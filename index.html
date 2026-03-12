@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TatangOBF - Lua Obfuscator</title>
+    <style>
+        :root {
+            /* GANTI LINK BACKGROUND DI SINI (BISA GIF/PNG) */
+            --bg-link: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXJueXJueXJueXJueXJueXJueXJueXJueXJueXJudSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxxS0uOumU8/giphy.gif');
+            --primary-glow: #00ffd5;
+            --panel-bg: rgba(20, 20, 20, 0.85);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-link) no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: var(--panel-bg);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .discord-btn {
+            display: block;
+            background: #5865F2;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .discord-btn:hover { background: #4752c4; }
+
+        h1 {
+            color: var(--primary-glow);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid #444;
+            border-radius: 8px;
+            color: #00ffd5;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: none;
+            margin-bottom: 10px;
+        }
+
+        .file-input-wrapper {
+            margin-bottom: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-enc {
+            background: transparent;
+            border: 2px solid var(--primary-glow);
+            color: var(--primary-glow);
+        }
+
+        .btn-enc:hover {
+            background: var(--primary-glow);
+            color: black;
+        }
+
+        .action-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sec {
+            background: #333;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-sec:hover { background: #444; }
+
+        .footer-text {
+            font-size: 12px;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="https://discord.gg/YOUR_LINK" class="discord-btn">JOIN OUR DISCORD</a>
+    
+    <h1>TATANG OBF</h1>
+
+    <div class="file-input-wrapper">
+        <input type="file" id="fileInput" accept=".lua" style="color: #888;">
+    </div>
+
+    <textarea id="inputCode" placeholder="Paste your Lua code here..."></textarea>
+    
+    <button class="btn-enc" onclick="obfuscate()">Obfuscate Code</button>
+
+    <textarea id="outputCode" placeholder="Encrypted code will appear here..." readonly></textarea>
+
+    <div class="action-group">
+        <button class="btn-sec" onclick="downloadFile()">Download</button>
+        <button class="btn-sec" onclick="copyCode()">Copy Code</button>
+    </div>
+
+    <p class="footer-text">Protected by Tatang Community &copy; 2026</p>
+</div>
+
+<script>
+    // Fungsi membaca file yang diupload
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('inputCode').value = e.target.result;
+        };
+        reader.readAsText(file);
+    });
+
+    // Logika Obfuscation "Hard" (Base64 + Byte Transformation)
+    function obfuscate() {
+        const input = document.getElementById('inputCode').value;
+        if (!input.trim()) return alert("Masukkan kode Lua terlebih dahulu!");
+
+        try {
+            // Step 1: Encode ke Base64
+            const b64 = btoa(input);
+            
+            // Step 2: Pecah menjadi deretan byte untuk mempersulit decompilation
+            let encrypted = "";
+            for(let i = 0; i < b64.length; i++) {
+                encrypted += "\\" + b64.charCodeAt(i);
+            }
+
+            // Step 3: Wrapper Lua Loader agar script bisa tetap jalan (Running)
+            const template = `--[[ OBfuscated by TATANG OBF ]]--\n` +
+                             `local _ = "${encrypted}"\n` +
+                             `local function load(s) return (s:gsub('\\\\(%d+)', function(n) return string.char(tonumber(n)) end)) end\n` +
+                             `local function decode(data) \n` +
+                             `  local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'\n` +
+                             `  data = string.gsub(data, '[^'..b..'=]', '')\n` +
+                             `  return (data:gsub('.', function(x)\n` +
+                             `    if (x == '=') then return '' end\n` +
+                             `    local r,f='',(b:find(x)-1)\n` +
+                             `    for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end\n` +
+                             `    return r;\n` +
+                             `  end):gsub('%d%d%d%d%d%d%d%d', function(x)\n` +
+                             `    return string.char(tonumber(x, 2))\n` +
+                             `  end))\n` +
+                             `end\n` +
+                             `assert(loadstring(decode(load(_))))()`;
+
+            document.getElementById('outputCode').value = template;
+        } catch (e) {
+            alert("Terjadi kesalahan saat enkripsi.");
+        }
+    }
+
+    function copyCode() {
+        const output = document.getElementById('outputCode');
+        output.select();
+        document.execCommand('copy');
+        alert("Kode berhasil disalin!");
+    }
+
+    function downloadFile() {
+        const text = document.getElementById('outputCode').value;
+        if(!text) return alert("Tidak ada kode untuk didownload!");
+        const blob = new Blob([text], { type: "text/plain" });
+        const anchor = document.createElement("a");
+        anchor.download = "TatangOBF_Result.lua";
+        anchor.href = window.URL.createObjectURL(blob);
+        anchor.click();
+    }
+</script>
+
+</body>
+</html>
