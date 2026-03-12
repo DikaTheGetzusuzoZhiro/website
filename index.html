@@ -3,211 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TatangOBF - Lua Obfuscator</title>
+    <title>TatangOBF - Pro Lua Encryption</title>
     <style>
         :root {
-            /* GANTI LINK BACKGROUND DI SINI (BISA GIF/PNG) */
-            --bg-link: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXJueXJueXJueXJueXJueXJueXJueXJueXJueXJudSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxxS0uOumU8/giphy.gif');
-            --primary-glow: #00ffd5;
-            --panel-bg: rgba(20, 20, 20, 0.85);
+            /* BACKGROUND GIF/PNG */
+            --bg-url: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXJueXJueXJueXJueXJueXJueXJueXJueXJueXJudSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxxS0uOumU8/giphy.gif');
+            --accent: #00ffcc;
+            --dark-panel: rgba(15, 15, 15, 0.9);
         }
 
         body {
             margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-link) no-repeat center center fixed;
+            font-family: 'Consolas', monospace;
+            background: var(--bg-url) no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: white;
+            color: #eee;
         }
 
-        .container {
-            width: 90%;
-            max-width: 600px;
-            background: var(--panel-bg);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        .main-card {
+            width: 95%;
+            max-width: 650px;
+            background: var(--dark-panel);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #00ffcc44;
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
+            backdrop-filter: blur(8px);
             text-align: center;
-            backdrop-filter: blur(10px);
         }
-
-        .discord-btn {
-            display: block;
-            background: #5865F2;
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .discord-btn:hover { background: #4752c4; }
 
         h1 {
-            color: var(--primary-glow);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+            margin: 0 0 20px 0;
+            font-size: 28px;
         }
 
         textarea {
             width: 100%;
-            height: 150px;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid #444;
-            border-radius: 8px;
-            color: #00ffd5;
-            padding: 10px;
-            box-sizing: border-box;
-            resize: none;
-            margin-bottom: 10px;
-        }
-
-        .file-input-wrapper {
-            margin-bottom: 15px;
-        }
-
-        button {
-            width: 100%;
+            height: 180px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #444;
+            border-radius: 10px;
+            color: #00ffcc;
             padding: 12px;
-            margin: 5px 0;
-            border: none;
+            box-sizing: border-box;
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        textarea:focus { border-color: var(--accent); }
+
+        .file-section {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px dashed #555;
+            border-radius: 8px;
+        }
+
+        input[type="file"] { color: #888; cursor: pointer; }
+
+        .btn-main {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            padding: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-main:hover {
+            background: var(--accent);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-sub {
+            flex: 1;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #444;
+            color: white;
             border-radius: 5px;
             cursor: pointer;
+        }
+
+        .btn-sub:hover { background: #333; }
+
+        .discord-footer {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+
+        .dc-link {
+            text-decoration: none;
+            color: #5865F2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             font-weight: bold;
             transition: 0.3s;
         }
 
-        .btn-enc {
-            background: transparent;
-            border: 2px solid var(--primary-glow);
-            color: var(--primary-glow);
-        }
+        .dc-link:hover { color: #fff; transform: scale(1.05); }
 
-        .btn-enc:hover {
-            background: var(--primary-glow);
-            color: black;
-        }
-
-        .action-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-sec {
-            background: #333;
-            color: white;
-            flex: 1;
-        }
-
-        .btn-sec:hover { background: #444; }
-
-        .footer-text {
-            font-size: 12px;
-            margin-top: 20px;
-            color: #888;
+        .dc-icon {
+            width: 30px;
+            height: 30px;
+            filter: drop-shadow(0 0 5px #5865F2);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <a href="https://discord.gg/YOUR_LINK" class="discord-btn">JOIN OUR DISCORD</a>
-    
+<div class="main-card">
     <h1>TATANG OBF</h1>
-
-    <div class="file-input-wrapper">
-        <input type="file" id="fileInput" accept=".lua" style="color: #888;">
-    </div>
-
-    <textarea id="inputCode" placeholder="Paste your Lua code here..."></textarea>
     
-    <button class="btn-enc" onclick="obfuscate()">Obfuscate Code</button>
+    <textarea id="inputCode" placeholder="-- Paste Your Lua Code Here..."></textarea>
 
-    <textarea id="outputCode" placeholder="Encrypted code will appear here..." readonly></textarea>
-
-    <div class="action-group">
-        <button class="btn-sec" onclick="downloadFile()">Download</button>
-        <button class="btn-sec" onclick="copyCode()">Copy Code</button>
+    <div class="file-section">
+        <label style="display:block; margin-bottom: 5px; font-size: 12px; color: #888;">ATAU PILIH FILE:</label>
+        <input type="file" id="fileInput" accept=".lua">
     </div>
 
-    <p class="footer-text">Protected by Tatang Community &copy; 2026</p>
+    <button class="btn-main" onclick="processEncryption()">Encrypt Code (Hard)</button>
+
+    <textarea id="outputCode" style="margin-top: 20px; height: 120px;" placeholder="Output result..." readonly></textarea>
+
+    <div class="actions">
+        <button class="btn-sub" onclick="copyResult()">COPY</button>
+        <button class="btn-sub" onclick="downloadResult()">DOWNLOAD</button>
+    </div>
+
+    <div class="discord-footer">
+        <a href="https://discord.gg/yourlink" class="dc-link">
+            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" class="dc-icon" alt="DC">
+            JOIN TATANG COMMUNITY
+        </a>
+    </div>
 </div>
 
 <script>
-    // Fungsi membaca file yang diupload
+    // Handle File Upload
     document.getElementById('fileInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('inputCode').value = e.target.result;
-        };
-        reader.readAsText(file);
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => document.getElementById('inputCode').value = e.target.result;
+            reader.readAsText(file);
+        }
     });
 
-    // Logika Obfuscation "Hard" (Base64 + Byte Transformation)
-    function obfuscate() {
-        const input = document.getElementById('inputCode').value;
-        if (!input.trim()) return alert("Masukkan kode Lua terlebih dahulu!");
+    // Enkripsi Hard (Logic Injection)
+    function processEncryption() {
+        const code = document.getElementById('inputCode').value;
+        if (!code.trim()) return alert("Mana kodenya?");
 
-        try {
-            // Step 1: Encode ke Base64
-            const b64 = btoa(input);
-            
-            // Step 2: Pecah menjadi deretan byte untuk mempersulit decompilation
-            let encrypted = "";
-            for(let i = 0; i < b64.length; i++) {
-                encrypted += "\\" + b64.charCodeAt(i);
-            }
-
-            // Step 3: Wrapper Lua Loader agar script bisa tetap jalan (Running)
-            const template = `--[[ OBfuscated by TATANG OBF ]]--\n` +
-                             `local _ = "${encrypted}"\n` +
-                             `local function load(s) return (s:gsub('\\\\(%d+)', function(n) return string.char(tonumber(n)) end)) end\n` +
-                             `local function decode(data) \n` +
-                             `  local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'\n` +
-                             `  data = string.gsub(data, '[^'..b..'=]', '')\n` +
-                             `  return (data:gsub('.', function(x)\n` +
-                             `    if (x == '=') then return '' end\n` +
-                             `    local r,f='',(b:find(x)-1)\n` +
-                             `    for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end\n` +
-                             `    return r;\n` +
-                             `  end):gsub('%d%d%d%d%d%d%d%d', function(x)\n` +
-                             `    return string.char(tonumber(x, 2))\n` +
-                             `  end))\n` +
-                             `end\n` +
-                             `assert(loadstring(decode(load(_))))()`;
-
-            document.getElementById('outputCode').value = template;
-        } catch (e) {
-            alert("Terjadi kesalahan saat enkripsi.");
+        // 1. Base64
+        const stage1 = btoa(code);
+        
+        // 2. Junk Data & Byte Transformation (Membuat kode sangat panjang)
+        let hexed = "";
+        for (let i = 0; i < stage1.length; i++) {
+            // Kita selipkan sampah karakter acak di antara byte asli
+            const junk = Math.random().toString(36).substring(7);
+            hexed += "\\" + stage1.charCodeAt(i) + "--" + junk + "\n";
         }
+
+        // 3. Nested Wrapper (Template yang sangat rumit)
+        const finalTemplate = `--[[ 
+   TATANG OBFUSCATOR v2 
+   Status: HIGH ENCRYPTION
+   CREDITS: TATANG COMMUNITY
+]]--
+local _t = [[${hexed}]]
+local function _proc(_s)
+    local _r = ""
+    for _v in _s:gmatch("\\\\(%d+)") do
+        _r = _r .. string.char(tonumber(_v))
+    end
+    return _r
+end
+local _dec = function(_d)
+    local b='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    _d = string.gsub(_d, '[^'..b..'=]', '')
+    return (_d:gsub('.', function(x)
+        if (x == '=') then return '' end
+        local r,f='',(b:find(x)-1)
+        for i=6,1,-1 do r=r..(f%2^i-f%2^(i-1)>0 and '1' or '0') end
+        return r;
+    end):gsub('%d%d%d%d%d%d%d%d', function(x)
+        return string.char(tonumber(x, 2))
+    end))
+end
+local _exec = _dec(_proc(_t))
+local _final = loadstring(_exec)
+if _final then
+    return _final()
+else
+    print("TATANG OBF: Critical Decryption Error")
+end`;
+
+        document.getElementById('outputCode').value = finalTemplate;
     }
 
-    function copyCode() {
-        const output = document.getElementById('outputCode');
-        output.select();
+    function copyResult() {
+        const out = document.getElementById('outputCode');
+        out.select();
         document.execCommand('copy');
-        alert("Kode berhasil disalin!");
+        alert("Copied!");
     }
 
-    function downloadFile() {
-        const text = document.getElementById('outputCode').value;
-        if(!text) return alert("Tidak ada kode untuk didownload!");
-        const blob = new Blob([text], { type: "text/plain" });
-        const anchor = document.createElement("a");
-        anchor.download = "TatangOBF_Result.lua";
-        anchor.href = window.URL.createObjectURL(blob);
-        anchor.click();
+    function downloadResult() {
+        const content = document.getElementById('outputCode').value;
+        if (!content) return;
+        const blob = new Blob([content], {type: "text/plain"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "Tatang_Encrypted.lua";
+        a.click();
     }
 </script>
 
