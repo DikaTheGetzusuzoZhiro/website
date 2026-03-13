@@ -1,243 +1,70 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TatangOBF - Official API Engine</title>
-    <style>
-        :root {
-            --bg-link: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXJueXJueXJueXJueXJueXJueXJueXJueXJueXJudSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxxS0uOumU8/giphy.gif');
-            --accent: #00ffcc;
-            --panel: rgba(10, 10, 10, 0.95);
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Consolas', monospace;
-            background: var(--bg-link) no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #fff;
-        }
-
-        .container {
-            width: 95%;
-            max-width: 800px;
-            background: var(--panel);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            color: var(--accent);
-            text-align: center;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px var(--accent);
-            margin-top: 0;
-        }
-
-        textarea {
-            width: 100%;
-            height: 200px;
-            background: #000;
-            border: 1px solid #444;
-            border-radius: 8px;
-            color: var(--accent);
-            padding: 15px;
-            box-sizing: border-box;
-            font-size: 12px;
-            outline: none;
-            margin-bottom: 15px;
-        }
-
-        .upload-section {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            text-align: center;
-            border: 1px dashed #555;
-        }
-
-        .btn-enc {
-            width: 100%;
-            padding: 15px;
-            background: var(--accent);
-            border: none;
-            color: #000;
-            font-weight: bold;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .btn-enc:hover {
-            background: #00ccaa;
-            box-shadow: 0 0 20px var(--accent);
-        }
-
-        .btn-enc:disabled {
-            background: #444;
-            color: #888;
-            cursor: not-allowed;
-        }
-
-        .action-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn-sec {
-            flex: 1;
-            padding: 12px;
-            background: #222;
-            border: 1px solid #444;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .discord-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #222;
-            text-align: center;
-        }
-
-        .dc-link {
-            text-decoration: none;
-            color: #5865F2;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .loading-text {
-            color: yellow;
-            font-size: 12px;
-            margin-bottom: 10px;
-            display: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>TatangObf Lua Encryptor</title>
+<link rel="stylesheet" href="/public/style.css">
 </head>
+
 <body>
 
 <div class="container">
-    <h1>TATANG OBF</h1>
-    
-    <textarea id="inputCode" placeholder="-- Paste Your Lua Code Here..."></textarea>
 
-    <div class="upload-section">
-        <label style="display:block; font-size: 11px; color: #888; margin-bottom: 5px;">ATAU PILIH FILE:</label>
-        <input type="file" id="fileInput" accept=".lua">
-    </div>
+<h1>TatangObf</h1>
+<p>Strong Lua Obfuscator</p>
 
-    <div id="status" class="loading-text">Sedang mengenkripsi via API LuaObfuscator... Mohon tunggu...</div>
-    
-    <button id="encBtn" class="btn-enc" onclick="obfuscateWithAPI()">OBFUSCATE (OFFICIAL API)</button>
+<textarea id="luaInput" placeholder="Paste your Lua script here..."></textarea>
 
-    <textarea id="outputCode" style="margin-top: 20px; height: 150px;" placeholder="Hasil enkripsi resmi akan muncul di sini..." readonly></textarea>
+<div class="buttons">
+<button onclick="encryptLua()">Encrypt</button>
+<button onclick="downloadLua()">Download</button>
+</div>
 
-    <div class="action-group">
-        <button class="btn-sec" onclick="copyResult()">COPY</button>
-        <button class="btn-sec" onclick="downloadResult()">DOWNLOAD</button>
-    </div>
+<h3>Encrypted Result</h3>
 
-    <div class="discord-footer">
-        <a href="https://discord.gg/tatangcommunity" class="dc-link">
-            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" width="25" alt="DC">
-            JOIN TATANG COMMUNITY
-        </a>
-    </div>
+<textarea id="result"></textarea>
+
 </div>
 
 <script>
-    const API_KEY = "bc86afa6-e7a2-8a2d-7359-d8c13148bf4d669"; // API KEY KAMU
 
-    // Handle File Upload
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (ev) => document.getElementById('inputCode').value = ev.target.result;
-            reader.readAsText(file);
-        }
-    });
+async function encryptLua(){
 
-    async function obfuscateWithAPI() {
-        const code = document.getElementById('inputCode').value;
-        const btn = document.getElementById('encBtn');
-        const status = document.getElementById('status');
+const lua = document.getElementById("luaInput").value
 
-        if (!code.trim()) return alert("Mana kodenya?");
+if(!lua){
+alert("Paste Lua script first")
+return
+}
 
-        btn.disabled = true;
-        status.style.display = "block";
+const res = await fetch("/api/encrypt",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({lua})
+})
 
-        try {
-            const response = await fetch("https://luaobfuscator.com/api/obfuscator/newscript", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "apikey": API_KEY
-                },
-                body: JSON.stringify({
-                    req: code,
-                    options: {
-                        "Custom": true,
-                        "Variables": true,
-                        "Strings": true,
-                        "Numbers": true,
-                        "MaxComplexity": true
-                    }
-                })
-            });
+const data = await res.json()
 
-            const data = await response.json();
+document.getElementById("result").value = data.result
 
-            if (data.code) {
-                document.getElementById('outputCode').value = data.code;
-            } else {
-                alert("Gagal Enc: " + (data.message || "Kesalahan Server API"));
-            }
-        } catch (err) {
-            alert("Error Koneksi: Pastikan internet aktif dan API Key benar.");
-            console.error(err);
-        } finally {
-            btn.disabled = false;
-            status.style.display = "none";
-        }
-    }
+}
 
-    function copyResult() {
-        const out = document.getElementById('outputCode');
-        out.select();
-        document.execCommand('copy');
-        alert("Kode resmi disalin!");
-    }
+function downloadLua(){
 
-    function downloadResult() {
-        const content = document.getElementById('outputCode').value;
-        if(!content) return;
-        const blob = new Blob([content], {type: "text/plain"});
-        const a = document.createElement("a");
-        a.href = URL.createObjectURL(blob);
-        a.download = "Tatang_Official_Enc.lua";
-        a.click();
-    }
+const text = document.getElementById("result").value
+
+const blob = new Blob([text],{type:"text/plain"})
+const url = URL.createObjectURL(blob)
+
+const a = document.createElement("a")
+a.href = url
+a.download = "encrypted.lua"
+a.click()
+
+}
+
 </script>
 
 </body>
