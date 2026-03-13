@@ -1,68 +1,182 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<meta charset="UTF-8">
-<title>TatangObf Lua Encryptor</title>
-<link rel="stylesheet" href="/public/style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TATANG COMMUNITY | LUA DEVELOPER</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    <style>
+        :root {
+            /* Warna Hijau Neon untuk Aksen agar Serasi dengan Logo Baru */
+            --accent-green: #00ff88;
+            /* Nuansa Glassmorphism */
+            --glass-bg: rgba(0, 0, 0, 0.85);
+            --border: rgba(255, 255, 255, 0.15);
+            --whatsapp-color: #25D366;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            /* BACKGROUND ANIME DARK */
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://images.alphacoders.com/132/1325712.png'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* CARD STYLE (Glassmorphism + Glow) */
+        .main-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            width: 100%;
+            max-width: 420px;
+            border-radius: 25px;
+            border: 1px solid var(--border);
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.1), 
+                        0 20px 60px rgba(0,0,0,0.7);
+        }
+
+        /* LOGO TG MAHKOTA RANTAI */
+        .logo-wrapper {
+            width: 130px; 
+            height: 130px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 0 10px var(--accent-green));
+        }
+
+        .logo-wrapper img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .role-tag {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent-green);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        .description {
+            color: #ccc;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .description b {
+            color: var(--accent-green);
+        }
+
+        /* TOMBOL SOSIAL MEDIA */
+        .btn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            color: #fff;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .btn-discord { background: #5865F2; }
+        .btn-whatsapp { background: var(--whatsapp-color); }
+        .btn-youtube { background: #FF0000; }
+
+        .btn img {
+            width: 20px;
+            margin-right: 12px;
+        }
+
+        /* Hover Effect: Glowing & Lift */
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            filter: brightness(1.1);
+        }
+
+        .footer {
+            margin-top: 35px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
 <body>
 
-<div class="box">
+    <div class="main-card">
+        <div class="logo-wrapper">
+            <img src="https://i.ibb.co.com/zVPvVbM5/file-00000000b5d4720698886001d6221767.png" alt="TG Crown Logo">
+        </div>
 
-<h1>TatangObf</h1>
-<p>Lua Obfuscator</p>
+        <h1>TATANG</h1>
+        <div class="role-tag">Monetloader Developer</div>
 
-<textarea id="luaInput" placeholder="Paste Lua script here"></textarea>
+        <p class="description">
+            Spesialis dalam pembuatan <b>File Lua Monetloader Script</b> untuk SAMP Mobile. 
+            Menyediakan fitur automasi, modifikasi visual, dan utility script berkualitas tinggi untuk komunitas.
+        </p>
+        
+        <div class="btn-list">
+            <a href="https://discord.gg/G5SABE8uQe" class="btn btn-discord" target="_blank">
+                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=ffffff" alt="Discord Icon">
+                Community Discord
+            </a>
 
-<br>
+            <a href="https://whatsapp.com/channel/YOUR_CHANNEL_LINK" class="btn btn-whatsapp" target="_blank">
+                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=ffffff" alt="WhatsApp Icon">
+                Saluran WhatsApp
+            </a>
+            
+            <a href="https://youtube.com/@tatanglua" class="btn btn-youtube" target="_blank">
+                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=ffffff" alt="YouTube Icon">
+                YouTube Channel
+            </a>
+        </div>
 
-<button onclick="encryptLua()">Encrypt</button>
-<button onclick="downloadLua()">Download</button>
-
-<h3>Result</h3>
-
-<textarea id="result"></textarea>
-
-</div>
-
-<script>
-
-async function encryptLua(){
-
-const lua = document.getElementById("luaInput").value
-
-const res = await fetch("/api/encrypt",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({lua})
-})
-
-const data = await res.json()
-
-document.getElementById("result").value = data.result
-
-}
-
-function downloadLua(){
-
-const text = document.getElementById("result").value
-
-const blob = new Blob([text],{type:"text/plain"})
-
-const url = URL.createObjectURL(blob)
-
-const a = document.createElement("a")
-
-a.href = url
-a.download = "encrypted.lua"
-a.click()
-
-}
-
-</script>
+        <div class="footer">
+            EST. 2025 • TATANG COMMUNITY
+        </div>
+    </div>
 
 </body>
 </html>
