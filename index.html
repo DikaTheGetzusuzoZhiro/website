@@ -3,289 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TatangOBF - Ultra Lua Encryption</title>
+    <title>TatangOBF - WeAreDevs Style</title>
     <style>
         :root {
-            /* BACKGROUND GIF/PNG - Ganti link di bawah untuk mengubah background */
             --bg-url: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXZueXJueXJueXJueXJueXJueXJueXJueXJueXJueXJudSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKMGpxxS0uOumU8/giphy.gif');
-            --accent: #ff0055; /* Warna aksen baru yang lebih gahar */
-            --primary-glow: #00ffd5;
-            --dark-panel: rgba(10, 10, 10, 0.92);
+            --accent-green: #00ff88;
+            --panel-bg: rgba(10, 10, 10, 0.95);
         }
 
         body {
             margin: 0;
-            font-family: 'Courier New', Courier, monospace; /* Font monospace agar lebih kerasa hacking */
+            font-family: 'Segoe UI', sans-serif;
             background: var(--bg-url) no-repeat center center fixed;
             background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #ddd;
+            color: #fff;
         }
 
-        .main-card {
-            width: 95%;
-            max-width: 700px;
-            background: var(--dark-panel);
+        .container {
+            width: 90%;
+            max-width: 750px;
+            background: var(--panel-bg);
             padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #333;
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            border: 1px solid #222;
+            box-shadow: 0 0 50px rgba(0,0,0,1);
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
-
-        /* Efek garis pendar di pinggir */
-        .main-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: scan 3s linear infinite;
-        }
-
-        @keyframes scan { 0% { left: -100%; } 100% { left: 100%; } }
 
         h1 {
-            color: var(--primary-glow);
-            text-shadow: 0 0 15px var(--primary-glow);
-            margin: 0 0 25px 0;
-            font-size: 32px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            color: var(--accent-green);
+            font-size: 35px;
+            margin: 0 0 20px 0;
+            letter-spacing: 5px;
+            text-shadow: 0 0 10px var(--accent-green);
         }
 
         textarea {
             width: 100%;
             height: 200px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #444;
-            border-radius: 6px;
-            color: #00ffcc;
+            background: #050505;
+            border: 1px solid #333;
+            border-radius: 5px;
+            color: #00ff88;
             padding: 15px;
             box-sizing: border-box;
-            font-size: 13px;
-            outline: none;
-            transition: 0.3s;
-            margin-bottom: 15px;
-            font-family: inherit;
+            font-family: 'Consolas', monospace;
+            resize: none;
+            font-size: 12px;
         }
 
-        textarea:focus { border-color: var(--primary-glow); box-shadow: 0 0 10px rgba(0, 255, 213, 0.3); }
-
-        .file-section {
-            margin-bottom: 20px;
+        .file-box {
+            margin: 20px 0;
             padding: 15px;
-            border: 1px dashed #555;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 5px;
         }
 
-        .file-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 12px;
-            color: #aaa;
-            text-transform: uppercase;
-        }
-
-        input[type="file"] {
-            color: #888;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .btn-main {
+        .btn-enc {
             width: 100%;
-            background: linear-gradient(45deg, #111, #222);
-            border: 2px solid var(--accent);
-            color: var(--accent);
-            padding: 18px;
+            padding: 15px;
+            background: #00ff88;
+            border: none;
+            color: #000;
             font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 8px;
+            font-size: 18px;
             cursor: pointer;
+            border-radius: 5px;
             transition: 0.3s;
-            font-size: 16px;
-            letter-spacing: 1px;
-            margin-top: 10px;
+            text-transform: uppercase;
         }
 
-        .btn-main:hover {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 0 0 25px var(--accent);
-            transform: translateY(-2px);
+        .btn-enc:hover {
+            background: #00cc6e;
+            box-shadow: 0 0 20px var(--accent-green);
         }
 
-        .btn-main:active { transform: translateY(1px); }
-
-        .actions {
+        .secondary-actions {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        .btn-sub {
+        .btn-sec {
             flex: 1;
-            padding: 12px;
-            background: #1a1a1a;
-            border: 1px solid #333;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #444;
             color: white;
-            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-            text-transform: uppercase;
-            font-size: 12px;
+            border-radius: 5px;
         }
 
-        .btn-sub:hover { background: #252525; border-color: #555; }
-
-        .discord-footer {
-            margin-top: 35px;
-            padding-top: 20px;
+        .discord-area {
+            margin-top: 30px;
             border-top: 1px solid #222;
+            padding-top: 20px;
         }
 
-        .dc-link {
+        .dc-btn {
             text-decoration: none;
-            color: #5865F2;
+            color: #5865f2;
+            font-weight: bold;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            font-weight: bold;
-            transition: 0.3s;
-            font-size: 14px;
-        }
-
-        .dc-link:hover { color: #fff; transform: scale(1.03); }
-
-        .dc-icon {
-            width: 28px;
-            height: 28px;
-            filter: drop-shadow(0 0 5px #5865F2);
+            gap: 10px;
         }
     </style>
 </head>
 <body>
 
-<div class="main-card">
-    <h1>TATANG OBF v3</h1>
+<div class="container">
+    <h1>TATANG OBF</h1>
     
-    <textarea id="inputCode" placeholder="-- Paste Your Lua Code Here... atau Pilih File di Bawah"></textarea>
+    <textarea id="inputCode" placeholder="Paste your Lua code here..."></textarea>
 
-    <div class="file-section">
-        <label class="file-label">ATAU UNGGAH FILE .LUA:</label>
+    <div class="file-box">
+        <label style="font-size: 12px; color: #666; display: block; margin-bottom: 5px;">UPLOAD FILE LUA</label>
         <input type="file" id="fileInput" accept=".lua">
     </div>
 
-    <button class="btn-main" onclick="processUltraEncryption()">ENCRYPT (ULTRA HARD)</button>
+    <button class="btn-enc" onclick="wearedevsEncrypt()">OBFUSCATE CODE</button>
 
-    <textarea id="outputCode" style="margin-top: 25px; height: 150px;" placeholder="Output result..." readonly></textarea>
+    <textarea id="outputCode" style="margin-top: 20px; height: 150px;" placeholder="Result will appear here..." readonly></textarea>
 
-    <div class="actions">
-        <button class="btn-sub" onclick="copyResult()">SALIN KODE</button>
-        <button class="btn-sub" onclick="downloadResult()">UNDUH FILE</button>
+    <div class="secondary-actions">
+        <button class="btn-sec" onclick="copyCode()">COPY CODE</button>
+        <button class="btn-sec" onclick="downloadFile()">DOWNLOAD .LUA</button>
     </div>
 
-    <div class="discord-footer">
-        <a href="https://discord.gg/yourlink" class="dc-link" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" class="dc-icon" alt="DC">
-            GABUNG KOMUNITAS TATANG
+    <div class="discord-area">
+        <a href="https://discord.gg/yourlink" class="dc-btn">
+            <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" width="25" alt="DC">
+            TATANG COMMUNITY DISCORD
         </a>
     </div>
 </div>
 
 <script>
-    // Handle File Upload
+    // Membaca file LUA
     document.getElementById('fileInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = (e) => {
-                document.getElementById('inputCode').value = e.target.result;
-                alert("File '" + file.name + "' berhasil dimuat!");
-            }
+            reader.onload = (e) => document.getElementById('inputCode').value = e.target.result;
             reader.readAsText(file);
         }
     });
 
-    // Enkripsi Ultra Hard (Byte + XOR + Multilayer Loader)
-    function processUltraEncryption() {
+    function wearedevsEncrypt() {
         const code = document.getElementById('inputCode').value;
-        if (!code.trim()) return alert("Masukkan kode Lua kamu dulu, bro!");
+        if (!code.trim()) return alert("Masukkan kode dulu!");
 
-        // Generasi Kunci XOR Acak
-        const key = Math.floor(Math.random() * 254) + 1;
-        
-        // Step 1: Ubah kode jadi array byte dan lakukan XOR
-        let encryptedBytes = [];
+        // Step 1: Ubah ke format Byte Array
+        let bytes = [];
         for (let i = 0; i < code.length; i++) {
-            encryptedBytes.push(code.charCodeAt(i) ^ key);
+            bytes.push(code.charCodeAt(i));
         }
 
-        // Step 2: Gabungkan jadi string panjang format byte
-        const byteString = encryptedBytes.join(',');
+        // Step 2: Generate Junk Math (Simulasi WeAreDevs)
+        // Kita bikin tabel angka besar yang sebenarnya adalah hasil kalkulasi matematika
+        let encryptedTable = bytes.map(b => {
+            let offset = Math.floor(Math.random() * 100000);
+            return `[(${b + offset})-${offset}]`;
+        }).join(',');
 
-        // Step 3: Wrapper Lua Loader yang rumit dan panjang
-        // Template ini didesain agar sulit dibaca tapi stabil dijalankan
-        const finalTemplate = `--[[ 
-   ::: TATANG OBFUSCATOR v3.0 (ULTRA-HARD) :::
-   PROTECTION STATUS: MAXIMUM
-   WARNING: DO NOT EDIT THIS CODE MANUALLY
-]]--
-local function _tatang_check() if _G._TATANG_V3 then return false end _G._TATANG_V3=true return true end
-if not _tatang_check() then return end
-local _k = ${key}
-local _b = {${byteString}}
-local _d = ""
-local _s = string.char
-local _t = tonumber
-for _i=1, #_b do
-    local _v = _b[_i]
-    _d = _d .. _s(_v ~ _k)
-end
-local _f, _e = loadstring(_d)
-if _f then
-    local _status, _err = pcall(_f)
-    if not _status then
-        print("::: TATANG OBF Runtime Error :::")
-        print(_err)
+        // Step 3: Template Virtualization ala WeAreDevs
+        const result = `--[[ v1.0.0 https://wearedevs.net/obfuscator ]]--
+return (function(...)
+    local _cache = {${encryptedTable}}
+    local _vm = ""
+    for _i=1, #_cache do
+        _vm = _vm .. string.char(_cache[_i])
     end
-else
-    print("::: TATANG OBF Critical Decryption Error :::")
-    print(_e)
-end
-_G._TATANG_V3 = nil -- Clean up`;
+    local _f, _err = loadstring(_vm)
+    if _f then
+        return _f(...)
+    else
+        error("TATANG_OBF: Decryption Failure -> " .. _err)
+    end
+end)(...)`;
 
-        document.getElementById('outputCode').value = finalTemplate;
-        alert("Enkripsi Berhasil! Kode kamu sekarang pusing dibaca.");
+        document.getElementById('outputCode').value = result;
     }
 
-    function copyResult() {
+    function copyCode() {
         const out = document.getElementById('outputCode');
-        if (!out.value) return;
         out.select();
         document.execCommand('copy');
-        alert("Kode hasil enkripsi berhasil disalin ke clipboard!");
+        alert("Berhasil disalin!");
     }
 
-    function downloadResult() {
+    function downloadFile() {
         const content = document.getElementById('outputCode').value;
-        if (!content) return alert("Belum ada kode untuk diunduh!");
+        if (!content) return;
         const blob = new Blob([content], {type: "text/plain"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = "Tatang_Protected.lua";
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "TatangObfuscated.lua";
         a.click();
-        URL.revokeObjectURL(url); // Clean up memory
     }
 </script>
 
