@@ -1,4 +1,5 @@
 {
-"name": "tatangobf",
-"version": "1.0.0"
+  "name": "tatangobf",
+  "version": "1.0.0",
+  "type": "module"
 }
