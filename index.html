@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>TatangObf Lua Encryptor</title>
@@ -8,19 +8,19 @@
 
 <body>
 
-<div class="container">
+<div class="box">
 
 <h1>TatangObf</h1>
-<p>Strong Lua Obfuscator</p>
+<p>Lua Obfuscator</p>
 
-<textarea id="luaInput" placeholder="Paste your Lua script here..."></textarea>
+<textarea id="luaInput" placeholder="Paste Lua script here"></textarea>
 
-<div class="buttons">
+<br>
+
 <button onclick="encryptLua()">Encrypt</button>
 <button onclick="downloadLua()">Download</button>
-</div>
 
-<h3>Encrypted Result</h3>
+<h3>Result</h3>
 
 <textarea id="result"></textarea>
 
@@ -31,11 +31,6 @@
 async function encryptLua(){
 
 const lua = document.getElementById("luaInput").value
-
-if(!lua){
-alert("Paste Lua script first")
-return
-}
 
 const res = await fetch("/api/encrypt",{
 method:"POST",
@@ -56,9 +51,11 @@ function downloadLua(){
 const text = document.getElementById("result").value
 
 const blob = new Blob([text],{type:"text/plain"})
+
 const url = URL.createObjectURL(blob)
 
 const a = document.createElement("a")
+
 a.href = url
 a.download = "encrypted.lua"
 a.click()
