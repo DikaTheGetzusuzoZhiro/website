@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SA FORGE - GTA SA Modding Community</title>
+    <title>TATANG - GTA SA Modding Community</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-dark: #0f0f0f;
             --bg-card: #1a1a1a;
-            --green-primary: #198754; /* Menyesuaikan warna hijau neon */
+            --green-primary: #198754; 
             --green-hover: #157347;
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
@@ -21,10 +21,11 @@
 
         /* Navbar */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: rgba(15, 15, 15, 0.95); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
-        .logo { font-size: 24px; font-weight: 800; }
+        .logo { font-size: 24px; font-weight: 800; text-decoration: none; }
         .logo span:first-child { color: var(--text-main); }
         .logo span:last-child { color: var(--green-primary); }
-        .menu-toggle { color: var(--text-main); font-size: 24px; cursor: pointer; background: none; border: none; }
+        .menu-toggle { color: var(--text-main); font-size: 24px; cursor: pointer; background: none; border: none; transition: transform 0.2s; }
+        .menu-toggle:active { transform: scale(0.9); }
 
         /* Hero Section */
         .hero { text-align: center; padding: 60px 20px; background: linear-gradient(to bottom, rgba(15,15,15,0.2), #0f0f0f), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop') center/cover; }
@@ -32,12 +33,15 @@
         .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
         .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; max-width: 400px; margin-left: auto; margin-right: auto; }
         
-        /* Buttons */
-        .btn { display: inline-block; width: 100%; max-width: 300px; padding: 15px; border-radius: 8px; font-weight: 600; text-decoration: none; text-align: center; margin-bottom: 15px; transition: 0.3s; }
-        .btn-primary { background-color: var(--green-primary); color: white; border: none; }
-        .btn-primary:hover { background-color: var(--green-hover); }
+        /* Buttons General */
+        .btn { display: inline-block; width: 100%; max-width: 300px; padding: 15px; border-radius: 8px; font-weight: 600; text-decoration: none; text-align: center; margin-bottom: 15px; cursor: pointer; transition: all 0.2s ease; border: none; font-size: 16px; }
+        .btn:active { transform: scale(0.96); } /* Efek mengecil saat diklik */
+        
+        .btn-primary { background-color: var(--green-primary); color: white; }
+        .btn-primary:hover { background-color: var(--green-hover); box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3); }
+        
         .btn-outline { background-color: transparent; border: 1px solid #444; color: white; }
-        .btn-outline:hover { border-color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--text-main); background-color: rgba(255,255,255,0.05); }
 
         /* Services Section */
         .services { padding: 40px 20px; text-align: center; }
@@ -46,41 +50,50 @@
         .section-desc { color: var(--text-muted); margin-bottom: 30px; font-size: 14px; }
 
         /* Card System */
-        .card { background-color: var(--bg-card); border-radius: 12px; overflow: hidden; text-align: left; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.7; }
+        .card { background-color: var(--bg-card); border-radius: 12px; overflow: hidden; text-align: left; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid #222; }
+        .card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.7; transition: opacity 0.3s; }
+        .card:hover img { opacity: 1; }
         .card-body { padding: 20px; }
         .card h3 { font-size: 20px; margin-bottom: 10px; text-transform: uppercase; }
         .card p { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
         .price { color: var(--green-primary); font-weight: 600; font-size: 18px; margin-bottom: 15px; display: block; }
-        .btn-order { background-color: #2a2a2a; border: none; width: 100%; color: white; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .btn-order:hover { background-color: #333; }
+        
+        .btn-order { background-color: #2a2a2a; border: none; width: 100%; color: white; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-order:hover { background-color: #3d3d3d; }
+        .btn-order:active { transform: scale(0.96); }
 
         /* Order Flow */
-        .flow-section { padding: 40px 20px; background-color: #121212; text-align: center; }
-        .flow-section h2 { margin-bottom: 40px; }
+        .flow-section { padding: 40px 20px; background-color: #121212; text-align: center; border-top: 1px solid #222; }
+        .flow-section h2 { margin-bottom: 40px; font-weight: 800; font-size: 24px; text-transform: uppercase; letter-spacing: 2px; }
         .step { margin-bottom: 30px; }
-        .step-num { width: 50px; height: 50px; border: 2px solid var(--green-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: var(--green-primary); margin: 0 auto 15px auto; }
+        .step-num { width: 50px; height: 50px; border: 2px solid var(--green-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: var(--green-primary); margin: 0 auto 15px auto; background-color: rgba(25, 135, 84, 0.05); }
         .step h4 { font-size: 18px; margin-bottom: 5px; text-transform: uppercase; }
         .step p { color: var(--text-muted); font-size: 14px; }
-        .btn-discord { background-color: var(--green-primary); color: white; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; }
+        
+        .btn-discord { background-color: var(--green-primary); color: white; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; transition: all 0.2s ease; border: none; font-size: 16px; cursor: pointer; }
+        .btn-discord:hover { background-color: var(--green-hover); box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3); }
+        .btn-discord:active { transform: scale(0.96); }
+
+        footer { text-align: center; padding: 20px; color: #666; font-size: 12px; background-color: #0f0f0f; }
 
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">
-            <span>SA</span><span>FORGE</span>
-        </div>
-        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+        <a href="#" class="logo" onclick="alert('Kembali ke Beranda')">
+            <span>TA</span><span>TANG</span>
+        </a>
+        <button class="menu-toggle" onclick="alert('Menu Navigasi akan terbuka!')"><i class="fas fa-bars"></i></button>
     </nav>
 
     <section class="hero">
         <div class="badge">• GTA SA MODDING COMMUNITY</div>
-        <h1><span style="color:white;">SA</span> <span style="color:var(--green-primary);">FORGE</span></h1>
+        <h1><span style="color:white;">TA</span><span style="color:var(--green-primary);">TANG</span></h1>
         <p>Koleksi modifikasi visual, script Lua, dan tools eksklusif untuk <strong>Personal Player</strong> GTA San Andreas Multiplayer.</p>
-        <a href="#" class="btn btn-primary">CARI MOD &rarr;</a>
-        <a href="#" class="btn btn-outline">REQUEST SCRIPT</a>
+        
+        <button class="btn btn-primary" onclick="alert('Mengarahkan ke halaman Gudang Mod...')">CARI MOD &rarr;</button>
+        <button class="btn btn-outline" onclick="alert('Membuka form Request Script...')">REQUEST SCRIPT</button>
     </section>
 
     <section class="services">
@@ -93,7 +106,7 @@
                 <h3>JASA SCRIPTING MOONLOADER</h3>
                 <p>Pembuatan script Custom Lua untuk automation, atau mempermudah gameplay.</p>
                 <span class="price"><i class="fas fa-dollar-sign"></i> Mulai dari Rp 25.000</span>
-                <button class="btn-order">ORDER SEKARANG</button>
+                <button class="btn-order" onclick="alert('Memproses pesanan Jasa Scripting Moonloader...')">ORDER SEKARANG</button>
             </div>
         </div>
 
@@ -103,13 +116,13 @@
                 <h3>JASA PEMBUATAN BOT DISCORD</h3>
                 <p>Bot Server Discord untuk membantu membangun komunitas anda.</p>
                 <span class="price"><i class="fas fa-dollar-sign"></i> Mulai dari Rp 50.000</span>
-                <button class="btn-order">ORDER SEKARANG</button>
+                <button class="btn-order" onclick="alert('Memproses pesanan Jasa Pembuatan Bot Discord...')">ORDER SEKARANG</button>
             </div>
         </div>
     </section>
 
     <section class="flow-section">
-        <h2 style="font-weight: 800; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">ALUR PEMESANAN</h2>
+        <h2>ALUR PEMESANAN</h2>
         
         <div class="step">
             <div class="step-num">1</div>
@@ -129,11 +142,14 @@
             <p>Testing final, pelunasan, dan penyerahan file script/bot.</p>
         </div>
 
-        <a href="#" class="btn-discord">
-            <i class="far fa-comment"></i> HUBUNGI KAMI DI DISCORD
-        </a>
-        <p style="color: #666; font-size: 12px; margin-top: 40px;">© 2026 SA FORGE. All rights reserved.</p>
+        <button class="btn-discord" onclick="window.open('https://discord.com', '_blank')">
+            <i class="fab fa-discord"></i> HUBUNGI KAMI DI DISCORD
+        </button>
     </section>
+
+    <footer>
+        <p>© 2026 TATANG. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
