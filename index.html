@@ -11,80 +11,77 @@
             --bg-dark: #0a0a0a;
             --bg-card: #141414;
             --green-neon: #1ed760; 
-            --green-dark: #198754;
             --text-main: #ffffff;
             --text-muted: #999999;
         }
 
-        /* Reset Dasar */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
-        /* --- SIDEBAR NAVIGASI --- */
+        /* --- SIDEBAR --- */
         .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: #111; z-index: 1000; transition: 0.4s; padding: 30px 20px; border-right: 1px solid #333; }
         .sidebar.active { left: 0; }
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .sidebar-menu { list-style: none; }
-        .sidebar-menu li { margin-bottom: 15px; }
-        .sidebar-menu a { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 8px; transition: 0.3s; }
+        .sidebar-menu a { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 8px; transition: 0.3s; margin-bottom: 10px; }
         .sidebar-menu a:hover { background: rgba(30, 215, 96, 0.1); color: var(--green-neon); }
-        .sidebar-menu i { width: 20px; text-align: center; }
 
-        /* --- TOP NAVBAR --- */
+        /* --- NAVBAR --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(10, 10, 10, 0.95); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #222; }
-        .logo { font-size: 22px; font-weight: 800; text-decoration: none; color: white; letter-spacing: 1px; }
+        .logo { font-size: 22px; font-weight: 800; text-decoration: none; color: white; }
         .logo span { color: var(--green-neon); }
         .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; }
 
+        /* --- WELCOME HERO SECTION --- */
+        .welcome-hero {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+        .welcome-hero h1 { font-size: 36px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .welcome-hero h1 span { color: var(--green-neon); }
+        .welcome-hero p { color: var(--text-muted); font-size: 14px; margin-top: 5px; max-width: 80%; }
+
         .container { padding: 20px; max-width: 600px; margin: auto; }
 
-        /* --- HERO & JUDUL --- */
-        .hero-img { width: 100%; border-radius: 15px; height: 180px; object-fit: cover; margin-bottom: 20px; border: 1px solid #333; }
-        .hero-text { text-align: center; margin-bottom: 30px; }
-        .hero-text h1 { font-size: 32px; font-weight: 800; }
-        .hero-text p { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
-
-        /* --- KARTU PRODUK --- */
-        .section-title { font-size: 18px; font-weight: 800; text-transform: uppercase; margin: 30px 0 15px; color: var(--green-neon); display: flex; align-items: center; gap: 10px; }
+        /* --- SOCIAL LINKS --- */
+        .section-title { font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 30px 0 15px; color: var(--green-neon); display: flex; align-items: center; gap: 10px; }
         .section-title::after { content: ""; flex: 1; height: 1px; background: #333; }
-
-        .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 20px; border: 1px solid #222; transition: 0.3s; }
-        .card:hover { border-color: var(--green-neon); box-shadow: 0 0 15px rgba(30, 215, 96, 0.1); }
-        .card img { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
-        .card h3 { font-size: 20px; margin-bottom: 8px; color: var(--green-neon); }
-        .card ul { list-style: none; margin-bottom: 15px; }
-        .card ul li { font-size: 13px; color: #bbb; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .card ul li i { color: var(--green-neon); font-size: 10px; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #222; }
-        .price { font-size: 22px; font-weight: 800; color: var(--green-neon); }
-
-        /* --- TOMBOL --- */
-        .btn { padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; font-size: 14px; text-decoration: none; display: inline-block; }
-        .btn-buy { background: var(--green-neon); color: black; }
-        .btn-buy:active { transform: scale(0.95); }
         
-        /* --- TOMBOL SOSIAL MEDIA --- */
-        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; transition: 0.3s; }
-        .yt:hover { border-color: #ff0000; color: #ff0000; background: rgba(255,0,0,0.05); }
-        .tt:hover { border-color: #ff0050; color: #ff0050; background: rgba(255,0,80,0.05); }
-        .dc:hover { border-color: #5865F2; color: #5865F2; background: rgba(88,101,242,0.05); }
-        .wa:hover { border-color: #25D366; color: #25D366; background: rgba(37,211,102,0.05); }
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; }
 
-        /* --- MODAL PEMBAYARAN --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; backdrop-filter: blur(5px); }
-        .modal-content { background: #111; padding: 25px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--green-neon); position: relative; }
-        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; position: relative; cursor: pointer; border: 1px solid #333; transition: 0.2s; }
-        .pay-item:hover { border-color: var(--green-neon); background: rgba(30, 215, 96, 0.05); }
-        .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; margin-bottom: 3px; }
-        .pay-item span { font-family: monospace; font-size: 16px; color: white; font-weight: bold; }
-        .copy-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #555; transition: 0.2s; }
-        .pay-item:hover .copy-icon { color: var(--green-neon); }
-        .qris-box { background: white; padding: 10px; border-radius: 10px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        /* --- CARDS --- */
+        .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 20px; border: 1px solid #222; }
+        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
+        .card h3 { font-size: 20px; margin-bottom: 10px; color: var(--green-neon); }
+        .card ul { list-style: none; margin-bottom: 15px; font-size: 13px; color: #bbb; }
+        .card ul li { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .card ul li i { color: var(--green-neon); font-size: 10px; }
+        
+        .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #222; }
+        .price { font-size: 22px; font-weight: 800; color: var(--green-neon); }
+        .btn-buy { background: var(--green-neon); color: black; padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; text-transform: uppercase; font-size: 13px; }
+
+        /* --- MODAL --- */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-content { background: #111; padding: 25px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--green-neon); }
+        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; position: relative; cursor: pointer; }
+        .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; }
+        .pay-item span { font-family: monospace; font-size: 16px; color: white; }
+        .qris-box { background: white; padding: 10px; border-radius: 10px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
-        
-        footer { text-align:center; padding:40px; color:#333; font-size:11px; letter-spacing:1px; border-top: 1px solid #1a1a1a; margin-top: 50px; }
+        footer { text-align:center; padding:30px; color:#444; font-size:11px; }
     </style>
 </head>
 <body>
@@ -99,10 +96,10 @@
         <ul class="sidebar-menu">
             <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
             <li><a href="#store"><i class="fas fa-shopping-cart"></i> Toko Script</a></li>
-            <li><a href="https://youtube.com/@tatanglua" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
-            <li><a href="#" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
-            <li><a href="#" target="_blank"><i class="fab fa-discord"></i> Server Discord</a></li>
-            <li><a href="#" target="_blank"><i class="fas fa-bullhorn"></i> Saluran WA</a></li>
+            <li><a href="https://youtube.com/@tatanglua"><i class="fab fa-youtube"></i> YouTube</a></li>
+            <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+            <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+            <li><a href="#"><i class="fas fa-bullhorn"></i> Saluran WA</a></li>
         </ul>
     </div>
 
@@ -111,95 +108,82 @@
         <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
     </nav>
 
+    <div class="welcome-hero">
+        <h1>WELCOME TO <span>TATANG</span></h1>
+        <p>Solusi Terbaik untuk Custom Script Monetloader & Bot Discord High Quality</p>
+    </div>
+
     <div class="container">
-        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1000&auto=format&fit=crop" class="hero-img" alt="Monetloader">
-        <div class="hero-text">
-            <h1>TATANG DEVELOPER</h1>
-            <p>Solusi Custom Script Monetloader & Bot Discord Terpercaya.</p>
-        </div>
-
-        <h2 class="section-title">COMMUNITY LINKS</h2>
+        <h2 class="section-title">COMMUNITY</h2>
         <div class="social-grid">
-            <a href="#" class="social-btn yt"><i class="fab fa-youtube"></i> YouTube</a>
-            <a href="#" class="social-btn tt"><i class="fab fa-tiktok"></i> TikTok</a>
-            <a href="#" class="social-btn dc"><i class="fab fa-discord"></i> Discord</a>
-            <a href="#" class="social-btn wa"><i class="fas fa-bullhorn"></i> Saluran WA</a>
+            <a href="#" class="social-btn"><i class="fab fa-youtube" style="color:#ff0000;"></i> YouTube</a>
+            <a href="#" class="social-btn"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="#" class="social-btn"><i class="fab fa-discord" style="color:#5865F2;"></i> Discord</a>
+            <a href="#" class="social-btn"><i class="fas fa-bullhorn" style="color:#25D366;"></i> Saluran WA</a>
         </div>
 
-        <h2 class="section-title" id="store">AVAILABLE SERVICES</h2>
+        <h2 class="section-title" id="store">SERVICES</h2>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Monetloader Coding">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Coding">
             <h3>CUSTOM MONETLOADER</h3>
             <ul>
                 <li><i class="fas fa-check"></i> Bebas Request Fitur Sesuai Keinginan</li>
-                <li><i class="fas fa-check"></i> Script Ringan & No Lag (Mobile Opt)</li>
-                <li><i class="fas fa-check"></i> Anti-Decompile (Aman dari Pencuri)</li>
-                <li><i class="fas fa-check"></i> Support Update Jika Terjadi Bug</li>
+                <li><i class="fas fa-check"></i> Anti-Decompile (Keamanan Terjamin)</li>
+                <li><i class="fas fa-check"></i> Script Ringan & No Lag</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 30.000</div>
-                <button class="btn btn-buy" onclick="openPay('Script Monetloader Custom')">BUY NOW</button>
+                <button class="btn-buy" onclick="openPay('Script Monetloader')">BUY NOW</button>
             </div>
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="AI Coding Bot Visual">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="AI Bot">
             <h3>CUSTOM DISCORD BOT</h3>
             <ul>
-                <li><i class="fas fa-check"></i> Fitur Auto-Moderasi & Welcome</li>
-                <li><i class="fas fa-check"></i> Integrasi API (Groq/AI/Lainnya)</li>
+                <li><i class="fas fa-check"></i> Fitur Auto-Mod & Security</li>
+                <li><i class="fas fa-check"></i> Integrasi AI / Groq API</li>
                 <li><i class="fas fa-check"></i> Scan File Berbahaya Otomatis</li>
-                <li><i class="fas fa-check"></i> Online 24/7 (S&K Berlaku)</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 50.000</div>
-                <button class="btn btn-buy" onclick="openPay('Discord Bot Custom')">BUY NOW</button>
+                <button class="btn-buy" onclick="openPay('Discord Bot Custom')">BUY NOW</button>
             </div>
         </div>
     </div>
 
     <div class="modal" id="payModal">
         <div class="modal-content">
-            <h3 style="color:var(--green-neon); margin-bottom: 15px;">PAYMENT METHOD</h3>
-            <p id="orderName" style="font-size:12px; margin-bottom:15px; color:#888; font-weight: 600;"></p>
+            <h3 style="color:var(--green-neon);">PEMBAYARAN</h3>
+            <p id="orderName" style="font-size:11px; margin: 10px 0; color:#888;"></p>
             
             <div class="pay-item" onclick="copyNum('08123456789')">
                 <label>DANA</label>
                 <span>08123456789</span>
-                <i class="far fa-copy copy-icon"></i>
+                <i class="far fa-copy" style="float:right; color:#555;"></i>
             </div>
 
             <div class="pay-item" onclick="copyNum('08123456789')">
                 <label>GOPAY</label>
                 <span>08123456789</span>
-                <i class="far fa-copy copy-icon"></i>
+                <i class="far fa-copy" style="float:right; color:#555;"></i>
             </div>
 
             <div class="qris-box">
-                <i class="fas fa-qrcode fa-2x"></i>
-                <div style="text-align: left;">
-                    QRIS TATANG STORE<br>
-                    <span style="font-size:10px; font-weight:normal;">(Scan melalui Admin WhatsApp)</span>
-                </div>
+                <i class="fas fa-qrcode fa-2x"></i> QRIS TATANG STORE
             </div>
 
-            <p style="font-size: 10px; color: #666; margin-top: 15px;">Klik nomor untuk menyalin otomatis.<br>Kirim bukti transfer melalui tombol di bawah.</p>
-            
-            <a href="#" id="waLink" class="btn btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white; display: flex; align-items: center; justify-content: center; gap: 8px;" target="_blank">
-                <i class="fab fa-whatsapp"></i> HUBUNGI ADMIN
-            </a>
-            
-            <button class="btn" style="color:#ff4444; margin-top:10px; background: none; text-transform: none; font-weight: normal;" onclick="closePay()">Batal</button>
+            <button class="btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white;" onclick="hubungiAdmin()">HUBUNGI ADMIN</button>
+            <button onclick="closePay()" style="background:none; border:none; color:#ff4444; margin-top:15px; cursor:pointer;">Batal</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 TATANG LUA DEVELOPER | ALL RIGHTS RESERVED</p>
+        <p>&copy; 2026 TATANG LUA DEVELOPER</p>
     </footer>
 
     <script>
-        // Logika Sidebar
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
@@ -207,34 +191,24 @@
             overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
         }
 
-        // Buka Modal Pembayaran
         function openPay(name) {
             document.getElementById('orderName').innerText = "Produk: " + name;
-            // Ganti nomor WA Admin Anda di sini
-            const waNumber = "628123456789"; 
-            const message = encodeURIComponent(`Halo Tatang, saya ingin order ${name}. Tolong panduannya.`);
-            document.getElementById('waLink').href = `https://wa.me/${waNumber}?text=${message}`;
-            
             document.getElementById('payModal').style.display = 'flex';
         }
-
-        // Tutup Modal Pembayaran
-        function closeModalByOverlay(event) {
-             if (event.target === document.getElementById('payModal')) {
-                 closePay();
-             }
-        }
-        document.getElementById('payModal').addEventListener('click', closeModalByOverlay);
 
         function closePay() {
             document.getElementById('payModal').style.display = 'none';
         }
 
-        // Salin Nomor Otomatis
         function copyNum(num) {
             navigator.clipboard.writeText(num);
             alert("Nomor " + num + " berhasil disalin!");
         }
+
+        function hubungiAdmin() {
+            const order = document.getElementById('orderName').innerText;
+            window.open(`https://wa.me/628123456789?text=Halo Tatang, saya ingin order ${order}`, '_blank');
+        }
     </script>
 </body>
-        </html>
+                                                         </html>
