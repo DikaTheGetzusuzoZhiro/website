@@ -104,8 +104,9 @@
         /* --- MODAL --- */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .modal-content { background: #111; padding: 25px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--green-neon); }
-        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; cursor: pointer; border: 1px solid #333; text-decoration: none; display: block; }
-        .pay-item label { font-size: 10px; color: var(--green-neon); display: block; margin-bottom: 2px; font-weight: 700; }
+        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; cursor: pointer; border: 1px solid #333; text-decoration: none; display: block; transition: 0.3s; }
+        .pay-item:hover { border-color: var(--green-neon); }
+        .pay-item label { font-size: 10px; color: var(--green-neon); display: block; margin-bottom: 2px; font-weight: 700; cursor: pointer; }
         .pay-item span { font-family: monospace; font-size: 16px; color: white; font-weight: 700; }
         .qris-btn { background: white; padding: 12px; border-radius: 8px; margin-top: 10px; color: black; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-weight: 700; }
 
@@ -202,11 +203,11 @@
             <h3 style="color:var(--green-neon); margin-bottom: 10px;">PEMBAYARAN</h3>
             <p id="orderName" style="font-size:12px; margin-bottom:20px; color:#888;"></p>
             
-            <a href="https://wa.me/62895328044863" target="_blank" class="pay-item">
-                <label>DANA & GOPAY</label>
+            <div class="pay-item" onclick="copyNumber('0895328044863')">
+                <label>DANA & GOPAY (Klik Untuk Salin)</label>
                 <span>0895328044863</span>
-                <i class="fab fa-whatsapp" style="float:right; color:#25D366"></i>
-            </a>
+                <i class="fas fa-copy" style="float:right; color:var(--green-neon)"></i>
+            </div>
 
             <a href="https://i.ibb.co.com/6RwM0DrR/Kode-QRIS-FYY-STORE.png" target="_blank" class="qris-btn">
                 <i class="fas fa-qrcode fa-2x"></i>
@@ -243,6 +244,16 @@
             const order = document.getElementById('orderName').innerText;
             window.open(`https://wa.me/62895328044863?text=Halo Tatang, saya sudah bayar untuk ${order}.`, '_blank');
         }
+
+        // FUNGSI BARU UNTUK MENYALIN NOMOR
+        function copyNumber(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Nomor berhasil disalin: " + text);
+            }).catch(err => {
+                alert("Gagal menyalin nomor. Silakan salin secara manual.");
+                console.error('Error copying text: ', err);
+            });
+        }
     </script>
 </body>
-    </html>
+</html>
