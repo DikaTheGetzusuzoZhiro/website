@@ -3,199 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG | MONETLOADER ARCHITECT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>TATANG LUA | DEVELOPER GACOR</title>
     <style>
-        :root {
-            --primary: #ff3c00;
-            --gold: #ffd700;
-            --bg: #0a0a0a;
-            --card-bg: rgba(20, 20, 20, 0.95);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
 
         body {
-            background: var(--bg);
-            color: #eee;
-            font-family: 'Montserrat', sans-serif;
+            background: #000;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at center, #1a0a0a 0%, #000 100%);
+            padding: 20px;
+            /* Background efek garis halus */
+            background-image: linear-gradient(0deg, transparent 24%, rgba(255, 0, 0, .05) 25%, rgba(255, 0, 0, .05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 0, .05) 75%, rgba(255, 0, 0, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 0, 0, .05) 25%, rgba(255, 0, 0, .05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 0, .05) 75%, rgba(255, 0, 0, .05) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
         }
 
-        /* Container Utama */
-        .rpg-container {
+        .wadah-utama {
+            width: 100%;
+            max-width: 450px;
+            background: #0a0a0a;
+            border: 2px solid #ff0000;
+            padding: 30px;
             position: relative;
-            width: 90%;
-            max-width: 500px;
-            padding: 40px 20px;
-            background: var(--card-bg);
-            border: 2px solid #333;
-            border-image: linear-gradient(to bottom, var(--gold), #333) 1;
-            box-shadow: 0 0 50px rgba(0,0,0,1);
-            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
         }
 
-        /* Dekorasi Sudut */
-        .corner {
+        /* Garis Dekorasi */
+        .wadah-utama::before {
+            content: '';
             position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 2px solid var(--gold);
-            z-index: 5;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid #333;
+            z-index: -1;
         }
-        .top-l { top: -5px; left: -5px; border-right: none; border-bottom: none; }
-        .top-r { top: -5px; right: -5px; border-left: none; border-bottom: none; }
-        .bot-l { bottom: -5px; left: -5px; border-right: none; border-top: none; }
-        .bot-r { bottom: -5px; right: -5px; border-left: none; border-top: none; }
 
-        /* Header */
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 38px;
-            color: var(--gold);
+            font-size: 40px;
+            color: #ff0000;
+            text-align: center;
+            text-transform: uppercase;
             letter-spacing: 5px;
             margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            font-weight: 900;
         }
 
-        .title-tag {
-            font-size: 10px;
-            letter-spacing: 4px;
-            color: var(--primary);
-            font-weight: bold;
-            text-transform: uppercase;
+        .sub-judul {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
             margin-bottom: 30px;
-        }
-
-        /* Section Penjelasan - GACOR & RAPI */
-        .quest-log {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid #222;
-            padding: 20px;
-            margin-bottom: 35px;
-            text-align: left;
-            position: relative;
-        }
-
-        .quest-log h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 14px;
-            color: var(--gold);
-            margin-bottom: 10px;
+            letter-spacing: 2px;
             border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            padding-bottom: 10px;
         }
 
-        .quest-log p {
+        /* Kotak Penjelasan */
+        .kotak-info {
+            background: #111;
+            border-left: 4px solid #ff0000;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .kotak-info h2 {
+            font-size: 14px;
+            color: #ff0000;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .kotak-info p {
             font-size: 13px;
             line-height: 1.6;
-            color: #bbb;
+            color: #ccc;
         }
 
-        .highlight { color: var(--primary); font-weight: bold; }
-
-        /* Orbital Social Menu */
-        .social-orbit {
+        /* Link Tombol Gacor */
+        .tombol-list {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .circle-btn {
-            width: 65px;
-            height: 65px;
-            border: 2px solid #333;
-            border-radius: 50%;
+        .tombol {
             display: flex;
-            justify-content: center;
             align-items: center;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background: #000;
-            position: relative;
-        }
-
-        .circle-btn:hover {
-            border-color: var(--gold);
-            transform: translateY(-10px) rotate(10deg);
-            box-shadow: 0 0 20px var(--gold);
-        }
-
-        .circle-btn img {
-            width: 28px;
-            filter: grayscale(1) invert(1);
-        }
-
-        .circle-btn:hover img {
-            filter: grayscale(0) invert(0);
-        }
-
-        /* Social Labels */
-        .label {
-            font-size: 9px;
-            margin-top: 8px;
-            color: #666;
-            text-transform: uppercase;
+            padding: 15px;
+            text-decoration: none;
             font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border: 1px solid #333;
         }
 
-        /* Footer */
-        .footer-line {
-            margin-top: 40px;
-            font-size: 9px;
+        .t-dc { color: #5865F2; }
+        .t-wa { color: #25D366; }
+        .t-yt { color: #FF0000; }
+
+        .tombol img {
+            width: 20px;
+            margin-right: 15px;
+        }
+
+        .tombol:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.02);
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10px;
             color: #444;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div class="rpg-container">
-        <div class="corner top-l"></div>
-        <div class="corner top-r"></div>
-        <div class="corner bot-l"></div>
-        <div class="corner bot-r"></div>
-
+    <div class="wadah-utama">
         <h1>TATANG</h1>
-        <div class="title-tag">Elite Lua Developer</div>
+        <div class="sub-judul">AHLI LUA SCRIPTING</div>
 
-        <div class="quest-log">
-            <h3>[ MISSION: WHAT IS MONETLOADER? ]</h3>
+        <div class="kotak-info">
+            <h2>APA ITU MONETLOADER?</h2>
             <p>
-                <span class="highlight">Monetloader</span> adalah injector script berbasis Lua tercanggih untuk <b>SAMP Mobile</b>. Alat ini memungkinkan modifikasi game secara instan, memberikan akses ke fitur automasi, visual mod, dan utilitas canggih tanpa mengurangi stabilitas performa game.
+                <b>Monetloader</b> adalah alat (injector) buat masukin script <b>Lua</b> ke dalam GTA SAMP Mobile. Fungsinya biar lo bisa pakai fitur otomatis, modifikasi tampilan, dan tools tambahan tanpa ribet. Intinya, bikin game lo jauh lebih canggih.
             </p>
         </div>
 
-        <div class="social-orbit">
-            <div style="text-align: center;">
-                <a href="https://discord.gg/G5SABE8uQe" class="circle-btn" target="_blank">
-                    <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=ffffff" alt="Discord">
-                </a>
-                <div class="label">Discord</div>
-            </div>
+        <div class="tombol-list">
+            <a href="https://discord.gg/G5SABE8uQe" class="tombol t-dc">
+                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=5865F2" alt="DC">
+                GABUNG DISCORD
+            </a>
 
-            <div style="text-align: center;">
-                <a href="https://youtube.com/@tatanglua" class="circle-btn" target="_blank" style="border-color: #ff0000;">
-                    <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=ffffff" alt="YouTube">
-                </a>
-                <div class="label" style="color: #ff0000;">YouTube</div>
-            </div>
+            <a href="https://youtube.com/@tatanglua" class="tombol t-yt">
+                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=FF0000" alt="YT">
+                NONTON TUTORIAL YOUTUBE
+            </a>
 
-            <div style="text-align: center;">
-                <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="circle-btn" target="_blank" style="border-color: #25D366;">
-                    <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=ffffff" alt="WhatsApp">
-                </a>
-                <div class="label" style="color: #25D366;">WhatsApp</div>
-            </div>
+            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="tombol t-wa">
+                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=25D366" alt="WA">
+                SALURAN WHATSAPP
+            </a>
         </div>
 
-        <div class="footer-line">
-            SYSTEM STATUS: LEGENDARY // ACCESS GRANTED
+        <div class="footer">
+            AKSES AMAN // TATANG DEVELOPER
         </div>
     </div>
 
