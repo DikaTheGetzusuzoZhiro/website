@@ -81,7 +81,10 @@
         .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; cursor: pointer; border: 1px solid #333; text-decoration: none; display: block; }
         .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; margin-bottom: 2px; }
         .pay-item span { font-family: monospace; font-size: 16px; color: white; }
-        .qris-box { background: white; padding: 10px; border-radius: 8px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        
+        /* Tombol QRIS bisa dipencet */
+        .qris-btn { background: white; padding: 12px; border-radius: 8px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; transition: 0.3s; }
+        .qris-btn:hover { background: #e0e0e0; transform: scale(1.02); }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
         footer { text-align:center; padding:40px; color:#444; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
@@ -130,11 +133,10 @@
         <div class="card">
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Coding">
             <h3>CUSTOM MONETLOADER</h3>
-            <p class="card-desc">Script khusus Monetloader berkualitas tinggi. Dapatkan performa terbaik dengan fitur lengkap dan tampilan UI mImgui yang bisa Anda tentukan sendiri sesuai keinginan.</p>
+            <p class="card-desc">Script khusus Monetloader berkualitas tinggi dengan tampilan mImgui modern sesuai permintaan Anda.</p>
             <ul>
                 <li><i class="fas fa-check-circle"></i> Dapat File <b>No Enc</b> & <b>Enc</b></li>
                 <li><i class="fas fa-check-circle"></i> Bebas Request Tampilan <b>mImgui</b></li>
-                <li><i class="fas fa-check-circle"></i> Bebas Request Fitur Sesukamu</li>
                 <li><i class="fas fa-check-circle"></i> Fitur Dijamin <b>Work 100%</b></li>
                 <li><i class="fas fa-star"></i> Bonus <b>Role VIP</b> di Discord</li>
             </ul>
@@ -147,9 +149,8 @@
         <div class="card">
             <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Bot AI">
             <h3>BOT DISCORD</h3>
-            <p class="card-desc">Tingkatkan fitur server komunitasmu dengan bot canggih. Cocok untuk moderasi otomatis, musik, atau fitur khusus lainnya yang terintegrasi dengan YouTube, TikTok, dan Saluran WA.</p>
+            <p class="card-desc">Bot canggih untuk moderasi dan fitur khusus yang terintegrasi dengan YouTube, TikTok, dan Saluran WA.</p>
             <ul>
-                <li><i class="fas fa-check-circle"></i> Bebas Request Fitur Apapun</li>
                 <li><i class="fas fa-check-circle"></i> Bot <b>Online 24 Jam</b> Non-stop</li>
                 <li><i class="fas fa-check-circle"></i> Masa Aktif <b>30 Hari</b></li>
                 <li><i class="fas fa-check-circle"></i> Perpanjang Cuma <b>5k</b></li>
@@ -179,15 +180,15 @@
                 <i class="fab fa-whatsapp" style="float:right; color:#25D366"></i>
             </a>
 
-            <div class="qris-box">
+            <a href="https://i.ibb.co.com/6RwM0DrR/Kode-QRIS-FYY-STORE.png" target="_blank" class="qris-btn">
                 <i class="fas fa-qrcode fa-2x"></i>
                 <div style="text-align:left">
-                    QRIS TATANG STORE<br>
-                    <span style="font-size:10px; font-weight:normal">Scan & Kirim Bukti ke Admin</span>
+                    BUKA MENU QRIS<br>
+                    <span style="font-size:10px; font-weight:normal">Klik untuk lihat/scan kode QRIS</span>
                 </div>
-            </div>
+            </a>
 
-            <button class="btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white;" onclick="hubungiAdmin()">HUBUNGI ADMIN</button>
+            <button class="btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white;" onclick="hubungiAdmin()">KONFIRMASI ADMIN</button>
             <button onclick="closePay()" style="background:none; border:none; color:#ff4444; margin-top:15px; cursor:pointer; font-size:13px;">Batal</button>
         </div>
     </div>
@@ -215,8 +216,8 @@
 
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
-            window.open(`https://wa.me/62895328044863?text=Halo Tatang, saya ingin order ${order}.`, '_blank');
+            window.open(`https://wa.me/62895328044863?text=Halo Tatang, saya sudah bayar untuk ${order}. Ini bukti transfernya:`, '_blank');
         }
     </script>
 </body>
-    </html>
+</html>
