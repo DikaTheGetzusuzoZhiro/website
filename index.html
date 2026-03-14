@@ -3,208 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG LUA ARCHITECT | UNMATCHED</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>TATANG LUA | MONETLOADER SPECIALIST</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Michroma&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon: #00ff88;
-            --neon-dark: #008f4c;
-            --bg-dark: #050505;
-            --glass: rgba(0, 0, 0, 0.85);
+            --orange: #FF8C00;
+            --yellow: #FFD700;
+            --black: #0A0A0A;
+            --white: #F4F4F4;
+            --dark-grey: #151515;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: var(--bg-dark);
-            font-family: 'Rajdhani', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Michroma', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
-            color: white;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 2px 2px, #222 1px, transparent 0);
+            background-size: 32px 32px;
         }
 
-        /* Background Anime & Scanlines */
-        .bg-overlay {
+        /* Industrial Background Overlay */
+        body::before {
+            content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('https://images.alphacoders.com/132/1325712.png');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-        }
-
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 4px, 3px 100%;
+            background: linear-gradient(45deg, rgba(255,140,0,0.05) 0%, transparent 70%);
             pointer-events: none;
-            z-index: -1;
         }
 
-        /* The Main Gacor Card */
-        .cyber-card {
-            width: 380px;
-            padding: 40px 30px;
-            background: var(--glass);
-            border: 2px solid #1a1a1a;
+        .main-frame {
+            width: 90%;
+            max-width: 450px;
+            background: var(--dark-grey);
+            border-left: 5px solid var(--orange);
+            border-right: 2px solid var(--yellow);
+            padding: 40px 25px;
             position: relative;
-            text-align: center;
-            backdrop-filter: blur(15px);
-            clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            box-shadow: 20px 20px 0px rgba(0,0,0,0.5);
         }
 
-        /* Animated RGB Border Corner */
-        .cyber-card::before {
-            content: '';
+        /* Danger Stripes (Gacor Effect) */
+        .stripes {
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--orange),
+                var(--orange) 10px,
+                var(--black) 10px,
+                var(--black) 20px
+            );
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 2px solid var(--neon);
-            clip-path: polygon(0 0, 20% 0, 0 20%);
-            animation: pulse 2s infinite;
-        }
-
-        .cyber-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0; right: 0; width: 100%; height: 100%;
-            border: 2px solid var(--neon);
-            clip-path: polygon(100% 100%, 80% 100%, 100% 80%);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px var(--neon)); }
-            50% { opacity: 0.3; }
+            top: 0; left: 0;
         }
 
         /* Profile Section */
-        .logo-box {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 20px;
+        .profile-container {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .logo-box img {
+        .avatar-frame {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border: 3px solid var(--white);
+            outline: 3px solid var(--orange);
+            outline-offset: 4px;
+            background: var(--black);
+            padding: 5px;
+            transform: rotate(-2deg);
+        }
+
+        .avatar-frame img {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            border: 4px solid #1a1a1a;
             object-fit: cover;
-            z-index: 5;
-            position: relative;
+            filter: grayscale(20%) contrast(110%);
         }
-
-        .logo-ring {
-            position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px;
-            border: 2px dashed var(--neon);
-            border-radius: 50%;
-            animation: spin 10s linear infinite;
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            letter-spacing: 4px;
-            color: #fff;
-            text-shadow: 0 0 10px var(--neon);
-        }
-
-        .status {
-            font-size: 12px;
-            color: var(--neon);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 24px;
+            color: var(--orange);
             text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        /* Gacor Buttons */
-        .btn-container { display: flex; flex-direction: column; gap: 15px; }
-
-        .cyber-btn {
-            background: transparent;
-            border: 1px solid var(--neon);
-            color: #fff;
-            padding: 15px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
+            margin-bottom: 5px;
             letter-spacing: 2px;
-            position: relative;
-            transition: all 0.3s;
-            overflow: hidden;
-            text-transform: uppercase;
         }
 
-        .cyber-btn:hover {
-            background: var(--neon);
-            color: #000;
-            box-shadow: 0 0 20px var(--neon);
-            transform: skew(-5deg);
-        }
-
-        .cyber-btn:active {
-            animation: glitch 0.2s infinite;
-        }
-
-        @keyframes glitch {
-            0% { transform: translate(2px, -2px); }
-            50% { transform: translate(-2px, 2px); }
-            100% { transform: translate(0); }
-        }
-
-        .footer {
-            margin-top: 30px;
+        .badge {
+            background: var(--yellow);
+            color: var(--black);
             font-size: 10px;
-            opacity: 0.5;
-            letter-spacing: 5px;
+            font-weight: bold;
+            padding: 3px 10px;
+            display: inline-block;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
         }
 
-        /* Decorative HUD */
-        .hud-corner {
+        /* Info Section (Script Explanation) */
+        .info-panel {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #333;
+            padding: 15px;
+            margin-bottom: 25px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            border-radius: 4px;
+        }
+
+        .info-panel h3 {
+            color: var(--yellow);
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-panel h3::before {
+            content: ">";
+            margin-right: 8px;
+            color: var(--orange);
+        }
+
+        .info-panel p {
+            color: #bbb;
+            line-height: 1.5;
+        }
+
+        /* Interactive Buttons */
+        .link-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 14px 20px;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 13px;
+            font-weight: bold;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: "";
             position: absolute;
-            font-size: 8px;
-            color: var(--neon);
-            opacity: 0.6;
+            right: 15px;
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid var(--orange);
+            border-right: 2px solid var(--orange);
+            transform: rotate(45deg);
+        }
+
+        .btn:hover {
+            border-color: var(--orange);
+            background: var(--orange);
+            color: var(--black);
+            transform: translateX(8px);
+        }
+
+        .btn i-logo {
+            width: 24px;
+            margin-right: 15px;
+        }
+
+        .footer-tag {
+            margin-top: 30px;
+            text-align: right;
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            color: #555;
+            border-top: 1px solid #222;
+            padding-top: 10px;
+        }
+
+        /* Glitch Animation for Hover */
+        .btn:hover i-logo {
+            filter: invert(1);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
-    <div class="scanlines"></div>
-
-    <div class="cyber-card">
-        <div class="hud-corner" style="top: 10px; left: 15px;">SYS_LOAD: 99%</div>
-        <div class="hud-corner" style="bottom: 10px; right: 15px;">LUA_VER: 5.1</div>
-
-        <div class="logo-box">
-            <div class="logo-ring"></div>
-            <img src="https://i.ibb.co.com/zVPvVbM5/file-00000000b5d4720698886001d6221767.png" alt="Tatang">
+    <div class="main-frame">
+        <div class="stripes"></div>
+        
+        <div class="profile-container">
+            <div class="avatar-frame">
+                <img src="https://i.ibb.co.com/zVPvVbM5/file-00000000b5d4720698886001d6221767.png" alt="TATANG">
+            </div>
+            <h1>TATANG</h1>
+            <div class="badge">SYSTEM ARCHITECT - LUA</div>
         </div>
 
-        <h1>TATANG</h1>
-        <div class="status">▲ ACTIVE DEVELOPER ▲</div>
-
-        <div class="btn-container">
-            <a href="https://discord.gg/G5SABE8uQe" class="cyber-btn">Enter Discord</a>
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="cyber-btn">WhatsApp Archive</a>
-            <a href="https://youtube.com/@tatanglua" class="cyber-btn">Core Tutorials</a>
+        <div class="info-panel">
+            <h3>MONETLOADER LUA</h3>
+            <p>Framework canggih untuk eksekusi script <b>Lua</b> di SAMP Mobile. Memungkinkan modifikasi real-time tanpa crash sistem.</p>
         </div>
 
-        <div class="footer">
-            SECURE ACCESS // EST 2025
+        <div class="info-panel">
+            <h3>MANFAAT & FUNGSI</h3>
+            <p>Automasi fitur, peningkatan UI (Mimgui), dan bypass limitasi game untuk pengalaman <b>SAMP Mobile</b> yang lebih gacor.</p>
+        </div>
+
+        <div class="link-grid">
+            <a href="https://discord.gg/G5SABE8uQe" class="btn">
+                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=FFA500" class="i-logo" style="width: 24px; margin-right: 10px;" alt="Discord">
+                DISCORD COMMUNITY
+            </a>
+
+            <a href="https://youtube.com/@tatanglua" class="btn">
+                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=FFA500" class="i-logo" style="width: 24px; margin-right: 10px;" alt="YouTube">
+                YOUTUBE ARCHIVE
+            </a>
+
+            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="btn">
+                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=FFA500" class="i-logo" style="width: 24px; margin-right: 10px;" alt="WA">
+                WHATSAPP CHANNEL
+            </a>
+        </div>
+
+        <div class="footer-tag">
+            STATUS: OPERATIONAL // MNTR_V2.0 // EST 2025
         </div>
     </div>
 
