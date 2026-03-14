@@ -61,6 +61,13 @@
         .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 12px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; transition: 0.3s; }
         .social-btn:hover { border-color: var(--green-neon); transform: translateY(-2px); }
 
+        /* --- FREE DOWNLOAD BOX --- */
+        .free-box { background: linear-gradient(45deg, #1ed76022, #141414); border: 1px dashed var(--green-neon); border-radius: 16px; padding: 20px; margin-bottom: 25px; text-align: center; }
+        .free-box h4 { color: var(--green-neon); margin-bottom: 5px; text-transform: uppercase; }
+        .free-box p { font-size: 12px; color: #bbb; margin-bottom: 15px; }
+        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 12px; transition: 0.3s; }
+        .btn-download:hover { transform: scale(1.05); background: var(--green-neon); }
+
         /* --- PRODUCT CARDS --- */
         .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 25px; border: 1px solid #222; transition: 0.3s; }
         .card:hover { border-color: var(--green-neon); }
@@ -82,7 +89,6 @@
         .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; margin-bottom: 2px; }
         .pay-item span { font-family: monospace; font-size: 16px; color: white; }
         
-        /* Tombol QRIS bisa dipencet */
         .qris-btn { background: white; padding: 12px; border-radius: 8px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; transition: 0.3s; }
         .qris-btn:hover { background: #e0e0e0; transform: scale(1.02); }
 
@@ -126,6 +132,15 @@
             <a href="https://www.tiktok.com/@tatang.lua" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i> TIKTOK</a>
             <a href="https://discord.gg/G5SABE8uQe" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2"></i> DISCORD</a>
             <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank" class="social-btn"><i class="fas fa-bullhorn" style="color:#25D366"></i> SALURAN WA</a>
+        </div>
+
+        <h2 class="section-title">FREE RESOURCES</h2>
+        <div class="free-box">
+            <h4><i class="fas fa-gift"></i> Monetloader Free Edition</h4>
+            <p>Dapatkan versi free langsung dari server Discord kami secara gratis!</p>
+            <a href="https://discord.gg/G5SABE8uQe" target="_blank" class="btn-download">
+                <i class="fas fa-download"></i> DOWNLOAD DI DISCORD
+            </a>
         </div>
 
         <h2 class="section-title" id="services">OFFICIAL SERVICES</h2>
@@ -220,4 +235,4 @@
         }
     </script>
 </body>
-</html>
+    </html>
