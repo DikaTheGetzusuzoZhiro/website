@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TATANG - Official Developer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -15,7 +15,7 @@
             --text-muted: #999999;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; font-weight: 400; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
         /* --- SIDEBAR --- */
@@ -23,12 +23,12 @@
         .sidebar.active { left: 0; }
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
         .sidebar-menu { list-style: none; }
-        .sidebar-menu a { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 8px; transition: 0.3s; margin-bottom: 10px; }
+        .sidebar-menu a { color: white; text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 8px; transition: 0.3s; margin-bottom: 10px; }
         .sidebar-menu a:hover { background: rgba(30, 215, 96, 0.1); color: var(--green-neon); }
 
         /* --- NAVBAR --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(10, 10, 10, 0.95); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #222; }
-        .logo { font-size: 22px; font-weight: 800; text-decoration: none; color: white; }
+        .logo { font-size: 22px; text-decoration: none; color: white; }
         .logo span { color: var(--green-neon); }
         .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; }
 
@@ -46,26 +46,26 @@
             align-items: center;
             text-align: center;
         }
-        .welcome-hero h1 { font-size: 32px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .welcome-hero h1 { font-size: 32px; text-transform: uppercase; letter-spacing: 2px; }
         .welcome-hero h1 span { color: var(--green-neon); }
         .welcome-hero p { color: var(--text-muted); font-size: 13px; margin-top: 5px; }
 
         .container { padding: 20px; max-width: 600px; margin: auto; }
 
         /* --- TITLES --- */
-        .section-title { font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 30px 0 15px; color: var(--green-neon); display: flex; align-items: center; gap: 10px; }
+        .section-title { font-size: 16px; text-transform: uppercase; margin: 30px 0 15px; color: var(--green-neon); display: flex; align-items: center; gap: 10px; }
         .section-title::after { content: ""; flex: 1; height: 1px; background: #333; }
         
         /* --- SOCIAL GRID --- */
         .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 12px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; transition: 0.3s; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 12px; background: #1a1a1a; border: 1px solid #333; transition: 0.3s; }
         .social-btn:hover { border-color: var(--green-neon); transform: translateY(-2px); }
 
         /* --- FREE BOX --- */
         .free-box { background: linear-gradient(45deg, #1ed76022, #141414); border: 1px dashed var(--green-neon); border-radius: 16px; padding: 20px; margin-bottom: 25px; text-align: center; }
         .free-box h4 { color: var(--green-neon); margin-bottom: 5px; text-transform: uppercase; }
         .free-box p { font-size: 12px; color: #bbb; margin-bottom: 15px; }
-        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 12px; transition: 0.3s; }
+        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-size: 12px; transition: 0.3s; }
 
         /* --- CARDS --- */
         .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 25px; border: 1px solid #222; transition: 0.3s; }
@@ -77,16 +77,16 @@
         .card ul li i { color: var(--green-neon); width: 15px; text-align: center; }
         
         .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #222; }
-        .price { font-size: 22px; font-weight: 800; color: var(--green-neon); }
-        .btn-buy { background: var(--green-neon); color: black; padding: 12px 20px; border-radius: 8px; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; font-size: 13px; }
+        .price { font-size: 22px; color: var(--green-neon); }
+        .btn-buy { background: var(--green-neon); color: black; padding: 12px 20px; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; font-size: 13px; }
 
         /* --- MODAL --- */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .modal-content { background: #111; padding: 25px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--green-neon); }
         .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; cursor: pointer; border: 1px solid #333; text-decoration: none; display: block; }
-        .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; margin-bottom: 2px; }
+        .pay-item label { font-size: 10px; color: var(--green-neon); display: block; margin-bottom: 2px; }
         .pay-item span { font-family: monospace; font-size: 16px; color: white; }
-        .qris-btn { background: white; padding: 12px; border-radius: 8px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
+        .qris-btn { background: white; padding: 12px; border-radius: 8px; margin-top: 10px; color: black; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
         footer { text-align:center; padding:40px; color:#444; font-size: 11px; text-transform: uppercase; }
@@ -142,10 +142,10 @@
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Coding">
             <h3>CUSTOM MONETLOADER</h3>
             <ul>
-                <li><i class="fas fa-check-circle"></i> Dapat File <b>Enc</b> & <b>No Enc</b></li>
-                <li><i class="fas fa-check-circle"></i> Bebas Request <b>Tampilan</b> & <b>Fitur</b></li>
-                <li><i class="fas fa-check-circle"></i> Fitur Dijamin <b>Work 100%</b></li>
-                <li><i class="fas fa-star"></i> Bonus <b>Role VIP</b> di Discord</li>
+                <li><i class="fas fa-check-circle"></i> Dapat File Enc & No Enc</li>
+                <li><i class="fas fa-check-circle"></i> Bebas Request Tampilan & Fitur</li>
+                <li><i class="fas fa-check-circle"></i> Fitur Dijamin Work 100%</li>
+                <li><i class="fas fa-star"></i> Bonus Role VIP di Discord</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 30.000</div>
@@ -158,9 +158,9 @@
             <h3>BOT DISCORD</h3>
             <ul>
                 <li><i class="fas fa-check-circle"></i> Bebas Request Fitur Apapun</li>
-                <li><i class="fas fa-check-circle"></i> Bot <b>Online 24 Jam</b> Non-stop</li>
-                <li><i class="fas fa-check-circle"></i> Perpanjang Cuma <b>5k</b></li>
-                <li><i class="fas fa-star"></i> Bonus <b>Role VIP</b> di Discord</li>
+                <li><i class="fas fa-check-circle"></i> Bot Online 24 Jam Non-stop</li>
+                <li><i class="fas fa-check-circle"></i> Perpanjang Cuma 5k</li>
+                <li><i class="fas fa-star"></i> Bonus Role VIP di Discord</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 50.000</div>
@@ -182,7 +182,7 @@
 
             <a href="https://i.ibb.co.com/6RwM0DrR/Kode-QRIS-FYY-STORE.png" target="_blank" class="qris-btn">
                 <i class="fas fa-qrcode fa-2x"></i>
-                <div style="text-align:left">BUKA MENU QRIS<br><span style="font-size:10px; font-weight:normal">Scan kode QRIS Tatang Store</span></div>
+                <div style="text-align:left">BUKA MENU QRIS<br><span style="font-size:10px;">Scan kode QRIS Tatang Store</span></div>
             </a>
 
             <button class="btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white;" onclick="hubungiAdmin()">KONFIRMASI ADMIN</button>
@@ -217,4 +217,4 @@
         }
     </script>
 </body>
-                                                                            </html>
+                </html>
