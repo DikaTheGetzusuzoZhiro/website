@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG - Modding & Store</title>
+    <title>TATANG - Modding & Development</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #0b0b0b;
-            --bg-card: #151515;
-            --green-primary: #198754; 
-            --green-hover: #1fd655;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --green-neon: #1ed760; 
+            --green-dark: #198754;
             --text-main: #ffffff;
-            --text-muted: #888888;
+            --text-muted: #999999;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
@@ -22,57 +22,62 @@
         /* --- SIDEBAR --- */
         .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: #111; z-index: 1000; transition: 0.4s; padding: 30px 20px; border-right: 1px solid #333; }
         .sidebar.active { left: 0; }
-        .sidebar-menu { list-style: none; margin-top: 30px; }
-        .sidebar-menu li { margin-bottom: 20px; }
-        .sidebar-menu a { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; font-size: 16px; }
-        .sidebar-menu i { color: var(--green-primary); }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-menu li { margin-bottom: 15px; }
+        .sidebar-menu a { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; padding: 12px; border-radius: 8px; transition: 0.3s; }
+        .sidebar-menu a:hover { background: rgba(30, 215, 96, 0.1); color: var(--green-neon); }
+        .sidebar-menu i { width: 20px; text-align: center; }
 
         /* --- NAVBAR --- */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(11, 11, 11, 0.95); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #222; }
-        .logo { font-size: 24px; font-weight: 800; text-decoration: none; color: white; }
-        .logo span { color: var(--green-primary); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(10, 10, 10, 0.95); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #222; }
+        .logo { font-size: 22px; font-weight: 800; text-decoration: none; color: white; letter-spacing: 1px; }
+        .logo span { color: var(--green-neon); }
         .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; }
 
-        .container { padding: 20px; max-width: 800px; margin: auto; }
+        .container { padding: 20px; max-width: 600px; margin: auto; }
 
-        /* --- SECTION TITLES --- */
-        .section-title { font-size: 22px; font-weight: 800; text-transform: uppercase; margin: 40px 0 20px; border-left: 4px solid var(--green-primary); padding-left: 15px; }
+        /* --- HERO --- */
+        .hero-img { width: 100%; border-radius: 15px; height: 180px; object-fit: cover; margin-bottom: 20px; border: 1px solid #333; }
+        .hero-text { text-align: center; margin-bottom: 30px; }
+        .hero-text h1 { font-size: 32px; font-weight: 800; }
+        .hero-text p { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
 
-        /* --- UPLOAD SYSTEM --- */
-        .upload-card { background: var(--bg-card); padding: 25px; border-radius: 15px; border: 1px solid #333; }
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 12px; color: var(--green-primary); margin-bottom: 5px; font-weight: bold; }
-        input, textarea, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: white; font-size: 14px; }
+        /* --- PRODUCT CARDS --- */
+        .section-title { font-size: 18px; font-weight: 800; text-transform: uppercase; margin: 30px 0 15px; color: var(--green-neon); display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: #333; }
+
+        .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 20px; border: 1px solid #222; transition: 0.3s; }
+        .card:hover { border-color: var(--green-neon); }
+        .card img { width: 100%; height: 140px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; }
+        .card h3 { font-size: 20px; margin-bottom: 8px; }
+        .card ul { list-style: none; margin-bottom: 15px; }
+        .card ul li { font-size: 13px; color: #bbb; margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .card ul li i { color: var(--green-neon); font-size: 10px; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 15px; border-top: 1px solid #222; }
+        .price { font-size: 22px; font-weight: 800; color: var(--green-neon); }
+
+        /* --- BUTTONS --- */
+        .btn { padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; font-size: 14px; }
+        .btn-buy { background: var(--green-neon); color: black; }
+        .btn-buy:active { transform: scale(0.95); }
         
-        .btn { width: 100%; padding: 15px; border-radius: 8px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
-        .btn-green { background: var(--green-primary); color: white; }
-        .btn-green:hover { background: var(--green-hover); }
-        .btn-green:active { transform: scale(0.98); }
-
-        /* --- MOD LIST / DOWNLOAD --- */
-        .mod-item { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 15px; border: 1px solid #222; }
-        .mod-header { display: flex; justify-content: space-between; align-items: flex-start; }
-        .mod-name { font-size: 18px; font-weight: 800; color: var(--green-primary); }
-        .mod-meta { font-size: 11px; color: #666; margin-bottom: 10px; }
-        .download-btn { background: #222; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 10px; border: 1px solid #444; }
-        .download-btn:hover { background: #333; border-color: var(--green-primary); }
-
-        /* --- BUY FEATURE (MARKETPLACE) --- */
-        .buy-card { background: linear-gradient(145deg, #1a1a1a, #0a0a0a); border-radius: 15px; overflow: hidden; margin-bottom: 20px; border: 1px solid #333; }
-        .buy-card img { width: 100%; height: 180px; object-fit: cover; }
-        .buy-info { padding: 20px; }
-        .price-tag { font-size: 20px; font-weight: 800; color: var(--green-primary); margin: 10px 0; }
-
-        /* --- DISCORD BOT SECTION --- */
-        .bot-section { background: #5865F2; border-radius: 15px; padding: 25px; margin-top: 30px; display: flex; align-items: center; gap: 20px; }
-        .bot-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; }
-        .bot-text h3 { font-weight: 800; }
-        .bot-text p { font-size: 13px; opacity: 0.9; }
+        /* --- SOCIAL BUTTONS --- */
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; }
+        .yt:hover { border-color: #ff0000; color: #ff0000; }
+        .tt:hover { border-color: #ff0050; color: #ff0050; }
+        .dc:hover { border-color: #5865F2; color: #5865F2; }
+        .wa:hover { border-color: #25D366; color: #25D366; }
 
         /* --- MODAL --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-        .modal-content { background: #151515; padding: 25px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; border: 2px solid var(--green-primary); }
-        .qr-placeholder { background: white; color: black; padding: 10px; border-radius: 10px; margin: 15px 0; font-weight: bold; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-content { background: #111; padding: 25px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--green-neon); }
+        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; position: relative; }
+        .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; }
+        .pay-item span { font-family: monospace; font-size: 16px; color: white; }
+        .copy-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #555; cursor: pointer; }
+        .qris-box { background: white; padding: 10px; border-radius: 10px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
     </style>
@@ -82,14 +87,17 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <div class="sidebar" id="sidebar">
-        <h2 class="logo">TA<span>TANG</span></h2>
+        <div class="sidebar-header">
+            <h2 class="logo">TA<span>TANG</span></h2>
+            <button class="menu-toggle" onclick="toggleMenu()">&times;</button>
+        </div>
         <ul class="sidebar-menu">
-            <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="#gudang-mod"><i class="fas fa-download"></i> Gudang Mod</a></li>
-            <li><a href="#market"><i class="fas fa-shopping-cart"></i> Toko Script</a></li>
-            <li><a href="https://wa.me/628123456789"><i class="fab fa-whatsapp"></i> WhatsApp Admin</a></li>
-            <li><a href="#"><i class="fas fa-bullhorn"></i> Saluran WA</a></li>
-            <li><a href="#"><i class="fab fa-discord"></i> Discord Community</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="#store"><i class="fas fa-shopping-cart"></i> Toko Script</a></li>
+            <li><a href="https://youtube.com/@tatanglua"><i class="fab fa-youtube"></i> YouTube</a></li>
+            <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
+            <li><a href="#"><i class="fab fa-discord"></i> Server Discord</a></li>
+            <li><a href="#"><i class="fab fa-whatsapp"></i> Saluran WA</a></li>
         </ul>
     </div>
 
@@ -99,84 +107,96 @@
     </nav>
 
     <div class="container">
-        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1000&auto=format&fit=crop" style="width:100%; border-radius:15px; height:150px; object-fit:cover; margin-bottom:20px; border:1px solid #333;" alt="Monetloader Coding">
-
-        <h2 class="section-title">UPLOAD MOD</h2>
-        <div class="upload-card">
-            <div class="input-group">
-                <label>NAMA MOD / SCRIPT</label>
-                <input type="text" id="modName" placeholder="Contoh: Auto Kill V2">
-            </div>
-            <div class="input-group">
-                <label>DESKRIPSI</label>
-                <textarea id="modDesc" rows="3" placeholder="Jelaskan fitur mod anda..."></textarea>
-            </div>
-            <div class="input-group">
-                <label>PILIH FILE (SIMULASI)</label>
-                <input type="file" id="modFile">
-            </div>
-            <button class="btn btn-green" onclick="handleUpload()">POSTING KE PUBLIK</button>
+        <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=1000&auto=format&fit=crop" class="hero-img" alt="Monetloader">
+        <div class="hero-text">
+            <h1>TATANG DEVELOPER</h1>
+            <p>Solusi Custom Script Monetloader & Bot Discord Terpercaya.</p>
         </div>
 
-        <h2 class="section-title" id="gudang-mod">GUDANG MOD PUBLIK</h2>
-        <div id="modList">
-            <div class="mod-item">
-                <div class="mod-header">
-                    <div class="mod-name">Vehicle Spawner Tatang</div>
-                    <span style="background:var(--green-primary); font-size:10px; padding:2px 8px; border-radius:10px;">PRO</span>
-                </div>
-                <div class="mod-meta">Oleh: Admin • 14 Mar 2026 • 1.2 MB</div>
-                <p style="font-size: 14px; color: #aaa;">Script untuk spawn kendaraan secara otomatis di SAMP Mobile.</p>
-                <a href="#" class="download-btn" onclick="alert('Mendownload file: vehicle_spawner.lua')"><i class="fas fa-download"></i> DOWNLOAD FILE</a>
-            </div>
+        <h2 class="section-title">COMMUNITY LINKS</h2>
+        <div class="social-grid">
+            <a href="#" class="social-btn yt"><i class="fab fa-youtube"></i> YouTube</a>
+            <a href="#" class="social-btn tt"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a href="#" class="social-btn dc"><i class="fab fa-discord"></i> Discord</a>
+            <a href="#" class="social-btn wa"><i class="fas fa-bullhorn"></i> Saluran WA</a>
         </div>
 
-        <h2 class="section-title" id="market">MARKETPLACE (BUY)</h2>
-        <div class="buy-card">
-            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop" alt="Coding">
-            <div class="buy-info">
-                <h3>PREMIUM OBFUSCATOR LUA</h3>
-                <p style="font-size:13px; color:#888;">Lindungi kode script anda dari pencurian (Anti-Decompile).</p>
-                <div class="price-tag">Rp 50.000</div>
-                <button class="btn btn-green" onclick="showPay('Premium Obfuscator')">BELI SEKARANG</button>
+        <h2 class="section-title" id="store">AVAILABLE SERVICES</h2>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Monetloader">
+            <h3>CUSTOM MONETLOADER</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Bebas Request Fitur Sesuai Keinginan</li>
+                <li><i class="fas fa-check"></i> Script Ringan & No Lag (Mobile Opt)</li>
+                <li><i class="fas fa-check"></i> Anti-Decompile (Aman dari Pencuri)</li>
+                <li><i class="fas fa-check"></i> Support Update Jika Terjadi Bug</li>
+            </ul>
+            <div class="price-row">
+                <div class="price">Rp 30.000</div>
+                <button class="btn btn-buy" onclick="openPay('Script Monetloader Custom')">BUY NOW</button>
             </div>
         </div>
 
-        <h2 class="section-title">TATANG BOT PROJECT</h2>
-        <div class="bot-section">
-            <img src="https://cdn.pixabay.com/photo/2021/08/25/20/42/discord-6574457_1280.png" class="bot-img" alt="Discord Bot">
-            <div class="bot-text">
-                <h3>TATANG BOT AI</h3>
-                <p>Bot Discord otomatis untuk scan file berbahaya dan auto-role community.</p>
-                <button onclick="window.open('https://discord.com')" style="background:white; color:#5865F2; border:none; padding:5px 15px; border-radius:5px; font-weight:bold; margin-top:10px; cursor:pointer;">INVITE BOT</button>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?q=80&w=800&auto=format&fit=crop" alt="Discord Bot">
+            <h3>CUSTOM DISCORD BOT</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Fitur Auto-Moderasi & Welcome</li>
+                <li><i class="fas fa-check"></i> Integrasi API (Groq/AI/Lainnya)</li>
+                <li><i class="fas fa-check"></i> Scan File Berbahaya Otomatis</li>
+                <li><i class="fas fa-check"></i> Online 24/7 (S&K Berlaku)</li>
+            </ul>
+            <div class="price-row">
+                <div class="price">Rp 50.000</div>
+                <button class="btn btn-buy" onclick="openPay('Discord Bot Custom')">BUY NOW</button>
             </div>
         </div>
     </div>
 
     <div class="modal" id="payModal">
         <div class="modal-content">
-            <h3 id="itemName">PEMBAYARAN</h3>
-            <p style="font-size:12px; margin-top:10px;">Silahkan transfer ke salah satu e-wallet:</p>
-            <div class="qr-placeholder">DANA: 0812-3456-7890</div>
-            <div class="qr-placeholder" style="background:#00E5FF;">GOPAY: 0812-3456-7890</div>
-            <p style="font-size:11px; color:#aaa;">Kirim bukti TF ke WhatsApp Admin untuk aktivasi.</p>
-            <button class="btn btn-outline" style="margin-top:15px;" onclick="closePay()">BATAL</button>
+            <h3 style="color:var(--green-neon); margin-bottom: 15px;">PAYMENT METHOD</h3>
+            <p id="orderName" style="font-size:12px; margin-bottom:15px; color:#888;"></p>
+            
+            <div class="pay-item" onclick="copyNum('08123456789')">
+                <label>DANA</label>
+                <span>08123456789</span>
+                <i class="far fa-copy copy-icon"></i>
+            </div>
+
+            <div class="pay-item" onclick="copyNum('08123456789')">
+                <label>GOPAY</label>
+                <span>08123456789</span>
+                <i class="far fa-copy copy-icon"></i>
+            </div>
+
+            <div class="qris-box">
+                <i class="fas fa-qrcode"></i> QRIS TATANG STORE<br>
+                <span style="font-size:10px; font-weight:normal;">(Tersedia di Admin)</span>
+            </div>
+
+            <p style="font-size: 10px; color: #666; margin-top: 15px;">Klik nomor untuk salin. Setelah bayar, kirim bukti ke WhatsApp Admin!</p>
+            
+            <button class="btn btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white;" onclick="confirmWA()">KONFIRMASI WA</button>
+            <button class="btn" style="color:#ff4444; margin-top:10px;" onclick="closePay()">BATAL</button>
         </div>
     </div>
 
-    <footer style="text-align:center; padding:40px; color:#444; font-size:12px;">
-        &copy; 2026 TATANG LUA DEV | Versi Final 1.0
+    <footer style="text-align:center; padding:40px; color:#333; font-size:11px; letter-spacing:1px;">
+        &copy; 2026 TATANG LUA DEVELOPER | ALL RIGHTS RESERVED
     </footer>
 
     <script>
         function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
+            const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
-            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+            sidebar.classList.toggle('active');
+            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
         }
 
-        function showPay(name) {
-            document.getElementById('itemName').innerText = "BELI: " + name;
+        function openPay(name) {
+            document.getElementById('orderName').innerText = "Produk: " + name;
             document.getElementById('payModal').style.display = 'flex';
         }
 
@@ -184,41 +204,15 @@
             document.getElementById('payModal').style.display = 'none';
         }
 
-        function handleUpload() {
-            const name = document.getElementById('modName').value;
-            const desc = document.getElementById('modDesc').value;
-            const fileInput = document.getElementById('modFile');
-            const date = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
+        function copyNum(num) {
+            navigator.clipboard.writeText(num);
+            alert("Nomor " + num + " berhasil disalin!");
+        }
 
-            if(!name || !desc || !fileInput.files[0]) {
-                alert("Lengkapi semua data dan pilih file!");
-                return;
-            }
-
-            const fileName = fileInput.files[0].name;
-            const fileSize = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
-
-            const list = document.getElementById('modList');
-            const item = document.createElement('div');
-            item.className = 'mod-item';
-            item.innerHTML = `
-                <div class="mod-header">
-                    <div class="mod-name">${name}</div>
-                    <span style="background:#444; font-size:10px; padding:2px 8px; border-radius:10px;">USER</span>
-                </div>
-                <div class="mod-meta">Oleh: Guest User • ${date} • ${fileSize}</div>
-                <p style="font-size: 14px; color: #aaa;">${desc}</p>
-                <a href="#" class="download-btn" onclick="alert('Mendownload file: ${fileName}')"><i class="fas fa-download"></i> DOWNLOAD (${fileName})</a>
-            `;
-
-            list.prepend(item);
-            
-            // Reset
-            document.getElementById('modName').value = "";
-            document.getElementById('modDesc').value = "";
-            document.getElementById('modFile').value = "";
-            alert("Mod berhasil di-upload ke publik!");
+        function confirmWA() {
+            const order = document.getElementById('orderName').innerText;
+            window.open(`https://wa.me/628123456789?text=Halo Tatang, saya ingin konfirmasi pembayaran untuk ${order}`, '_blank');
         }
     </script>
 </body>
-    </html>
+                        </html>
