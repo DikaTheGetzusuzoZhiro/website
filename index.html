@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG | LUA ARCHITECT TERMINAL</title>
+    <title>TATANG | LUA ARCHITECT PREMIER</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --orange: #FF6B00;
             --yellow: #FFD600;
-            --black: #050505;
-            --dark: #121212;
+            --black: #080808;
+            --dark-card: #111111;
             --white: #FFFFFF;
+            --glow: rgba(255, 107, 0, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,198 +26,266 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            background-image: linear-gradient(rgba(255, 107, 0, 0.03) 1px, transparent 1px), 
-                              linear-gradient(90deg, rgba(255, 107, 0, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
+            overflow-x: hidden;
         }
 
-        .terminal-box {
+        /* Background Animated Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(var(--glow) 1px, transparent 1px), 
+                              linear-gradient(90deg, var(--glow) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            mask-image: radial-gradient(circle, black, transparent 80%);
+        }
+
+        /* Main Container */
+        .cyber-wrapper {
             width: 100%;
-            max-width: 480px;
-            background: var(--dark);
-            border: 2px solid var(--orange);
-            position: relative;
-            box-shadow: 0 0 30px rgba(255, 107, 0, 0.15);
-        }
-
-        /* Header / Monitor */
-        .monitor-header {
-            background: var(--orange);
-            color: var(--black);
-            padding: 15px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .system-status {
-            font-size: 10px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Content Area */
-        .content { padding: 25px; }
-
-        .dev-name {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 32px;
-            color: var(--white);
-            text-align: center;
-            margin-bottom: 5px;
-            letter-spacing: 5px;
-        }
-
-        .dev-role {
-            color: var(--yellow);
-            text-align: center;
-            font-size: 12px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* TABS SYSTEM */
-        .tabs-nav {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 10px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            color: #888;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background: var(--white);
-            color: var(--black);
-            border-color: var(--white);
-        }
-
-        .tab-content {
-            display: none;
-            background: rgba(255,255,255,0.03);
+            max-width: 500px;
+            background: var(--dark-card);
             border: 1px solid #222;
-            padding: 15px;
-            font-size: 13px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-            min-height: 120px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,1);
         }
 
-        .tab-content.active { display: block; }
+        .top-accent {
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--yellow), var(--orange));
+            width: 100%;
+        }
 
-        .highlight { color: var(--orange); font-weight: bold; }
+        /* Header Section */
+        .header-panel {
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+            background: linear-gradient(to bottom, rgba(255,107,0,0.05), transparent);
+        }
 
-        /* GACOR BUTTONS */
-        .social-links { display: grid; gap: 10px; }
-
-        .btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 20px;
-            background: transparent;
-            border: 1px solid var(--orange);
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 35px;
+            letter-spacing: 8px;
             color: var(--white);
-            text-decoration: none;
+            text-shadow: 2px 2px 0px var(--orange);
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 10px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        /* Tab Navigation */
+        .tabs-header {
+            display: flex;
+            background: #000;
+            border-bottom: 1px solid #222;
+        }
+
+        .tab-trigger {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: transparent;
+            color: #555;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 10px;
             font-weight: 700;
-            font-size: 13px;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .btn:hover {
+        .tab-trigger.active {
+            color: var(--orange);
+            background: rgba(255,107,0,0.1);
+            border-bottom: 2px solid var(--orange);
+        }
+
+        /* Tab Content Style */
+        .tab-pane {
+            display: none;
+            padding: 25px;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-pane.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .info-title {
+            color: var(--orange);
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-title::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: var(--yellow);
+            margin-right: 10px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .text-body {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .step-list {
+            list-style: none;
+        }
+
+        .step-item {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            color: var(--orange);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Gacor Social Buttons */
+        .social-grid {
+            padding: 0 25px 25px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            background: #151515;
+            border: 1px solid #222;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 12px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .social-btn:hover {
+            border-color: var(--orange);
             background: var(--orange);
             color: var(--black);
-            box-shadow: 0 0 15px var(--orange);
             transform: scale(1.02);
         }
 
+        .social-btn img {
+            width: 20px;
+            margin-right: 15px;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
+        }
+
+        .btn-arrow {
+            margin-left: auto;
+            font-size: 18px;
+        }
+
         .footer {
-            margin-top: 30px;
+            padding: 20px;
             text-align: center;
             font-size: 9px;
             color: #444;
-            letter-spacing: 3px;
+            background: #000;
+            letter-spacing: 2px;
         }
+
+        .typing-text {
+            color: var(--yellow);
+            border-right: 2px solid var(--orange);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
     </style>
 </head>
 <body>
 
-    <div class="terminal-box">
-        <div class="monitor-header">
-            <span>COMMAND_CENTER.SYS</span>
-            <span class="system-status">● ONLINE</span>
+    <div class="bg-grid"></div>
+
+    <div class="cyber-wrapper">
+        <div class="top-accent"></div>
+        
+        <header class="header-panel">
+            <h1>TATANG</h1>
+            <p class="subtitle">LUA ARCHITECT & DEVELOPER</p>
+        </header>
+
+        <nav class="tabs-header">
+            <button class="tab-trigger active" onclick="switchTab(event, 'info')">DEFINISI</button>
+            <button class="tab-trigger" onclick="switchTab(event, 'usage')">CARA PAKAI</button>
+        </nav>
+
+        <main class="content-body">
+            <section id="info" class="tab-pane active">
+                <div class="info-title">MONETLOADER EXPLAINED</div>
+                <div class="text-body">
+                    <p><b>Monetloader</b> adalah framework eksekusi script berbasis <b>Lua</b> khusus untuk GTA SAMP Mobile. Alat ini bertindak sebagai jembatan yang memungkinkan player menambahkan fitur automasi dan modifikasi visual tanpa perlu membongkar file OBB asli.</p>
+                </div>
+            </section>
+
+            <section id="usage" class="tab-pane">
+                <div class="info-title">IMPLEMENTATION STEPS</div>
+                <div class="text-body">
+                    <ul class="step-list">
+                        <li class="step-item"><span class="step-num">01.</span> Unduh & Install APK Monetloader versi terbaru.</li>
+                        <li class="step-item"><span class="step-num">02.</span> Buka folder <code style="color:var(--yellow)">Android/data/com.rockstargames.gtasa/</code>.</li>
+                        <li class="step-item"><span class="step-num">03.</span> Cari atau buat folder bernama <code style="color:var(--yellow)">monetloader</code>.</li>
+                        <li class="step-item"><span class="step-num">04.</span> Pindahkan file script <code style="color:var(--white)">.lua</code> ke dalam folder tersebut.</li>
+                        <li class="step-item"><span class="step-num">05.</span> Jalankan game dan aktifkan menu melalui shortcut yang tersedia.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <div class="social-grid">
+            <a href="https://discord.gg/G5SABE8uQe" class="social-btn">
+                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=FF6B00" alt="DC">
+                DISCORD COMMUNITY <span class="btn-arrow">›</span>
+            </a>
+            <a href="https://youtube.com/@tatanglua" class="social-btn">
+                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=FF6B00" alt="YT">
+                YOUTUBE TUTORIALS <span class="btn-arrow">›</span>
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="social-btn">
+                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=FF6B00" alt="WA">
+                WHATSAPP CHANNEL <span class="btn-arrow">›</span>
+            </a>
         </div>
 
-        <div class="content">
-            <h1 class="dev-name">TATANG</h1>
-            <p class="dev-role">Advanced Lua Engineer</p>
-
-            <div class="tabs-nav">
-                <button class="tab-btn active" onclick="openTab(event, 'info')">APA ITU?</button>
-                <button class="tab-btn" onclick="openTab(event, 'cara')">CARA PAKAI</button>
-            </div>
-
-            <div id="info" class="tab-content active">
-                <p><span class="highlight">Monetloader</span> adalah injector script berbasis Lua tercepat untuk SAMP Mobile. Ini memungkinkan modifikasi game secara real-time dengan stabilitas tinggi dan konsumsi RAM rendah.</p>
-            </div>
-
-            <div id="cara" class="tab-content">
-                <p>1. Install APK Monetloader.<br>
-                   2. Masukkan file <span class="highlight">.lua</span> ke folder <span class="highlight">Android/data/.../monetloader</span>.<br>
-                   3. Jalankan game & nikmati fitur otomatisnya.</p>
-            </div>
-
-            <div class="social-links">
-                <a href="https://discord.gg/G5SABE8uQe" class="btn">
-                    <span>DISCORD SERVER</span>
-                    <span>→</span>
-                </a>
-                <a href="https://youtube.com/@tatanglua" class="btn">
-                    <span>YOUTUBE TUTORIAL</span>
-                    <span>→</span>
-                </a>
-                <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="btn">
-                    <span>WA ARCHIVE</span>
-                    <span>→</span>
-                </a>
-            </div>
-
-            <div class="footer">
-                V.2.0.1 // UNTRACEABLE // 2026
-            </div>
-        </div>
+        <footer class="footer">
+            EST 2025 // ENCRYPTED ACCESS // TATANG_LUA_V2
+        </footer>
     </div>
 
     <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("active");
-            }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].classList.remove("active");
-            }
-            document.getElementById(tabName).style.display = "block";
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
+        function switchTab(e, tabId) {
+            const panes = document.querySelectorAll('.tab-pane');
+            const triggers = document.querySelectorAll('.tab-trigger');
+            
+            panes.forEach(p => p.classList.remove('active'));
+            triggers.forEach(t => t.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            e.currentTarget.classList.add('active');
         }
     </script>
-
 </body>
-                </html>
+</html>
