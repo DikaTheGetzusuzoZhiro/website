@@ -3,68 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG - Modding Community</title>
+    <title>TATANG - Modding & Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-dark: #0f0f0f;
-            --bg-card: #1a1a1a;
+            --bg-dark: #0b0b0b;
+            --bg-card: #151515;
             --green-primary: #198754; 
-            --green-hover: #157347;
+            --green-hover: #1fd655;
             --text-main: #ffffff;
-            --text-muted: #a0a0a0;
-            --glass: rgba(255, 255, 255, 0.05);
+            --text-muted: #888888;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; }
 
-        /* --- SIDEBAR MENU --- */
+        /* --- SIDEBAR --- */
         .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: #111; z-index: 1000; transition: 0.4s; padding: 30px 20px; border-right: 1px solid #333; }
         .sidebar.active { left: 0; }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .sidebar-menu { list-style: none; }
-        .sidebar-menu li { margin-bottom: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        .sidebar-menu a { color: var(--text-main); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; }
-        .sidebar-menu i { color: var(--green-primary); width: 20px; }
-        .close-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+        .sidebar-menu { list-style: none; margin-top: 30px; }
+        .sidebar-menu li { margin-bottom: 20px; }
+        .sidebar-menu a { color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 15px; font-size: 16px; }
+        .sidebar-menu i { color: var(--green-primary); }
 
         /* --- NAVBAR --- */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(15, 15, 15, 0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #333; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; background: rgba(11, 11, 11, 0.95); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid #222; }
         .logo { font-size: 24px; font-weight: 800; text-decoration: none; color: white; }
         .logo span { color: var(--green-primary); }
         .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; }
 
-        /* --- HERO & UPLOAD SECTION --- */
-        .container { padding: 20px; max-width: 600px; margin: auto; }
-        .hero { text-align: center; padding: 40px 0; }
-        .hero h1 { font-size: 40px; font-weight: 800; text-transform: uppercase; }
+        .container { padding: 20px; max-width: 800px; margin: auto; }
+
+        /* --- SECTION TITLES --- */
+        .section-title { font-size: 22px; font-weight: 800; text-transform: uppercase; margin: 40px 0 20px; border-left: 4px solid var(--green-primary); padding-left: 15px; }
+
+        /* --- UPLOAD SYSTEM --- */
+        .upload-card { background: var(--bg-card); padding: 25px; border-radius: 15px; border: 1px solid #333; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 12px; color: var(--green-primary); margin-bottom: 5px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: white; font-size: 14px; }
         
-        /* Form Upload */
-        .upload-box { background: var(--bg-card); padding: 20px; border-radius: 15px; border: 1px dashed var(--green-primary); margin-bottom: 30px; }
-        .upload-box h3 { margin-bottom: 15px; color: var(--green-primary); }
-        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #333; background: #0a0a0a; color: white; }
-        
-        .btn { width: 100%; padding: 15px; border-radius: 8px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; margin-bottom: 10px; }
-        .btn:active { transform: scale(0.95); }
+        .btn { width: 100%; padding: 15px; border-radius: 8px; font-weight: 800; border: none; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
         .btn-green { background: var(--green-primary); color: white; }
-        .btn-outline { background: transparent; border: 1px solid #444; color: white; }
+        .btn-green:hover { background: var(--green-hover); }
+        .btn-green:active { transform: scale(0.98); }
 
-        /* --- MOD LIST --- */
-        .mod-item { background: var(--bg-card); border-radius: 12px; padding: 15px; margin-bottom: 15px; border-left: 4px solid var(--green-primary); }
-        .mod-item h4 { font-size: 18px; color: var(--green-primary); }
-        .mod-info { font-size: 12px; color: var(--text-muted); margin-top: 5px; }
-        .mod-desc { margin-top: 10px; font-size: 14px; }
+        /* --- MOD LIST / DOWNLOAD --- */
+        .mod-item { background: var(--bg-card); border-radius: 12px; padding: 20px; margin-bottom: 15px; border: 1px solid #222; }
+        .mod-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .mod-name { font-size: 18px; font-weight: 800; color: var(--green-primary); }
+        .mod-meta { font-size: 11px; color: #666; margin-bottom: 10px; }
+        .download-btn { background: #222; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block; margin-top: 10px; border: 1px solid #444; }
+        .download-btn:hover { background: #333; border-color: var(--green-primary); }
 
-        /* --- MODAL PEMBAYARAN --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
-        .modal-content { background: #1a1a1a; padding: 25px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; border: 1px solid var(--green-primary); }
-        .payment-option { background: #222; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
-        .payment-option img { height: 25px; }
-        .copy-box { background: #000; padding: 10px; border-radius: 5px; font-family: monospace; color: var(--green-primary); margin-top: 5px; cursor: pointer; }
+        /* --- BUY FEATURE (MARKETPLACE) --- */
+        .buy-card { background: linear-gradient(145deg, #1a1a1a, #0a0a0a); border-radius: 15px; overflow: hidden; margin-bottom: 20px; border: 1px solid #333; }
+        .buy-card img { width: 100%; height: 180px; object-fit: cover; }
+        .buy-info { padding: 20px; }
+        .price-tag { font-size: 20px; font-weight: 800; color: var(--green-primary); margin: 10px 0; }
 
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+        /* --- DISCORD BOT SECTION --- */
+        .bot-section { background: #5865F2; border-radius: 15px; padding: 25px; margin-top: 30px; display: flex; align-items: center; gap: 20px; }
+        .bot-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid white; }
+        .bot-text h3 { font-weight: 800; }
+        .bot-text p { font-size: 13px; opacity: 0.9; }
+
+        /* --- MODAL --- */
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
+        .modal-content { background: #151515; padding: 25px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; border: 2px solid var(--green-primary); }
+        .qr-placeholder { background: white; color: black; padding: 10px; border-radius: 10px; margin: 15px 0; font-weight: bold; }
+
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
     </style>
 </head>
 <body>
@@ -72,16 +82,14 @@
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h2 class="logo">TA<span>TANG</span></h2>
-            <button class="close-btn" onclick="toggleMenu()">&times;</button>
-        </div>
+        <h2 class="logo">TA<span>TANG</span></h2>
         <ul class="sidebar-menu">
-            <li><a href="#" onclick="toggleMenu()"><i class="fas fa-home"></i> Beranda</a></li>
-            <li><a href="#" onclick="toggleMenu()"><i class="fas fa-box"></i> Gudang Mod</a></li>
-            <li><a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i> Discord Server</a></li>
-            <li><a href="https://wa.me/628123456789" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Admin</a></li>
-            <li><a href="#" target="_blank"><i class="fas fa-bullhorn"></i> Saluran WhatsApp</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#gudang-mod"><i class="fas fa-download"></i> Gudang Mod</a></li>
+            <li><a href="#market"><i class="fas fa-shopping-cart"></i> Toko Script</a></li>
+            <li><a href="https://wa.me/628123456789"><i class="fab fa-whatsapp"></i> WhatsApp Admin</a></li>
+            <li><a href="#"><i class="fas fa-bullhorn"></i> Saluran WA</a></li>
+            <li><a href="#"><i class="fab fa-discord"></i> Discord Community</a></li>
         </ul>
     </div>
 
@@ -91,113 +99,126 @@
     </nav>
 
     <div class="container">
-        <section class="hero">
-            <h1>TA<span>TANG</span> DEVELOPER</h1>
-            <p style="color: #888; margin-top: 10px;">Tempat upload dan cari script terbaik.</p>
-        </section>
+        <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?q=80&w=1000&auto=format&fit=crop" style="width:100%; border-radius:15px; height:150px; object-fit:cover; margin-bottom:20px; border:1px solid #333;" alt="Monetloader Coding">
 
-        <button class="btn btn-green" onclick="showModal()">ORDER SCRIPT (DANA/GOPAY)</button>
-        <button class="btn btn-outline" onclick="scrollToUpload()">CARI & UPLOAD MOD</button>
-
-        <hr style="border: 0; border-top: 1px solid #333; margin: 30px 0;">
-
-        <div class="upload-box" id="uploadForm">
-            <h3>UPLOAD MOD BARU</h3>
-            <input type="text" id="modName" placeholder="Nama Mod/Script...">
-            <textarea id="modDesc" rows="3" placeholder="Deskripsi singkat..."></textarea>
-            <select id="modCat">
-                <option value="Moonloader">Moonloader</option>
-                <option value="Cleo">Cleo</option>
-                <option value="SAMP Mobile">SAMP Mobile</option>
-            </select>
-            <button class="btn btn-green" onclick="addMod()">POSTING MOD SEKARANG</button>
+        <h2 class="section-title">UPLOAD MOD</h2>
+        <div class="upload-card">
+            <div class="input-group">
+                <label>NAMA MOD / SCRIPT</label>
+                <input type="text" id="modName" placeholder="Contoh: Auto Kill V2">
+            </div>
+            <div class="input-group">
+                <label>DESKRIPSI</label>
+                <textarea id="modDesc" rows="3" placeholder="Jelaskan fitur mod anda..."></textarea>
+            </div>
+            <div class="input-group">
+                <label>PILIH FILE (SIMULASI)</label>
+                <input type="file" id="modFile">
+            </div>
+            <button class="btn btn-green" onclick="handleUpload()">POSTING KE PUBLIK</button>
         </div>
 
-        <h2 style="margin-bottom: 20px;">GUDANG MOD TERBARU</h2>
-        <div id="modFeed">
+        <h2 class="section-title" id="gudang-mod">GUDANG MOD PUBLIK</h2>
+        <div id="modList">
             <div class="mod-item">
-                <h4>Auto Fish IT Mandalika</h4>
-                <div class="mod-info">Kategori: Moonloader • 14 Maret 2026</div>
-                <p class="mod-desc">Script mancing otomatis untuk server tertentu, ringan dan anti-detect.</p>
+                <div class="mod-header">
+                    <div class="mod-name">Vehicle Spawner Tatang</div>
+                    <span style="background:var(--green-primary); font-size:10px; padding:2px 8px; border-radius:10px;">PRO</span>
+                </div>
+                <div class="mod-meta">Oleh: Admin • 14 Mar 2026 • 1.2 MB</div>
+                <p style="font-size: 14px; color: #aaa;">Script untuk spawn kendaraan secara otomatis di SAMP Mobile.</p>
+                <a href="#" class="download-btn" onclick="alert('Mendownload file: vehicle_spawner.lua')"><i class="fas fa-download"></i> DOWNLOAD FILE</a>
+            </div>
+        </div>
+
+        <h2 class="section-title" id="market">MARKETPLACE (BUY)</h2>
+        <div class="buy-card">
+            <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop" alt="Coding">
+            <div class="buy-info">
+                <h3>PREMIUM OBFUSCATOR LUA</h3>
+                <p style="font-size:13px; color:#888;">Lindungi kode script anda dari pencurian (Anti-Decompile).</p>
+                <div class="price-tag">Rp 50.000</div>
+                <button class="btn btn-green" onclick="showPay('Premium Obfuscator')">BELI SEKARANG</button>
+            </div>
+        </div>
+
+        <h2 class="section-title">TATANG BOT PROJECT</h2>
+        <div class="bot-section">
+            <img src="https://cdn.pixabay.com/photo/2021/08/25/20/42/discord-6574457_1280.png" class="bot-img" alt="Discord Bot">
+            <div class="bot-text">
+                <h3>TATANG BOT AI</h3>
+                <p>Bot Discord otomatis untuk scan file berbahaya dan auto-role community.</p>
+                <button onclick="window.open('https://discord.com')" style="background:white; color:#5865F2; border:none; padding:5px 15px; border-radius:5px; font-weight:bold; margin-top:10px; cursor:pointer;">INVITE BOT</button>
             </div>
         </div>
     </div>
 
     <div class="modal" id="payModal">
         <div class="modal-content">
-            <h3 style="margin-bottom: 20px;">METODE PEMBAYARAN</h3>
-            
-            <div class="payment-option">
-                <span>DANA</span>
-                <div class="copy-box" onclick="copyText('08123456789')">08123456789 <i class="far fa-copy"></i></div>
-            </div>
-
-            <div class="payment-option">
-                <span>GOPAY</span>
-                <div class="copy-box" onclick="copyText('08123456789')">08123456789 <i class="far fa-copy"></i></div>
-            </div>
-
-            <p style="font-size: 11px; color: #888; margin: 15px 0;">Klik nomor untuk menyalin. Setelah bayar, kirim bukti ke WhatsApp Admin.</p>
-            <button class="btn btn-outline" onclick="closeModal()">TUTUP</button>
+            <h3 id="itemName">PEMBAYARAN</h3>
+            <p style="font-size:12px; margin-top:10px;">Silahkan transfer ke salah satu e-wallet:</p>
+            <div class="qr-placeholder">DANA: 0812-3456-7890</div>
+            <div class="qr-placeholder" style="background:#00E5FF;">GOPAY: 0812-3456-7890</div>
+            <p style="font-size:11px; color:#aaa;">Kirim bukti TF ke WhatsApp Admin untuk aktivasi.</p>
+            <button class="btn btn-outline" style="margin-top:15px;" onclick="closePay()">BATAL</button>
         </div>
     </div>
 
-    <footer>
-        <p style="text-align:center; padding: 40px; color: #555; font-size: 12px;">&copy; 2026 TATANG LUA DEVELOPER</p>
+    <footer style="text-align:center; padding:40px; color:#444; font-size:12px;">
+        &copy; 2026 TATANG LUA DEV | Versi Final 1.0
     </footer>
 
     <script>
-        // Fungsi Sidebar
         function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
+            document.getElementById('sidebar').classList.toggle('active');
             const overlay = document.getElementById('overlay');
-            sidebar.classList.toggle('active');
-            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Fungsi Modal
-        function showModal() { document.getElementById('payModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('payModal').style.display = 'none'; }
-
-        // Fungsi Salin Nomor
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert("Nomor " + text + " berhasil disalin!");
+        function showPay(name) {
+            document.getElementById('itemName').innerText = "BELI: " + name;
+            document.getElementById('payModal').style.display = 'flex';
         }
 
-        // Fungsi Scroll
-        function scrollToUpload() {
-            document.getElementById('uploadForm').scrollIntoView({ behavior: 'smooth' });
+        function closePay() {
+            document.getElementById('payModal').style.display = 'none';
         }
 
-        // Fungsi Tambah Mod (Upload)
-        function addMod() {
+        function handleUpload() {
             const name = document.getElementById('modName').value;
             const desc = document.getElementById('modDesc').value;
-            const cat = document.getElementById('modCat').value;
-            const date = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            const fileInput = document.getElementById('modFile');
+            const date = new Date().toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' });
 
-            if(name === "" || desc === "") {
-                alert("Isi nama dan deskripsi mod dulu!");
+            if(!name || !desc || !fileInput.files[0]) {
+                alert("Lengkapi semua data dan pilih file!");
                 return;
             }
 
-            const modFeed = document.getElementById('modFeed');
-            const newMod = document.createElement('div');
-            newMod.className = 'mod-item';
-            newMod.innerHTML = `
-                <h4>${name}</h4>
-                <div class="mod-info">Kategori: ${cat} • ${date}</div>
-                <p class="mod-desc">${desc}</p>
+            const fileName = fileInput.files[0].name;
+            const fileSize = (fileInput.files[0].size / 1024).toFixed(1) + " KB";
+
+            const list = document.getElementById('modList');
+            const item = document.createElement('div');
+            item.className = 'mod-item';
+            item.innerHTML = `
+                <div class="mod-header">
+                    <div class="mod-name">${name}</div>
+                    <span style="background:#444; font-size:10px; padding:2px 8px; border-radius:10px;">USER</span>
+                </div>
+                <div class="mod-meta">Oleh: Guest User • ${date} • ${fileSize}</div>
+                <p style="font-size: 14px; color: #aaa;">${desc}</p>
+                <a href="#" class="download-btn" onclick="alert('Mendownload file: ${fileName}')"><i class="fas fa-download"></i> DOWNLOAD (${fileName})</a>
             `;
 
-            modFeed.prepend(newMod); // Tambah ke paling atas
-
-            // Reset Form
+            list.prepend(item);
+            
+            // Reset
             document.getElementById('modName').value = "";
             document.getElementById('modDesc').value = "";
-            alert("Berhasil! Mod Anda sudah diposting di Gudang Mod.");
+            document.getElementById('modFile').value = "";
+            alert("Mod berhasil di-upload ke publik!");
         }
     </script>
 </body>
-</html>
+                </html>
