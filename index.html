@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG | LUA ARCHITECT PREMIER</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>TATANG | THE LUA ARCHITECT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --orange: #FF6B00;
             --yellow: #FFD600;
-            --black: #080808;
-            --dark-card: #111111;
-            --white: #FFFFFF;
-            --glow: rgba(255, 107, 0, 0.4);
+            --black: #050505;
+            --white: #ffffff;
+            --glow: rgba(255, 107, 0, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,272 +19,195 @@
         body {
             background: var(--black);
             color: var(--white);
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Rajdhani', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        /* Background Animated Grid */
-        .bg-grid {
+        /* BACKGROUND GACOR: HEXAGON & SCANLINES */
+        .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(var(--glow) 1px, transparent 1px), 
-                              linear-gradient(90deg, var(--glow) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: -1;
-            mask-image: radial-gradient(circle, black, transparent 80%);
+            background: 
+                radial-gradient(circle at center, transparent 0%, var(--black) 80%),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            z-index: -2;
         }
 
-        /* Main Container */
-        .cyber-wrapper {
-            width: 100%;
-            max-width: 500px;
-            background: var(--dark-card);
-            border: 1px solid #222;
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* MAIN TERMINAL CARD */
+        .main-container {
             position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,1);
-        }
-
-        .top-accent {
-            height: 4px;
-            background: linear-gradient(90deg, var(--orange), var(--yellow), var(--orange));
-            width: 100%;
-        }
-
-        /* Header Section */
-        .header-panel {
-            padding: 30px 20px;
+            width: 400px;
+            padding: 50px 30px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 2px solid var(--orange);
             text-align: center;
-            border-bottom: 1px solid #222;
-            background: linear-gradient(to bottom, rgba(255,107,0,0.05), transparent);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 40px rgba(255, 107, 0, 0.1);
         }
 
+        /* CORNER DECORATIONS */
+        .main-container::before {
+            content: ""; position: absolute; top: -10px; left: -10px;
+            width: 40px; height: 40px; border-top: 4px solid var(--yellow); border-left: 4px solid var(--yellow);
+        }
+        .main-container::after {
+            content: ""; position: absolute; bottom: -10px; right: -10px;
+            width: 40px; height: 40px; border-bottom: 4px solid var(--yellow); border-right: 4px solid var(--yellow);
+        }
+
+        /* NAME & STATUS */
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 35px;
-            letter-spacing: 8px;
-            color: var(--white);
-            text-shadow: 2px 2px 0px var(--orange);
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(to bottom, var(--white) 30%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 10px;
             margin-bottom: 5px;
+            filter: drop-shadow(0 0 10px var(--glow));
         }
 
-        .subtitle {
-            font-size: 10px;
+        .role {
+            font-size: 12px;
+            letter-spacing: 5px;
             color: var(--yellow);
             text-transform: uppercase;
-            letter-spacing: 4px;
-        }
-
-        /* Tab Navigation */
-        .tabs-header {
-            display: flex;
-            background: #000;
-            border-bottom: 1px solid #222;
-        }
-
-        .tab-trigger {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            background: transparent;
-            color: #555;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 10px;
+            margin-bottom: 35px;
             font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
         }
 
-        .tab-trigger.active {
-            color: var(--orange);
-            background: rgba(255,107,0,0.1);
-            border-bottom: 2px solid var(--orange);
+        /* DEFINITION BOX */
+        .info-box {
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 107, 0, 0.05);
+            padding: 20px;
+            margin-bottom: 40px;
+            position: relative;
         }
 
-        /* Tab Content Style */
-        .tab-pane {
-            display: none;
-            padding: 25px;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .tab-pane.active { display: block; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .info-title {
-            color: var(--orange);
+        .info-box p {
             font-size: 14px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .info-title::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            background: var(--yellow);
-            margin-right: 10px;
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        }
-
-        .text-body {
-            font-size: 13px;
-            line-height: 1.8;
+            line-height: 1.6;
             color: #ccc;
         }
 
-        .step-list {
-            list-style: none;
-        }
+        .info-box b { color: var(--orange); }
 
-        .step-item {
-            margin-bottom: 12px;
+        /* GACOR INTERACTIVE BUTTONS */
+        .btn-list {
             display: flex;
-            align-items: flex-start;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .step-num {
-            color: var(--orange);
+        .btn {
+            position: relative;
+            padding: 18px;
+            background: transparent;
+            border: 1px solid var(--orange);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
             font-weight: bold;
-            margin-right: 10px;
-        }
-
-        /* Gacor Social Buttons */
-        .social-grid {
-            padding: 0 25px 25px;
-            display: grid;
-            gap: 12px;
-        }
-
-        .social-btn {
+            letter-spacing: 2px;
+            overflow: hidden;
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            padding: 18px;
-            background: #151515;
-            border: 1px solid #222;
-            text-decoration: none;
-            color: var(--white);
-            font-weight: bold;
-            font-size: 12px;
-            transition: 0.3s;
-            position: relative;
+            justify-content: center;
+            gap: 15px;
         }
 
-        .social-btn:hover {
-            border-color: var(--orange);
+        .btn:hover {
             background: var(--orange);
             color: var(--black);
-            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--orange);
+            transform: skewX(-5deg);
         }
 
-        .social-btn img {
-            width: 20px;
-            margin-right: 15px;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
+        .btn img {
+            width: 18px;
+            transition: 0.3s;
         }
 
-        .btn-arrow {
-            margin-left: auto;
-            font-size: 18px;
+        .btn:hover img {
+            filter: brightness(0);
         }
 
-        .footer {
-            padding: 20px;
-            text-align: center;
-            font-size: 9px;
-            color: #444;
-            background: #000;
-            letter-spacing: 2px;
+        /* DECORATIVE ELEMENTS */
+        .status-line {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--orange), transparent);
+            margin: 20px 0;
         }
 
-        .typing-text {
-            color: var(--yellow);
-            border-right: 2px solid var(--orange);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+        .glow-point {
+            position: absolute;
+            width: 200px; height: 200px;
+            background: var(--orange);
+            filter: blur(100px);
+            opacity: 0.1;
+            z-index: -1;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 4s infinite;
         }
 
-        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.5); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-grid"></div>
+    <div class="bg-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="glow-point"></div>
 
-    <div class="cyber-wrapper">
-        <div class="top-accent"></div>
+    <div class="main-container">
+        <h1>TATANG</h1>
+        <p class="role">LUA SPECIALIST</p>
         
-        <header class="header-panel">
-            <h1>TATANG</h1>
-            <p class="subtitle">LUA ARCHITECT & DEVELOPER</p>
-        </header>
+        <div class="status-line"></div>
 
-        <nav class="tabs-header">
-            <button class="tab-trigger active" onclick="switchTab(event, 'info')">DEFINISI</button>
-            <button class="tab-trigger" onclick="switchTab(event, 'usage')">CARA PAKAI</button>
-        </nav>
-
-        <main class="content-body">
-            <section id="info" class="tab-pane active">
-                <div class="info-title">MONETLOADER EXPLAINED</div>
-                <div class="text-body">
-                    <p><b>Monetloader</b> adalah framework eksekusi script berbasis <b>Lua</b> khusus untuk GTA SAMP Mobile. Alat ini bertindak sebagai jembatan yang memungkinkan player menambahkan fitur automasi dan modifikasi visual tanpa perlu membongkar file OBB asli.</p>
-                </div>
-            </section>
-
-            <section id="usage" class="tab-pane">
-                <div class="info-title">IMPLEMENTATION STEPS</div>
-                <div class="text-body">
-                    <ul class="step-list">
-                        <li class="step-item"><span class="step-num">01.</span> Unduh & Install APK Monetloader versi terbaru.</li>
-                        <li class="step-item"><span class="step-num">02.</span> Buka folder <code style="color:var(--yellow)">Android/data/com.rockstargames.gtasa/</code>.</li>
-                        <li class="step-item"><span class="step-num">03.</span> Cari atau buat folder bernama <code style="color:var(--yellow)">monetloader</code>.</li>
-                        <li class="step-item"><span class="step-num">04.</span> Pindahkan file script <code style="color:var(--white)">.lua</code> ke dalam folder tersebut.</li>
-                        <li class="step-item"><span class="step-num">05.</span> Jalankan game dan aktifkan menu melalui shortcut yang tersedia.</li>
-                    </ul>
-                </div>
-            </section>
-        </main>
-
-        <div class="social-grid">
-            <a href="https://discord.gg/G5SABE8uQe" class="social-btn">
-                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=FF6B00" alt="DC">
-                DISCORD COMMUNITY <span class="btn-arrow">›</span>
-            </a>
-            <a href="https://youtube.com/@tatanglua" class="social-btn">
-                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=FF6B00" alt="YT">
-                YOUTUBE TUTORIALS <span class="btn-arrow">›</span>
-            </a>
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="social-btn">
-                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=FF6B00" alt="WA">
-                WHATSAPP CHANNEL <span class="btn-arrow">›</span>
-            </a>
+        <div class="info-box">
+            <p>
+                <b>Monetloader</b> adalah injector Lua tercepat dan paling stabil untuk <b>SAMP Mobile</b>. Memungkinkan integrasi script canggih untuk automasi dan modifikasi game tanpa hambatan.
+            </p>
         </div>
 
-        <footer class="footer">
-            EST 2025 // ENCRYPTED ACCESS // TATANG_LUA_V2
-        </footer>
+        <div class="btn-list">
+            <a href="https://discord.gg/G5SABE8uQe" class="btn">
+                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=ffffff" alt="DC">
+                DISCORD SERVER
+            </a>
+            <a href="https://youtube.com/@tatanglua" class="btn">
+                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=ffffff" alt="YT">
+                YOUTUBE CHANNEL
+            </a>
+            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="btn">
+                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=ffffff" alt="WA">
+                WHATSAPP ARCHIVE
+            </a>
+        </div>
     </div>
 
-    <script>
-        function switchTab(e, tabId) {
-            const panes = document.querySelectorAll('.tab-pane');
-            const triggers = document.querySelectorAll('.tab-trigger');
-            
-            panes.forEach(p => p.classList.remove('active'));
-            triggers.forEach(t => t.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            e.currentTarget.classList.add('active');
-        }
-    </script>
 </body>
 </html>
