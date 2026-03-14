@@ -3,163 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG LUA | DEVELOPER GACOR</title>
+    <title>SA FORGE - GTA SA Modding Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-
-        body {
-            background: #000;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            /* Background efek garis halus */
-            background-image: linear-gradient(0deg, transparent 24%, rgba(255, 0, 0, .05) 25%, rgba(255, 0, 0, .05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 0, .05) 75%, rgba(255, 0, 0, .05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 0, 0, .05) 25%, rgba(255, 0, 0, .05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 0, .05) 75%, rgba(255, 0, 0, .05) 76%, transparent 77%, transparent);
-            background-size: 50px 50px;
+        :root {
+            --bg-dark: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --green-primary: #198754; /* Menyesuaikan warna hijau neon */
+            --green-hover: #157347;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
         }
 
-        .wadah-utama {
-            width: 100%;
-            max-width: 450px;
-            background: #0a0a0a;
-            border: 2px solid #ff0000;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
 
-        /* Garis Dekorasi */
-        .wadah-utama::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 1px solid #333;
-            z-index: -1;
-        }
+        /* Navbar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px; background-color: rgba(15, 15, 15, 0.95); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: 800; }
+        .logo span:first-child { color: var(--text-main); }
+        .logo span:last-child { color: var(--green-primary); }
+        .menu-toggle { color: var(--text-main); font-size: 24px; cursor: pointer; background: none; border: none; }
 
-        h1 {
-            font-size: 40px;
-            color: #ff0000;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            margin-bottom: 5px;
-            font-weight: 900;
-        }
+        /* Hero Section */
+        .hero { text-align: center; padding: 60px 20px; background: linear-gradient(to bottom, rgba(15,15,15,0.2), #0f0f0f), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop') center/cover; }
+        .badge { background-color: rgba(25, 135, 84, 0.1); border: 1px solid var(--green-primary); color: var(--green-primary); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; margin-bottom: 20px; letter-spacing: 1px; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
+        .hero p { color: var(--text-muted); font-size: 14px; margin-bottom: 30px; max-width: 400px; margin-left: auto; margin-right: auto; }
+        
+        /* Buttons */
+        .btn { display: inline-block; width: 100%; max-width: 300px; padding: 15px; border-radius: 8px; font-weight: 600; text-decoration: none; text-align: center; margin-bottom: 15px; transition: 0.3s; }
+        .btn-primary { background-color: var(--green-primary); color: white; border: none; }
+        .btn-primary:hover { background-color: var(--green-hover); }
+        .btn-outline { background-color: transparent; border: 1px solid #444; color: white; }
+        .btn-outline:hover { border-color: var(--text-main); }
 
-        .sub-judul {
-            text-align: center;
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-        }
+        /* Services Section */
+        .services { padding: 40px 20px; text-align: center; }
+        .services h2 { font-size: 28px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; }
+        .services h2 span { color: var(--green-primary); }
+        .section-desc { color: var(--text-muted); margin-bottom: 30px; font-size: 14px; }
 
-        /* Kotak Penjelasan */
-        .kotak-info {
-            background: #111;
-            border-left: 4px solid #ff0000;
-            padding: 15px;
-            margin-bottom: 25px;
-        }
+        /* Card System */
+        .card { background-color: var(--bg-card); border-radius: 12px; overflow: hidden; text-align: left; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.7; }
+        .card-body { padding: 20px; }
+        .card h3 { font-size: 20px; margin-bottom: 10px; text-transform: uppercase; }
+        .card p { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; }
+        .price { color: var(--green-primary); font-weight: 600; font-size: 18px; margin-bottom: 15px; display: block; }
+        .btn-order { background-color: #2a2a2a; border: none; width: 100%; color: white; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-order:hover { background-color: #333; }
 
-        .kotak-info h2 {
-            font-size: 14px;
-            color: #ff0000;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-        }
+        /* Order Flow */
+        .flow-section { padding: 40px 20px; background-color: #121212; text-align: center; }
+        .flow-section h2 { margin-bottom: 40px; }
+        .step { margin-bottom: 30px; }
+        .step-num { width: 50px; height: 50px; border: 2px solid var(--green-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; color: var(--green-primary); margin: 0 auto 15px auto; }
+        .step h4 { font-size: 18px; margin-bottom: 5px; text-transform: uppercase; }
+        .step p { color: var(--text-muted); font-size: 14px; }
+        .btn-discord { background-color: var(--green-primary); color: white; width: 100%; padding: 15px; border-radius: 8px; font-weight: bold; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px; }
 
-        .kotak-info p {
-            font-size: 13px;
-            line-height: 1.6;
-            color: #ccc;
-        }
-
-        /* Link Tombol Gacor */
-        .tombol-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .tombol {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            text-transform: uppercase;
-            transition: 0.3s;
-            border: 1px solid #333;
-        }
-
-        .t-dc { color: #5865F2; }
-        .t-wa { color: #25D366; }
-        .t-yt { color: #FF0000; }
-
-        .tombol img {
-            width: 20px;
-            margin-right: 15px;
-        }
-
-        .tombol:hover {
-            background: #fff;
-            color: #000;
-            transform: scale(1.02);
-        }
-
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 10px;
-            color: #444;
-            letter-spacing: 1px;
-        }
     </style>
 </head>
 <body>
 
-    <div class="wadah-utama">
-        <h1>TATANG</h1>
-        <div class="sub-judul">AHLI LUA SCRIPTING</div>
+    <nav>
+        <div class="logo">
+            <span>SA</span><span>FORGE</span>
+        </div>
+        <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+    </nav>
 
-        <div class="kotak-info">
-            <h2>APA ITU MONETLOADER?</h2>
-            <p>
-                <b>Monetloader</b> adalah alat (injector) buat masukin script <b>Lua</b> ke dalam GTA SAMP Mobile. Fungsinya biar lo bisa pakai fitur otomatis, modifikasi tampilan, dan tools tambahan tanpa ribet. Intinya, bikin game lo jauh lebih canggih.
-            </p>
+    <section class="hero">
+        <div class="badge">• GTA SA MODDING COMMUNITY</div>
+        <h1><span style="color:white;">SA</span> <span style="color:var(--green-primary);">FORGE</span></h1>
+        <p>Koleksi modifikasi visual, script Lua, dan tools eksklusif untuk <strong>Personal Player</strong> GTA San Andreas Multiplayer.</p>
+        <a href="#" class="btn btn-primary">CARI MOD &rarr;</a>
+        <a href="#" class="btn btn-outline">REQUEST SCRIPT</a>
+    </section>
+
+    <section class="services">
+        <h2>JASA SCRIPTING & <br><span>DEVELOPMENT</span></h2>
+        <p class="section-desc">Butuh fitur custom untuk server SAMP, Client, atau Bot Automation? Tim kami siap merealisasikan ide "gila" kamu menjadi program yang fungsional.</p>
+
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Coding">
+            <div class="card-body">
+                <h3>JASA SCRIPTING MOONLOADER</h3>
+                <p>Pembuatan script Custom Lua untuk automation, atau mempermudah gameplay.</p>
+                <span class="price"><i class="fas fa-dollar-sign"></i> Mulai dari Rp 25.000</span>
+                <button class="btn-order">ORDER SEKARANG</button>
+            </div>
         </div>
 
-        <div class="tombol-list">
-            <a href="https://discord.gg/G5SABE8uQe" class="tombol t-dc">
-                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=5865F2" alt="DC">
-                DISCORD
-            </a>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=800&auto=format&fit=crop" alt="Robot Hand">
+            <div class="card-body">
+                <h3>JASA PEMBUATAN BOT DISCORD</h3>
+                <p>Bot Server Discord untuk membantu membangun komunitas anda.</p>
+                <span class="price"><i class="fas fa-dollar-sign"></i> Mulai dari Rp 50.000</span>
+                <button class="btn-order">ORDER SEKARANG</button>
+            </div>
+        </div>
+    </section>
 
-            <a href="https://youtube.com/@tatanglua" class="tombol t-yt">
-                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=FF0000" alt="YT">
-                YOUTUBE
-            </a>
-
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="tombol t-wa">
-                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=25D366" alt="WA">
-                SALURAN WHATSAPP
-            </a>
+    <section class="flow-section">
+        <h2 style="font-weight: 800; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">ALUR PEMESANAN</h2>
+        
+        <div class="step">
+            <div class="step-num">1</div>
+            <h4>KONSULTASI</h4>
+            <p>Diskusikan ide, fitur, dan budget via Discord Ticket.</p>
         </div>
 
-        <div class="footer">
-            AKSES AMAN // TATANG DEVELOPER
+        <div class="step">
+            <div class="step-num">2</div>
+            <h4>DEVELOPMENT</h4>
+            <p>Pengerjaan dimulai setelah DP 50%. Update progress realtime.</p>
         </div>
-    </div>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <h4>DELIVERY</h4>
+            <p>Testing final, pelunasan, dan penyerahan file script/bot.</p>
+        </div>
+
+        <a href="#" class="btn-discord">
+            <i class="far fa-comment"></i> HUBUNGI KAMI DI DISCORD
+        </a>
+        <p style="color: #666; font-size: 12px; margin-top: 40px;">© 2026 SA FORGE. All rights reserved.</p>
+    </section>
 
 </body>
 </html>
