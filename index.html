@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG LUA | MONETLOADER SPECIALIST</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Michroma&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>TATANG | LUA ARCHITECT TERMINAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --orange: #FF8C00;
-            --yellow: #FFD700;
-            --black: #0A0A0A;
-            --white: #F4F4F4;
-            --dark-grey: #151515;
+            --orange: #FF6B00;
+            --yellow: #FFD600;
+            --black: #050505;
+            --dark: #121212;
+            --white: #FFFFFF;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,231 +19,204 @@
         body {
             background: var(--black);
             color: var(--white);
-            font-family: 'Michroma', sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 2px 2px, #222 1px, transparent 0);
-            background-size: 32px 32px;
+            padding: 20px;
+            background-image: linear-gradient(rgba(255, 107, 0, 0.03) 1px, transparent 1px), 
+                              linear-gradient(90deg, rgba(255, 107, 0, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
         }
 
-        /* Industrial Background Overlay */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, rgba(255,140,0,0.05) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .main-frame {
-            width: 90%;
-            max-width: 450px;
-            background: var(--dark-grey);
-            border-left: 5px solid var(--orange);
-            border-right: 2px solid var(--yellow);
-            padding: 40px 25px;
+        .terminal-box {
+            width: 100%;
+            max-width: 480px;
+            background: var(--dark);
+            border: 2px solid var(--orange);
             position: relative;
-            box-shadow: 20px 20px 0px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(255, 107, 0, 0.15);
         }
 
-        /* Danger Stripes (Gacor Effect) */
-        .stripes {
-            width: 100%;
-            height: 10px;
-            background: repeating-linear-gradient(
-                -45deg,
-                var(--orange),
-                var(--orange) 10px,
-                var(--black) 10px,
-                var(--black) 20px
-            );
-            position: absolute;
-            top: 0; left: 0;
-        }
-
-        /* Profile Section */
-        .profile-container {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .avatar-frame {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px;
-            border: 3px solid var(--white);
-            outline: 3px solid var(--orange);
-            outline-offset: 4px;
-            background: var(--black);
-            padding: 5px;
-            transform: rotate(-2deg);
-        }
-
-        .avatar-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%) contrast(110%);
-        }
-
-        h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 24px;
-            color: var(--orange);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-
-        .badge {
-            background: var(--yellow);
+        /* Header / Monitor */
+        .monitor-header {
+            background: var(--orange);
             color: var(--black);
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 10px;
-            display: inline-block;
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
-        }
-
-        /* Info Section (Script Explanation) */
-        .info-panel {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid #333;
             padding: 15px;
-            margin-bottom: 25px;
-            font-family: 'Space Mono', monospace;
-            font-size: 13px;
-            border-radius: 4px;
-        }
-
-        .info-panel h3 {
-            color: var(--yellow);
-            font-size: 14px;
-            margin-bottom: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
             display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .info-panel h3::before {
-            content: ">";
-            margin-right: 8px;
-            color: var(--orange);
+        .system-status {
+            font-size: 10px;
+            animation: blink 1s infinite;
         }
 
-        .info-panel p {
-            color: #bbb;
-            line-height: 1.5;
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Content Area */
+        .content { padding: 25px; }
+
+        .dev-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 32px;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 5px;
+            letter-spacing: 5px;
         }
 
-        /* Interactive Buttons */
-        .link-grid {
+        .dev-role {
+            color: var(--yellow);
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* TABS SYSTEM */
+        .tabs-nav {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            gap: 5px;
+            margin-bottom: 15px;
         }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #888;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #222;
+            padding: 15px;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            min-height: 120px;
+        }
+
+        .tab-content.active { display: block; }
+
+        .highlight { color: var(--orange); font-weight: bold; }
+
+        /* GACOR BUTTONS */
+        .social-links { display: grid; gap: 10px; }
 
         .btn {
             display: flex;
             align-items: center;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            padding: 14px 20px;
-            text-decoration: none;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: transparent;
+            border: 1px solid var(--orange);
             color: var(--white);
+            text-decoration: none;
+            font-weight: 700;
             font-size: 13px;
-            font-weight: bold;
             transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::after {
-            content: "";
-            position: absolute;
-            right: 15px;
-            width: 8px;
-            height: 8px;
-            border-top: 2px solid var(--orange);
-            border-right: 2px solid var(--orange);
-            transform: rotate(45deg);
         }
 
         .btn:hover {
-            border-color: var(--orange);
             background: var(--orange);
             color: var(--black);
-            transform: translateX(8px);
+            box-shadow: 0 0 15px var(--orange);
+            transform: scale(1.02);
         }
 
-        .btn i-logo {
-            width: 24px;
-            margin-right: 15px;
-        }
-
-        .footer-tag {
+        .footer {
             margin-top: 30px;
-            text-align: right;
-            font-family: 'Space Mono', monospace;
+            text-align: center;
             font-size: 9px;
-            color: #555;
-            border-top: 1px solid #222;
-            padding-top: 10px;
-        }
-
-        /* Glitch Animation for Hover */
-        .btn:hover i-logo {
-            filter: invert(1);
+            color: #444;
+            letter-spacing: 3px;
         }
     </style>
 </head>
 <body>
 
-    <div class="main-frame">
-        <div class="stripes"></div>
-        
-        <div class="profile-container">
-            <div class="avatar-frame">
-                <img src="https://i.ibb.co.com/zVPvVbM5/file-00000000b5d4720698886001d6221767.png" alt="TATANG">
+    <div class="terminal-box">
+        <div class="monitor-header">
+            <span>COMMAND_CENTER.SYS</span>
+            <span class="system-status">● ONLINE</span>
+        </div>
+
+        <div class="content">
+            <h1 class="dev-name">TATANG</h1>
+            <p class="dev-role">Advanced Lua Engineer</p>
+
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="openTab(event, 'info')">APA ITU?</button>
+                <button class="tab-btn" onclick="openTab(event, 'cara')">CARA PAKAI</button>
             </div>
-            <h1>TATANG</h1>
-            <div class="badge">SYSTEM ARCHITECT - LUA</div>
-        </div>
 
-        <div class="info-panel">
-            <h3>MONETLOADER LUA</h3>
-            <p>Framework canggih untuk eksekusi script <b>Lua</b> di SAMP Mobile. Memungkinkan modifikasi real-time tanpa crash sistem.</p>
-        </div>
+            <div id="info" class="tab-content active">
+                <p><span class="highlight">Monetloader</span> adalah injector script berbasis Lua tercepat untuk SAMP Mobile. Ini memungkinkan modifikasi game secara real-time dengan stabilitas tinggi dan konsumsi RAM rendah.</p>
+            </div>
 
-        <div class="info-panel">
-            <h3>MANFAAT & FUNGSI</h3>
-            <p>Automasi fitur, peningkatan UI (Mimgui), dan bypass limitasi game untuk pengalaman <b>SAMP Mobile</b> yang lebih gacor.</p>
-        </div>
+            <div id="cara" class="tab-content">
+                <p>1. Install APK Monetloader.<br>
+                   2. Masukkan file <span class="highlight">.lua</span> ke folder <span class="highlight">Android/data/.../monetloader</span>.<br>
+                   3. Jalankan game & nikmati fitur otomatisnya.</p>
+            </div>
 
-        <div class="link-grid">
-            <a href="https://discord.gg/G5SABE8uQe" class="btn">
-                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=FFA500" class="i-logo" style="width: 24px; margin-right: 10px;" alt="Discord">
-                DISCORD COMMUNITY
-            </a>
+            <div class="social-links">
+                <a href="https://discord.gg/G5SABE8uQe" class="btn">
+                    <span>DISCORD SERVER</span>
+                    <span>→</span>
+                </a>
+                <a href="https://youtube.com/@tatanglua" class="btn">
+                    <span>YOUTUBE TUTORIAL</span>
+                    <span>→</span>
+                </a>
+                <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="btn">
+                    <span>WA ARCHIVE</span>
+                    <span>→</span>
+                </a>
+            </div>
 
-            <a href="https://youtube.com/@tatanglua" class="btn">
-                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=FFA500" class="i-logo" style="width: 24px; margin-right: 10px;" alt="YouTube">
-                YOUTUBE ARCHIVE
-            </a>
-
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="btn">
-                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=FFA500" class="i-logo" style="width: 24px; margin-right: 10px;" alt="WA">
-                WHATSAPP CHANNEL
-            </a>
-        </div>
-
-        <div class="footer-tag">
-            STATUS: OPERATIONAL // MNTR_V2.0 // EST 2025
+            <div class="footer">
+                V.2.0.1 // UNTRACEABLE // 2026
+            </div>
         </div>
     </div>
 
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+
 </body>
-</html>
+                </html>
