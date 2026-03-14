@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG - Modding & Development</title>
+    <title>TATANG - Official Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -37,7 +37,7 @@
             position: relative;
             width: 100%;
             height: 250px;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -45,43 +45,44 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            border-bottom: 1px solid #222;
         }
-        .welcome-hero h1 { font-size: 36px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .welcome-hero h1 { font-size: 32px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
         .welcome-hero h1 span { color: var(--green-neon); }
-        .welcome-hero p { color: var(--text-muted); font-size: 14px; margin-top: 5px; max-width: 80%; }
+        .welcome-hero p { color: var(--text-muted); font-size: 13px; margin-top: 5px; max-width: 80%; }
 
         .container { padding: 20px; max-width: 600px; margin: auto; }
 
-        /* --- SOCIAL LINKS --- */
+        /* --- SECTION TITLES --- */
         .section-title { font-size: 16px; font-weight: 800; text-transform: uppercase; margin: 30px 0 15px; color: var(--green-neon); display: flex; align-items: center; gap: 10px; }
         .section-title::after { content: ""; flex: 1; height: 1px; background: #333; }
         
+        /* --- SOCIAL GRID --- */
         .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 13px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; color: white; font-size: 12px; font-weight: 600; background: #1a1a1a; border: 1px solid #333; }
 
-        /* --- CARDS --- */
-        .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 20px; border: 1px solid #222; }
-        .card img { width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 15px; border: 1px solid #333; }
-        .card h3 { font-size: 20px; margin-bottom: 10px; color: var(--green-neon); }
-        .card ul { list-style: none; margin-bottom: 15px; font-size: 13px; color: #bbb; }
-        .card ul li { margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .card ul li i { color: var(--green-neon); font-size: 10px; }
+        /* --- PRODUCT CARDS --- */
+        .card { background: var(--bg-card); border-radius: 16px; padding: 20px; margin-bottom: 25px; border: 1px solid #222; transition: 0.3s; }
+        .card:hover { border-color: var(--green-neon); }
+        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 1px solid #333; }
+        .card h3 { font-size: 20px; margin-bottom: 12px; color: var(--green-neon); text-transform: uppercase; }
+        .card ul { list-style: none; margin-bottom: 20px; }
+        .card ul li { font-size: 13px; color: #ccc; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .card ul li i { color: var(--green-neon); width: 15px; text-align: center; }
         
         .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #222; }
         .price { font-size: 22px; font-weight: 800; color: var(--green-neon); }
-        .btn-buy { background: var(--green-neon); color: black; padding: 12px 20px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; text-transform: uppercase; font-size: 13px; }
+        .btn-buy { background: var(--green-neon); color: black; padding: 12px 20px; border-radius: 8px; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; font-size: 13px; }
 
         /* --- MODAL --- */
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; }
         .modal-content { background: #111; padding: 25px; border-radius: 20px; width: 100%; max-width: 350px; text-align: center; border: 1px solid var(--green-neon); }
-        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; position: relative; cursor: pointer; }
-        .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; }
+        .pay-item { background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 10px; text-align: left; cursor: pointer; border: 1px solid #333; }
+        .pay-item label { font-size: 10px; color: var(--green-neon); font-weight: 800; display: block; margin-bottom: 2px; }
         .pay-item span { font-family: monospace; font-size: 16px; color: white; }
-        .qris-box { background: white; padding: 10px; border-radius: 10px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .qris-box { background: white; padding: 10px; border-radius: 8px; margin-top: 10px; color: black; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999; }
-        footer { text-align:center; padding:30px; color:#444; font-size:11px; }
+        footer { text-align:center; padding:40px; color:#444; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -95,7 +96,7 @@
         </div>
         <ul class="sidebar-menu">
             <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-            <li><a href="#store"><i class="fas fa-shopping-cart"></i> Toko Script</a></li>
+            <li><a href="#services"><i class="fas fa-code"></i> Layanan</a></li>
             <li><a href="https://youtube.com/@tatanglua"><i class="fab fa-youtube"></i> YouTube</a></li>
             <li><a href="#"><i class="fab fa-tiktok"></i> TikTok</a></li>
             <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
@@ -110,77 +111,85 @@
 
     <div class="welcome-hero">
         <h1>WELCOME TO <span>TATANG</span></h1>
-        <p>Solusi Terbaik untuk Custom Script Monetloader & Bot Discord High Quality</p>
+        <p>Solusi Custom Script & Bot Discord Terpercaya dengan Fitur Premium</p>
     </div>
 
     <div class="container">
-        <h2 class="section-title">COMMUNITY</h2>
+        <h2 class="section-title">COMMUNITY LINKS</h2>
         <div class="social-grid">
-            <a href="#" class="social-btn"><i class="fab fa-youtube" style="color:#ff0000;"></i> YouTube</a>
-            <a href="#" class="social-btn"><i class="fab fa-tiktok"></i> TikTok</a>
-            <a href="#" class="social-btn"><i class="fab fa-discord" style="color:#5865F2;"></i> Discord</a>
-            <a href="#" class="social-btn"><i class="fas fa-bullhorn" style="color:#25D366;"></i> Saluran WA</a>
+            <a href="#" class="social-btn"><i class="fab fa-youtube" style="color:red"></i> YOUTUBE</a>
+            <a href="#" class="social-btn"><i class="fab fa-tiktok"></i> TIKTOK</a>
+            <a href="#" class="social-btn"><i class="fab fa-discord" style="color:#5865F2"></i> DISCORD</a>
+            <a href="#" class="social-btn"><i class="fas fa-bullhorn" style="color:#25D366"></i> SALURAN WA</a>
         </div>
 
-        <h2 class="section-title" id="store">SERVICES</h2>
+        <h2 class="section-title" id="services">OFFICIAL SERVICES</h2>
 
         <div class="card">
             <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop" alt="Coding">
             <h3>CUSTOM MONETLOADER</h3>
             <ul>
-                <li><i class="fas fa-check"></i> Bebas Request Fitur Sesuai Keinginan</li>
-                <li><i class="fas fa-check"></i> Anti-Decompile (Keamanan Terjamin)</li>
-                <li><i class="fas fa-check"></i> Script Ringan & No Lag</li>
+                <li><i class="fas fa-check-circle"></i> Dapat File <b>No Enc</b> & <b>Enc</b></li>
+                <li><i class="fas fa-check-circle"></i> Bebas Request Tampilan <b>mImgui</b></li>
+                <li><i class="fas fa-check-circle"></i> Bebas Request Fitur Sesuai Keinginan</li>
+                <li><i class="fas fa-check-circle"></i> Fitur Dijamin <b>Work 100%</b></li>
+                <li><i class="fas fa-star"></i> Bonus <b>Role VIP</b> di Discord</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 30.000</div>
-                <button class="btn-buy" onclick="openPay('Script Monetloader')">BUY NOW</button>
+                <button class="btn-buy" onclick="openPay('Custom Monetloader (No Enc)')">BUY NOW</button>
             </div>
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="AI Bot">
+            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Bot AI">
             <h3>CUSTOM DISCORD BOT</h3>
             <ul>
-                <li><i class="fas fa-check"></i> Fitur Auto-Mod & Security</li>
-                <li><i class="fas fa-check"></i> Integrasi AI / Groq API</li>
-                <li><i class="fas fa-check"></i> Scan File Berbahaya Otomatis</li>
+                <li><i class="fas fa-check-circle"></i> Bebas Request Semua Fitur</li>
+                <li><i class="fas fa-check-circle"></i> Bot <b>Online 24 Jam</b> Non-stop</li>
+                <li><i class="fas fa-check-circle"></i> Masa Aktif <b>30 Hari</b></li>
+                <li><i class="fas fa-check-circle"></i> Perpanjang Masa Aktif Cuma <b>5k</b></li>
+                <li><i class="fas fa-star"></i> Bonus <b>Role VIP</b> di Discord</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 50.000</div>
-                <button class="btn-buy" onclick="openPay('Discord Bot Custom')">BUY NOW</button>
+                <button class="btn-buy" onclick="openPay('Custom Discord Bot (30 Hari)')">BUY NOW</button>
             </div>
         </div>
     </div>
 
     <div class="modal" id="payModal">
         <div class="modal-content">
-            <h3 style="color:var(--green-neon);">PEMBAYARAN</h3>
-            <p id="orderName" style="font-size:11px; margin: 10px 0; color:#888;"></p>
+            <h3 style="color:var(--green-neon); margin-bottom: 10px;">PEMBAYARAN</h3>
+            <p id="orderName" style="font-size:12px; margin-bottom:20px; color:#888; font-weight:600;"></p>
             
             <div class="pay-item" onclick="copyNum('08123456789')">
                 <label>DANA</label>
                 <span>08123456789</span>
-                <i class="far fa-copy" style="float:right; color:#555;"></i>
+                <i class="far fa-copy" style="float:right; color:#444"></i>
             </div>
 
             <div class="pay-item" onclick="copyNum('08123456789')">
                 <label>GOPAY</label>
                 <span>08123456789</span>
-                <i class="far fa-copy" style="float:right; color:#555;"></i>
+                <i class="far fa-copy" style="float:right; color:#444"></i>
             </div>
 
             <div class="qris-box">
-                <i class="fas fa-qrcode fa-2x"></i> QRIS TATANG STORE
+                <i class="fas fa-qrcode fa-2x"></i>
+                <div style="text-align:left">
+                    QRIS TATANG STORE<br>
+                    <span style="font-size:10px; font-weight:normal">Konfirmasi Bukti Transfer ke Admin</span>
+                </div>
             </div>
 
             <button class="btn-buy" style="margin-top:20px; width:100%; background:#25D366; color:white;" onclick="hubungiAdmin()">HUBUNGI ADMIN</button>
-            <button onclick="closePay()" style="background:none; border:none; color:#ff4444; margin-top:15px; cursor:pointer;">Batal</button>
+            <button onclick="closePay()" style="background:none; border:none; color:#ff4444; margin-top:15px; cursor:pointer; font-size:13px;">Batal</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 TATANG LUA DEVELOPER</p>
+        <p>&copy; 2026 TATANG LUA DEVELOPER | ALL RIGHTS RESERVED</p>
     </footer>
 
     <script>
@@ -192,7 +201,7 @@
         }
 
         function openPay(name) {
-            document.getElementById('orderName').innerText = "Produk: " + name;
+            document.getElementById('orderName').innerText = "PRODUK: " + name;
             document.getElementById('payModal').style.display = 'flex';
         }
 
@@ -202,13 +211,14 @@
 
         function copyNum(num) {
             navigator.clipboard.writeText(num);
-            alert("Nomor " + num + " berhasil disalin!");
+            alert("Nomor " + num + " berhasil disalin ke clipboard!");
         }
 
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
+            // Ganti nomor WA Anda di sini
             window.open(`https://wa.me/628123456789?text=Halo Tatang, saya ingin order ${order}`, '_blank');
         }
     </script>
 </body>
-                                                         </html>
+</html>
