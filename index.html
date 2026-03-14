@@ -3,209 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG | THE LUA ARCHITECT</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>TATANG | THE VOID ARCHITECT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Quicksand:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --orange: #FF6B00;
-            --yellow: #FFD600;
-            --black: #050505;
-            --white: #ffffff;
-            --glow: rgba(255, 107, 0, 0.5);
+            --primary: #9d50bb;
+            --secondary: #6e48aa;
+            --accent: #00d2ff;
+            --gold: #ffd700;
+            --bg: #020205;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: var(--black);
-            color: var(--white);
-            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             overflow: hidden;
+            font-family: 'Quicksand', sans-serif;
+            color: white;
         }
 
-        /* BACKGROUND GACOR: HEXAGON & SCANLINES */
-        .bg-overlay {
+        /* Particles / Stars */
+        .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at center, transparent 0%, var(--black) 80%),
-                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
             z-index: -2;
         }
 
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.3) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        /* MAIN TERMINAL CARD */
-        .main-container {
+        /* Circular Layout Container */
+        .rpg-ui {
             position: relative;
             width: 400px;
-            padding: 50px 30px;
-            background: rgba(10, 10, 10, 0.9);
-            border: 2px solid var(--orange);
-            text-align: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 40px rgba(255, 107, 0, 0.1);
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* CORNER DECORATIONS */
-        .main-container::before {
-            content: ""; position: absolute; top: -10px; left: -10px;
-            width: 40px; height: 40px; border-top: 4px solid var(--yellow); border-left: 4px solid var(--yellow);
-        }
-        .main-container::after {
-            content: ""; position: absolute; bottom: -10px; right: -10px;
-            width: 40px; height: 40px; border-bottom: 4px solid var(--yellow); border-right: 4px solid var(--yellow);
-        }
-
-        /* NAME & STATUS */
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 48px;
-            font-weight: 900;
-            background: linear-gradient(to bottom, var(--white) 30%, var(--orange) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 10px;
-            margin-bottom: 5px;
-            filter: drop-shadow(0 0 10px var(--glow));
+        /* Rotating Magic Circle */
+        .magic-circle {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border: 2px dashed var(--primary);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+            opacity: 0.3;
+            box-shadow: 0 0 50px var(--secondary);
         }
 
-        .role {
-            font-size: 12px;
-            letter-spacing: 5px;
-            color: var(--yellow);
-            text-transform: uppercase;
-            margin-bottom: 35px;
-            font-weight: 700;
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* DEFINITION BOX */
-        .info-box {
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255, 107, 0, 0.05);
-            padding: 20px;
-            margin-bottom: 40px;
+        /* Center Profile Card */
+        .center-card {
             position: relative;
-        }
-
-        .info-box p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: #ccc;
-        }
-
-        .info-box b { color: var(--orange); }
-
-        /* GACOR INTERACTIVE BUTTONS */
-        .btn-list {
+            z-index: 10;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 50%;
+            width: 220px;
+            height: 220px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-
-        .btn {
-            position: relative;
-            padding: 18px;
-            background: transparent;
-            border: 1px solid var(--orange);
-            color: var(--white);
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            overflow: hidden;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 30px rgba(157, 80, 187, 0.4);
+            animation: float 4s ease-in-out infinite;
         }
 
-        .btn:hover {
-            background: var(--orange);
-            color: var(--black);
-            box-shadow: 0 0 30px var(--orange);
-            transform: skewX(-5deg);
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
-        .btn img {
-            width: 18px;
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-shadow: 0 0 15px var(--gold);
+        }
+
+        .level {
+            font-size: 10px;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        /* Orbiting Buttons */
+        .orbit-btn {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: 0.4s;
+            z-index: 15;
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .orbit-btn img {
+            width: 30px;
+            filter: drop-shadow(0 0 5px var(--accent));
+        }
+
+        .orbit-btn span {
+            position: absolute;
+            bottom: -25px;
+            font-size: 9px;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+            opacity: 0;
             transition: 0.3s;
         }
 
-        .btn:hover img {
-            filter: brightness(0);
+        .orbit-btn:hover {
+            transform: scale(1.2);
+            background: var(--accent);
+            box-shadow: 0 0 30px var(--accent);
         }
 
-        /* DECORATIVE ELEMENTS */
-        .status-line {
+        .orbit-btn:hover span { opacity: 1; }
+
+        /* Positioning the Buttons in Circle */
+        .btn-yt { top: -10px; left: 50%; transform: translateX(-50%); border-color: #ff0000; box-shadow: 0 0 15px #ff0000; }
+        .btn-dc { bottom: 40px; left: -10px; border-color: #5865F2; box-shadow: 0 0 15px #5865F2; }
+        .btn-wa { bottom: 40px; right: -10px; border-color: #25D366; box-shadow: 0 0 15px #25D366; }
+
+        /* RPG Resource Bars */
+        .resource-bars {
+            margin-top: 15px;
+            width: 100px;
+        }
+
+        .bar {
+            height: 4px;
             width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--orange), transparent);
-            margin: 20px 0;
+            background: #222;
+            margin-bottom: 5px;
+            border-radius: 2px;
+            overflow: hidden;
         }
 
-        .glow-point {
+        .hp { width: 90%; background: #ff4d4d; box-shadow: 0 0 5px #ff4d4d; }
+        .mp { width: 100%; background: var(--accent); box-shadow: 0 0 5px var(--accent); }
+
+        /* Info Text */
+        .desc-tab {
             position: absolute;
-            width: 200px; height: 200px;
-            background: var(--orange);
-            filter: blur(100px);
-            opacity: 0.1;
-            z-index: -1;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            animation: pulse 4s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.5); }
+            bottom: -100px;
+            width: 300px;
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            line-height: 1.5;
+            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-overlay"></div>
-    <div class="scanlines"></div>
-    <div class="glow-point"></div>
+    <div class="stars"></div>
 
-    <div class="main-container">
-        <h1>TATANG</h1>
-        <p class="role">LUA SPECIALIST</p>
-        
-        <div class="status-line"></div>
+    <div class="rpg-ui">
+        <div class="magic-circle"></div>
 
-        <div class="info-box">
-            <p>
-                <b>Monetloader</b> adalah injector Lua tercepat dan paling stabil untuk <b>SAMP Mobile</b>. Memungkinkan integrasi script canggih untuk automasi dan modifikasi game tanpa hambatan.
-            </p>
+        <a href="https://youtube.com/@tatanglua" class="orbit-btn btn-yt" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=ffffff" alt="YT">
+            <span>YOUTUBE</span>
+        </a>
+
+        <a href="https://discord.gg/G5SABE8uQe" class="orbit-btn btn-dc" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=ffffff" alt="DC">
+            <span>DISCORD</span>
+        </a>
+
+        <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="orbit-btn btn-wa" target="_blank">
+            <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=ffffff" alt="WA">
+            <span>WHATSAPP</span>
+        </a>
+
+        <div class="center-card">
+            <h1>TATANG</h1>
+            <div class="level">LVL. 99 LUA MAGE</div>
+            
+            <div class="resource-bars">
+                <div class="bar"><div class="hp"></div></div>
+                <div class="bar"><div class="mp"></div></div>
+            </div>
         </div>
 
-        <div class="btn-list">
-            <a href="https://discord.gg/G5SABE8uQe" class="btn">
-                <img src="https://img.icons8.com/?size=100&id=30888&format=png&color=ffffff" alt="DC">
-                DISCORD SERVER
-            </a>
-            <a href="https://youtube.com/@tatanglua" class="btn">
-                <img src="https://img.icons8.com/?size=100&id=19318&format=png&color=ffffff" alt="YT">
-                YOUTUBE CHANNEL
-            </a>
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" class="btn">
-                <img src="https://img.icons8.com/?size=100&id=16713&format=png&color=ffffff" alt="WA">
-                WHATSAPP ARCHIVE
-            </a>
+        <div class="desc-tab">
+            <b>Monetloader</b>: Senior-class injector for SAMP Mobile. 
+            Optimized for performance and stability.
         </div>
     </div>
 
