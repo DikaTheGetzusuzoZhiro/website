@@ -203,7 +203,7 @@
                 <li><i class="fas fa-paint-brush"></i> <strong>Desain Bebas:</strong> Kustomisasi Tampilan & UI sepenuhnya sesuai selera Anda.</li>
                 <li><i class="fas fa-cogs"></i> <strong>Fitur Spesifik:</strong> Bebas request fitur rumit yang disesuaikan dengan kebutuhan Server.</li>
                 <li><i class="fas fa-shield-alt"></i> <strong>Terjamin:</strong> Fitur dipastikan berfungsi normal (Work 100%) dan bergaransi bebas bug.</li>
-                <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord TATANG DEVELOPER.</li>
+                <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
             </ul>
             <div class="price-row">
                 <div class="price">Rp 30.000</div>
@@ -272,7 +272,7 @@
             document.getElementById('orderName').innerText = name;
             const modal = document.getElementById('payModal');
             modal.style.display = 'flex';
-            // Sedikit delay agar animasi transisi scale/opacity berjalan lancar
+            
             setTimeout(() => {
                 modal.classList.add('show');
             }, 10);
@@ -283,19 +283,16 @@
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 400); // Sesuaikan dengan durasi transisi di CSS
+            }, 400); 
         }
 
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
             
-            // Format pesan yang akan dikirim ke WhatsApp
-            const message = encodeURIComponent(`Halo Admin Tatang Developer, saya ingin mengkonfirmasi pembayaran untuk pemesanan: [ ${order} ].`);
+            alert(`Sistem akan mengarahkanmu ke WhatsApp Admin TATANG DEVELOPER untuk mengkonfirmasi pesanan: [ ${order} ].`);
             
-            alert(`Sistem akan mengarahkanmu ke WhatsApp Admin TATANG DEVELOPER.\n\nSilakan kirim pesan otomatis yang sudah kami siapkan untuk mengkonfirmasi pesanan: [ ${order} ].`);
-            
-            // Redirect ke WhatsApp (menggunakan nomor DANA yang tertera: 0895328044863 diubah ke format 62)
-            window.open(`https://wa.me/62895328044863?text=${message}`, '_blank');
+            // Redirect ke WhatsApp tanpa pesan otomatis
+            window.open(`https://wa.me/62895328044863`, '_blank');
         }
 
         function copyNumber(text) {
@@ -308,4 +305,4 @@
         }
     </script>
 </body>
-</html>
+                                                               </html>
