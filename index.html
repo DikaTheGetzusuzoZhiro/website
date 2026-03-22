@@ -20,7 +20,7 @@
             --bg-card: rgba(18, 18, 18, 0.7);
             --accent-color: #ff6600; /* Oren Sporty */
             --accent-glow: rgba(255, 102, 0, 0.5);
-            --discord-color: #5865F2;
+            --wa-color: #25D366;
             --text-main: #ffffff;
             --text-muted: #a0a0a0;
         }
@@ -132,8 +132,9 @@
         .qris-btn { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 16px; margin-top: 15px; color: white; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 15px; text-decoration: none; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); transition: 0.3s; }
         .qris-btn:hover { border-color: var(--accent-color); color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
 
-        .btn-discord-confirm { background: var(--discord-color); color: white; border: none; padding: 16px; border-radius: 14px; width: 100%; margin-top: 25px; font-size: 14px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3); }
-        .btn-discord-confirm:hover { background: #4752C4; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5); }
+        /* BUTTON WA CONFIRM */
+        .btn-wa-confirm { background: var(--wa-color); color: white; border: none; padding: 16px; border-radius: 14px; width: 100%; margin-top: 25px; font-size: 14px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
+        .btn-wa-confirm:hover { background: #1da851; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5); }
 
         .btn-cancel { background: none; border: none; color: #ff4d4d; margin-top: 20px; cursor: pointer; font-weight: 700; font-size: 13px; letter-spacing: 1px; transition: 0.3s; padding: 10px; }
         .btn-cancel:hover { color: #ff1a1a; text-shadow: 0 0 10px rgba(255, 77, 77, 0.4); }
@@ -155,9 +156,9 @@
         </div>
         <ul class="sidebar-menu">
             <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
-            <li><a href="https://youtube.com/@tatanglua" target="_blank"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a></li>
             <li><a href="https://www.tiktok.com/@tatang.lua" target="_blank"><i class="fab fa-tiktok" style="color:#fff"></i> TikTok</a></li>
             <li><a href="https://discord.gg/G5SABE8uQe" target="_blank"><i class="fab fa-discord" style="color:#5865F2"></i> Discord</a></li>
+            <li><a href="https://youtube.com/@tatanglua" target="_blank"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a></li>
             <li><a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank"><i class="fas fa-bullhorn" style="color:#25D366"></i> Saluran WA</a></li>
         </ul>
     </div>
@@ -177,10 +178,10 @@
     <div class="container">
         <h2 class="section-title"><i class="fas fa-link"></i> OFFICIAL LINKS</h2>
         <div class="social-grid">
-            <a href="https://youtube.com/@tatanglua" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000; font-size:18px;"></i> YOUTUBE</a>
             <a href="https://www.tiktok.com/@tatang.lua" target="_blank" class="social-btn"><i class="fab fa-tiktok" style="font-size:18px;"></i> TIKTOK</a>
             <a href="https://discord.gg/G5SABE8uQe" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2; font-size:18px;"></i> DISCORD</a>
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366; font-size:18px;"></i> WHATSAPP</a>
+            <a href="https://youtube.com/@tatanglua" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000; font-size:18px;"></i> YOUTUBE</a>
+            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366; font-size:18px;"></i> SALURAN WA</a>
         </div>
 
         <h2 class="section-title"><i class="fas fa-box-open"></i> FREE RESOURCES</h2>
@@ -247,8 +248,8 @@
                 <div style="text-align:left; line-height: 1.3;">BUKA MENU QRIS<br><span style="font-size:11px; color:var(--text-muted); font-weight: 500;">Ketuk untuk scan pembayaran otomatis</span></div>
             </a>
 
-            <button class="btn-discord-confirm" onclick="hubungiAdmin()">
-                <i class="fab fa-discord fa-lg"></i> KONFIRMASI VIA DISCORD
+            <button class="btn-wa-confirm" onclick="hubungiAdmin()">
+                <i class="fab fa-whatsapp fa-lg"></i> KONFIRMASI VIA WHATSAPP
             </button>
             
             <button class="btn-cancel" onclick="closePay()">BATALKAN PESANAN</button>
@@ -287,11 +288,14 @@
 
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
-            // Notifikasi sebelum dialihkan ke Discord
-            alert(`Sistem akan mengarahkanmu ke Server Discord TATANG DEVELOPER.\n\nSilakan buat Tiket (Ticket) di server dan sebutkan bahwa Anda ingin mengkonfirmasi pembayaran untuk pemesanan: [ ${order} ].`);
             
-            // Redirect ke Discord
-            window.open(`https://discord.gg/G5SABE8uQe`, '_blank');
+            // Format pesan yang akan dikirim ke WhatsApp
+            const message = encodeURIComponent(`Halo Admin Tatang Developer, saya ingin mengkonfirmasi pembayaran untuk pemesanan: [ ${order} ].`);
+            
+            alert(`Sistem akan mengarahkanmu ke WhatsApp Admin TATANG DEVELOPER.\n\nSilakan kirim pesan otomatis yang sudah kami siapkan untuk mengkonfirmasi pesanan: [ ${order} ].`);
+            
+            // Redirect ke WhatsApp (menggunakan nomor DANA yang tertera: 0895328044863 diubah ke format 62)
+            window.open(`https://wa.me/62895328044863?text=${message}`, '_blank');
         }
 
         function copyNumber(text) {
@@ -304,4 +308,4 @@
         }
     </script>
 </body>
-            </html>
+</html>
