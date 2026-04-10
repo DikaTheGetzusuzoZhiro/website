@@ -18,7 +18,7 @@
         :root {
             --bg-dark: #050505;
             --bg-card: rgba(18, 18, 18, 0.7);
-            --accent-color: #ff6600; /* Oren Sporty */
+            --accent-color: #ff6600; 
             --accent-glow: rgba(255, 102, 0, 0.5);
             --wa-color: #25D366;
             --text-main: #ffffff;
@@ -32,6 +32,8 @@
             overflow-x: hidden; 
             line-height: 1.6; 
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* --- SIDEBAR --- */
@@ -40,18 +42,23 @@
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         
         .sidebar-menu { list-style: none; }
-        .sidebar-menu a { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 14px 16px; border-radius: 12px; transition: 0.3s; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
-        .sidebar-menu a:hover { background: rgba(255, 102, 0, 0.1); color: var(--accent-color); transform: translateX(5px); box-shadow: inset 2px 0 0 var(--accent-color); }
+        .sidebar-menu a { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 14px 16px; border-radius: 12px; transition: 0.3s; margin-bottom: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .sidebar-menu a:hover, .sidebar-menu a.active-link { background: rgba(255, 102, 0, 0.1); color: var(--accent-color); transform: translateX(5px); box-shadow: inset 2px 0 0 var(--accent-color); }
         .sidebar-menu i { font-size: 18px; width: 20px; text-align: center; }
         .sidebar-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 15px 0; }
 
         /* --- NAVBAR --- */
         nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
-        .logo-container { display: flex; align-items: center; text-decoration: none; }
+        .logo-container { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
         .logo-text { font-size: 22px; color: white; font-weight: 800; letter-spacing: 0.5px; }
         .logo-text span { color: var(--accent-color); font-weight: 800; text-shadow: 0 0 15px var(--accent-glow); }
         .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; transition: 0.3s; }
         .menu-toggle:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-glow); transform: scale(1.1); }
+
+        /* --- PAGE VIEWS (SPA SYSTEM) --- */
+        .page-view { display: none; animation: fadeIn 0.6s ease; flex: 1; }
+        .page-view.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HERO SECTION --- */
         .welcome-hero {
@@ -74,9 +81,9 @@
         .welcome-hero p { color: #d0d0d0; font-size: 15px; margin-top: 15px; max-width: 550px; font-weight: 400; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); animation: fadeInUp 1s ease 0.3s both; }
 
         .hero-buttons { margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 1s ease 0.6s both; }
-        .btn-hero-primary { background: var(--accent-color); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px;}
+        .btn-hero-primary { background: var(--accent-color); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;}
         .btn-hero-primary:hover { background: #ff7a1f; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6); }
-        .btn-hero-secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; backdrop-filter: blur(5px); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px;}
+        .btn-hero-secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; backdrop-filter: blur(5px); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;}
         .btn-hero-secondary:hover { background: rgba(255,255,255,0.15); border-color: var(--accent-color); transform: translateY(-3px); }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -85,12 +92,12 @@
         .container { padding: 40px 20px; max-width: 700px; margin: auto; }
 
         /* --- TITLES --- */
-        .section-title { font-size: 15px; text-transform: uppercase; margin: 50px 0 25px; color: var(--text-muted); display: flex; align-items: center; gap: 15px; font-weight: 700; letter-spacing: 2px; scroll-margin-top: 80px;}
+        .section-title { font-size: 15px; text-transform: uppercase; margin: 20px 0 25px; color: var(--text-muted); display: flex; align-items: center; gap: 15px; font-weight: 700; letter-spacing: 2px; }
         .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0.1), transparent); }
         .section-title i { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-glow); font-size: 18px; }
         
         /* --- SOCIAL GRID --- */
-        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;}
         .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; border-radius: 14px; text-decoration: none; color: white; font-size: 13px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-weight: 700; letter-spacing: 1px; backdrop-filter: blur(10px); }
         .social-btn:hover { border-color: var(--accent-color); background: rgba(255, 102, 0, 0.08); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(255, 102, 0, 0.2); }
 
@@ -127,8 +134,9 @@
 
         /* LIST & INFO STYLING */
         .info-list { padding-left: 20px; color: #ccc; font-size: 14px; margin-bottom: 20px; }
-        .info-list li { margin-bottom: 10px; padding-left: 5px; }
-        .info-heading { color: white; margin-bottom: 8px; font-size: 16px; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px;}
+        .info-list li { margin-bottom: 15px; padding-left: 5px; line-height: 1.8;}
+        .info-list li strong { color: white; }
+        .info-heading { color: white; margin-bottom: 8px; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px;}
         .info-heading i { color: var(--accent-color); }
 
         /* --- MODAL --- */
@@ -153,7 +161,7 @@
         .btn-cancel:hover { color: #ff1a1a; text-shadow: 0 0 10px rgba(255, 77, 77, 0.4); }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 999; }
-        footer { text-align:center; padding: 50px 20px 30px; color: #666; font-size: 13px; font-weight: 600; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 40px; }
+        footer { text-align:center; padding: 30px 20px; color: #666; font-size: 13px; font-weight: 600; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: auto; }
     </style>
 </head>
 <body>
@@ -162,116 +170,143 @@
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="logo-container">
+            <div class="logo-container" onclick="switchPage('home')">
                 <h2 class="logo-text">TATANG<br><span>COMUNITY</span></h2>
             </div>
             <button class="menu-toggle" onclick="toggleMenu()">&times;</button>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="#" onclick="toggleMenu()"><i class="fas fa-home"></i> Beranda</a></li>
-            <li><a href="#services" onclick="toggleMenu()"><i class="fas fa-shopping-cart"></i> Layanan</a></li>
-            <li><a href="#cara-order" onclick="toggleMenu()"><i class="fas fa-clipboard-list"></i> Cara Order</a></li>
-            <li><a href="#penjelasan" onclick="toggleMenu()"><i class="fas fa-info-circle"></i> Penjelasan</a></li>
+            <li><a id="nav-home" class="active-link" onclick="switchPage('home')"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a id="nav-services" onclick="switchPage('services')"><i class="fas fa-shopping-cart"></i> Layanan Kami</a></li>
+            <li><a id="nav-tutorial" onclick="switchPage('tutorial')"><i class="fas fa-clipboard-list"></i> Cara Order</a></li>
+            <li><a id="nav-faq" onclick="switchPage('faq')"><i class="fas fa-info-circle"></i> Penjelasan</a></li>
             <li class="sidebar-divider"></li>
             <li><a href="https://www.tiktok.com/@tatang.lua" target="_blank"><i class="fab fa-tiktok" style="color:#fff"></i> TikTok</a></li>
             <li><a href="https://discord.gg/DXfdeX2m8d" target="_blank"><i class="fab fa-discord" style="color:#5865F2"></i> Discord</a></li>
             <li><a href="https://youtube.com/@tatanglua" target="_blank"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a></li>
             <li><a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank"><i class="fas fa-bullhorn" style="color:#25D366"></i> Saluran WA</a></li>
-            <li><a href="https://chat.whatsapp.com/GaYyMhoYBltIZaxlTVZTxk?mode=gi_t" target="_blank"><i class="fas fa-users" style="color:#25D366"></i> Grup WA RTM</a></li>
         </ul>
     </div>
 
     <nav>
-        <a href="#" class="logo-container">
+        <div class="logo-container" onclick="switchPage('home')">
             <div class="logo-text">TATANG <span>LUA</span></div>
-        </a>
+        </div>
         <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></button>
     </nav>
 
-    <div class="welcome-hero">
-        <h1>WELCOME TO <br><span>TATANG COMUNITY</span></h1>
-        <p>Pusat Layanan Script Monetloader Gta Samp & Bot Discord Terbaik, Termurah, dan Terpercaya. Upgrade komunitasmu dengan sistem premium buatan kami!</p>
-        
-        <div class="hero-buttons">
-            <a href="#services" class="btn-hero-primary"><i class="fas fa-code"></i> ORDER SCRIPT</a>
-            <a href="#services" class="btn-hero-secondary"><i class="fas fa-robot"></i> ORDER BOT</a>
+    <div id="view-home" class="page-view active">
+        <div class="welcome-hero">
+            <h1>WELCOME TO <br><span>TATANG COMUNITY</span></h1>
+            <p>Pusat Layanan Script Monetloader Gta Samp & Bot Discord Terbaik, Termurah, dan Terpercaya. Upgrade komunitasmu dengan sistem premium buatan kami!</p>
+            
+            <div class="hero-buttons">
+                <button class="btn-hero-primary" onclick="switchPage('services')"><i class="fas fa-code"></i> ORDER SCRIPT</button>
+                <button class="btn-hero-secondary" onclick="switchPage('services')"><i class="fas fa-robot"></i> ORDER BOT</button>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-link"></i> OFFICIAL LINKS</h2>
+            <div class="social-grid">
+                <a href="https://www.tiktok.com/@tatang.lua" target="_blank" class="social-btn"><i class="fab fa-tiktok" style="font-size:18px;"></i> TIKTOK</a>
+                <a href="https://discord.gg/DXfdeX2m8d" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2; font-size:18px;"></i> DISCORD</a>
+                <a href="https://youtube.com/@tatanglua" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000; font-size:18px;"></i> YOUTUBE</a>
+                <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366; font-size:18px;"></i> SALURAN WA</a>
+                <a href="https://chat.whatsapp.com/GaYyMhoYBltIZaxlTVZTxk?mode=gi_t" target="_blank" class="social-btn" style="grid-column: 1 / -1;"><i class="fas fa-users" style="color:#25D366; font-size:18px;"></i> GRUP WA RTM</a>
+            </div>
+
+            <h2 class="section-title"><i class="fas fa-box-open"></i> FREE RESOURCES</h2>
+            <div class="free-box">
+                <h4>Monetloader Free Edition</h4>
+                <p>Dapatkan versi gratis langsung dari server Discord kami untuk mencoba fitur dasar. Yuk gabung dan ramaikan komunitas sekarang!</p>
+                <a href="https://discord.gg/DXfdeX2m8d" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> UNDUH DI DISCORD</a>
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        
-        <h2 class="section-title"><i class="fas fa-link"></i> OFFICIAL LINKS</h2>
-        <div class="social-grid">
-            <a href="https://www.tiktok.com/@tatang.lua" target="_blank" class="social-btn"><i class="fab fa-tiktok" style="font-size:18px;"></i> TIKTOK</a>
-            <a href="https://discord.gg/DXfdeX2m8d" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2; font-size:18px;"></i> DISCORD</a>
-            <a href="https://youtube.com/@tatanglua" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000; font-size:18px;"></i> YOUTUBE</a>
-            <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366; font-size:18px;"></i> SALURAN WA</a>
-            <a href="https://chat.whatsapp.com/GaYyMhoYBltIZaxlTVZTxk?mode=gi_t" target="_blank" class="social-btn" style="grid-column: 1 / -1;"><i class="fas fa-users" style="color:#25D366; font-size:18px;"></i> GRUP WA RTM</a>
-        </div>
+    <div id="view-services" class="page-view">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-shopping-cart"></i> OFFICIAL SERVICES</h2>
 
-        <h2 class="section-title" id="cara-order"><i class="fas fa-clipboard-list"></i> CARA ORDER</h2>
-        <div class="card" style="padding: 30px;">
-            <ol class="info-list">
-                <li>Pilih jenis layanan (<strong>Script Monetloader</strong> atau <strong>Bot Discord</strong>) pada daftar layanan di bawah.</li>
-                <li>Klik tombol <strong>"ORDER"</strong> pada layanan yang ingin Anda beli.</li>
-                <li>Pilih metode pembayaran (Transfer ke E-Wallet DANA/GOPAY atau melalui scan QRIS).</li>
-                <li>Setelah melakukan pembayaran, klik tombol <strong>"KONFIRMASI VIA WHATSAPP"</strong>.</li>
-                <li>Kirimkan bukti screenshot pembayaran otomatis ke WhatsApp Admin.</li>
-                <li>Admin akan segera merespons dan memproses pesanan / request fitur yang Anda inginkan.</li>
-            </ol>
-        </div>
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop" alt="Custom Monetloader">
+                </div>
+                <h3>CUSTOM MONETLOADER</h3>
+                <ul>
+                    <li><i class="fas fa-file-code"></i> <strong>Full Akses:</strong> Mendapatkan File Script 100% Open Source (No Encrypt).</li>
+                    <li><i class="fas fa-paint-brush"></i> <strong>Desain Bebas:</strong> Kustomisasi Tampilan & UI sepenuhnya sesuai selera Anda.</li>
+                    <li><i class="fas fa-cogs"></i> <strong>Fitur Spesifik:</strong> Bebas request fitur rumit yang disesuaikan dengan kebutuhan Server.</li>
+                    <li><i class="fas fa-shield-alt"></i> <strong>Terjamin:</strong> Fitur dipastikan berfungsi normal (Work 100%) dan bergaransi bebas bug.</li>
+                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">Rp 30.000</div>
+                    <button class="btn-buy" onclick="openPay('Custom Monetloader')">ORDER</button>
+                </div>
+            </div>
 
-        <h2 class="section-title" id="penjelasan"><i class="fas fa-info-circle"></i> PENJELASAN LAYANAN</h2>
-        <div class="card" style="padding: 30px;">
-            <div class="info-heading"><i class="fas fa-code"></i> Apa itu Custom Monetloader?</div>
-            <p style="color: #ccc; font-size: 14px; margin-bottom: 25px; padding-left: 24px;">Layanan pembuatan script `.lua` khusus untuk GTA SAMP (PC maupun Android via Monetloader). Kami menyediakan kode 100% open-source (tanpa di-encrypt), sehingga Anda bebas mempelajari atau mengubahnya nanti. Anda bebas request bentuk tampilan UI, text draw, dan fitur sistemnya.</p>
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Bot Discord">
+                </div>
+                <h3>BOT DISCORD CUSTOM</h3>
+                <ul>
+                    <li><i class="fas fa-terminal"></i> Bebas Request Sistem & Command Apapun</li>
+                    <li><i class="fas fa-server"></i> Hosting Stabil, Bot Online 24 Jam Non-stop</li>
+                    <li><i class="fas fa-hourglass-half"></i> Masa Aktif Bot 30 Hari</li>
+                    <li><i class="fas fa-headset"></i> Gratis Maintenance & Perbaikan Bug</li>
+                    <li><i class="fas fa-crown"></i> Bonus Eksklusif Role VIP di Server Discord Kami</li>
+                </ul>
+                <div class="price-row">
+                    <div class="price">Rp 50.000 <span>/ BULAN</span></div>
+                    <button class="btn-buy" onclick="openPay('Bot Discord Custom')">ORDER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-tutorial" class="page-view">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-clipboard-list"></i> PANDUAN CARA ORDER</h2>
+            <div class="card" style="padding: 30px;">
+                <ol class="info-list">
+                    <li>Buka menu <strong>"Layanan Kami"</strong> untuk melihat daftar script dan bot yang tersedia.</li>
+                    <li>Klik tombol <strong>"ORDER"</strong> pada layanan yang ingin Anda beli.</li>
+                    <li>Pilih metode pembayaran yang tersedia (Transfer ke E-Wallet DANA/GOPAY atau melalui scan QRIS otomatis).</li>
+                    <li>Setelah melakukan pembayaran, klik tombol <strong>"KONFIRMASI VIA WHATSAPP"</strong> di layar Checkout.</li>
+                    <li>Sistem akan mengarahkan Anda ke WhatsApp Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan valid.</li>
+                    <li>Admin akan memverifikasi pembayaran dan langsung memproses pesanan / request fitur yang Anda inginkan.</li>
+                </ol>
+                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+                    <button class="btn-buy" style="background: var(--accent-color); color: white;" onclick="switchPage('services')"><i class="fas fa-shopping-cart"></i> LIHAT LAYANAN SEKARANG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="view-faq" class="page-view">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> PENJELASAN LAYANAN</h2>
             
-            <div class="info-heading"><i class="fas fa-robot"></i> Sistem Bot Discord Custom</div>
-            <p style="color: #ccc; font-size: 14px; margin-bottom: 0; padding-left: 24px;">Layanan pembuatan bot Discord yang aktif 24 jam penuh di server Anda. Sangat cocok untuk manajemen Roleplay, Moderasi server, Tiket otomatis, Welcomer, hingga integrasi database. Server Anda akan jauh lebih profesional dengan sistem otomatisasi bot.</p>
-        </div>
-
-        <h2 class="section-title"><i class="fas fa-box-open"></i> FREE RESOURCES</h2>
-        <div class="free-box">
-            <h4>Monetloader Free Edition</h4>
-            <p>Dapatkan versi gratis langsung dari server Discord kami untuk mencoba fitur dasar. Yuk gabung dan ramaikan komunitas sekarang!</p>
-            <a href="https://discord.gg/DXfdeX2m8d" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> UNDUH DI DISCORD</a>
-        </div>
-
-        <h2 class="section-title" id="services"><i class="fas fa-shopping-cart"></i> OFFICIAL SERVICES</h2>
-
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop" alt="Custom Monetloader">
+            <div class="card" style="padding: 30px; margin-bottom: 20px;">
+                <div class="info-heading"><i class="fas fa-code"></i> Apa itu Custom Monetloader?</div>
+                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                    Layanan pembuatan script `.lua` khusus untuk GTA SAMP (PC maupun Android via Monetloader). Kami menyediakan kode 100% open-source (tanpa di-encrypt), sehingga Anda bebas mempelajari atau mengubahnya nanti. Anda bebas request bentuk tampilan UI, text draw, dan fitur sistemnya sesuai selera server roleplay Anda.
+                </p>
             </div>
-            <h3>CUSTOM MONETLOADER</h3>
-            <ul>
-                <li><i class="fas fa-file-code"></i> <strong>Full Akses:</strong> Mendapatkan File Script 100% Open Source (No Encrypt).</li>
-                <li><i class="fas fa-paint-brush"></i> <strong>Desain Bebas:</strong> Kustomisasi Tampilan & UI sepenuhnya sesuai selera Anda.</li>
-                <li><i class="fas fa-cogs"></i> <strong>Fitur Spesifik:</strong> Bebas request fitur rumit yang disesuaikan dengan kebutuhan Server.</li>
-                <li><i class="fas fa-shield-alt"></i> <strong>Terjamin:</strong> Fitur dipastikan berfungsi normal (Work 100%) dan bergaransi bebas bug.</li>
-                <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
-            </ul>
-            <div class="price-row">
-                <div class="price">Rp 30.000</div>
-                <button class="btn-buy" onclick="openPay('Custom Monetloader')">ORDER</button>
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="card-img-wrapper">
-                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Bot Discord">
+            <div class="card" style="padding: 30px;">
+                <div class="info-heading"><i class="fas fa-robot"></i> Sistem Bot Discord Custom</div>
+                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                    Layanan pembuatan bot Discord yang aktif 24 jam penuh di server Anda. Sangat cocok untuk manajemen Roleplay, Moderasi server, Tiket otomatis, Sistem Economy, Welcomer, hingga integrasi database. Server komunitas Anda akan jauh lebih rapi, otomatis, dan terlihat profesional dengan bot buatan kami.
+                </p>
             </div>
-            <h3>BOT DISCORD CUSTOM</h3>
-            <ul>
-                <li><i class="fas fa-terminal"></i> Bebas Request Sistem & Command Apapun</li>
-                <li><i class="fas fa-server"></i> Hosting Stabil, Bot Online 24 Jam Non-stop</li>
-                <li><i class="fas fa-hourglass-half"></i> Masa Aktif Bot 30 Hari</li>
-                <li><i class="fas fa-headset"></i> Gratis Maintenance & Perbaikan Bug</li>
-                <li><i class="fas fa-crown"></i> Bonus Eksklusif Role VIP di Server Discord Kami</li>
-            </ul>
-            <div class="price-row">
-                <div class="price">Rp 50.000 <span>/ BULAN</span></div>
-                <button class="btn-buy" onclick="openPay('Bot Discord Custom')">ORDER</button>
+            
+            <div class="free-box" style="margin-top: 30px;">
+                <h4 style="font-size: 16px;"><i class="fas fa-headset" style="color: var(--accent-color);"></i> Butuh Bantuan Lain?</h4>
+                <p style="font-size: 13px; margin-bottom: 15px;">Jika Anda memiliki pertanyaan khusus di luar penjelasan di atas, silakan tanyakan langsung ke admin melalui Discord atau WhatsApp kami.</p>
             </div>
         </div>
     </div>
@@ -307,6 +342,7 @@
     </footer>
 
     <script>
+        // Fungsi buka/tutup Sidebar Menu
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
@@ -314,6 +350,33 @@
             overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
         }
 
+        // Fungsi Single Page Application (SPA) - Pindah Halaman
+        function switchPage(pageId) {
+            // Sembunyikan semua halaman
+            const views = document.querySelectorAll('.page-view');
+            views.forEach(view => view.classList.remove('active'));
+            
+            // Tampilkan halaman yang dipilih
+            const targetView = document.getElementById('view-' + pageId);
+            if(targetView) {
+                targetView.classList.add('active');
+                window.scrollTo(0, 0); // Reset scroll ke paling atas setiap pindah ruangan
+            }
+
+            // Ubah highlight di menu sidebar
+            const navLinks = document.querySelectorAll('.sidebar-menu a');
+            navLinks.forEach(link => link.classList.remove('active-link'));
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) activeNav.classList.add('active-link');
+
+            // Tutup sidebar jika sedang terbuka (khusus mobile)
+            const sidebar = document.getElementById('sidebar');
+            if(sidebar.classList.contains('active')) {
+                toggleMenu();
+            }
+        }
+
+        // Fungsi Buka Modal Pembayaran
         function openPay(name) {
             document.getElementById('orderName').innerText = name;
             const modal = document.getElementById('payModal');
@@ -324,6 +387,7 @@
             }, 10);
         }
 
+        // Fungsi Tutup Modal Pembayaran
         function closePay() {
             const modal = document.getElementById('payModal');
             modal.classList.remove('show');
@@ -332,18 +396,17 @@
             }, 400); 
         }
 
+        // Fungsi Redirect Konfirmasi WhatsApp
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
-            
             alert(`Sistem akan mengarahkanmu ke WhatsApp Admin TATANG DEVELOPER untuk mengkonfirmasi pesanan: [ ${order} ]. \n\nPastikan Anda mengirim screenshot pembayaran!`);
-            
-            // Redirect ke WhatsApp
             window.open(`https://wa.me/62895328044863?text=Halo Admin Tatang Developer, saya sudah melakukan pembayaran untuk pemesanan *${order}*. Berikut saya lampirkan bukti pembayarannya.`, '_blank');
         }
 
+        // Fungsi Copy Nomor
         function copyNumber(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert("Nomor berhasil disalin: " + text);
+                alert("Nomor E-Wallet berhasil disalin: " + text);
             }).catch(err => {
                 alert("Gagal menyalin nomor. Silakan salin secara manual.");
                 console.error('Error copying text: ', err);
@@ -351,4 +414,4 @@
         }
     </script>
 </body>
-                </html>
+    </html>
