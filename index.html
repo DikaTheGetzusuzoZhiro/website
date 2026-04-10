@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tatang Community - Official Web</title>
-    <meta property="og:title" content="Tatang Community - Official Web" />
+    <title>Tatang Community - Official Store</title>
+    <meta property="og:title" content="Tatang Community - Official Store" />
     <meta property="og:description" content="Pusat Layanan Script Monetloader Gta Samp, Verifikasi Roblox, & Bot Discord Terbaik." />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#00ff00">
+    <meta name="theme-color" content="#00e6e6">
     <meta name="twitter:card" content="summary_large_image">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,8 +19,8 @@
     :root {
         --bg-dark: #050505;
         --bg-card: rgba(18, 18, 18, 0.7);
-        --accent-color: #00ff00; 
-        --accent-glow: rgba(0, 255, 0, 0.5);
+        --accent-color: #00e6e6; /* Diubah ke Cyan menyesuaikan tema ImGui favorit */
+        --accent-glow: rgba(0, 230, 230, 0.5);
         --wa-color: #25D366;
         --discord-color: #5865F2;
         --text-main: #ffffff;
@@ -29,7 +29,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
     body { 
-        background: radial-gradient(circle at top right, #001a00, var(--bg-dark)); 
+        background: radial-gradient(circle at top right, #001a1a, var(--bg-dark)); 
         color: var(--text-main); 
         overflow-x: hidden; 
         line-height: 1.6; 
@@ -45,19 +45,19 @@
     
     .sidebar-menu { list-style: none; }
     .sidebar-menu a { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 14px 16px; border-radius: 12px; transition: 0.3s; margin-bottom: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
-    .sidebar-menu a:hover, .sidebar-menu a.active-link { background: rgba(0, 255, 0, 0.1); color: var(--accent-color); transform: translateX(5px); box-shadow: inset 2px 0 0 var(--accent-color); }
+    .sidebar-menu a:hover, .sidebar-menu a.active-link { background: rgba(0, 230, 230, 0.1); color: var(--accent-color); transform: translateX(5px); box-shadow: inset 2px 0 0 var(--accent-color); }
     .sidebar-menu i { font-size: 18px; width: 20px; text-align: center; }
     .sidebar-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 15px 0; }
 
     /* --- NAVBAR --- */
     nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
     .logo-container { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
-    .logo-text { font-size: 20px; color: white; font-weight: 800; letter-spacing: 0.5px; line-height: 1.1; }
-    .logo-text span { color: var(--accent-color); font-weight: 800; text-shadow: 0 0 15px var(--accent-glow); font-size: 18px; }
+    .logo-text { font-size: 22px; color: white; font-weight: 800; letter-spacing: 0.5px; }
+    .logo-text span { color: var(--accent-color); font-weight: 800; text-shadow: 0 0 15px var(--accent-glow); }
     .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; transition: 0.3s; }
     .menu-toggle:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-glow); transform: scale(1.1); }
 
-    /* --- PAGE VIEWS (SPA SYSTEM) --- */
+    /* --- PAGE VIEWS --- */
     .page-view { display: none; animation: fadeIn 0.6s ease; flex: 1; }
     .page-view.active { display: block; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
@@ -66,7 +66,7 @@
     .welcome-hero {
         position: relative;
         width: 100%;
-        height: 400px;
+        height: 450px;
         background: linear-gradient(to bottom, rgba(5,5,5,0.6), rgba(5,5,5,1)), url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1470&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
@@ -82,9 +82,11 @@
     .welcome-hero h1 span { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-glow); }
     .welcome-hero p { color: #d0d0d0; font-size: 15px; margin-top: 15px; max-width: 550px; font-weight: 400; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); animation: fadeInUp 1s ease 0.3s both; }
 
+    .visitor-counter { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--accent-color); border: 1px solid rgba(255,255,255,0.1); animation: fadeInUp 1s ease 0.4s both; backdrop-filter: blur(5px); }
+
     .hero-buttons { margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 1s ease 0.6s both; }
-    .btn-hero-primary { background: var(--accent-color); color: #000; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(0, 255, 0, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;}
-    .btn-hero-primary:hover { background: #33ff33; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 255, 0, 0.6); }
+    .btn-hero-primary { background: var(--accent-color); color: #000; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(0, 230, 230, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;}
+    .btn-hero-primary:hover { background: #00ffff; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 230, 230, 0.6); }
     .btn-hero-secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; backdrop-filter: blur(5px); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;}
     .btn-hero-secondary:hover { background: rgba(255,255,255,0.15); border-color: var(--accent-color); transform: translateY(-3px); }
 
@@ -101,13 +103,13 @@
     /* --- SOCIAL GRID --- */
     .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;}
     .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; border-radius: 14px; text-decoration: none; color: white; font-size: 13px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-weight: 700; letter-spacing: 1px; backdrop-filter: blur(10px); }
-    .social-btn:hover { border-color: var(--accent-color); background: rgba(0, 255, 0, 0.08); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(0, 255, 0, 0.2); }
+    .social-btn:hover { border-color: var(--accent-color); background: rgba(0, 230, 230, 0.08); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(0, 230, 230, 0.2); }
 
-    /* --- CARDS & INFO BOXES --- */
+    /* --- CARDS --- */
     .card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 24px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; position: relative; }
     .card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--accent-color); transition: 0.4s ease; box-shadow: 0 0 15px var(--accent-color); }
     .card:hover::before { width: 100%; }
-    .card:hover { border-color: rgba(0, 255, 0, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 255, 0, 0.1); transform: translateY(-8px); }
+    .card:hover { border-color: rgba(0, 230, 230, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(0, 230, 230, 0.1); transform: translateY(-8px); }
     
     .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; border-radius: 16px; margin-bottom: 25px; position: relative; }
     .card-img-wrapper::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, rgba(18,18,18,1), transparent); }
@@ -120,47 +122,45 @@
     .card ul li i { color: var(--accent-color); font-size: 16px; width: 16px; margin-top: 3px; text-align: center; text-shadow: 0 0 8px var(--accent-glow); }
     
     .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .price { font-size: 26px; color: var(--accent-color); font-weight: 800; display: flex; align-items: center; gap: 6px; text-shadow: 0 0 15px rgba(0, 255, 0, 0.3); }
+    .price { font-size: 26px; color: var(--accent-color); font-weight: 800; display: flex; align-items: center; gap: 6px; text-shadow: 0 0 15px rgba(0, 230, 230, 0.3); }
     .price span { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-top: 6px; text-shadow: none; }
     
     .btn-buy { background: white; color: black; padding: 14px 32px; border-radius: 14px; border: none; cursor: pointer; font-size: 14px; font-weight: 800; transition: 0.3s; letter-spacing: 1px; }
     .btn-buy:hover { background: var(--accent-color); color: #000; box-shadow: 0 8px 25px var(--accent-glow); transform: scale(1.05); }
 
-    /* --- LIVE CHAT WIDGET STYLES --- */
-    .chat-btn { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: var(--accent-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #000; font-size: 24px; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 255, 0, 0.5); z-index: 1000; transition: 0.3s; }
-    .chat-btn:hover { transform: scale(1.1); background: #33ff33; }
+    /* --- LIVE CHAT --- */
+    .chat-btn { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: var(--accent-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #000; font-size: 24px; cursor: pointer; box-shadow: 0 5px 20px rgba(0, 230, 230, 0.5); z-index: 1000; transition: 0.3s; }
+    .chat-btn:hover { transform: scale(1.1); background: #00ffff; }
     
     .chat-window { position: fixed; bottom: 100px; right: 25px; width: 350px; height: 450px; background: rgba(15, 15, 15, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); display: none; flex-direction: column; z-index: 1000; overflow: hidden; opacity: 0; transform: translateY(20px); transition: all 0.3s ease; }
     .chat-window.show { display: flex; opacity: 1; transform: translateY(0); }
     
-    .chat-header { background: rgba(0, 255, 0, 0.1); padding: 15px 20px; border-bottom: 1px solid rgba(0, 255, 0, 0.2); display: flex; justify-content: space-between; align-items: center; }
+    .chat-header { background: rgba(0, 230, 230, 0.1); padding: 15px 20px; border-bottom: 1px solid rgba(0, 230, 230, 0.2); display: flex; justify-content: space-between; align-items: center; }
     .chat-header h3 { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
     .chat-header h3 i { color: var(--accent-color); }
     .close-chat { background: none; border: none; color: white; cursor: pointer; font-size: 18px; }
     
     .chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
     .chat-message { display: flex; gap: 10px; align-items: flex-start; }
-    .chat-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .chat-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; background: #333; }
     .chat-content { background: rgba(255,255,255,0.05); padding: 10px 15px; border-radius: 0 15px 15px 15px; max-width: 80%; font-size: 13px; }
     .chat-author { font-weight: 700; color: var(--accent-color); font-size: 11px; margin-bottom: 3px; display: block; }
     
-    .chat-input-area { padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px; background: rgba(0,0,0,0.3); }
-    .chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 10px 15px; color: white; font-size: 13px; outline: none; }
+    .chat-input-area { padding: 10px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 8px; background: rgba(0,0,0,0.3); }
+    .chat-input-row { display: flex; gap: 8px; }
+    .chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 15px; color: white; font-size: 13px; outline: none; }
     .chat-input:focus { border-color: var(--accent-color); }
-    .send-btn { background: var(--accent-color); color: #000; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
-    .send-btn:hover { transform: scale(1.1); background: #33ff33; }
-    
-    .discord-login-btn { background: var(--discord-color); color: white; border: none; padding: 12px; border-radius: 12px; width: 100%; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin: auto; }
-    .discord-login-btn:hover { background: #4752c4; }
+    .send-btn { background: var(--accent-color); color: #000; border: none; width: 40px; height: 40px; border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.3s; }
+    .send-btn:hover { transform: scale(1.05); }
 
     /* --- MODAL --- */
     .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
     .modal.show { opacity: 1; display: flex; }
-    .modal-content { background: #121212; padding: 35px; border-radius: 24px; width: 100%; max-width: 400px; text-align: center; border: 1px solid rgba(0, 255, 0, 0.4); box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 40px rgba(0, 255, 0, 0.15); transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .modal-content { background: #121212; padding: 35px; border-radius: 24px; width: 100%; max-width: 400px; text-align: center; border: 1px solid rgba(0, 230, 230, 0.4); box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 40px rgba(0, 230, 230, 0.15); transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .modal.show .modal-content { transform: translateY(0) scale(1); }
     
     .pay-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; margin-bottom: 15px; text-align: left; cursor: pointer; border: 1px solid rgba(255,255,255,0.08); transition: 0.3s; display: flex; justify-content: space-between; align-items: center; }
-    .pay-item:hover { border-color: var(--accent-color); background: rgba(0, 255, 0, 0.08); box-shadow: 0 0 20px rgba(0, 255, 0, 0.15); transform: translateY(-2px); }
+    .pay-item:hover { border-color: var(--accent-color); background: rgba(0, 230, 230, 0.08); box-shadow: 0 0 20px rgba(0, 230, 230, 0.15); transform: translateY(-2px); }
     .pay-item-text label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 1px; }
     .pay-item-text span { font-family: monospace; font-size: 20px; color: white; font-weight: 700; letter-spacing: 2px; }
 
@@ -218,20 +218,14 @@
     </div>
     
     <div class="chat-messages" id="chatMessages">
-        <div id="loginArea" style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; gap: 15px;">
-            <i class="fab fa-discord" style="font-size: 40px; color: var(--discord-color);"></i>
-            <p style="font-size: 13px; color: #ccc;">Silakan login dengan Discord untuk memulai Live Chat.</p>
-            <button class="discord-login-btn" onclick="loginDiscord()">
-                Login dengan Discord
-            </button>
         </div>
-        
-        <div id="messagesArea" style="display: none; flex-direction: column; gap: 12px;"></div>
-    </div>
 
-    <div class="chat-input-area" id="inputArea" style="display: none;">
-        <input type="text" id="messageInput" class="chat-input" placeholder="Ketik pesan..." onkeypress="handleKeyPress(event)">
-        <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+    <div class="chat-input-area" id="inputArea">
+        <input type="text" id="usernameInput" class="chat-input" placeholder="Nama Anda (Opsional)">
+        <div class="chat-input-row">
+            <input type="text" id="messageInput" class="chat-input" placeholder="Ketik pesan..." onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
     </div>
 </div>
 
@@ -240,6 +234,10 @@
         <h1>WELCOME TO <br><span>TATANG COMMUNITY</span></h1>
         <p>Pusat Layanan Script Monetloader Gta Samp, Verifikasi Roblox, & Bot Discord Terbaik.</p>
         
+        <div class="visitor-counter">
+            <i class="fas fa-eye"></i> Total Pengunjung: <span id="visitorCount">Memuat...</span>
+        </div>
+
         <div class="hero-buttons">
             <button class="btn-hero-primary" onclick="switchPage('services')"><i class="fas fa-code"></i> ORDER SCRIPT</button>
             <button class="btn-hero-secondary" onclick="switchPage('services')"><i class="fas fa-robot"></i> ORDER BOT</button>
@@ -325,7 +323,7 @@
     <div class="container">
         <h2 class="section-title"><i class="fas fa-info-circle"></i> PENJELASAN LAYANAN</h2>
         <div class="card" style="padding: 30px; margin-bottom: 20px;">
-            <div class="info-heading"><i class="fas fa-store"></i> Tatang Community</div>
+            <div class="info-heading"><i class="fas fa-store"></i> Tatang Community (Formerly Fyy Store)</div>
             <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
                 Kami menyediakan solusi modding Monetloader open-source, manajemen komunitas Discord, hingga verifikasi akun Roblox dengan sistem yang modern.
             </p>
@@ -393,26 +391,38 @@
         setTimeout(() => modal.style.display = 'none', 400); 
     }
 
+    // Teks pesan WA dihapus seperti instruksi
     function hubungiAdmin() {
-        const order = document.getElementById('orderName').innerText;
-        window.open(`https://wa.me/62895328044863?text=Halo Admin Tatang Community, saya sudah melakukan pembayaran untuk pemesanan *${order}*. Berikut saya lampirkan bukti pembayarannya.`, '_blank');
+        window.open('https://wa.me/62895328044863', '_blank');
     }
 
     function copyNumber(text) {
         navigator.clipboard.writeText(text).then(() => alert("Nomor berhasil disalin!"));
     }
 
-    /* --- PENGATURAN SUPABASE & LIVE CHAT --- */
+    /* --- PENGATURAN COUNTER PENGUNJUNG --- */
+    // Menggunakan free API dari counterapi.dev
+    fetch('https://api.counterapi.dev/v1/tatangcommunity/visits/up')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('visitorCount').innerText = data.count.toLocaleString('id-ID');
+        })
+        .catch(err => {
+            document.getElementById('visitorCount').innerText = "Offline";
+        });
+
+    /* --- PENGATURAN SUPABASE & LIVE CHAT (TANPA LOGIN) --- */
     
-    const SUPABASE_URL = 'https://puscykjiuwdbkytoigoe.supabase.co'; 
+    // GANTI TEKS DI BAWAH INI DENGAN URL PROJECT SUPABASE KAMU
+    const SUPABASE_URL = 'ISI_DENGAN_URL_PROJECT_SUPABASE_KAMU'; 
     const SUPABASE_ANON_KEY = 'sb_publishable_TbKYM5XREVbBpp8EE1GXCg_gDr4uvZd';
     
     let supabaseClient = null;
-    let currentUser = null;
 
-    if(SUPABASE_URL) {
+    if(SUPABASE_URL !== 'ISI_DENGAN_URL_PROJECT_SUPABASE_KAMU') {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        checkUserSession();
+        loadMessages();
+        subscribeToMessages();
     }
 
     function toggleChat() {
@@ -423,35 +433,12 @@
         } else {
             chatWindow.style.display = 'flex';
             setTimeout(() => chatWindow.classList.add('show'), 10);
-            if(currentUser) loadMessages();
-        }
-    }
-
-    async function loginDiscord() {
-        if(!supabaseClient) {
-            alert("Terjadi kesalahan pada koneksi database.");
-            return;
-        }
-        const { data, error } = await supabaseClient.auth.signInWithOAuth({
-            provider: 'discord',
-        });
-        if(error) console.error("Login Error:", error.message);
-    }
-
-    async function checkUserSession() {
-        if(!supabaseClient) return;
-        const { data: { session } } = await supabaseClient.auth.getSession();
-        if (session) {
-            currentUser = session.user;
-            document.getElementById('loginArea').style.display = 'none';
-            document.getElementById('messagesArea').style.display = 'flex';
-            document.getElementById('inputArea').style.display = 'flex';
-            loadMessages();
-            subscribeToMessages();
+            if(supabaseClient) loadMessages();
         }
     }
 
     async function loadMessages() {
+        if(!supabaseClient) return;
         const { data, error } = await supabaseClient
             .from('messages')
             .select('*')
@@ -459,7 +446,7 @@
             .limit(50);
             
         if(data) {
-            const messagesArea = document.getElementById('messagesArea');
+            const messagesArea = document.getElementById('chatMessages');
             messagesArea.innerHTML = '';
             data.forEach(msg => appendMessageUI(msg));
             scrollToBottom();
@@ -467,6 +454,7 @@
     }
 
     function subscribeToMessages() {
+        if(!supabaseClient) return;
         supabaseClient
             .channel('public:messages')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, payload => {
@@ -477,15 +465,30 @@
     }
 
     async function sendMessage() {
-        const input = document.getElementById('messageInput');
-        const content = input.value.trim();
-        if(!content || !currentUser) return;
+        const nameInput = document.getElementById('usernameInput');
+        const msgInput = document.getElementById('messageInput');
         
-        input.value = '';
+        // Ambil nama dari input, kalau kosong pakai Guest
+        let username = nameInput.value.trim();
+        if(!username) {
+            username = 'Guest' + Math.floor(Math.random() * 1000);
+            nameInput.value = username; // Auto isi jika kosong
+        }
         
-        const username = currentUser.user_metadata.full_name || currentUser.user_metadata.name || "User";
-        const avatar_url = currentUser.user_metadata.avatar_url || "https://cdn.discordapp.com/embed/avatars/0.png";
+        const content = msgInput.value.trim();
+        if(!content) return;
+        
+        msgInput.value = '';
+        const avatar_url = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
 
+        // Jika Supabase belum disetting, kita buat simulasi UI saja agar tetap terlihat berfungsi
+        if(!supabaseClient) {
+            appendMessageUI({ content, username, avatar_url });
+            scrollToBottom();
+            return;
+        }
+
+        // Catatan: Pastikan table 'messages' di Supabase memperbolehkan RLS Insert anonim (Insert tanpa Auth)
         await supabaseClient.from('messages').insert([
             { content, username, avatar_url }
         ]);
@@ -496,7 +499,7 @@
     }
 
     function appendMessageUI(msg) {
-        const messagesArea = document.getElementById('messagesArea');
+        const messagesArea = document.getElementById('chatMessages');
         const div = document.createElement('div');
         div.className = 'chat-message';
         div.innerHTML = `
@@ -513,11 +516,7 @@
         const chatMessages = document.getElementById('chatMessages');
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-
-    window.addEventListener('hashchange', () => {
-        checkUserSession();
-    });
 </script>
 
 </body>
-                                                                                                </html>
+</html>
