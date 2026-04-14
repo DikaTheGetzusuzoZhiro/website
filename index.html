@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TATANG COMUNITY - Official Store</title>
+    <title>TATANG DEVELOPER - Official Store</title>
 
     <meta property="og:title" content="TATANG DEVELOPER - Official Store" />
     <meta property="og:description" content="Pusat Layanan Script Monetloader Gta Samp & Bot Discord Terbaik. Kustomisasi bebas, jaminan work 100%!" />
@@ -64,7 +64,7 @@
         .welcome-hero {
             position: relative;
             width: 100%;
-            height: 400px;
+            min-height: 450px; /* Diubah dari height ke min-height agar tidak tabrakan di mobile */
             background: linear-gradient(to bottom, rgba(5,5,5,0.6), rgba(5,5,5,1)), url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1470&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -74,13 +74,13 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 80px 20px; /* Menambahkan padding agar elemen di dalamnya bisa bernapas */
         }
         .welcome-hero h1 { font-size: 36px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; line-height: 1.2; text-shadow: 2px 2px 15px rgba(0,0,0,0.9); animation: fadeInDown 1s ease; }
         .welcome-hero h1 span { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-glow); }
         .welcome-hero p { color: #d0d0d0; font-size: 15px; margin-top: 15px; max-width: 550px; font-weight: 400; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); animation: fadeInUp 1s ease 0.3s both; }
 
-        .hero-buttons { margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 1s ease 0.6s both; }
+        .hero-buttons { margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 1s ease 0.6s both; }
         .btn-hero-primary { background: var(--accent-color); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;}
         .btn-hero-primary:hover { background: #ff7a1f; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6); }
         .btn-hero-secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; backdrop-filter: blur(5px); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;}
@@ -171,9 +171,9 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-container" onclick="switchPage('home')">
-                <h2 class="logo-text">TATANG<br><span>COMUNITY</span></h2>
+                <h2 class="logo-text">TATANG<br><span>DEVELOPER</span></h2>
             </div>
-            <button class="menu-toggle" onclick="toggleMenu()">&times;</button>
+            <button class="menu-toggle" onclick="toggleMenu()">×</button>
         </div>
         <ul class="sidebar-menu">
             <li><a id="nav-home" class="active-link" onclick="switchPage('home')"><i class="fas fa-home"></i> Beranda</a></li>
@@ -190,14 +190,14 @@
 
     <nav>
         <div class="logo-container" onclick="switchPage('home')">
-            <div class="logo-text">TATANG <span>LUA</span></div>
+            <div class="logo-text">TATANG <span>DEVELOPER</span></div>
         </div>
         <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></button>
     </nav>
 
     <div id="view-home" class="page-view active">
         <div class="welcome-hero">
-            <h1>WELCOME TO <br><span>TATANG COMUNITY</span></h1>
+            <h1>WELCOME TO <br><span>TATANG DEVELOPER</span></h1>
             <p>Pusat Layanan Script Monetloader Gta Samp & Bot Discord Terbaik, Termurah, dan Terpercaya. Upgrade komunitasmu dengan sistem premium buatan kami!</p>
             
             <div class="hero-buttons">
@@ -275,7 +275,7 @@
                     <li><i class="fas fa-palette"></i> <strong>Tema Bebas:</strong> Desain dan tampilan (UI/UX) sepenuhnya sesuai dengan seleramu.</li>
                     <li><i class="fas fa-layer-group"></i> <strong>Fitur Lengkap:</strong> Bebas request fitur tambahan (Katalog, Animasi, Integrasi link, dll).</li>
                     <li><i class="fas fa-mobile-alt"></i> <strong>Responsif:</strong> Tampilan dijamin rapi dan nyaman dilihat di HP maupun PC.</li>
-                    <li><i class="fas fa-infinity"></i> <strong>Masa Aktif:</strong> Website menjadi milik Anda selamanya (Lifetime).</li>
+                    <li><i class="fas fa-infinity"></i> <strong>Masa Aktif:</strong> Website menjadi milik Anda selamanya.</li>
                     <li><i class="fas fa-code"></i> <strong>Full Source Code:</strong> Dapatkan file mentah HTML, CSS, & JS 100% untuk dikelola sendiri.</li>
                     <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
                 </ul>
@@ -359,7 +359,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 TATANG COMUNITY. ALL RIGHTS RESERVED.</p>
+        <p>© 2026 TATANG DEVELOPER. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
