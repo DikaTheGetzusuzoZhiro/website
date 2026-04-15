@@ -149,7 +149,7 @@
         .pay-item:hover { border-color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
         .pay-item-text label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 1px; }
         .pay-item-text span { font-family: monospace; font-size: 20px; color: white; font-weight: 700; letter-spacing: 2px; }
-        .pay-item-text.small-text span { font-size: 16px; font-family: 'Inter', sans-serif;}
+        .pay-item-text.small-text span { font-size: 14px; font-family: 'Inter', sans-serif;}
         
         .qris-btn { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 16px; margin-top: 15px; color: white; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 15px; text-decoration: none; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); transition: 0.3s; }
         .qris-btn:hover { border-color: var(--accent-color); color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
@@ -296,9 +296,9 @@
                 <ol class="info-list">
                     <li>Buka menu <strong>"Layanan Kami"</strong> untuk melihat daftar script dan bot yang tersedia.</li>
                     <li>Klik tombol <strong>"ORDER"</strong> pada layanan yang ingin Anda beli.</li>
-                    <li>Pilih metode pembayaran yang tersedia (Transfer E-Wallet DANA/GOPAY, QRIS Otomatis, atau menggunakan sistem pengamanan <strong>Rekber / Rekening Bersama</strong>).</li>
+                    <li>Pilih metode pembayaran yang tersedia (Transfer E-Wallet DANA/GOPAY, QRIS Otomatis). Kami sangat menyarankan untuk menggunakan jasa <strong>Rekber / MC (Middleman)</strong> agar transaksi lebih aman dan terhindar dari penipuan.</li>
                     <li>Setelah melakukan pembayaran, klik tombol <strong>"KONFIRMASI VIA DISCORD"</strong> di layar Checkout.</li>
-                    <li>Sistem akan mengarahkan Anda ke Discord Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan valid. Jika menggunakan Rekber, informasikan ke Admin.</li>
+                    <li>Sistem akan mengarahkan Anda ke Discord Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan valid. Jika menggunakan jasa Rekber/MC, segera informasikan ke Admin.</li>
                     <li>Admin akan memverifikasi pembayaran dan langsung memproses pesanan / request fitur yang Anda inginkan.</li>
                 </ol>
                 <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
@@ -336,7 +336,7 @@
             <div class="card" style="padding: 30px; margin-bottom: 20px;">
                 <div class="info-heading"><i class="fas fa-coins"></i> RTM (Real Money Trading) GTA SAMP</div>
                 <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
-                    Fasilitas transaksi jual-beli aset in-game di GTA SAMP (seperti uang in-game, bisnis, properti, kendaraan langka, dll) dengan menggunakan uang asli secara legal di komunitas kami. Transaksi RTM di komunitas ini difasilitasi dengan sistem yang dijamin keamanannya dan dipantau langsung untuk menghindari penipuan.
+                    Fasilitas transaksi jual-beli aset in-game di GTA SAMP (seperti uang in-game, bisnis, properti, kendaraan langka, dll) dengan menggunakan uang asli secara legal di komunitas kami. <strong>Sangat disarankan untuk selalu menggunakan jasa Rekber / MC (Middleman)</strong> dalam setiap transaksi RTM supaya lebih aman dan terhindar dari segala bentuk penipuan.
                 </p>
             </div>
             
@@ -368,7 +368,7 @@
             <div class="pay-item" style="margin-top: 15px;" onclick="hubungiAdmin()">
                 <div class="pay-item-text small-text">
                     <label>OPSI KEAMANAN EXTRA</label>
-                    <span>Gunakan REKBER (Rekening Bersama)</span>
+                    <span>Gunakan REKBER / MC (Anti Penipuan)</span>
                 </div>
                 <i class="fas fa-shield-check" style="color:var(--accent-color); font-size: 20px; transition: 0.3s;"></i>
             </div>
@@ -443,7 +443,7 @@
         // Fungsi Redirect Konfirmasi Discord
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
-            alert(`Sistem akan mengarahkanmu ke Discord Admin TATANG DEVELOPER untuk mengkonfirmasi pesanan: [ ${order} ]. \n\nPastikan Anda mengirim screenshot pembayaran atau beri tahu admin jika ingin menggunakan layanan REKBER.`);
+            alert(`Sistem akan mengarahkanmu ke Discord Admin TATANG DEVELOPER untuk mengkonfirmasi pesanan: [ ${order} ]. \n\nPastikan Anda mengirim screenshot pembayaran atau beri tahu admin jika ingin menggunakan jasa REKBER / MC agar terhindar dari penipuan.`);
             window.open(`https://discord.gg/GZF6tt9f`, '_blank');
         }
 
