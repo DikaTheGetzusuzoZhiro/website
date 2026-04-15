@@ -64,7 +64,7 @@
         .welcome-hero {
             position: relative;
             width: 100%;
-            min-height: 450px; /* Diubah dari height ke min-height agar tidak tabrakan di mobile */
+            min-height: 450px;
             background: linear-gradient(to bottom, rgba(5,5,5,0.6), rgba(5,5,5,1)), url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1470&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -74,7 +74,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px; /* Menambahkan padding agar elemen di dalamnya bisa bernapas */
+            padding: 80px 20px;
         }
         .welcome-hero h1 { font-size: 36px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; line-height: 1.2; text-shadow: 2px 2px 15px rgba(0,0,0,0.9); animation: fadeInDown 1s ease; }
         .welcome-hero h1 span { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-glow); }
@@ -149,6 +149,7 @@
         .pay-item:hover { border-color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
         .pay-item-text label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 1px; }
         .pay-item-text span { font-family: monospace; font-size: 20px; color: white; font-weight: 700; letter-spacing: 2px; }
+        .pay-item-text.small-text span { font-size: 16px; font-family: 'Inter', sans-serif;}
         
         .qris-btn { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 16px; margin-top: 15px; color: white; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 15px; text-decoration: none; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); transition: 0.3s; }
         .qris-btn:hover { border-color: var(--accent-color); color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
@@ -295,9 +296,9 @@
                 <ol class="info-list">
                     <li>Buka menu <strong>"Layanan Kami"</strong> untuk melihat daftar script dan bot yang tersedia.</li>
                     <li>Klik tombol <strong>"ORDER"</strong> pada layanan yang ingin Anda beli.</li>
-                    <li>Pilih metode pembayaran yang tersedia (Transfer ke E-Wallet DANA/GOPAY atau melalui scan QRIS otomatis).</li>
+                    <li>Pilih metode pembayaran yang tersedia (Transfer E-Wallet DANA/GOPAY, QRIS Otomatis, atau menggunakan sistem pengamanan <strong>Rekber / Rekening Bersama</strong>).</li>
                     <li>Setelah melakukan pembayaran, klik tombol <strong>"KONFIRMASI VIA DISCORD"</strong> di layar Checkout.</li>
-                    <li>Sistem akan mengarahkan Anda ke Discord Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan valid.</li>
+                    <li>Sistem akan mengarahkan Anda ke Discord Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan valid. Jika menggunakan Rekber, informasikan ke Admin.</li>
                     <li>Admin akan memverifikasi pembayaran dan langsung memproses pesanan / request fitur yang Anda inginkan.</li>
                 </ol>
                 <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
@@ -314,14 +315,28 @@
             <div class="card" style="padding: 30px; margin-bottom: 20px;">
                 <div class="info-heading"><i class="fas fa-code"></i> Apa itu Custom Monetloader?</div>
                 <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
-                    Layanan pembuatan script khusus untuk GTA SAMP (PC maupun Android) Kami menyediakan kode 100% open-source (tanpa di-encrypt), sehingga Anda bebas mempelajari atau mengubahnya nanti. Anda bebas request bentuk tampilan UI, dan fitur sistemnya sesuai selera server roleplay Anda.
+                    Layanan pembuatan script khusus untuk GTA SAMP (PC maupun Android). Kami menyediakan kode 100% open-source (tanpa di-encrypt), sehingga Anda bebas mempelajari atau mengubahnya nanti. Anda bebas request bentuk tampilan UI, dan fitur sistemnya sesuai selera server roleplay Anda.
                 </p>
             </div>
 
-            <div class="card" style="padding: 30px;">
+            <div class="card" style="padding: 30px; margin-bottom: 20px;">
                 <div class="info-heading"><i class="fas fa-robot"></i> Sistem Bot Discord Custom</div>
                 <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
                     Layanan pembuatan bot Discord yang aktif 24 jam penuh di server Anda. Sangat cocok untuk manajemen Roleplay, Moderasi server, Tiket otomatis, Sistem Economy, Welcomer, Dll. hingga integrasi database. Server komunitas Anda akan jauh lebih rapi, otomatis, dan terlihat profesional dengan bot buatan kami.
+                </p>
+            </div>
+
+            <div class="card" style="padding: 30px; margin-bottom: 20px;">
+                <div class="info-heading"><i class="fas fa-globe"></i> Custom Website</div>
+                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                    Layanan pembuatan dan perancangan website untuk mempresentasikan server, komunitas, atau toko Anda. Kami merancang dengan tampilan modern dan interaktif. Anda akan mendapatkan File Asli Source Code (HTML/CSS/JS) sepenuhnya. Website ini dapat Anda host sendiri secara gratis maupun berbayar dengan kontrol di tangan Anda selamanya.
+                </p>
+            </div>
+
+            <div class="card" style="padding: 30px; margin-bottom: 20px;">
+                <div class="info-heading"><i class="fas fa-coins"></i> RTM (Real Money Trading) GTA SAMP</div>
+                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                    Fasilitas transaksi jual-beli aset in-game di GTA SAMP (seperti uang in-game, bisnis, properti, kendaraan langka, dll) dengan menggunakan uang asli secara legal di komunitas kami. Transaksi RTM di komunitas ini difasilitasi dengan sistem yang dijamin keamanannya dan dipantau langsung untuk menghindari penipuan.
                 </p>
             </div>
             
@@ -349,6 +364,14 @@
                 <i class="fas fa-qrcode fa-2x"></i>
                 <div style="text-align:left; line-height: 1.3;">BUKA MENU QRIS<br><span style="font-size:11px; color:var(--text-muted); font-weight: 500;">Ketuk untuk scan pembayaran otomatis</span></div>
             </a>
+
+            <div class="pay-item" style="margin-top: 15px;" onclick="hubungiAdmin()">
+                <div class="pay-item-text small-text">
+                    <label>OPSI KEAMANAN EXTRA</label>
+                    <span>Gunakan REKBER (Rekening Bersama)</span>
+                </div>
+                <i class="fas fa-shield-check" style="color:var(--accent-color); font-size: 20px; transition: 0.3s;"></i>
+            </div>
 
             <button class="btn-dc-confirm" onclick="hubungiAdmin()">
                 <i class="fab fa-discord fa-lg"></i> KONFIRMASI VIA DISCORD
@@ -420,7 +443,7 @@
         // Fungsi Redirect Konfirmasi Discord
         function hubungiAdmin() {
             const order = document.getElementById('orderName').innerText;
-            alert(`Sistem akan mengarahkanmu ke Discord Admin TATANG DEVELOPER untuk mengkonfirmasi pesanan: [ ${order} ]. \n\nPastikan Anda mengirim screenshot pembayaran!`);
+            alert(`Sistem akan mengarahkanmu ke Discord Admin TATANG DEVELOPER untuk mengkonfirmasi pesanan: [ ${order} ]. \n\nPastikan Anda mengirim screenshot pembayaran atau beri tahu admin jika ingin menggunakan layanan REKBER.`);
             window.open(`https://discord.gg/GZF6tt9f`, '_blank');
         }
 
