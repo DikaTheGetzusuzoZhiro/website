@@ -6,28 +6,30 @@
     <title>TATANG DEVELOPER - Official Store</title>
 
     <meta property="og:title" content="TATANG DEVELOPER - Official Store" />
-    <meta property="og:description" content="Pusat Layanan Script Monetloader Gta Samp & Bot Discord Terbaik. Kustomisasi bebas, jaminan work 100%!" />
+    <meta property="og:description" content="Pusat Layanan Script Monetloader Gta Samp, Bot Discord & Jual Beli Game Terbaik." />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#ff6600">
+    <meta name="theme-color" content="#ff5500">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-dark: #050505;
-            --bg-card: rgba(18, 18, 18, 0.7);
-            --accent-color: #ff6600; 
-            --accent-glow: rgba(255, 102, 0, 0.5);
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(20, 20, 20, 0.6);
+            --accent-color: #ff5500; 
+            --accent-glow: rgba(255, 85, 0, 0.6);
             --dc-color: #5865F2;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
+            --text-main: #f8f9fa;
+            --text-muted: #adb5bd;
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        
         body { 
-            background: radial-gradient(circle at top right, #1a0a00, var(--bg-dark)); 
+            background: radial-gradient(circle at top right, #2a0f00 0%, var(--bg-dark) 50%, #050505 100%);
             color: var(--text-main); 
             overflow-x: hidden; 
             line-height: 1.6; 
@@ -36,36 +38,43 @@
             flex-direction: column;
         }
 
+        /* --- SCROLLBAR --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
         /* --- SIDEBAR --- */
-        .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(15px); z-index: 1000; transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s; padding: 30px 20px; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: 5px 0 25px rgba(0,0,0,0.8); overflow-y: auto;}
+        .sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 1000; transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s; padding: 30px 20px; border-right: 1px solid var(--glass-border); box-shadow: 10px 0 30px rgba(0,0,0,0.9); overflow-y: auto;}
         .sidebar.active { left: 0; }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; padding-bottom: 15px; border-bottom: 1px solid var(--glass-border); }
         
         .sidebar-menu { list-style: none; }
         .sidebar-menu a { color: var(--text-muted); text-decoration: none; display: flex; align-items: center; gap: 15px; padding: 14px 16px; border-radius: 12px; transition: 0.3s; margin-bottom: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
-        .sidebar-menu a:hover, .sidebar-menu a.active-link { background: rgba(255, 102, 0, 0.1); color: var(--accent-color); transform: translateX(5px); box-shadow: inset 2px 0 0 var(--accent-color); }
-        .sidebar-menu i { font-size: 18px; width: 20px; text-align: center; }
-        .sidebar-divider { height: 1px; background: rgba(255,255,255,0.05); margin: 15px 0; }
+        .sidebar-menu a:hover, .sidebar-menu a.active-link { background: linear-gradient(90deg, rgba(255, 85, 0, 0.15) 0%, transparent 100%); color: var(--text-main); transform: translateX(5px); border-left: 3px solid var(--accent-color); }
+        .sidebar-menu a:hover i, .sidebar-menu a.active-link i { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-glow); }
+        .sidebar-menu i { font-size: 18px; width: 20px; text-align: center; transition: 0.3s; }
+        .sidebar-divider { height: 1px; background: var(--glass-border); margin: 15px 0; }
 
         /* --- NAVBAR --- */
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(10, 10, 10, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 99; border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); }
         .logo-container { display: flex; align-items: center; text-decoration: none; cursor: pointer; }
         .logo-text { font-size: 22px; color: white; font-weight: 800; letter-spacing: 0.5px; }
-        .logo-text span { color: var(--accent-color); font-weight: 800; text-shadow: 0 0 15px var(--accent-glow); }
+        .logo-text span { background: linear-gradient(135deg, #ff8c00, #ff2a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
         .menu-toggle { color: white; font-size: 24px; cursor: pointer; background: none; border: none; transition: 0.3s; }
-        .menu-toggle:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-glow); transform: scale(1.1); }
+        .menu-toggle:hover { color: var(--accent-color); text-shadow: 0 0 15px var(--accent-glow); transform: scale(1.1); }
 
         /* --- PAGE VIEWS (SPA SYSTEM) --- */
-        .page-view { display: none; animation: fadeIn 0.6s ease; flex: 1; }
+        .page-view { display: none; animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1); flex: 1; }
         .page-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HERO SECTION --- */
         .welcome-hero {
             position: relative;
             width: 100%;
-            min-height: 450px;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.6), rgba(5,5,5,1)), url('https://images.unsplash.com/photo-1614850523459-c2f4c699c52e?q=80&w=1470&auto=format&fit=crop');
+            min-height: 500px;
+            background: linear-gradient(to bottom, rgba(5,5,5,0.4), rgba(10,10,10,1)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1470&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -76,93 +85,101 @@
             text-align: center;
             padding: 80px 20px;
         }
-        .welcome-hero h1 { font-size: 36px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; line-height: 1.2; text-shadow: 2px 2px 15px rgba(0,0,0,0.9); animation: fadeInDown 1s ease; }
-        .welcome-hero h1 span { color: var(--accent-color); text-shadow: 0 0 20px var(--accent-glow); }
-        .welcome-hero p { color: #d0d0d0; font-size: 15px; margin-top: 15px; max-width: 550px; font-weight: 400; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); animation: fadeInUp 1s ease 0.3s both; }
+        .welcome-hero::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255,85,0,0.1) 0%, transparent 60%); pointer-events: none; }
+        
+        .welcome-hero h1 { font-size: 42px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; line-height: 1.2; text-shadow: 2px 2px 20px rgba(0,0,0,0.9); animation: fadeInDown 1s ease; z-index: 2;}
+        .welcome-hero h1 span { background: linear-gradient(135deg, #ff8c00, #ff2a00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px var(--accent-glow)); }
+        .welcome-hero p { color: #d0d0d0; font-size: 16px; margin-top: 15px; max-width: 600px; font-weight: 500; text-shadow: 1px 1px 10px rgba(0,0,0,0.8); animation: fadeInUp 1s ease 0.3s both; z-index: 2;}
 
-        .hero-buttons { margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 1s ease 0.6s both; }
-        .btn-hero-primary { background: var(--accent-color); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer; border: none;}
-        .btn-hero-primary:hover { background: #ff7a1f; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 102, 0, 0.6); }
-        .btn-hero-secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; backdrop-filter: blur(5px); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;}
-        .btn-hero-secondary:hover { background: rgba(255,255,255,0.15); border-color: var(--accent-color); transform: translateY(-3px); }
+        .hero-buttons { margin-top: 35px; display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; animation: fadeInUp 1s ease 0.6s both; z-index: 2;}
+        .btn-hero-primary { background: linear-gradient(135deg, #ff7b00, #ff3300); color: white; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 85, 0, 0.4); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; border: none; position: relative; overflow: hidden;}
+        .btn-hero-primary::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: 0.5s; }
+        .btn-hero-primary:hover::before { left: 100%; }
+        .btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(255, 85, 0, 0.6); }
+        
+        .btn-hero-secondary { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-weight: 700; transition: 0.3s; backdrop-filter: blur(10px); letter-spacing: 1px; font-size: 14px; display: flex; align-items: center; gap: 10px; cursor: pointer;}
+        .btn-hero-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--accent-color); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .container { padding: 40px 20px; max-width: 700px; margin: auto; }
+        .container { padding: 50px 20px; max-width: 800px; margin: auto; }
 
         /* --- TITLES --- */
-        .section-title { font-size: 15px; text-transform: uppercase; margin: 20px 0 25px; color: var(--text-muted); display: flex; align-items: center; gap: 15px; font-weight: 700; letter-spacing: 2px; }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0.1), transparent); }
-        .section-title i { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-glow); font-size: 18px; }
+        .section-title { font-size: 18px; text-transform: uppercase; margin: 20px 0 30px; color: var(--text-main); display: flex; align-items: center; gap: 15px; font-weight: 800; letter-spacing: 2px; }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to right, var(--accent-color), transparent); opacity: 0.5; }
+        .section-title i { color: var(--accent-color); text-shadow: 0 0 15px var(--accent-glow); font-size: 20px; }
         
         /* --- SOCIAL GRID --- */
-        .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 40px;}
-        .social-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 15px; border-radius: 14px; text-decoration: none; color: white; font-size: 13px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-weight: 700; letter-spacing: 1px; backdrop-filter: blur(10px); }
-        .social-btn:hover { border-color: var(--accent-color); background: rgba(255, 102, 0, 0.08); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(255, 102, 0, 0.2); }
+        .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 50px;}
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 16px; border-radius: 16px; text-decoration: none; color: white; font-size: 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); font-weight: 700; letter-spacing: 1px; backdrop-filter: blur(10px); }
+        .social-btn:hover { border-color: var(--accent-color); background: linear-gradient(135deg, rgba(255,85,0,0.1), transparent); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(255, 85, 0, 0.2); }
+        .social-btn.highlight { grid-column: 1 / -1; background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(0,0,0,0.5)); border-color: rgba(37, 211, 102, 0.3); }
+        .social-btn.highlight:hover { background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(0,0,0,0.8)); border-color: #25D366; box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 0 20px rgba(37, 211, 102, 0.3); }
 
         /* --- FREE BOX --- */
-        .free-box { background: linear-gradient(135deg, rgba(255, 102, 0, 0.15), rgba(18, 18, 18, 0.8)); border: 1px solid rgba(255, 102, 0, 0.3); border-radius: 20px; padding: 30px; margin-bottom: 40px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(10px); }
-        .free-box::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-color); box-shadow: 0 0 20px var(--accent-color); }
-        .free-box h4 { color: white; margin-bottom: 10px; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
-        .free-box p { font-size: 14px; color: #ccc; margin-bottom: 25px; line-height: 1.6; }
-        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: var(--accent-color); color: white; padding: 14px 28px; border-radius: 30px; text-decoration: none; font-size: 13px; font-weight: 800; transition: 0.3s; box-shadow: 0 5px 20px rgba(255, 102, 0, 0.4); letter-spacing: 1px; }
-        .btn-download:hover { background: #ff7a1f; transform: scale(1.05) translateY(-2px); box-shadow: 0 10px 30px rgba(255, 102, 0, 0.6); }
+        .free-box { background: linear-gradient(135deg, rgba(255, 85, 0, 0.1), var(--bg-card)); border: 1px solid rgba(255, 85, 0, 0.2); border-radius: 24px; padding: 35px; margin-bottom: 40px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.6); backdrop-filter: blur(15px); }
+        .free-box::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, #ff8c00, #ff2a00); box-shadow: 0 0 20px var(--accent-color); }
+        .free-box h4 { color: white; margin-bottom: 15px; font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
+        .free-box p { font-size: 15px; color: var(--text-muted); margin-bottom: 25px; line-height: 1.7; font-weight: 500;}
+        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); color: white; padding: 14px 30px; border-radius: 30px; text-decoration: none; font-size: 14px; font-weight: 800; transition: 0.3s; border: 1px solid var(--accent-color); letter-spacing: 1px; }
+        .btn-download:hover { background: var(--accent-color); transform: scale(1.05) translateY(-2px); box-shadow: 0 10px 30px rgba(255, 85, 0, 0.4); }
 
         /* --- CARDS & INFO BOXES --- */
-        .card { background: var(--bg-card); backdrop-filter: blur(10px); border-radius: 24px; padding: 25px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; position: relative; }
-        .card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: var(--accent-color); transition: 0.4s ease; box-shadow: 0 0 15px var(--accent-color); }
+        .card { background: var(--bg-card); backdrop-filter: blur(15px); border-radius: 24px; padding: 30px; margin-bottom: 40px; border: 1px solid var(--glass-border); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; position: relative; }
+        .card::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--accent-color), transparent); transition: 0.5s ease; box-shadow: 0 0 15px var(--accent-color); }
         .card:hover::before { width: 100%; }
-        .card:hover { border-color: rgba(255, 102, 0, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(255, 102, 0, 0.1); transform: translateY(-8px); }
+        .card:hover { border-color: rgba(255, 85, 0, 0.3); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 30px rgba(255, 85, 0, 0.1); transform: translateY(-8px); background: rgba(25, 25, 25, 0.8); }
         
-        .card-img-wrapper { width: 100%; height: 220px; overflow: hidden; border-radius: 16px; margin-bottom: 25px; position: relative; }
-        .card-img-wrapper::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, rgba(18,18,18,1), transparent); }
+        .card-img-wrapper { width: 100%; height: 240px; overflow: hidden; border-radius: 16px; margin-bottom: 25px; position: relative; }
+        .card-img-wrapper::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 60%; background: linear-gradient(to top, rgba(15,15,15,1), transparent); }
         .card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
-        .card:hover img { transform: scale(1.1); }
+        .card:hover img { transform: scale(1.08); }
         
-        .card h3 { font-size: 24px; margin-bottom: 15px; color: white; font-weight: 800; letter-spacing: 1px; }
+        .card h3 { font-size: 26px; margin-bottom: 20px; color: white; font-weight: 800; letter-spacing: 1px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);}
         .card ul { list-style: none; margin-bottom: 30px; }
-        .card ul li { font-size: 14px; color: #ccc; margin-bottom: 14px; display: flex; align-items: flex-start; gap: 12px; font-weight: 500; }
-        .card ul li i { color: var(--accent-color); font-size: 16px; width: 16px; margin-top: 3px; text-align: center; text-shadow: 0 0 8px var(--accent-glow); }
+        .card ul li { font-size: 15px; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: flex-start; gap: 15px; font-weight: 500; }
+        .card ul li i { color: var(--accent-color); font-size: 16px; width: 16px; margin-top: 4px; text-align: center; text-shadow: 0 0 10px var(--accent-glow); }
+        .card ul li strong { color: var(--text-main); }
         
-        .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.08); }
-        .price { font-size: 26px; color: var(--accent-color); font-weight: 800; display: flex; align-items: center; gap: 6px; text-shadow: 0 0 15px rgba(255, 102, 0, 0.3); }
-        .price span { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-top: 6px; text-shadow: none; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; padding-top: 25px; border-top: 1px solid var(--glass-border); }
+        .price { font-size: 28px; color: white; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+        .price span { font-size: 13px; color: var(--accent-color); font-weight: 700; text-transform: uppercase; margin-top: 6px; text-shadow: 0 0 10px var(--accent-glow); }
         
-        .btn-buy { background: white; color: black; padding: 14px 32px; border-radius: 14px; border: none; cursor: pointer; font-size: 14px; font-weight: 800; transition: 0.3s; letter-spacing: 1px; }
-        .btn-buy:hover { background: var(--accent-color); color: white; box-shadow: 0 8px 25px var(--accent-glow); transform: scale(1.05); }
+        .btn-buy { background: white; color: black; padding: 14px 32px; border-radius: 14px; border: none; cursor: pointer; font-size: 14px; font-weight: 800; transition: 0.3s; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+        .btn-buy:hover { background: linear-gradient(135deg, #ff7b00, #ff3300); color: white; box-shadow: 0 8px 25px var(--accent-glow); transform: scale(1.05); }
 
         /* LIST & INFO STYLING */
-        .info-list { padding-left: 20px; color: #ccc; font-size: 14px; margin-bottom: 20px; }
-        .info-list li { margin-bottom: 15px; padding-left: 5px; line-height: 1.8;}
-        .info-list li strong { color: white; }
-        .info-heading { color: white; margin-bottom: 8px; font-size: 18px; font-weight: 700; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px;}
-        .info-heading i { color: var(--accent-color); }
+        .info-list { padding-left: 20px; color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+        .info-list li { margin-bottom: 18px; padding-left: 8px; line-height: 1.8;}
+        .info-list li strong { color: white; font-weight: 700; }
+        .info-heading { color: white; margin-bottom: 12px; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; display: flex; align-items: center; gap: 12px;}
+        .info-heading i { color: var(--accent-color); text-shadow: 0 0 15px var(--accent-glow); }
 
         /* --- MODAL --- */
-        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px; opacity: 0; transition: opacity 0.4s ease; }
         .modal.show { opacity: 1; display: flex; }
-        .modal-content { background: #121212; padding: 35px; border-radius: 24px; width: 100%; max-width: 400px; text-align: center; border: 1px solid rgba(255, 102, 0, 0.4); box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 40px rgba(255, 102, 0, 0.15); transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .modal-content { background: #111; padding: 40px; border-radius: 24px; width: 100%; max-width: 420px; text-align: center; border: 1px solid rgba(255, 85, 0, 0.3); box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 50px rgba(255, 85, 0, 0.1); transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+        .modal-content::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, #ff8c00, #ff2a00); }
         .modal.show .modal-content { transform: translateY(0) scale(1); }
         
-        .pay-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; margin-bottom: 15px; text-align: left; cursor: pointer; border: 1px solid rgba(255,255,255,0.08); transition: 0.3s; display: flex; justify-content: space-between; align-items: center; }
-        .pay-item:hover { border-color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
-        .pay-item-text label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 1px; }
-        .pay-item-text span { font-family: monospace; font-size: 20px; color: white; font-weight: 700; letter-spacing: 2px; }
-        .pay-item-text.small-text span { font-size: 14px; font-family: 'Inter', sans-serif;}
+        .pay-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 16px; margin-bottom: 15px; text-align: left; cursor: pointer; border: 1px solid var(--glass-border); transition: 0.3s; display: flex; justify-content: space-between; align-items: center; }
+        .pay-item:hover { border-color: var(--accent-color); background: linear-gradient(135deg, rgba(255,85,0,0.05), transparent); box-shadow: 0 5px 20px rgba(255, 85, 0, 0.1); transform: translateY(-2px); }
+        .pay-item-text label { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px; font-weight: 700; letter-spacing: 1px; }
+        .pay-item-text span { font-family: 'Plus Jakarta Sans', monospace; font-size: 22px; color: white; font-weight: 800; letter-spacing: 1px; }
         
-        .qris-btn { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 16px; margin-top: 15px; color: white; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 15px; text-decoration: none; font-weight: 700; border: 1px solid rgba(255,255,255,0.08); transition: 0.3s; }
-        .qris-btn:hover { border-color: var(--accent-color); color: var(--accent-color); background: rgba(255, 102, 0, 0.08); box-shadow: 0 0 20px rgba(255, 102, 0, 0.15); transform: translateY(-2px); }
+        .qris-btn { background: rgba(255,255,255,0.03); padding: 18px; border-radius: 16px; margin-top: 15px; color: white; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 15px; text-decoration: none; font-weight: 700; border: 1px solid var(--glass-border); transition: 0.3s; }
+        .qris-btn:hover { border-color: var(--accent-color); color: var(--accent-color); background: rgba(255, 85, 0, 0.05); box-shadow: 0 5px 20px rgba(255, 85, 0, 0.1); transform: translateY(-2px); }
 
         /* BUTTON DC CONFIRM */
-        .btn-dc-confirm { background: var(--dc-color); color: white; border: none; padding: 16px; border-radius: 14px; width: 100%; margin-top: 25px; font-size: 14px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(88, 101, 242, 0.3); }
-        .btn-dc-confirm:hover { background: #4752c4; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.5); }
+        .btn-dc-confirm { background: var(--dc-color); color: white; border: none; padding: 18px; border-radius: 14px; width: 100%; margin-top: 25px; font-size: 15px; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(88, 101, 242, 0.3); }
+        .btn-dc-confirm:hover { background: #4752c4; transform: translateY(-3px); box-shadow: 0 10px 30px rgba(88, 101, 242, 0.5); }
 
         .btn-cancel { background: none; border: none; color: #ff4d4d; margin-top: 20px; cursor: pointer; font-weight: 700; font-size: 13px; letter-spacing: 1px; transition: 0.3s; padding: 10px; }
-        .btn-cancel:hover { color: #ff1a1a; text-shadow: 0 0 10px rgba(255, 77, 77, 0.4); }
+        .btn-cancel:hover { color: #ff1a1a; text-shadow: 0 0 15px rgba(255, 77, 77, 0.5); }
 
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 999; }
-        footer { text-align:center; padding: 30px 20px; color: #666; font-size: 13px; font-weight: 600; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: auto; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 999; }
+        footer { text-align:center; padding: 40px 20px; color: #666; font-size: 14px; font-weight: 600; letter-spacing: 1px; border-top: 1px solid var(--glass-border); margin-top: auto; background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); }
     </style>
 </head>
 <body>
@@ -199,12 +216,11 @@
     <div id="view-home" class="page-view active">
         <div class="welcome-hero">
             <h1>WELCOME TO <br><span>TATANG COMUNITY</span></h1>
-            <p>Pusat Layanan Script Monetloader Gta Samp & Bot Discord Terbaik, Termurah, dan Terpercaya. Upgrade komunitasmu dengan sistem premium buatan kami!</p>
+            <p>Pusat Layanan Script Monetloader Gta Samp, Pembuatan Bot Discord, Web Developer & Jual Beli Game Terpercaya.</p>
             
             <div class="hero-buttons">
-                <button class="btn-hero-primary" onclick="switchPage('services')"><i class="fas fa-code"></i> ORDER SCRIPT</button>
-                <button class="btn-hero-secondary" onclick="switchPage('services')"><i class="fas fa-robot"></i> ORDER BOT</button>
-                <button class="btn-hero-secondary" onclick="switchPage('services')"><i class="fas fa-globe"></i> ORDER WEBSITE</button>
+                <button class="btn-hero-primary" onclick="switchPage('services')"><i class="fas fa-rocket"></i> EKSPLOR LAYANAN</button>
+                <button class="btn-hero-secondary" onclick="switchPage('faq')"><i class="fas fa-book"></i> BACA INFO</button>
             </div>
         </div>
 
@@ -215,13 +231,13 @@
                 <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2; font-size:18px;"></i> DISCORD</a>
                 <a href="https://youtube.com/@tatanglua" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000; font-size:18px;"></i> YOUTUBE</a>
                 <a href="https://whatsapp.com/channel/0029Vb6F8TTDZ4LiVouR9H24" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366; font-size:18px;"></i> SALURAN WA</a>
-                <a href="https://chat.whatsapp.com/FxJ1FYme6aX1QoLOKfRnAb?mode=gi_t" target="_blank" class="social-btn" style="grid-column: 1 / -1;"><i class="fas fa-users" style="color:#25D366; font-size:18px;"></i> GB RTM BY ZENN</a>
+                <a href="https://chat.whatsapp.com/FxJ1FYme6aX1QoLOKfRnAb?mode=gi_t" target="_blank" class="social-btn highlight"><i class="fas fa-gamepad" style="color:#25D366; font-size:20px;"></i> GB JB ALL GAME BY ZENN</a>
             </div>
 
             <h2 class="section-title"><i class="fas fa-box-open"></i> FREE RESOURCES</h2>
             <div class="free-box">
                 <h4>Monetloader Free Edition</h4>
-                <p>Dapatkan versi gratis langsung dari server Discord kami untuk mencoba fitur dasar. Yuk gabung dan ramaikan komunitas sekarang!</p>
+                <p>Dapatkan versi gratis langsung dari server Discord kami untuk mencoba fitur dasar. Yuk gabung dan ramaikan komunitas sekarang, gratis untuk semua member!</p>
                 <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> UNDUH DI DISCORD</a>
             </div>
         </div>
@@ -245,7 +261,7 @@
                 </ul>
                 <div class="price-row">
                     <div class="price">Rp 30.000</div>
-                    <button class="btn-buy" onclick="openPay('Custom Monetloader')">ORDER</button>
+                    <button class="btn-buy" onclick="openPay('Custom Monetloader')">ORDER <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
@@ -255,15 +271,15 @@
                 </div>
                 <h3>BOT DISCORD CUSTOM</h3>
                 <ul>
-                    <li><i class="fas fa-terminal"></i> Bebas Request Sistem & Command Apapun</li>
-                    <li><i class="fas fa-server"></i> Hosting Stabil, Bot Online 24 Jam Non-stop</li>
-                    <li><i class="fas fa-hourglass-half"></i> Masa Aktif Bot 30 Hari</li>
-                    <li><i class="fas fa-headset"></i> Gratis Maintenance & Perbaikan Bug</li>
-                    <li><i class="fas fa-crown"></i> Bonus Eksklusif Role VIP di Server Discord Kami</li>
+                    <li><i class="fas fa-terminal"></i> <strong>Kustomisasi:</strong> Bebas Request Sistem & Command Apapun.</li>
+                    <li><i class="fas fa-server"></i> <strong>Uptime:</strong> Hosting Stabil, Bot Online 24 Jam Non-stop.</li>
+                    <li><i class="fas fa-hourglass-half"></i> <strong>Durasi:</strong> Masa Aktif Bot 30 Hari (Bisa diperpanjang).</li>
+                    <li><i class="fas fa-headset"></i> <strong>Support:</strong> Gratis Maintenance & Perbaikan Bug selama masa aktif.</li>
+                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
                 </ul>
                 <div class="price-row">
                     <div class="price">Rp 50.000 <span>/ BULAN</span></div>
-                    <button class="btn-buy" onclick="openPay('Bot Discord Custom')">ORDER</button>
+                    <button class="btn-buy" onclick="openPay('Bot Discord Custom')">ORDER <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
@@ -273,16 +289,16 @@
                 </div>
                 <h3>CUSTOM WEBSITE</h3>
                 <ul>
-                    <li><i class="fas fa-palette"></i> <strong>Tema Bebas:</strong> Desain dan tampilan (UI/UX) sepenuhnya sesuai dengan seleramu.</li>
-                    <li><i class="fas fa-layer-group"></i> <strong>Fitur Lengkap:</strong> Bebas request fitur tambahan (Katalog, Animasi, Integrasi link, dll).</li>
-                    <li><i class="fas fa-mobile-alt"></i> <strong>Responsif:</strong> Tampilan dijamin rapi dan nyaman dilihat di HP maupun PC.</li>
-                    <li><i class="fas fa-infinity"></i> <strong>Masa Aktif:</strong> Website menjadi milik Anda selamanya.</li>
-                    <li><i class="fas fa-code"></i> <strong>Full Source Code:</strong> Dapatkan file mentah HTML, CSS, & JS 100% untuk dikelola sendiri.</li>
+                    <li><i class="fas fa-palette"></i> <strong>Tema Bebas:</strong> Desain dan tampilan (UI/UX) modern sesuai selera.</li>
+                    <li><i class="fas fa-layer-group"></i> <strong>Fitur Lengkap:</strong> Bebas request fitur (Katalog, Animasi, Link tree, dll).</li>
+                    <li><i class="fas fa-mobile-alt"></i> <strong>Responsif:</strong> Tampilan rapi di HP, Tablet, maupun PC.</li>
+                    <li><i class="fas fa-infinity"></i> <strong>Milik Sendiri:</strong> Website menjadi milik Anda selamanya.</li>
+                    <li><i class="fas fa-code"></i> <strong>Full Source:</strong> File mentah HTML, CSS, & JS 100% diberikan.</li>
                     <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
                 </ul>
                 <div class="price-row">
                     <div class="price">Rp 50.000</div>
-                    <button class="btn-buy" onclick="openPay('Custom Website')">ORDER</button>
+                    <button class="btn-buy" onclick="openPay('Custom Website')">ORDER <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
@@ -292,17 +308,17 @@
     <div id="view-tutorial" class="page-view">
         <div class="container">
             <h2 class="section-title"><i class="fas fa-clipboard-list"></i> PANDUAN CARA ORDER</h2>
-            <div class="card" style="padding: 30px;">
+            <div class="card" style="padding: 40px;">
                 <ol class="info-list">
-                    <li>Buka menu <strong>"Layanan Kami"</strong> untuk melihat daftar script dan bot yang tersedia.</li>
+                    <li>Buka menu <strong>"Layanan Kami"</strong> untuk melihat daftar script, bot, dan web yang tersedia.</li>
                     <li>Klik tombol <strong>"ORDER"</strong> pada layanan yang ingin Anda beli.</li>
                     <li>Pilih metode pembayaran yang tersedia (Transfer E-Wallet DANA/GOPAY, QRIS Otomatis). Kami sangat menyarankan untuk menggunakan jasa <strong>Rekber / MC (Middleman)</strong> agar transaksi lebih aman dan terhindar dari penipuan.</li>
                     <li>Setelah melakukan pembayaran, klik tombol <strong>"KONFIRMASI VIA DISCORD"</strong> di layar Checkout.</li>
                     <li>Sistem akan mengarahkan Anda ke Discord Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan valid. Jika menggunakan jasa Rekber/MC, segera informasikan ke Admin.</li>
-                    <li>Admin akan memverifikasi pembayaran dan langsung memproses pesanan / request fitur yang Anda inginkan.</li>
+                    <li>Admin akan memverifikasi pembayaran dan langsung memproses pesanan atau request fitur yang Anda inginkan.</li>
                 </ol>
-                <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
-                    <button class="btn-buy" style="background: var(--accent-color); color: white;" onclick="switchPage('services')"><i class="fas fa-shopping-cart"></i> LIHAT LAYANAN SEKARANG</button>
+                <div style="margin-top: 35px; padding-top: 25px; border-top: 1px solid var(--glass-border); text-align: center;">
+                    <button class="btn-hero-primary" style="margin: auto;" onclick="switchPage('services')"><i class="fas fa-shopping-cart"></i> LIHAT LAYANAN SEKARANG</button>
                 </div>
             </div>
         </div>
@@ -312,45 +328,45 @@
         <div class="container">
             <h2 class="section-title"><i class="fas fa-info-circle"></i> PENJELASAN LAYANAN</h2>
             
-            <div class="card" style="padding: 30px; margin-bottom: 20px;">
+            <div class="card" style="padding: 35px; margin-bottom: 25px;">
                 <div class="info-heading"><i class="fas fa-code"></i> Apa itu Custom Monetloader?</div>
-                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
                     Layanan pembuatan script khusus untuk GTA SAMP (PC maupun Android). Kami menyediakan kode 100% open-source (tanpa di-encrypt), sehingga Anda bebas mempelajari atau mengubahnya nanti. Anda bebas request bentuk tampilan UI, dan fitur sistemnya sesuai selera server roleplay Anda.
                 </p>
             </div>
 
-            <div class="card" style="padding: 30px; margin-bottom: 20px;">
+            <div class="card" style="padding: 35px; margin-bottom: 25px;">
                 <div class="info-heading"><i class="fas fa-robot"></i> Sistem Bot Discord Custom</div>
-                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
                     Layanan pembuatan bot Discord yang aktif 24 jam penuh di server Anda. Sangat cocok untuk manajemen Roleplay, Moderasi server, Tiket otomatis, Sistem Economy, Welcomer, Dll. hingga integrasi database. Server komunitas Anda akan jauh lebih rapi, otomatis, dan terlihat profesional dengan bot buatan kami.
                 </p>
             </div>
 
-            <div class="card" style="padding: 30px; margin-bottom: 20px;">
+            <div class="card" style="padding: 35px; margin-bottom: 25px;">
                 <div class="info-heading"><i class="fas fa-globe"></i> Custom Website</div>
-                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
+                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
                     Layanan pembuatan dan perancangan website untuk mempresentasikan server, komunitas, atau toko Anda. Kami merancang dengan tampilan modern dan interaktif. Anda akan mendapatkan File Asli Source Code (HTML/CSS/JS) sepenuhnya. Website ini dapat Anda host sendiri secara gratis maupun berbayar dengan kontrol di tangan Anda selamanya.
                 </p>
             </div>
 
-            <div class="card" style="padding: 30px; margin-bottom: 20px;">
-                <div class="info-heading"><i class="fas fa-coins"></i> RTM (Real Money Trading) GTA SAMP</div>
-                <p style="color: #ccc; font-size: 14px; padding-left: 28px; line-height: 1.8;">
-                    Fasilitas transaksi jual-beli aset in-game di GTA SAMP (seperti uang in-game, bisnis, properti, kendaraan langka, dll) dengan menggunakan uang asli secara legal di komunitas kami. <strong>Sangat disarankan untuk selalu menggunakan jasa Rekber / MC (Middleman)</strong> dalam setiap transaksi RTM supaya lebih aman dan terhindar dari segala bentuk penipuan.
+            <div class="card" style="padding: 35px; margin-bottom: 25px; border-color: rgba(37, 211, 102, 0.3);">
+                <div class="info-heading"><i class="fas fa-gamepad" style="color: #25D366; text-shadow: 0 0 15px rgba(37,211,102,0.5);"></i> Jual Beli Kebutuhan All Game</div>
+                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
+                    Kami juga menyediakan fasilitas grup atau wadah komunitas untuk transaksi jual-beli berbagai kebutuhan game (seperti Jual Beli Akun, Top Up Mata Uang Game, Item Langka, Jasa GB/Joki, dll) dengan menggunakan uang asli secara legal di komunitas kami. <strong>Sangat disarankan untuk selalu menggunakan jasa Rekber / MC (Middleman) yang terpercaya</strong> dalam setiap transaksi antar player supaya aman dan terhindar dari segala bentuk penipuan.
                 </p>
             </div>
             
-            <div class="free-box" style="margin-top: 30px;">
-                <h4 style="font-size: 16px;"><i class="fas fa-headset" style="color: var(--accent-color);"></i> Butuh Bantuan Lain?</h4>
-                <p style="font-size: 13px; margin-bottom: 15px;">Jika Anda memiliki pertanyaan khusus di luar penjelasan di atas, silakan tanyakan langsung ke admin melalui Discord.</p>
+            <div class="free-box" style="margin-top: 40px;">
+                <h4 style="font-size: 18px;"><i class="fas fa-headset" style="color: var(--accent-color); margin-right: 10px;"></i> Butuh Bantuan Lain?</h4>
+                <p style="font-size: 14px; margin-bottom: 15px;">Jika Anda memiliki pertanyaan khusus di luar penjelasan di atas, silakan tanyakan langsung ke admin melalui Discord resmi kami.</p>
             </div>
         </div>
     </div>
 
     <div class="modal" id="payModal">
         <div class="modal-content">
-            <h3 style="color:white; margin-bottom: 5px; font-weight:800; letter-spacing: 1px;">CHECKOUT</h3>
-            <p id="orderName" style="font-size:14px; margin-bottom:30px; color:var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"></p>
+            <h3 style="color:white; margin-bottom: 5px; font-weight:800; letter-spacing: 1.5px;">CHECKOUT</h3>
+            <p id="orderName" style="font-size:15px; margin-bottom:30px; color:var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"></p>
             
             <div class="pay-item" onclick="copyNumber('0895328044863')">
                 <div class="pay-item-text">
@@ -362,7 +378,7 @@
 
             <a href="https://i.ibb.co.com/Dg6ZzSfJ/image-952a8d4a-58f9-4bb7-add5-c407f8c73923.png" target="_blank" class="qris-btn">
                 <i class="fas fa-qrcode fa-2x"></i>
-                <div style="text-align:left; line-height: 1.3;">BUKA MENU QRIS<br><span style="font-size:11px; color:var(--text-muted); font-weight: 500;">Ketuk untuk scan pembayaran otomatis</span></div>
+                <div style="text-align:left; line-height: 1.3;">BUKA MENU QRIS<br><span style="font-size:12px; color:var(--text-muted); font-weight: 500;">Ketuk untuk scan pembayaran otomatis</span></div>
             </a>
 
             <button class="btn-dc-confirm" onclick="hubungiAdmin()">
@@ -388,24 +404,20 @@
 
         // Fungsi Single Page Application (SPA) - Pindah Halaman
         function switchPage(pageId) {
-            // Sembunyikan semua halaman
             const views = document.querySelectorAll('.page-view');
             views.forEach(view => view.classList.remove('active'));
             
-            // Tampilkan halaman yang dipilih
             const targetView = document.getElementById('view-' + pageId);
             if(targetView) {
                 targetView.classList.add('active');
-                window.scrollTo(0, 0); // Reset scroll ke paling atas setiap pindah ruangan
+                window.scrollTo(0, 0); 
             }
 
-            // Ubah highlight di menu sidebar
             const navLinks = document.querySelectorAll('.sidebar-menu a');
             navLinks.forEach(link => link.classList.remove('active-link'));
             const activeNav = document.getElementById('nav-' + pageId);
             if(activeNav) activeNav.classList.add('active-link');
 
-            // Tutup sidebar jika sedang terbuka (khusus mobile)
             const sidebar = document.getElementById('sidebar');
             if(sidebar.classList.contains('active')) {
                 toggleMenu();
