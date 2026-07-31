@@ -1,194 +1,360 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tama Ryuichi - Official Store</title>
-
     <meta property="og:title" content="Tama Ryuichi - Official Store" />
     <meta property="og:description" content="Pusat Layanan Script Monetloader Gta Samp, Bot Discord & Jual Beli Game Terbaik." />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#ff5500">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#ff5500" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
+        /* ============================================================
+               ROOT & RESET
+               ============================================================ */
         :root {
             --bg-dark: #0a0a0a;
-            --bg-card: rgba(20, 20, 20, 0.6);
-            --accent-color: #ff5500;
-            --accent-glow: rgba(255, 85, 0, 0.6);
-            --wa-color: #25D366;
-            --text-main: #f8f9fa;
-            --text-muted: #adb5bd;
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --bg-card: rgba(18, 18, 24, 0.75);
+            --accent: #ff5500;
+            --accent-glow: rgba(255, 85, 0, 0.5);
+            --accent-soft: #ff7b2b;
+            --wa: #25D366;
+            --text: #f0f0f5;
+            --muted: #a0a0b8;
+            --border-glass: rgba(255, 255, 255, 0.06);
+            --radius: 20px;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
         body {
-            background: radial-gradient(circle at top right, #2a0f00 0%, var(--bg-dark) 50%, #050505 100%);
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(ellipse at 20% 10%, #1f0d00 0%, var(--bg-dark) 55%, #030303 100%);
+            color: var(--text);
+            min-height: 100vh;
             overflow-x: hidden;
             line-height: 1.6;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- SCROLLBAR --- */
+        /* --- Scrollbar --- */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-dark);
         }
         ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-color);
+            background: var(--accent);
+            border-radius: 12px;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* --- SIDEBAR --- */
+        /* --- Selection --- */
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* ============================================================
+               AMBIENT GLOW ORBS (background decoration)
+               ============================================================ */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.3;
+            animation: orbFloat 18s ease-in-out infinite alternate;
+        }
+        .orb--1 {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            left: -100px;
+            background: radial-gradient(circle, #ff5500, transparent 70%);
+            animation-duration: 22s;
+        }
+        .orb--2 {
+            width: 400px;
+            height: 400px;
+            bottom: -100px;
+            right: -80px;
+            background: radial-gradient(circle, #ff2a00, transparent 70%);
+            animation-duration: 26s;
+            animation-delay: -6s;
+        }
+        .orb--3 {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            left: 60%;
+            background: radial-gradient(circle, #ff8c00, transparent 70%);
+            animation-duration: 20s;
+            animation-delay: -10s;
+            opacity: 0.15;
+        }
+
+        @keyframes orbFloat {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(60px, -40px) scale(1.15);
+            }
+        }
+
+        /* ============================================================
+               SIDEBAR
+               ============================================================ */
         .sidebar {
             position: fixed;
             top: 0;
             left: -100%;
-            width: 280px;
+            width: 290px;
             height: 100%;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            transition: cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
-            padding: 30px 20px;
-            border-right: 1px solid var(--glass-border);
-            box-shadow: 10px 0 30px rgba(0, 0, 0, 0.9);
+            background: rgba(8, 8, 12, 0.92);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            z-index: 1100;
+            transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 28px 22px;
+            border-right: 1px solid var(--border-glass);
+            box-shadow: 12px 0 50px rgba(0, 0, 0, 0.9);
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
+
         .sidebar.active {
             left: 0;
         }
+
         .sidebar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-glass);
+            margin-bottom: 28px;
+        }
+
+        .sidebar-logo {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .sidebar-logo .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+        .sidebar-logo .logo-text span {
+            background: linear-gradient(135deg, #ff8c00, #ff2a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-close {
+            color: #fff;
+            font-size: 26px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: 0.3s;
+            line-height: 1;
+        }
+        .sidebar-close:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
         }
 
         .sidebar-menu {
             list-style: none;
+            flex: 1;
+        }
+        .sidebar-menu li {
+            margin-bottom: 4px;
         }
         .sidebar-menu a {
-            color: var(--text-muted);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 15px;
-            padding: 14px 16px;
-            border-radius: 12px;
-            transition: 0.3s;
-            margin-bottom: 8px;
-            font-weight: 600;
+            gap: 16px;
+            padding: 13px 16px;
+            border-radius: 14px;
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 700;
             font-size: 14px;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
-        .sidebar-menu a:hover,
-        .sidebar-menu a.active-link {
-            background: linear-gradient(90deg, rgba(255, 85, 0, 0.15) 0%, transparent 100%);
-            color: var(--text-main);
-            transform: translateX(5px);
-            border-left: 3px solid var(--accent-color);
-        }
-        .sidebar-menu a:hover i,
-        .sidebar-menu a.active-link i {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-glow);
-        }
-        .sidebar-menu i {
-            font-size: 18px;
-            width: 20px;
+        .sidebar-menu a i {
+            width: 22px;
+            font-size: 17px;
             text-align: center;
             transition: 0.3s;
         }
-        .sidebar-divider {
-            height: 1px;
-            background: var(--glass-border);
-            margin: 15px 0;
+        .sidebar-menu a:hover,
+        .sidebar-menu a.active-link {
+            background: linear-gradient(90deg, rgba(255, 85, 0, 0.12), transparent 80%);
+            color: #fff;
+            transform: translateX(6px);
+        }
+        .sidebar-menu a:hover i,
+        .sidebar-menu a.active-link i {
+            color: var(--accent);
+            text-shadow: 0 0 18px var(--accent-glow);
+        }
+        .sidebar-menu a.active-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 60%;
+            background: var(--accent);
+            border-radius: 0 6px 6px 0;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* --- NAVBAR --- */
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border-glass);
+            margin: 16px 0 18px;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-glass);
+            font-size: 11px;
+            color: var(--muted);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================================
+               NAVBAR
+               ============================================================ */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background: rgba(10, 10, 10, 0.6);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             position: sticky;
             top: 0;
             z-index: 99;
-            border-bottom: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 5%;
+            background: rgba(8, 8, 12, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid var(--border-glass);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
         }
-        .logo-container {
+
+        .nav-logo {
+            cursor: pointer;
             display: flex;
             align-items: center;
-            text-decoration: none;
-            cursor: pointer;
+            gap: 4px;
         }
-        .logo-text {
-            font-size: 22px;
-            color: white;
-            font-weight: 800;
-            letter-spacing: 0.5px;
+        .nav-logo .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #fff;
         }
-        .logo-text span {
+        .nav-logo .logo-text span {
             background: linear-gradient(135deg, #ff8c00, #ff2a00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
         }
-        .menu-toggle {
-            color: white;
+
+        .nav-toggle {
+            color: #fff;
             font-size: 24px;
             cursor: pointer;
             background: none;
             border: none;
             transition: 0.3s;
+            padding: 4px 8px;
+            border-radius: 10px;
         }
-        .menu-toggle:hover {
-            color: var(--accent-color);
-            text-shadow: 0 0 15px var(--accent-glow);
-            transform: scale(1.1);
+        .nav-toggle:hover {
+            color: var(--accent);
+            background: rgba(255, 85, 0, 0.08);
+            text-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* --- PAGE VIEWS (SPA SYSTEM) --- */
+        /* ============================================================
+               OVERLAY (sidebar backdrop)
+               ============================================================ */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1050;
+            animation: overlayFade 0.3s ease;
+        }
+        .overlay.show {
+            display: block;
+        }
+
+        @keyframes overlayFade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ============================================================
+               PAGE VIEWS (SPA)
+               ============================================================ */
         .page-view {
             display: none;
-            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pageEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
             flex: 1;
+            position: relative;
+            z-index: 1;
         }
         .page-view.active {
             display: block;
         }
-        @keyframes fadeIn {
+
+        @keyframes pageEnter {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -196,144 +362,150 @@
             }
         }
 
-        /* --- HERO SECTION --- */
-        .welcome-hero {
+        /* ============================================================
+               HERO
+               ============================================================ */
+        .hero {
             position: relative;
             width: 100%;
-            min-height: 500px;
-            background: linear-gradient(to bottom, rgba(5, 5, 5, 0.4), rgba(10, 10, 10, 1)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=1470&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            min-height: 560px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px;
-        }
-        .welcome-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 85, 0, 0.1) 0%, transparent 60%);
-            pointer-events: none;
+            padding: 80px 24px 60px;
+            background:
+                radial-gradient(ellipse at 30% 40%, rgba(255, 85, 0, 0.08), transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(255, 40, 0, 0.05), transparent 50%),
+                linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, var(--bg-dark) 100%);
+            overflow: hidden;
         }
 
-        .welcome-hero h1 {
-            font-size: 42px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 800;
-            line-height: 1.2;
-            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.9);
-            animation: fadeInDown 1s ease;
-            z-index: 2;
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
         }
-        .welcome-hero h1 span {
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 85, 0, 0.12);
+            border: 1px solid rgba(255, 85, 0, 0.2);
+            padding: 6px 20px;
+            border-radius: 60px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-soft);
+            margin-bottom: 28px;
+            backdrop-filter: blur(10px);
+            animation: fadeUp 1s ease both;
+        }
+        .hero-badge i {
+            margin-right: 8px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 8vw, 68px);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            animation: fadeUp 1s ease 0.15s both;
+        }
+        .hero h1 .highlight {
             background: linear-gradient(135deg, #ff8c00, #ff2a00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px var(--accent-glow));
-        }
-        .welcome-hero p {
-            color: #d0d0d0;
-            font-size: 16px;
-            margin-top: 15px;
-            max-width: 600px;
-            font-weight: 500;
-            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.8);
-            animation: fadeInUp 1s ease 0.3s both;
-            z-index: 2;
+            filter: drop-shadow(0 0 30px var(--accent-glow));
         }
 
-        .hero-buttons {
-            margin-top: 35px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeInUp 1s ease 0.6s both;
-            z-index: 2;
+        .hero p {
+            font-size: clamp(15px, 1.6vw, 19px);
+            color: var(--muted);
+            max-width: 560px;
+            margin: 18px auto 0;
+            font-weight: 500;
+            animation: fadeUp 1s ease 0.3s both;
         }
-        .btn-hero-primary {
-            background: linear-gradient(135deg, #ff7b00, #ff3300);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 800;
-            transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(255, 85, 0, 0.4);
-            letter-spacing: 1px;
-            font-size: 14px;
+
+        .hero-actions {
+            margin-top: 40px;
             display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            animation: fadeUp 1s ease 0.45s both;
+        }
+
+        .btn {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-decoration: none;
             cursor: pointer;
             border: none;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
             overflow: hidden;
         }
-        .btn-hero-primary::before {
+        .btn--primary {
+            background: linear-gradient(135deg, #ff7b00, #ff2a00);
+            color: #fff;
+            box-shadow: 0 6px 30px var(--accent-glow);
+        }
+        .btn--primary::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            inset: 0;
+            background: linear-gradient(135deg, #ff8c00, #ff3d00);
+            opacity: 0;
+            transition: 0.4s;
         }
-        .btn-hero-primary:hover::before {
-            left: 100%;
+        .btn--primary:hover::before {
+            opacity: 1;
         }
-        .btn-hero-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 85, 0, 0.6);
+        .btn--primary:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 45px var(--accent-glow);
+        }
+        .btn--primary span {
+            position: relative;
+            z-index: 2;
         }
 
-        .btn-hero-secondary {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
+        .btn--ghost {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            color: #fff;
             backdrop-filter: blur(10px);
-            letter-spacing: 1px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
         }
-        .btn-hero-secondary:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent-color);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        .btn--ghost:hover {
+            border-color: var(--accent);
+            background: rgba(255, 85, 0, 0.06);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes fadeInDown {
+        @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(24px);
             }
             to {
                 opacity: 1;
@@ -341,317 +513,381 @@
             }
         }
 
+        /* ============================================================
+               CONTAINER & TITLES
+               ============================================================ */
         .container {
-            padding: 50px 20px;
-            max-width: 800px;
-            margin: auto;
+            padding: 50px 24px;
+            max-width: 880px;
+            margin: 0 auto;
         }
 
-        /* --- TITLES --- */
         .section-title {
-            font-size: 18px;
-            text-transform: uppercase;
-            margin: 20px 0 30px;
-            color: var(--text-main);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
+            font-size: 17px;
             font-weight: 800;
             letter-spacing: 2px;
-        }
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to right, var(--accent-color), transparent);
-            opacity: 0.5;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 32px;
         }
         .section-title i {
-            color: var(--accent-color);
-            text-shadow: 0 0 15px var(--accent-glow);
+            color: var(--accent);
             font-size: 20px;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent 80%);
+            border-radius: 4px;
+            opacity: 0.4;
         }
 
-        /* --- SOCIAL GRID --- */
+        /* ============================================================
+               SOCIAL GRID
+               ============================================================ */
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 14px;
+            margin-bottom: 48px;
         }
+
         .social-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 16px;
+            padding: 15px 18px;
             border-radius: 16px;
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            text-decoration: none;
             font-weight: 700;
-            letter-spacing: 1px;
-            backdrop-filter: blur(10px);
+            font-size: 13px;
+            letter-spacing: 0.8px;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            backdrop-filter: blur(8px);
+        }
+        .social-btn i {
+            font-size: 18px;
         }
         .social-btn:hover {
-            border-color: var(--accent-color);
-            background: linear-gradient(135deg, rgba(255, 85, 0, 0.1), transparent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 85, 0, 0.2);
+            border-color: var(--accent);
+            background: rgba(255, 85, 0, 0.06);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 85, 0, 0.06);
         }
         .social-btn.highlight {
             grid-column: 1 / -1;
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1), rgba(0, 0, 0, 0.5));
-            border-color: rgba(37, 211, 102, 0.3);
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.08), rgba(0, 0, 0, 0.4));
+            border-color: rgba(37, 211, 102, 0.2);
         }
         .social-btn.highlight:hover {
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(0, 0, 0, 0.8));
-            border-color: #25D366;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(37, 211, 102, 0.3);
+            border-color: var(--wa);
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(0, 0, 0, 0.6));
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(37, 211, 102, 0.08);
         }
 
-        /* --- FREE BOX --- */
+        /* ============================================================
+               FREE BOX
+               ============================================================ */
         .free-box {
-            background: linear-gradient(135deg, rgba(255, 85, 0, 0.1), var(--bg-card));
-            border: 1px solid rgba(255, 85, 0, 0.2);
-            border-radius: 24px;
-            padding: 35px;
+            background: linear-gradient(135deg, rgba(255, 85, 0, 0.06), var(--bg-card));
+            border: 1px solid rgba(255, 85, 0, 0.15);
+            border-radius: var(--radius);
+            padding: 36px 32px;
             margin-bottom: 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow);
         }
         .free-box::before {
-            content: "";
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(to bottom, #ff8c00, #ff2a00);
-            box-shadow: 0 0 20px var(--accent-color);
+            background: linear-gradient(180deg, #ff8c00, #ff2a00);
+            box-shadow: 0 0 30px var(--accent);
         }
         .free-box h4 {
-            color: white;
-            margin-bottom: 15px;
             font-size: 22px;
             font-weight: 800;
             letter-spacing: 0.5px;
+            margin-bottom: 12px;
         }
         .free-box p {
+            color: var(--muted);
             font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 25px;
-            line-height: 1.7;
             font-weight: 500;
-        }
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            padding: 14px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 800;
-            transition: 0.3s;
-            border: 1px solid var(--accent-color);
-            letter-spacing: 1px;
-        }
-        .btn-download:hover {
-            background: var(--accent-color);
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 85, 0, 0.4);
+            max-width: 500px;
+            margin: 0 auto 24px;
         }
 
-        /* --- CARDS & INFO BOXES --- */
+        .btn--download {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--accent);
+            color: #fff;
+            padding: 13px 32px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .btn--download:hover {
+            background: var(--accent);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 40px var(--accent-glow);
+        }
+
+        /* ============================================================
+               CARDS (service)
+               ============================================================ */
         .card {
             background: var(--bg-card);
-            backdrop-filter: blur(15px);
-            border-radius: 24px;
-            padding: 30px;
-            margin-bottom: 40px;
-            border: 1px solid var(--glass-border);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            overflow: hidden;
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius);
+            padding: 30px 28px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border-glass);
+            transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
-        .card::before {
-            content: "";
+        .card::after {
+            content: '';
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-            transition: 0.5s ease;
-            box-shadow: 0 0 15px var(--accent-color);
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            transition: 0.6s ease;
+            box-shadow: 0 0 30px var(--accent-glow);
         }
-        .card:hover::before {
+        .card:hover::after {
             width: 100%;
         }
         .card:hover {
-            border-color: rgba(255, 85, 0, 0.3);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 85, 0, 0.1);
-            transform: translateY(-8px);
-            background: rgba(25, 25, 25, 0.8);
+            border-color: rgba(255, 85, 0, 0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 85, 0, 0.04);
+            background: rgba(22, 22, 30, 0.85);
         }
 
-        .card-img-wrapper {
+        .card-img {
             width: 100%;
-            height: 240px;
+            height: 220px;
             overflow: hidden;
-            border-radius: 16px;
-            margin-bottom: 25px;
+            border-radius: 14px;
+            margin-bottom: 22px;
             position: relative;
         }
-        .card-img-wrapper::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60%;
-            background: linear-gradient(to top, rgba(15, 15, 15, 1), transparent);
-        }
-        .card img {
+        .card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.7s ease;
         }
-        .card:hover img {
-            transform: scale(1.08);
+        .card:hover .card-img img {
+            transform: scale(1.06);
+        }
+        .card-img::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
         }
 
         .card h3 {
-            font-size: 26px;
-            margin-bottom: 20px;
-            color: white;
+            font-size: 24px;
             font-weight: 800;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
+            margin-bottom: 18px;
         }
+
         .card ul {
             list-style: none;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
         .card ul li {
-            font-size: 15px;
-            color: var(--text-muted);
-            margin-bottom: 16px;
             display: flex;
             align-items: flex-start;
-            gap: 15px;
+            gap: 14px;
+            color: var(--muted);
+            font-size: 14px;
             font-weight: 500;
+            padding: 6px 0;
+            line-height: 1.5;
         }
         .card ul li i {
-            color: var(--accent-color);
-            font-size: 16px;
-            width: 16px;
-            margin-top: 4px;
+            color: var(--accent);
+            font-size: 15px;
+            margin-top: 3px;
+            text-shadow: 0 0 12px var(--accent-glow);
+            width: 18px;
             text-align: center;
-            text-shadow: 0 0 10px var(--accent-glow);
         }
         .card ul li strong {
-            color: var(--text-main);
+            color: #fff;
+            font-weight: 700;
         }
 
         .price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 25px;
-            border-top: 1px solid var(--glass-border);
+            padding-top: 20px;
+            border-top: 1px solid var(--border-glass);
+            flex-wrap: wrap;
+            gap: 16px;
         }
         .price {
             font-size: 28px;
-            color: white;
-            font-weight: 800;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #fff;
             display: flex;
-            align-items: center;
-            gap: 8px;
+            align-items: baseline;
+            gap: 6px;
         }
         .price span {
             font-size: 13px;
-            color: var(--accent-color);
             font-weight: 700;
+            color: var(--accent-soft);
             text-transform: uppercase;
-            margin-top: 6px;
-            text-shadow: 0 0 10px var(--accent-glow);
-        }
-
-        .btn-buy {
-            background: white;
-            color: black;
-            padding: 14px 32px;
-            border-radius: 14px;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 800;
-            transition: 0.3s;
             letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-buy:hover {
-            background: linear-gradient(135deg, #ff7b00, #ff3300);
-            color: white;
-            box-shadow: 0 8px 25px var(--accent-glow);
-            transform: scale(1.05);
         }
 
-        /* LIST & INFO STYLING */
+        .btn--buy {
+            background: #fff;
+            color: #0a0a0a;
+            border: none;
+            padding: 13px 30px;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn--buy:hover {
+            background: linear-gradient(135deg, #ff7b00, #ff2a00);
+            color: #fff;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 35px var(--accent-glow);
+        }
+
+        /* ============================================================
+               INFO LIST (tutorial / faq)
+               ============================================================ */
         .info-list {
-            padding-left: 20px;
-            color: var(--text-muted);
+            list-style: none;
+            padding: 0;
+            color: var(--muted);
             font-size: 15px;
-            margin-bottom: 20px;
+            font-weight: 500;
+            counter-reset: step;
         }
         .info-list li {
-            margin-bottom: 18px;
-            padding-left: 8px;
-            line-height: 1.8;
+            counter-increment: step;
+            display: flex;
+            gap: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            line-height: 1.7;
         }
-        .info-list li strong {
-            color: white;
-            font-weight: 700;
+        .info-list li:last-child {
+            border-bottom: none;
         }
-        .info-heading {
-            color: white;
-            margin-bottom: 12px;
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
+        .info-list li::before {
+            content: counter(step);
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            min-width: 32px;
+            height: 32px;
+            background: rgba(255, 85, 0, 0.1);
+            border: 1px solid rgba(255, 85, 0, 0.15);
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--accent);
+            flex-shrink: 0;
         }
-        .info-heading i {
-            color: var(--accent-color);
-            text-shadow: 0 0 15px var(--accent-glow);
+        .info-list li strong {
+            color: #fff;
+            font-weight: 700;
         }
 
-        /* --- MODAL --- */
+        .faq-item {
+            padding: 22px 24px;
+            margin-bottom: 18px;
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid var(--border-glass);
+            transition: 0.3s;
+        }
+        .faq-item:hover {
+            border-color: rgba(255, 85, 0, 0.15);
+        }
+        .faq-item .q {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .faq-item .q i {
+            color: var(--accent);
+            font-size: 18px;
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+        .faq-item .a {
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+            padding-left: 38px;
+            line-height: 1.8;
+        }
+        .faq-item .a strong {
+            color: #fff;
+        }
+
+        /* ============================================================
+               MODAL
+               ============================================================ */
         .modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             display: none;
             align-items: center;
             justify-content: center;
@@ -664,171 +900,259 @@
             opacity: 1;
             display: flex;
         }
-        .modal-content {
-            background: #111;
-            padding: 40px;
-            border-radius: 24px;
-            width: 100%;
+
+        .modal-box {
+            background: #14141a;
+            border-radius: var(--radius);
+            padding: 38px 32px;
             max-width: 420px;
-            text-align: center;
-            border: 1px solid rgba(255, 85, 0, 0.3);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 50px rgba(255, 85, 0, 0.1);
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 100%;
+            border: 1px solid rgba(255, 85, 0, 0.15);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(255, 85, 0, 0.04);
+            transform: translateY(30px) scale(0.96);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
             overflow: hidden;
         }
-        .modal-content::before {
+        .modal.show .modal-box {
+            transform: translateY(0) scale(1);
+        }
+        .modal-box::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, #ff8c00, #ff2a00);
         }
-        .modal.show .modal-content {
-            transform: translateY(0) scale(1);
+
+        .modal-box h3 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+        .modal-box .order-label {
+            color: var(--accent-soft);
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 28px;
+            display: block;
         }
 
         .pay-item {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            text-align: left;
-            cursor: pointer;
-            border: 1px solid var(--glass-border);
-            transition: 0.3s;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 16px 20px;
+            border-radius: 14px;
+            border: 1px solid var(--border-glass);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
         }
         .pay-item:hover {
-            border-color: var(--accent-color);
-            background: linear-gradient(135deg, rgba(255, 85, 0, 0.05), transparent);
-            box-shadow: 0 5px 20px rgba(255, 85, 0, 0.1);
+            border-color: var(--accent);
+            background: rgba(255, 85, 0, 0.04);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
-        .pay-item-text label {
-            font-size: 12px;
-            color: var(--text-muted);
-            display: block;
-            margin-bottom: 6px;
+        .pay-item .label {
+            font-size: 11px;
             font-weight: 700;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--muted);
+            display: block;
         }
-        .pay-item-text span {
-            font-family: 'Plus Jakarta Sans', monospace;
-            font-size: 22px;
-            color: white;
+        .pay-item .value {
+            font-size: 20px;
             font-weight: 800;
-            letter-spacing: 1px;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .pay-item .copy-icon {
+            color: var(--accent);
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        .pay-item:hover .copy-icon {
+            transform: scale(1.15);
+            text-shadow: 0 0 20px var(--accent-glow);
         }
 
         .qris-btn {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 18px;
-            border-radius: 16px;
-            margin-top: 15px;
-            color: white;
-            font-size: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 14px;
+            padding: 16px 20px;
+            color: #fff;
             text-decoration: none;
             font-weight: 700;
-            border: 1px solid var(--glass-border);
-            transition: 0.3s;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-top: 4px;
         }
         .qris-btn:hover {
-            border-color: var(--accent-color);
-            color: var(--accent-color);
-            background: rgba(255, 85, 0, 0.05);
-            box-shadow: 0 5px 20px rgba(255, 85, 0, 0.1);
+            border-color: var(--accent);
+            background: rgba(255, 85, 0, 0.04);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        .qris-btn .sub {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--muted);
+            display: block;
+        }
+        .qris-btn i {
+            font-size: 32px;
+            color: var(--accent);
         }
 
-        /* BUTTON WA CONFIRM */
-        .btn-wa-confirm {
-            background: var(--wa-color);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 14px;
-            width: 100%;
-            margin-top: 25px;
-            font-size: 15px;
-            font-weight: 800;
-            letter-spacing: 1px;
+        .btn--wa-confirm {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            background: var(--wa);
+            color: #fff;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.25);
+            margin-top: 20px;
         }
-        .btn-wa-confirm:hover {
+        .btn--wa-confirm:hover {
             background: #1ebd5a;
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 12px 45px rgba(37, 211, 102, 0.4);
         }
 
-        .btn-cancel {
+        .btn--cancel {
             background: none;
             border: none;
             color: #ff4d4d;
-            margin-top: 20px;
-            cursor: pointer;
             font-weight: 700;
             font-size: 13px;
             letter-spacing: 1px;
+            cursor: pointer;
+            padding: 14px 10px 4px;
             transition: 0.3s;
-            padding: 10px;
+            display: block;
+            margin: 0 auto;
         }
-        .btn-cancel:hover {
+        .btn--cancel:hover {
             color: #ff1a1a;
-            text-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+            text-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
         }
 
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 999;
-        }
+        /* ============================================================
+               FOOTER
+               ============================================================ */
         footer {
             text-align: center;
-            padding: 40px 20px;
-            color: #666;
-            font-size: 14px;
+            padding: 32px 20px;
+            color: #555;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: 1px;
-            border-top: 1px solid var(--glass-border);
+            letter-spacing: 0.8px;
+            border-top: 1px solid var(--border-glass);
             margin-top: auto;
-            background: rgba(5, 5, 5, 0.8);
+            background: rgba(5, 5, 5, 0.6);
             backdrop-filter: blur(10px);
+            z-index: 1;
+            position: relative;
+        }
+        footer span {
+            color: var(--accent);
+        }
+
+        /* ============================================================
+               RESPONSIVE
+               ============================================================ */
+        @media (max-width: 640px) {
+            .container {
+                padding: 32px 16px;
+            }
+            .card {
+                padding: 22px 18px;
+            }
+            .hero {
+                min-height: 400px;
+                padding: 60px 20px 40px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .price-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .price {
+                font-size: 24px;
+            }
+            .btn--buy {
+                justify-content: center;
+            }
+            .social-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .free-box {
+                padding: 28px 20px;
+            }
+            .modal-box {
+                padding: 28px 20px;
+            }
+            .sidebar {
+                width: 270px;
+                padding: 20px 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- ====== AMBIENT ORBS ====== -->
+    <div class="orb orb--1"></div>
+    <div class="orb orb--2"></div>
+    <div class="orb orb--3"></div>
+
+    <!-- ====== OVERLAY ====== -->
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+    <!-- ====== SIDEBAR ====== -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="logo-container" onclick="switchPage('home')">
-                <h2 class="logo-text">Tama<br><span>Ryuichi</span></h2>
+            <div class="sidebar-logo" onclick="switchPage('home')">
+                <div class="logo-text">Tama<br /><span>Ryuichi</span></div>
             </div>
-            <button class="menu-toggle" onclick="toggleMenu()">×</button>
+            <button class="sidebar-close" onclick="toggleMenu()">✕</button>
         </div>
+
         <ul class="sidebar-menu">
             <li><a id="nav-home" class="active-link" onclick="switchPage('home')"><i class="fas fa-home"></i> Beranda</a></li>
             <li><a id="nav-services" onclick="switchPage('services')"><i class="fas fa-shopping-cart"></i> Layanan Kami</a></li>
@@ -840,238 +1164,252 @@
             <li><a href="https://youtube.com/@tamaryc03" target="_blank"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a></li>
             <li><a href="https://whatsapp.com/channel/0029Vb8P2lX29754xrgZm72H" target="_blank"><i class="fas fa-bullhorn" style="color:#25D366"></i> Saluran WA</a></li>
         </ul>
+
+        <div class="sidebar-footer">© 2025 Tama Ryuichi</div>
     </div>
 
+    <!-- ====== NAVBAR ====== -->
     <nav>
-        <div class="logo-container" onclick="switchPage('home')">
+        <div class="nav-logo" onclick="switchPage('home')">
             <div class="logo-text">Tama <span>Ryuichi</span></div>
         </div>
-        <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></button>
+        <button class="nav-toggle" onclick="toggleMenu()"><i class="fas fa-bars-staggered"></i></button>
     </nav>
 
-    <div id="view-home" class="page-view active">
-        <div class="welcome-hero">
-            <h1>WELCOME TO <br><span>TAMA RYUICHI</span></h1>
-            <p>Pusat Layanan Script Monetloader Gta Samp, Pembuatan Bot Discord, Web Developer & Jual Beli Game Terpercaya.</p>
+    <!-- ================================================================
+    PAGE VIEWS
+    ================================================================ -->
 
-            <div class="hero-buttons">
-                <button class="btn-hero-primary" onclick="switchPage('services')"><i class="fas fa-rocket"></i> EKSPLOR LAYANAN</button>
-                <button class="btn-hero-secondary" onclick="switchPage('faq')"><i class="fas fa-book"></i> BACA INFO</button>
+    <!-- ===== HOME ===== -->
+    <div id="view-home" class="page-view active">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge"><i class="fas fa-bolt"></i> Official Store</div>
+                <h1>Welcome to <br /><span class="highlight">Tama Ryuichi</span></h1>
+                <p>Pusat Layanan Script Monetloader GTA SAMP, Bot Discord, Web Developer &amp; Jual Beli Game Terpercaya.</p>
+                <div class="hero-actions">
+                    <button class="btn btn--primary" onclick="switchPage('services')"><span><i class="fas fa-rocket"></i> Eksplor Layanan</span></button>
+                    <button class="btn btn--ghost" onclick="switchPage('faq')"><i class="fas fa-book"></i> Baca Info</button>
+                </div>
             </div>
-        </div>
+        </section>
 
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-link"></i> OFFICIAL LINKS</h2>
+            <!-- SOCIAL -->
+            <h2 class="section-title"><i class="fas fa-link"></i> Official Links</h2>
             <div class="social-grid">
-                <a href="https://www.tiktok.com/@tamaryuchiofc" target="_blank" class="social-btn"><i class="fab fa-tiktok" style="font-size:18px;"></i> TIKTOK</a>
-                <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2; font-size:18px;"></i> DISCORD</a>
-                <a href="https://youtube.com/@tamaryc03" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000; font-size:18px;"></i> YOUTUBE</a>
-                <a href="https://whatsapp.com/channel/0029Vb8P2lX29754xrgZm72H" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366; font-size:18px;"></i> SALURAN WA</a>
-                <a href="https://chat.whatsapp.com/KuhJBtxRo9U2RLtN4bcjDm" target="_blank" class="social-btn highlight"><i class="fas fa-gamepad" style="color:#25D366; font-size:20px;"></i> GB JB ALL GAME BY ZENN</a>
+                <a href="https://www.tiktok.com/@tamaryuchiofc" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i> TikTok</a>
+                <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2"></i> Discord</a>
+                <a href="https://youtube.com/@tamaryc03" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a>
+                <a href="https://whatsapp.com/channel/0029Vb8P2lX29754xrgZm72H" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366"></i> Saluran WA</a>
+                <a href="https://chat.whatsapp.com/KuhJBtxRo9U2RLtN4bcjDm" target="_blank" class="social-btn highlight"><i class="fas fa-gamepad" style="color:#25D366"></i> GB JB All Game by ZENN</a>
             </div>
 
-            <h2 class="section-title"><i class="fas fa-box-open"></i> FREE RESOURCES</h2>
+            <!-- FREE -->
+            <h2 class="section-title"><i class="fas fa-box-open"></i> Free Resources</h2>
             <div class="free-box">
                 <h4>Monetloader Free Edition</h4>
-                <p>Dapatkan versi gratis langsung dari server Discord kami untuk mencoba fitur dasar. Yuk gabung dan ramaikan komunitas sekarang, gratis untuk semua member!</p>
-                <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="btn-download"><i class="fas fa-cloud-download-alt"></i> UNDUH DI DISCORD</a>
+                <p>Dapatkan versi gratis langsung dari server Discord kami. Gratis untuk semua member!</p>
+                <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="btn--download"><i class="fas fa-cloud-download-alt"></i> Unduh di Discord</a>
             </div>
         </div>
     </div>
 
+    <!-- ===== SERVICES ===== -->
     <div id="view-services" class="page-view">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-shopping-cart"></i> OFFICIAL SERVICES</h2>
+            <h2 class="section-title"><i class="fas fa-shopping-cart"></i> Official Services</h2>
 
+            <!-- Card 1 -->
             <div class="card">
-                <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop" alt="Custom Monetloader">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800&auto=format&fit=crop" alt="Custom Monetloader" loading="lazy" />
                 </div>
-                <h3>CUSTOM MONETLOADER</h3>
+                <h3>Custom Monetloader</h3>
                 <ul>
-                    <li><i class="fas fa-file-code"></i> <strong>Full Akses:</strong> Mendapatkan File Script 100% Open Source (No Encrypt).</li>
-                    <li><i class="fas fa-paint-brush"></i> <strong>Desain Bebas:</strong> Kustomisasi Tampilan & UI sepenuhnya sesuai selera Anda.</li>
-                    <li><i class="fas fa-cogs"></i> <strong>Fitur Spesifik:</strong> Bebas request fitur rumit yang disesuaikan dengan kebutuhan Server.</li>
-                    <li><i class="fas fa-shield-alt"></i> <strong>Terjamin:</strong> Fitur dipastikan berfungsi normal (Work 100%) dan bergaransi bebas bug.</li>
-                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
+                    <li><i class="fas fa-file-code"></i> <strong>Full Akses:</strong> File Script 100% Open Source (No Encrypt).</li>
+                    <li><i class="fas fa-paint-brush"></i> <strong>Desain Bebas:</strong> Kustomisasi Tampilan &amp; UI sesuai selera.</li>
+                    <li><i class="fas fa-cogs"></i> <strong>Fitur Spesifik:</strong> Request fitur rumit sesuai kebutuhan Server.</li>
+                    <li><i class="fas fa-shield-alt"></i> <strong>Terjamin:</strong> Fitur Work 100% &amp; bergaransi bebas bug.</li>
+                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Role VIP di Server Discord.</li>
                 </ul>
                 <div class="price-row">
                     <div class="price">Rp 30.000</div>
-                    <button class="btn-buy" onclick="openPay('Custom Monetloader')">ORDER <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn--buy" onclick="openPay('Custom Monetloader')">ORDER <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
+            <!-- Card 2 -->
             <div class="card">
-                <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Bot Discord">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop" alt="Bot Discord" loading="lazy" />
                 </div>
-                <h3>BOT DISCORD CUSTOM</h3>
+                <h3>Bot Discord Custom</h3>
                 <ul>
-                    <li><i class="fas fa-terminal"></i> <strong>Kustomisasi:</strong> Bebas Request Sistem & Command Apapun.</li>
-                    <li><i class="fas fa-server"></i> <strong>Uptime:</strong> Hosting Stabil, Bot Online 24 Jam Non-stop.</li>
-                    <li><i class="fas fa-hourglass-half"></i> <strong>Durasi:</strong> Masa Aktif Bot 30 Hari (Bisa diperpanjang).</li>
-                    <li><i class="fas fa-headset"></i> <strong>Support:</strong> Gratis Maintenance & Perbaikan Bug selama masa aktif.</li>
-                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
+                    <li><i class="fas fa-terminal"></i> <strong>Kustomisasi:</strong> Request Sistem &amp; Command Apapun.</li>
+                    <li><i class="fas fa-server"></i> <strong>Uptime:</strong> Hosting Stabil, Online 24 Jam Non-stop.</li>
+                    <li><i class="fas fa-hourglass-half"></i> <strong>Durasi:</strong> Aktif 30 Hari (bisa diperpanjang).</li>
+                    <li><i class="fas fa-headset"></i> <strong>Support:</strong> Maintenance &amp; Perbaikan Bug gratis.</li>
+                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Role VIP di Server Discord.</li>
                 </ul>
                 <div class="price-row">
-                    <div class="price">Rp 50.000 <span>/ BULAN</span></div>
-                    <button class="btn-buy" onclick="openPay('Bot Discord Custom')">ORDER <i class="fas fa-arrow-right"></i></button>
+                    <div class="price">Rp 50.000 <span>/ bulan</span></div>
+                    <button class="btn--buy" onclick="openPay('Bot Discord Custom')">ORDER <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
+            <!-- Card 3 -->
             <div class="card">
-                <div class="card-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="Custom Website">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" alt="Custom Website" loading="lazy" />
                 </div>
-                <h3>CUSTOM WEBSITE</h3>
+                <h3>Custom Website</h3>
                 <ul>
-                    <li><i class="fas fa-palette"></i> <strong>Tema Bebas:</strong> Desain dan tampilan (UI/UX) modern sesuai selera.</li>
-                    <li><i class="fas fa-layer-group"></i> <strong>Fitur Lengkap:</strong> Bebas request fitur (Katalog, Animasi, Link tree, dll).</li>
-                    <li><i class="fas fa-mobile-alt"></i> <strong>Responsif:</strong> Tampilan rapi di HP, Tablet, maupun PC.</li>
+                    <li><i class="fas fa-palette"></i> <strong>Tema Bebas:</strong> Desain UI/UX modern sesuai selera.</li>
+                    <li><i class="fas fa-layer-group"></i> <strong>Fitur Lengkap:</strong> Katalog, Animasi, Link tree, dll.</li>
+                    <li><i class="fas fa-mobile-alt"></i> <strong>Responsif:</strong> Rapi di HP, Tablet, &amp; PC.</li>
                     <li><i class="fas fa-infinity"></i> <strong>Milik Sendiri:</strong> Website menjadi milik Anda selamanya.</li>
-                    <li><i class="fas fa-code"></i> <strong>Full Source:</strong> File mentah HTML, CSS, & JS 100% diberikan.</li>
-                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Eksklusif Role VIP di Server Discord Kami</li>
+                    <li><i class="fas fa-code"></i> <strong>Full Source:</strong> File HTML, CSS, &amp; JS 100% diberikan.</li>
+                    <li><i class="fas fa-crown"></i> <strong>Privilege:</strong> Bonus Role VIP di Server Discord.</li>
                 </ul>
                 <div class="price-row">
                     <div class="price">Rp 50.000</div>
-                    <button class="btn-buy" onclick="openPay('Custom Website')">ORDER <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn--buy" onclick="openPay('Custom Website')">ORDER <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
-
         </div>
     </div>
 
+    <!-- ===== TUTORIAL ===== -->
     <div id="view-tutorial" class="page-view">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-clipboard-list"></i> PANDUAN CARA ORDER</h2>
-            <div class="card" style="padding: 40px;">
+            <h2 class="section-title"><i class="fas fa-clipboard-list"></i> Panduan Cara Order</h2>
+            <div class="card" style="padding: 34px 30px;">
                 <ol class="info-list">
                     <li>Buka menu <strong>"Layanan Kami"</strong> untuk melihat daftar script, bot, dan web yang tersedia.</li>
                     <li>Klik tombol <strong>"ORDER"</strong> pada layanan yang ingin Anda beli.</li>
-                    <li>Pilih metode pembayaran yang tersedia (Transfer E-Wallet DANA/GOPAY, QRIS Otomatis). Pastikan Anda mentransfer sesuai nominal yang tertera.</li>
-                    <li>Setelah melakukan pembayaran, klik tombol <strong>"KONFIRMASI VIA WHATSAPP"</strong> di layar Checkout.</li>
-                    <li>Sistem akan mengarahkan Anda ke WhatsApp Admin. <strong>Wajib mengirimkan bukti screenshot pembayaran</strong> agar pesanan langsung kami proses.</li>
-                    <li>Admin akan memverifikasi pembayaran dan langsung membuatkan pesanan / request fitur yang Anda inginkan.</li>
+                    <li>Pilih metode pembayaran (Transfer E-Wallet DANA/GOPAY atau QRIS Otomatis). Transfer sesuai nominal.</li>
+                    <li>Setelah bayar, klik tombol <strong>"KONFIRMASI VIA WHATSAPP"</strong> di layar Checkout.</li>
+                    <li>Anda akan diarahkan ke WhatsApp Admin. <strong>Wajib kirim screenshot bukti bayar</strong> agar pesanan diproses.</li>
+                    <li>Admin verifikasi pembayaran dan langsung membuat pesanan / request fitur Anda.</li>
                 </ol>
-                <div style="margin-top: 35px; padding-top: 25px; border-top: 1px solid var(--glass-border); text-align: center;">
-                    <button class="btn-hero-primary" style="margin: auto;" onclick="switchPage('services')"><i class="fas fa-shopping-cart"></i> LIHAT LAYANAN SEKARANG</button>
+                <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-glass); text-align: center;">
+                    <button class="btn btn--primary" onclick="switchPage('services')"><span><i class="fas fa-shopping-cart"></i> Lihat Layanan</span></button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- ===== FAQ ===== -->
     <div id="view-faq" class="page-view">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-info-circle"></i> PENJELASAN LAYANAN</h2>
+            <h2 class="section-title"><i class="fas fa-info-circle"></i> Penjelasan Layanan</h2>
 
-            <div class="card" style="padding: 35px; margin-bottom: 25px;">
-                <div class="info-heading"><i class="fas fa-code"></i> Apa itu Custom Monetloader?</div>
-                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
-                    Layanan pembuatan script khusus untuk GTA SAMP (PC maupun Android). Kami menyediakan kode 100% open-source (tanpa di-encrypt), sehingga Anda bebas mempelajari atau mengubahnya nanti. Anda bebas request bentuk tampilan UI, dan fitur sistemnya sesuai selera server roleplay Anda.
-                </p>
+            <div class="faq-item">
+                <div class="q"><i class="fas fa-code"></i> Apa itu Custom Monetloader?</div>
+                <div class="a">Layanan pembuatan script khusus untuk GTA SAMP (PC &amp; Android). Kode 100% open-source (tanpa encrypt), bebas request tampilan UI dan fitur sistem sesuai selera server roleplay Anda.</div>
             </div>
 
-            <div class="card" style="padding: 35px; margin-bottom: 25px;">
-                <div class="info-heading"><i class="fas fa-robot"></i> Sistem Bot Discord Custom</div>
-                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
-                    Layanan pembuatan bot Discord yang aktif 24 jam penuh di server Anda. Sangat cocok untuk manajemen Roleplay, Moderasi server, Tiket otomatis, Sistem Economy, Welcomer, Dll. hingga integrasi database. Server komunitas Anda akan jauh lebih rapi, otomatis, dan terlihat profesional dengan bot buatan kami.
-                </p>
+            <div class="faq-item">
+                <div class="q"><i class="fas fa-robot"></i> Sistem Bot Discord Custom</div>
+                <div class="a">Pembuatan bot Discord aktif 24 jam. Cocok untuk manajemen Roleplay, Moderasi, Tiket otomatis, Economy, Welcomer, hingga integrasi database. Server Anda jadi lebih rapi dan profesional.</div>
             </div>
 
-            <div class="card" style="padding: 35px; margin-bottom: 25px;">
-                <div class="info-heading"><i class="fas fa-globe"></i> Custom Website</div>
-                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
-                    Layanan pembuatan dan perancangan website untuk mempresentasikan server, komunitas, atau toko Anda. Kami merancang dengan tampilan modern dan interaktif. Anda akan mendapatkan File Asli Source Code (HTML/CSS/JS) sepenuhnya. Website ini dapat Anda host sendiri secara gratis maupun berbayar dengan kontrol di tangan Anda selamanya.
-                </p>
+            <div class="faq-item">
+                <div class="q"><i class="fas fa-globe"></i> Custom Website</div>
+                <div class="a">Perancangan website modern &amp; interaktif untuk server, komunitas, atau toko Anda. Dapatkan Source Code (HTML/CSS/JS) sepenuhnya. Website menjadi milik Anda selamanya, bisa dihosting sendiri.</div>
             </div>
 
-            <div class="card" style="padding: 35px; margin-bottom: 25px; border-color: rgba(37, 211, 102, 0.3);">
-                <div class="info-heading"><i class="fas fa-gamepad" style="color: #25D366; text-shadow: 0 0 15px rgba(37,211,102,0.5);"></i> Jual Beli Kebutuhan All Game</div>
-                <p style="color: var(--text-muted); font-size: 15px; padding-left: 32px; line-height: 1.8;">
-                    Kami juga menyediakan fasilitas grup atau wadah komunitas untuk transaksi jual-beli berbagai kebutuhan game (seperti Jual Beli Akun, Top Up Mata Uang Game, Item Langka, Jasa GB/Joki, dll) dengan menggunakan uang asli secara legal di komunitas kami. <strong>Sangat disarankan untuk selalu menggunakan jasa Admin / Rekber terpercaya</strong> dalam setiap transaksi antar player supaya aman dan terhindar dari segala bentuk penipuan.
-                </p>
+            <div class="faq-item" style="border-color: rgba(37,211,102,0.2);">
+                <div class="q"><i class="fas fa-gamepad" style="color:#25D366; text-shadow:0 0 20px rgba(37,211,102,0.3);"></i> Jual Beli Kebutuhan All Game</div>
+                <div class="a">Fasilitas grup / wadah komunitas untuk transaksi jual-beli berbagai kebutuhan game (Akun, Top Up, Item Langka, Jasa GB/Joki, dll) dengan uang asli secara legal. <strong>Gunakan jasa Admin / Rekber terpercaya</strong> agar aman dari penipuan.</div>
             </div>
 
             <div class="free-box" style="margin-top: 40px;">
-                <h4 style="font-size: 18px;"><i class="fas fa-headset" style="color: var(--accent-color); margin-right: 10px;"></i> Butuh Bantuan Lain?</h4>
-                <p style="font-size: 14px; margin-bottom: 15px;">Jika Anda memiliki pertanyaan khusus di luar penjelasan di atas, silakan tanyakan langsung ke admin melalui WhatsApp atau Discord resmi kami.</p>
+                <h4 style="font-size:18px;"><i class="fas fa-headset" style="color:var(--accent); margin-right:10px;"></i> Butuh Bantuan?</h4>
+                <p style="font-size:14px; margin-bottom:12px;">Ada pertanyaan lain? Tanyakan langsung ke admin via WhatsApp atau Discord resmi kami.</p>
             </div>
         </div>
     </div>
 
+    <!-- ===== MODAL ===== -->
     <div class="modal" id="payModal">
-        <div class="modal-content">
-            <h3 style="color:white; margin-bottom: 5px; font-weight:800; letter-spacing: 1.5px;">CHECKOUT</h3>
-            <p id="orderName" style="font-size:15px; margin-bottom:30px; color:var(--accent-color); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;"></p>
+        <div class="modal-box">
+            <h3>Checkout</h3>
+            <span class="order-label" id="orderName">—</span>
 
             <div class="pay-item" onclick="copyNumber('0895328044863')">
-                <div class="pay-item-text">
-                    <label>E-WALLET (DANA/GOPAY)</label>
-                    <span>0895328044863</span>
+                <div>
+                    <span class="label">E-Wallet (DANA / GOPAY)</span>
+                    <span class="value">0895328044863</span>
                 </div>
-                <i class="fas fa-copy" style="color:var(--accent-color); font-size: 20px; transition: 0.3s;"></i>
+                <i class="fas fa-copy copy-icon"></i>
             </div>
 
             <a href="https://i.ibb.co.com/4wG7WL6Y/qr-ID1025380621058-27-07-26-1785093567-1785093567310.jpg" target="_blank" class="qris-btn">
-                <i class="fas fa-qrcode fa-2x"></i>
-                <div style="text-align:left; line-height: 1.3;">BUKA MENU QRIS<br><span style="font-size:12px; color:var(--text-muted); font-weight: 500;">Ketuk untuk scan pembayaran otomatis</span></div>
+                <i class="fas fa-qrcode"></i>
+                <div>
+                    Buka Menu QRIS
+                    <span class="sub">Ketuk untuk scan pembayaran otomatis</span>
+                </div>
             </a>
 
-            <button class="btn-wa-confirm" onclick="hubungiAdmin()">
-                <i class="fab fa-whatsapp fa-lg"></i> KONFIRMASI VIA WHATSAPP
+            <button class="btn--wa-confirm" onclick="hubungiAdmin()">
+                <i class="fab fa-whatsapp fa-lg"></i> Konfirmasi via WhatsApp
             </button>
 
-            <button class="btn-cancel" onclick="closePay()">BATALKAN PESANAN</button>
+            <button class="btn--cancel" onclick="closePay()">Batalkan Pesanan</button>
         </div>
     </div>
 
+    <!-- ===== FOOTER ===== -->
     <footer>
-        <p>© 2025 Tama Ryuichi. ALL RIGHTS RESERVED.</p>
+        <p>© 2025 <span>Tama Ryuichi</span>. All Rights Reserved.</p>
     </footer>
 
+    <!-- ================================================================
+    SCRIPT
+    ================================================================ -->
     <script>
-        // Fungsi buka/tutup Sidebar Menu
+        // ----- Toggle Sidebar -----
         function toggleMenu() {
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
             sidebar.classList.toggle('active');
-            overlay.style.display = sidebar.classList.contains('active') ? 'block' : 'none';
+            overlay.classList.toggle('show');
         }
 
-        // Fungsi Single Page Application (SPA) - Pindah Halaman
+        // ----- SPA: Switch Page -----
         function switchPage(pageId) {
-            const views = document.querySelectorAll('.page-view');
-            views.forEach(view => view.classList.remove('active'));
+            // Hide all pages
+            document.querySelectorAll('.page-view').forEach(v => v.classList.remove('active'));
+            const target = document.getElementById('view-' + pageId);
+            if (target) target.classList.add('active');
 
-            const targetView = document.getElementById('view-' + pageId);
-            if (targetView) {
-                targetView.classList.add('active');
-                window.scrollTo(0, 0);
-            }
+            // Update nav active link
+            document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active-link'));
+            const navLink = document.getElementById('nav-' + pageId);
+            if (navLink) navLink.classList.add('active-link');
 
-            const navLinks = document.querySelectorAll('.sidebar-menu a');
-            navLinks.forEach(link => link.classList.remove('active-link'));
-            const activeNav = document.getElementById('nav-' + pageId);
-            if (activeNav) activeNav.classList.add('active-link');
-
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.classList.contains('active')) {
+            // Close sidebar on mobile
+            if (document.getElementById('sidebar').classList.contains('active')) {
                 toggleMenu();
             }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Fungsi Buka Modal Pembayaran
+        // ----- Modal: Open -----
         function openPay(name) {
-            document.getElementById('orderName').innerText = name;
+            document.getElementById('orderName').textContent = name;
             const modal = document.getElementById('payModal');
             modal.style.display = 'flex';
-
-            setTimeout(() => {
+            requestAnimationFrame(() => {
                 modal.classList.add('show');
-            }, 10);
+            });
         }
 
-        // Fungsi Tutup Modal Pembayaran
+        // ----- Modal: Close -----
         function closePay() {
             const modal = document.getElementById('payModal');
             modal.classList.remove('show');
@@ -1080,26 +1418,41 @@
             }, 400);
         }
 
-        // Fungsi Redirect Konfirmasi WhatsApp
+        // ----- WhatsApp Confirm -----
         function hubungiAdmin() {
-            const order = document.getElementById('orderName').innerText;
-            const phoneNumber = "62895328044863"; // Nomor WhatsApp (diawali dengan 62)
-            const message = `Halo Admin Tama Ryuichi, saya ingin mengkonfirmasi pesanan layanan: [ ${order} ].%0A%0ABerikut saya lampirkan bukti pembayarannya.`;
+            const order = document.getElementById('orderName').textContent;
+            const phone = '62895328044863';
+            const msg =
+                `Halo Admin Tama Ryuichi, saya ingin mengkonfirmasi pesanan layanan: [ ${order} ].%0A%0ABerikut saya lampirkan bukti pembayarannya.`;
 
-            alert(`Sistem akan mengarahkanmu ke WhatsApp Admin Tama Ryuichi untuk mengkonfirmasi pesanan: [ ${order} ]. \n\nPastikan Anda mengirim screenshot bukti pembayaran.`);
-
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            alert(
+                `Sistem akan mengarahkanmu ke WhatsApp Admin Tama Ryuichi untuk mengkonfirmasi pesanan: [ ${order} ].\n\nPastikan Anda mengirim screenshot bukti pembayaran.`
+                );
+            window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
         }
 
-        // Fungsi Copy Nomor
+        // ----- Copy Number -----
         function copyNumber(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert("Nomor E-Wallet berhasil disalin: " + text);
-            }).catch(err => {
-                alert("Gagal menyalin nomor. Silakan salin secara manual.");
-                console.error('Error copying text: ', err);
+                alert('Nomor E-Wallet berhasil disalin: ' + text);
+            }).catch(() => {
+                alert('Gagal menyalin nomor. Silakan salin secara manual.');
             });
         }
+
+        // ----- Close modal on overlay click (outside content) -----
+        document.getElementById('payModal').addEventListener('click', function(e) {
+            if (e.target === this) closePay();
+        });
+
+        // ----- Close sidebar with Escape key -----
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (document.getElementById('sidebar').classList.contains('active')) toggleMenu();
+                if (document.getElementById('payModal').classList.contains('show')) closePay();
+            }
+        });
     </script>
+
 </body>
 </html>
