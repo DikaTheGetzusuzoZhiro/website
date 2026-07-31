@@ -19,9 +19,9 @@
                ============================================================ */
         :root {
             --bg-dark: #0a0a0a;
-            --bg-card: rgba(18, 18, 24, 0.75);
+            --bg-card: rgba(16, 16, 24, 0.8);
             --accent: #ff5500;
-            --accent-glow: rgba(255, 85, 0, 0.5);
+            --accent-glow: rgba(255, 85, 0, 0.6);
             --accent-soft: #ff7b2b;
             --wa: #25D366;
             --text: #f0f0f5;
@@ -51,6 +51,27 @@
             line-height: 1.6;
             display: flex;
             flex-direction: column;
+            position: relative;
+        }
+
+        /* --- Background animated gradient overlay --- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 85, 0, 0.03), transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(255, 40, 0, 0.02), transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+            animation: bgPulse 12s ease-in-out infinite alternate;
+        }
+        @keyframes bgPulse {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
         }
 
         /* --- Scrollbar --- */
@@ -81,7 +102,7 @@
             filter: blur(90px);
             pointer-events: none;
             z-index: 0;
-            opacity: 0.3;
+            opacity: 0.25;
             animation: orbFloat 18s ease-in-out infinite alternate;
         }
         .orb--1 {
@@ -130,7 +151,7 @@
             left: -100%;
             width: 290px;
             height: 100%;
-            background: rgba(8, 8, 12, 0.92);
+            background: rgba(8, 8, 12, 0.94);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             z-index: 1100;
@@ -267,7 +288,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 14px 5%;
-            background: rgba(8, 8, 12, 0.7);
+            background: rgba(8, 8, 12, 0.75);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-bottom: 1px solid var(--border-glass);
@@ -376,8 +397,8 @@
             text-align: center;
             padding: 80px 24px 60px;
             background:
-                radial-gradient(ellipse at 30% 40%, rgba(255, 85, 0, 0.08), transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(255, 40, 0, 0.05), transparent 50%),
+                radial-gradient(ellipse at 30% 40%, rgba(255, 85, 0, 0.12), transparent 60%),
+                radial-gradient(ellipse at 70% 60%, rgba(255, 40, 0, 0.08), transparent 50%),
                 linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, var(--bg-dark) 100%);
             overflow: hidden;
         }
@@ -411,6 +432,7 @@
             margin-bottom: 28px;
             backdrop-filter: blur(10px);
             animation: fadeUp 1s ease both;
+            box-shadow: 0 0 30px rgba(255, 85, 0, 0.05);
         }
         .hero-badge i {
             margin-right: 8px;
@@ -427,7 +449,7 @@
             background: linear-gradient(135deg, #ff8c00, #ff2a00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px var(--accent-glow));
+            filter: drop-shadow(0 0 40px var(--accent-glow));
         }
 
         .hero p {
@@ -583,16 +605,6 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 85, 0, 0.06);
         }
-        .social-btn.highlight {
-            grid-column: 1 / -1;
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.08), rgba(0, 0, 0, 0.4));
-            border-color: rgba(37, 211, 102, 0.2);
-        }
-        .social-btn.highlight:hover {
-            border-color: var(--wa);
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(0, 0, 0, 0.6));
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(37, 211, 102, 0.08);
-        }
 
         /* ============================================================
                FREE BOX
@@ -608,6 +620,12 @@
             overflow: hidden;
             backdrop-filter: blur(12px);
             box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+        }
+        .free-box:hover {
+            border-color: rgba(255, 85, 0, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 85, 0, 0.05);
         }
         .free-box::before {
             content: '';
@@ -792,6 +810,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
         }
         .btn--buy:hover {
             background: linear-gradient(135deg, #ff7b00, #ff2a00);
@@ -849,10 +868,12 @@
             backdrop-filter: blur(12px);
             border-radius: 16px;
             border: 1px solid var(--border-glass);
-            transition: 0.3s;
+            transition: all 0.3s ease;
         }
         .faq-item:hover {
-            border-color: rgba(255, 85, 0, 0.15);
+            border-color: rgba(255, 85, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
         .faq-item .q {
             display: flex;
@@ -1161,7 +1182,7 @@
             <li class="sidebar-divider"></li>
             <li><a href="https://www.tiktok.com/@tamaryuchiofc" target="_blank"><i class="fab fa-tiktok" style="color:#fff"></i> TikTok</a></li>
             <li><a href="https://discord.gg/Y9gwPyCG9E" target="_blank"><i class="fab fa-discord" style="color:#5865F2"></i> Discord</a></li>
-            <li><a href="https://youtube.com/@tamaryc03" target="_blank"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a></li>
+            <li><a href="https://youtube.com/@tamarycofc" target="_blank"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a></li>
             <li><a href="https://whatsapp.com/channel/0029Vb8P2lX29754xrgZm72H" target="_blank"><i class="fas fa-bullhorn" style="color:#25D366"></i> Saluran WA</a></li>
         </ul>
 
@@ -1200,9 +1221,8 @@
             <div class="social-grid">
                 <a href="https://www.tiktok.com/@tamaryuchiofc" target="_blank" class="social-btn"><i class="fab fa-tiktok"></i> TikTok</a>
                 <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" class="social-btn"><i class="fab fa-discord" style="color:#5865F2"></i> Discord</a>
-                <a href="https://youtube.com/@tamaryc03" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a>
+                <a href="https://youtube.com/@tamarycofc" target="_blank" class="social-btn"><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube</a>
                 <a href="https://whatsapp.com/channel/0029Vb8P2lX29754xrgZm72H" target="_blank" class="social-btn"><i class="fab fa-whatsapp" style="color:#25D366"></i> Saluran WA</a>
-                <a href="https://chat.whatsapp.com/KuhJBtxRo9U2RLtN4bcjDm" target="_blank" class="social-btn highlight"><i class="fas fa-gamepad" style="color:#25D366"></i> GB JB All Game by ZENN</a>
             </div>
 
             <!-- FREE -->
