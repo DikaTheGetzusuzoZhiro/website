@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import ChatApp from "@/components/ChatApp";
+import RatingForm from "@/components/RatingForm";
 
 export default function ChatPage() {
   const router = useRouter();
@@ -27,5 +28,13 @@ export default function ChatPage() {
     );
   }
 
-  return <ChatApp username={username} />;
+  return (
+    <div className="min-h-screen bg-zinc-950">
+      <ChatApp username={username} />
+
+      <div className="mx-auto max-w-4xl px-5 pb-10">
+        <RatingForm username={username} />
+      </div>
+    </div>
+  );
 }
