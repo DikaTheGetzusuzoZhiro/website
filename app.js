@@ -1,134 +1,262 @@
-const CLIENT_ID = "3af5dfbf2bec4a40a0b0e6b3a0beaa9c";
+/* =========================================
+   TAMA MUSIC
+   Spotify Web API + Authorization Code PKCE
+========================================= */
+
 
 /*
- * PENTING:
- * Redirect URI harus SAMA PERSIS dengan yang ada
- * di Spotify Developer Dashboard.
- *
- * Untuk Vercel, contoh:
- * https://website-three-weld-9t4erfvh7y.vercel.app/
+ * CLIENT ID SPOTIFY KAMU
  */
 
-const REDIRECT_URI = window.location.origin + window.location.pathname;
+const CLIENT_ID =
+  "3af5dfbf2bec4a40a0b0e6b3a0beaa9c";
 
-const SCOPES = "";
 
-let accessToken = localStorage.getItem("spotify_access_token");
+/*
+ * Redirect URI
+ *
+ * HARUS SAMA PERSIS dengan yang kamu
+ * daftarkan di Spotify Developer Dashboard.
+ *
+ * Untuk Vercel misalnya:
+ *
+ * https://tama-music.vercel.app/
+ */
+
+const REDIRECT_URI =
+  window.location.origin +
+  window.location.pathname;
+
+
+/*
+ * Scope
+ *
+ * Untuk search + metadata publik,
+ * kita tidak perlu meminta scope tambahan.
+ *
+ * Scope berikut dipakai kalau nanti ingin
+ * membaca library user.
+ */
+
+const SCOPES = [
+  "user-read-private",
+  "user-read-email",
+  "user-library-read"
+].join(" ");
+
+
+/*
+ * Spotify endpoints
+ */
+
+const AUTHORIZE_URL =
+  "https://accounts.spotify.com/authorize";
+
+const TOKEN_URL =
+  "https://accounts.spotify.com/api/token";
+
+const API_BASE =
+  "https://api.spotify.com/v1";
+
+
+/*
+ * STATE
+ */
+
+let accessToken =
+  localStorage.getItem(
+    "tama_spotify_access_token"
+  );
+
+let expiresAt =
+  Number(
+    localStorage.getItem(
+      "tama_spotify_expires_at"
+    ) || 0
+  );
+
 let currentTracks = [];
+
+let currentTrack = null;
+
 let currentIndex = -1;
-let isPlaying = false;
 
-const audio = new Audio();
-audio.volume = 0.8;
+let currentArtists = [];
 
-const $ = id => document.getElementById(id);
+
+/* =========================================
+   HELPERS
+========================================= */
 
 function randomString(length = 64) {
-  const chars =
+
+  const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
 
-  const values = crypto.getRandomValues(new Uint8Array(length));
+  const values =
+    crypto.getRandomValues(
+      new Uint8Array(length)
+    );
 
   return Array.from(values)
-    .map(x => chars[x % chars.length])
+    .map(
+      value =>
+        characters[
+          value % characters.length
+        ]
+    )
     .join("");
+
 }
 
-async function sha256(plain) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(plain);
-  return crypto.subtle.digest("SHA-256", data);
+
+async function sha256(value) {
+
+  const encoder =
+    new TextEncoder();
+
+  const data =
+    encoder.encode(value);
+
+  return crypto.subtle.digest(
+    "SHA-256",
+    data
+  );
+
 }
 
-function base64url(input) {
-  return btoa(String.fromCharCode(...new Uint8Array(input)))
+
+function base64UrlEncode(buffer) {
+
+  return btoa(
+    String.fromCharCode(
+      ...new Uint8Array(buffer)
+    )
+  )
     .replace(/=/g, "")
     .replace(/\+/g, "-")
     .replace(/\//g, "_");
+
 }
+
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
 
 async function loginSpotify() {
 
-  const verifier = randomString();
+  const codeVerifier =
+    randomString(64);
 
-  const challenge = base64url(
-    await sha256(verifier)
+  const state =
+    randomString(32);
+
+  const hashed =
+    await sha256(
+      codeVerifier
+    );
+
+  const codeChallenge =
+    base64UrlEncode(
+      hashed
+    );
+
+
+  localStorage.setItem(
+    "tama_code_verifier",
+    codeVerifier
   );
 
-  const state = randomString(32);
+  localStorage.setItem(
+    "tama_oauth_state",
+    state
+  );
 
-  localStorage.setItem("spotify_verifier", verifier);
-  localStorage.setItem("spotify_state", state);
 
-  const params = new URLSearchParams({
-    response_type: "code",
-    client_id: CLIENT_ID,
-    scope: SCOPES,
-    redirect_uri: REDIRECT_URI,
-    state,
-    code_challenge_method: "S256",
-    code_challenge: challenge
-  });
+  const params =
+    new URLSearchParams({
+
+      client_id:
+        CLIENT_ID,
+
+      response_type:
+        "code",
+
+      redirect_uri:
+        REDIRECT_URI,
+
+      state:
+        state,
+
+      scope:
+        SCOPES,
+
+      code_challenge_method:
+        "S256",
+
+      code_challenge:
+        codeChallenge
+
+    });
+
 
   window.location.href =
-    "https://accounts.spotify.com/authorize?" +
+    AUTHORIZE_URL +
+    "?" +
     params.toString();
+
 }
+
+
+/* =========================================
+   CALLBACK
+========================================= */
 
 async function handleCallback() {
 
-  const params = new URLSearchParams(window.location.search);
-
-  const code = params.get("code");
-  const state = params.get("state");
-
-  if (!code) return;
-
-  const savedState = localStorage.getItem("spotify_state");
-
-  if (state !== savedState) {
-    alert("Login Spotify tidak valid.");
-    return;
-  }
-
-  const verifier =
-    localStorage.getItem("spotify_verifier");
-
-  const response = await fetch(
-    "https://accounts.spotify.com/api/token",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type":
-          "application/x-www-form-urlencoded"
-      },
-      body: new URLSearchParams({
-        client_id: CLIENT_ID,
-        grant_type: "authorization_code",
-        code,
-        redirect_uri: REDIRECT_URI,
-        code_verifier: verifier
-      })
-    }
-  );
-
-  const data = await response.json();
-
-  if (data.access_token) {
-
-    accessToken = data.access_token;
-
-    localStorage.setItem(
-      "spotify_access_token",
-      accessToken
+  const params =
+    new URLSearchParams(
+      window.location.search
     );
 
-    if (data.refresh_token) {
-      localStorage.setItem(
-        "spotify_refresh_token",
-        data.refresh_token
-      );
-    }
+
+  const error =
+    params.get("error");
+
+  if (error) {
+
+    console.error(
+      "Spotify authorization:",
+      error
+    );
 
     history.replaceState(
       {},
@@ -136,498 +264,1606 @@ async function handleCallback() {
       REDIRECT_URI
     );
 
-    $("loginBtn").textContent = "Spotify Connected";
+    return;
 
-    await searchTracks("popular music");
-  } else {
-    console.error(data);
-    alert("Gagal login Spotify.");
-  }
-}
-
-async function api(endpoint) {
-
-  if (!accessToken) {
-    throw new Error("NOT_LOGGED_IN");
   }
 
-  const response = await fetch(
-    "https://api.spotify.com/v1" + endpoint,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    }
-  );
 
-  if (response.status === 401) {
-    localStorage.removeItem("spotify_access_token");
-    accessToken = null;
+  const code =
+    params.get("code");
 
-    throw new Error("TOKEN_EXPIRED");
-  }
-
-  return response.json();
-}
-
-async function searchTracks(query) {
-
-  if (!query.trim()) return;
-
-  $("searchPage").classList.add("active-page");
-  $("homePage").classList.remove("active-page");
-  $("libraryPage").classList.remove("active-page");
-
-  $("searchStatus").textContent =
-    `Hasil pencarian untuk "${query}"`;
-
-  $("searchResults").innerHTML =
-    `<div class="loading">Mencari musik...</div>`;
-
-  try {
-
-    const data = await api(
-      `/search?q=${encodeURIComponent(query)}&type=track&limit=20&market=ID`
-    );
-
-    currentTracks = data.tracks.items;
-
-    renderResults(currentTracks);
-
-  } catch (error) {
-
-    $("searchResults").innerHTML =
-      `<p>Silakan login Spotify terlebih dahulu.</p>`;
-  }
-}
-
-function renderResults(tracks) {
-
-  if (!tracks.length) {
-    $("searchResults").innerHTML =
-      "<p>Tidak ada hasil.</p>";
-
+  if (!code) {
     return;
   }
 
-  $("searchResults").innerHTML =
-    tracks.map((track, index) => {
 
-      const image =
-        track.album.images?.[1]?.url ||
-        track.album.images?.[0]?.url ||
-        "https://via.placeholder.com/300";
+  const state =
+    params.get("state");
 
-      return `
-        <div class="result">
+  const savedState =
+    localStorage.getItem(
+      "tama_oauth_state"
+    );
 
-          <img src="${image}">
 
-          <div class="result-info">
-            <h3>${escapeHtml(track.name)}</h3>
-            <p>
-              ${escapeHtml(track.artists.map(a => a.name).join(", "))}
-              •
-              ${escapeHtml(track.album.name)}
-            </p>
-          </div>
+  if (
+    !state ||
+    state !== savedState
+  ) {
 
-          <div class="result-actions">
+    alert(
+      "Login Spotify gagal: state tidak cocok."
+    );
 
-            <button onclick="playTrack(${index})">
-              ▶
-            </button>
+    return;
 
-            <button onclick="showDetails(${index})">
-              ⋮
-            </button>
+  }
 
-            <button onclick="toggleFavorite(${index})">
-              ♡
-            </button>
 
-          </div>
+  const verifier =
+    localStorage.getItem(
+      "tama_code_verifier"
+    );
 
+
+  if (!verifier) {
+
+    alert(
+      "PKCE verifier tidak ditemukan."
+    );
+
+    return;
+
+  }
+
+
+  const response =
+    await fetch(
+      TOKEN_URL,
+      {
+
+        method:
+          "POST",
+
+        headers: {
+          "Content-Type":
+            "application/x-www-form-urlencoded"
+        },
+
+        body:
+          new URLSearchParams({
+
+            grant_type:
+              "authorization_code",
+
+            code:
+              code,
+
+            redirect_uri:
+              REDIRECT_URI,
+
+            client_id:
+              CLIENT_ID,
+
+            code_verifier:
+              verifier
+
+          })
+
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    console.error(data);
+
+    alert(
+      "Gagal mendapatkan token Spotify."
+    );
+
+    return;
+
+  }
+
+
+  saveToken(
+    data
+  );
+
+
+  history.replaceState(
+    {},
+    document.title,
+    REDIRECT_URI
+  );
+
+
+  await loadProfile();
+
+}
+
+
+/* =========================================
+   TOKEN
+========================================= */
+
+function saveToken(data) {
+
+  accessToken =
+    data.access_token;
+
+  expiresAt =
+    Date.now() +
+    (
+      Number(
+        data.expires_in || 3600
+      ) *
+      1000
+    );
+
+
+  localStorage.setItem(
+    "tama_spotify_access_token",
+    accessToken
+  );
+
+  localStorage.setItem(
+    "tama_spotify_expires_at",
+    expiresAt
+  );
+
+
+  if (
+    data.refresh_token
+  ) {
+
+    localStorage.setItem(
+      "tama_spotify_refresh_token",
+      data.refresh_token
+    );
+
+  }
+
+}
+
+
+async function refreshToken() {
+
+  const refresh =
+    localStorage.getItem(
+      "tama_spotify_refresh_token"
+    );
+
+
+  if (!refresh) {
+
+    accessToken = null;
+
+    return false;
+
+  }
+
+
+  const response =
+    await fetch(
+      TOKEN_URL,
+      {
+
+        method:
+          "POST",
+
+        headers: {
+          "Content-Type":
+            "application/x-www-form-urlencoded"
+        },
+
+        body:
+          new URLSearchParams({
+
+            grant_type:
+              "refresh_token",
+
+            refresh_token:
+              refresh,
+
+            client_id:
+              CLIENT_ID
+
+          })
+
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    logoutSpotify();
+
+    return false;
+
+  }
+
+
+  saveToken(
+    data
+  );
+
+
+  return true;
+
+}
+
+
+async function ensureToken() {
+
+  if (!accessToken) {
+    return false;
+  }
+
+
+  if (
+    Date.now() <
+    expiresAt -
+    60000
+  ) {
+
+    return true;
+
+  }
+
+
+  return refreshToken();
+
+}
+
+
+/* =========================================
+   API
+========================================= */
+
+async function spotifyAPI(
+  endpoint,
+  options = {}
+) {
+
+  const valid =
+    await ensureToken();
+
+
+  if (!valid) {
+
+    throw new Error(
+      "NOT_AUTHENTICATED"
+    );
+
+  }
+
+
+  const response =
+    await fetch(
+      API_BASE + endpoint,
+      {
+
+        ...options,
+
+        headers: {
+
+          ...(options.headers || {}),
+
+          Authorization:
+            `Bearer ${accessToken}`
+
+        }
+
+      }
+    );
+
+
+  if (
+    response.status === 401
+  ) {
+
+    const refreshed =
+      await refreshToken();
+
+
+    if (!refreshed) {
+
+      throw new Error(
+        "TOKEN_EXPIRED"
+      );
+
+    }
+
+
+    return spotifyAPI(
+      endpoint,
+      options
+    );
+
+  }
+
+
+  if (
+    response.status === 204
+  ) {
+
+    return null;
+
+  }
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    console.error(
+      "Spotify API error:",
+      data
+    );
+
+    throw new Error(
+      data?.error?.message ||
+      "Spotify API error"
+    );
+
+  }
+
+
+  return data;
+
+}
+
+
+/* =========================================
+   PROFILE
+========================================= */
+
+async function loadProfile() {
+
+  try {
+
+    const profile =
+      await spotifyAPI(
+        "/me"
+      );
+
+
+    document.getElementById(
+      "userName"
+    ).textContent =
+      profile.display_name ||
+      profile.id;
+
+
+    if (
+      profile.images &&
+      profile.images.length
+    ) {
+
+      document.getElementById(
+        "userImage"
+      ).src =
+        profile.images[0].url;
+
+    }
+
+
+    document.getElementById(
+      "loginButton"
+    ).textContent =
+      "Spotify Connected";
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+async function searchMusic(
+  query
+) {
+
+  if (!query.trim()) {
+    return;
+  }
+
+
+  showPage(
+    "search"
+  );
+
+
+  const results =
+    document.getElementById(
+      "searchResults"
+    );
+
+
+  const info =
+    document.getElementById(
+      "searchInfo"
+    );
+
+
+  results.innerHTML =
+    `<div class="loading">
+      Mencari musik...
+    </div>`;
+
+
+  try {
+
+    const data =
+      await spotifyAPI(
+        "/search?" +
+        new URLSearchParams({
+
+          q:
+            query,
+
+          type:
+            "track,artist,album",
+
+          limit:
+            "20",
+
+          market:
+            "ID"
+
+        })
+      );
+
+
+    currentTracks =
+      data.tracks?.items ||
+      [];
+
+
+    info.textContent =
+      `${currentTracks.length} lagu untuk "${query}"`;
+
+
+    renderSearchResults(
+      currentTracks
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    if (
+      error.message ===
+      "NOT_AUTHENTICATED"
+    ) {
+
+      results.innerHTML = `
+        <div class="empty">
+          <p>Login Spotify terlebih dahulu.</p>
+          <br>
+          <button
+            class="green-button"
+            onclick="loginSpotify()"
+          >
+            Login Spotify
+          </button>
         </div>
       `;
 
-    }).join("");
+      return;
+
+    }
+
+
+    results.innerHTML =
+      `<div class="empty">
+        Gagal mengambil data Spotify.
+      </div>`;
+
+  }
+
 }
 
-function playTrack(index) {
 
-  const track = currentTracks[index];
+/* =========================================
+   HOME
+========================================= */
 
-  if (!track) return;
+async function loadHome() {
+
+  const grid =
+    document.getElementById(
+      "homeTracks"
+    );
+
+
+  grid.innerHTML =
+    `<div class="loading">
+      Memuat musik...
+    </div>`;
+
+
+  try {
+
+    const data =
+      await spotifyAPI(
+        "/search?" +
+        new URLSearchParams({
+
+          q:
+            "year:2026",
+
+          type:
+            "track",
+
+          limit:
+            "12",
+
+          market:
+            "ID"
+
+        })
+      );
+
+
+    currentTracks =
+      data.tracks?.items ||
+      [];
+
+
+    renderMusicGrid(
+      currentTracks,
+      grid
+    );
+
+
+  } catch (error) {
+
+    grid.innerHTML = `
+      <div class="empty">
+        Login Spotify untuk memuat musik.
+      </div>
+    `;
+
+  }
+
+
+  loadArtists();
+
+}
+
+
+/* =========================================
+   ARTISTS
+========================================= */
+
+async function loadArtists() {
+
+  const grid =
+    document.getElementById(
+      "homeArtists"
+    );
+
+
+  try {
+
+    const data =
+      await spotifyAPI(
+        "/search?" +
+        new URLSearchParams({
+
+          q:
+            "genre:pop",
+
+          type:
+            "artist",
+
+          limit:
+            "8",
+
+          market:
+            "ID"
+
+        })
+      );
+
+
+    currentArtists =
+      data.artists?.items ||
+      [];
+
+
+    grid.innerHTML =
+      currentArtists
+        .map(
+          artist => {
+
+            const image =
+              artist.images?.[1]?.url ||
+              artist.images?.[0]?.url ||
+              "https://placehold.co/300";
+
+
+            return `
+
+              <div
+                class="artist-card"
+                onclick="openArtist('${artist.id}')"
+              >
+
+                <img
+                  src="${escapeHTML(image)}"
+                  alt=""
+                >
+
+                <h3>
+                  ${escapeHTML(
+                    artist.name
+                  )}
+                </h3>
+
+              </div>
+
+            `;
+
+          }
+        )
+        .join("");
+
+
+  } catch {
+
+    grid.innerHTML =
+      "";
+
+  }
+
+}
+
+
+/* =========================================
+   SEARCH RESULTS
+========================================= */
+
+function renderSearchResults(
+  tracks
+) {
+
+  const container =
+    document.getElementById(
+      "searchResults"
+    );
+
+
+  if (!tracks.length) {
+
+    container.innerHTML =
+      `<div class="empty">
+        Lagu tidak ditemukan.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    tracks
+      .map(
+        (track, index) => {
+
+          const image =
+            getTrackImage(
+              track
+            );
+
+
+          return `
+
+            <div class="result">
+
+              <img
+                src="${escapeHTML(image)}"
+                alt=""
+              >
+
+              <div>
+
+                <div class="result-title">
+                  ${escapeHTML(
+                    track.name
+                  )}
+                </div>
+
+                <div class="result-subtitle">
+                  ${escapeHTML(
+                    track.artists
+                      .map(
+                        artist =>
+                          artist.name
+                      )
+                      .join(", ")
+                  )}
+                  •
+                  ${escapeHTML(
+                    track.album.name
+                  )}
+                </div>
+
+              </div>
+
+              <div class="result-buttons">
+
+                <button
+                  onclick="playTrack(${index})"
+                >
+                  ▶
+                </button>
+
+                <button
+                  onclick="openTrack(${index})"
+                >
+                  ⋮
+                </button>
+
+                <button
+                  onclick="favoriteTrack(${index})"
+                >
+                  ♡
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   MUSIC GRID
+========================================= */
+
+function renderMusicGrid(
+  tracks,
+  container
+) {
+
+  if (!tracks.length) {
+
+    container.innerHTML =
+      `<div class="empty">
+        Tidak ada lagu.
+      </div>`;
+
+    return;
+
+  }
+
+
+  container.innerHTML =
+    tracks
+      .map(
+        (track, index) => {
+
+          const image =
+            getTrackImage(
+              track
+            );
+
+
+          return `
+
+            <div class="music-card">
+
+              <img
+                src="${escapeHTML(image)}"
+                alt=""
+              >
+
+              <div class="music-title">
+                ${escapeHTML(
+                  track.name
+                )}
+              </div>
+
+              <div class="music-artist">
+                ${escapeHTML(
+                  track.artists
+                    .map(
+                      x =>
+                        x.name
+                    )
+                    .join(", ")
+                )}
+              </div>
+
+              <div class="card-buttons">
+
+                <button
+                  class="play"
+                  onclick="playTrack(${index})"
+                >
+                  ▶
+                </button>
+
+                <button
+                  onclick="openTrack(${index})"
+                >
+                  ⋮
+                </button>
+
+                <button
+                  onclick="favoriteTrack(${index})"
+                >
+                  ♡
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   IMAGE
+========================================= */
+
+function getTrackImage(
+  track
+) {
+
+  return (
+    track?.album?.images?.[0]?.url ||
+    track?.album?.images?.[1]?.url ||
+    "https://placehold.co/500x500/181818/ffffff?text=TAMA"
+  );
+
+}
+
+
+/* =========================================
+   TRACK
+========================================= */
+
+function playTrack(
+  index
+) {
+
+  const track =
+    currentTracks[index];
+
+
+  if (!track) {
+    return;
+  }
+
+
+  currentTrack =
+    track;
+
+  currentIndex =
+    index;
+
+
+  document.getElementById(
+    "playerImage"
+  ).src =
+    getTrackImage(
+      track
+    );
+
+
+  document.getElementById(
+    "playerTitle"
+  ).textContent =
+    track.name;
+
+
+  document.getElementById(
+    "playerArtist"
+  ).textContent =
+    track.artists
+      .map(
+        artist =>
+          artist.name
+      )
+      .join(", ");
+
+
+  document.getElementById(
+    "mainPlay"
+  ).textContent =
+    "▶";
+
 
   /*
-   * Spotify Web API metadata tidak menyediakan MP3
-   * untuk kita download/host.
+   * Spotify Web API tidak memberikan
+   * file audio MP3 untuk kita putar
+   * langsung dari website.
    *
-   * preview_url juga dapat tidak tersedia.
+   * Jadi tombol player membuka Spotify.
    */
 
-  currentIndex = index;
+  openCurrentSpotify();
 
-  $("playerTitle").textContent = track.name;
+}
 
-  $("playerArtist").textContent =
-    track.artists.map(a => a.name).join(", ");
 
-  $("playerCover").src =
-    track.album.images?.[0]?.url ||
-    "https://via.placeholder.com/300";
+/* =========================================
+   OPEN SPOTIFY
+========================================= */
 
-  if (track.preview_url) {
+function openCurrentSpotify() {
 
-    audio.src = track.preview_url;
+  if (!currentTrack) {
 
-    audio.play();
+    return;
 
-    isPlaying = true;
+  }
 
-    $("playBtn").textContent = "❚❚";
 
-  } else {
+  if (
+    currentTrack.external_urls &&
+    currentTrack.external_urls.spotify
+  ) {
 
-    isPlaying = false;
-
-    $("playBtn").textContent = "▶";
-
-    alert(
-      "Preview audio tidak tersedia untuk lagu ini. Tekan 'Buka di Spotify' untuk mendengarkan."
+    window.open(
+      currentTrack.external_urls.spotify,
+      "_blank",
+      "noopener"
     );
+
   }
+
 }
 
-function togglePlay() {
 
-  if (!audio.src) return;
-
-  if (isPlaying) {
-    audio.pause();
-    isPlaying = false;
-    $("playBtn").textContent = "▶";
-  } else {
-    audio.play();
-    isPlaying = true;
-    $("playBtn").textContent = "❚❚";
-  }
-}
+/* =========================================
+   NEXT / PREVIOUS
+========================================= */
 
 function nextTrack() {
 
-  if (!currentTracks.length) return;
+  if (
+    !currentTracks.length
+  ) {
 
-  let next = currentIndex + 1;
+    return;
 
-  if (next >= currentTracks.length) {
-    next = 0;
   }
 
-  playTrack(next);
+
+  let index =
+    currentIndex + 1;
+
+
+  if (
+    index >=
+    currentTracks.length
+  ) {
+
+    index = 0;
+
+  }
+
+
+  playTrack(
+    index
+  );
+
 }
+
 
 function previousTrack() {
 
-  if (!currentTracks.length) return;
+  if (
+    !currentTracks.length
+  ) {
 
-  let previous = currentIndex - 1;
+    return;
 
-  if (previous < 0) {
-    previous = currentTracks.length - 1;
   }
 
-  playTrack(previous);
+
+  let index =
+    currentIndex - 1;
+
+
+  if (
+    index < 0
+  ) {
+
+    index =
+      currentTracks.length - 1;
+
+  }
+
+
+  playTrack(
+    index
+  );
+
 }
 
-function showDetails(index) {
 
-  const track = currentTracks[index];
+/* =========================================
+   DETAIL
+========================================= */
 
-  if (!track) return;
+function openTrack(
+  index
+) {
 
-  $("detailCover").src =
-    track.album.images?.[0]?.url ||
-    "https://via.placeholder.com/300";
+  const track =
+    currentTracks[index];
 
-  $("detailTitle").textContent =
-    track.name;
 
-  $("detailArtist").textContent =
-    "Artis: " +
-    track.artists.map(a => a.name).join(", ");
+  if (!track) {
+    return;
+  }
 
-  $("detailAlbum").textContent =
-    "Album: " + track.album.name;
 
-  $("spotifyLink").href =
-    track.external_urls.spotify;
+  currentTrack =
+    track;
 
-  $("lyricsText").textContent =
-    "Lirik tidak disediakan oleh Spotify Web API. " +
-    "Gunakan sumber lirik berlisensi jika ingin menambahkan fitur lirik.";
+  currentIndex =
+    index;
 
-  $("detailModal").classList.add("show");
-}
 
-function closeModal() {
-  $("detailModal").classList.remove("show");
-}
-
-function toggleFavorite(index) {
-
-  const track = currentTracks[index];
-
-  if (!track) return;
-
-  let favorites =
-    JSON.parse(
-      localStorage.getItem("tama_favorites") || "[]"
+  document.getElementById(
+    "detailImage"
+  ).src =
+    getTrackImage(
+      track
     );
 
+
+  document.getElementById(
+    "detailTitle"
+  ).textContent =
+    track.name;
+
+
+  document.getElementById(
+    "detailArtist"
+  ).textContent =
+    "Artis: " +
+    track.artists
+      .map(
+        artist =>
+          artist.name
+      )
+      .join(", ");
+
+
+  document.getElementById(
+    "detailAlbum"
+  ).textContent =
+    "Album: " +
+    track.album.name;
+
+
+  document
+    .getElementById(
+      "detailModal"
+    )
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+function closeModal() {
+
+  document
+    .getElementById(
+      "detailModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================================
+   FAVORITE
+========================================= */
+
+function getLocalFavorites() {
+
+  return JSON.parse(
+    localStorage.getItem(
+      "tama_music_favorites"
+    ) || "[]"
+  );
+
+}
+
+
+function favoriteTrack(
+  index
+) {
+
+  const track =
+    currentTracks[index];
+
+
+  if (!track) {
+    return;
+  }
+
+
+  let favorites =
+    getLocalFavorites();
+
+
   const exists =
-    favorites.some(x => x.id === track.id);
+    favorites.some(
+      item =>
+        item.id ===
+        track.id
+    );
+
 
   if (exists) {
 
     favorites =
-      favorites.filter(x => x.id !== track.id);
+      favorites.filter(
+        item =>
+          item.id !==
+          track.id
+      );
 
   } else {
 
-    favorites.push(track);
-  }
-
-  localStorage.setItem(
-    "tama_favorites",
-    JSON.stringify(favorites)
-  );
-
-  alert(
-    exists
-      ? "Dihapus dari favorit."
-      : "Ditambahkan ke favorit."
-  );
-}
-
-function loadLibrary() {
-
-  const favorites =
-    JSON.parse(
-      localStorage.getItem("tama_favorites") || "[]"
+    favorites.push(
+      track
     );
 
-  currentTracks = favorites;
+  }
 
-  if (!favorites.length) {
 
-    $("libraryGrid").innerHTML =
-      `<p style="color:#888">
-        Belum ada lagu favorit.
-      </p>`;
+  localStorage.setItem(
+    "tama_music_favorites",
+    JSON.stringify(
+      favorites
+    )
+  );
 
+
+  loadLibrary();
+
+}
+
+
+function saveCurrentFavorite() {
+
+  if (!currentTrack) {
     return;
   }
 
-  $("libraryGrid").innerHTML =
-    favorites.map((track, index) => {
 
-      const image =
-        track.album.images?.[0]?.url ||
-        "https://via.placeholder.com/300";
+  let favorites =
+    getLocalFavorites();
 
-      return `
-        <div class="card">
 
-          <img src="${image}">
+  const exists =
+    favorites.some(
+      item =>
+        item.id ===
+        currentTrack.id
+    );
 
-          <h3>${escapeHtml(track.name)}</h3>
 
-          <p>
-            ${escapeHtml(
-              track.artists.map(a => a.name).join(", ")
-            )}
-          </p>
+  if (!exists) {
 
-          <div class="card-buttons">
+    favorites.push(
+      currentTrack
+    );
 
-            <button
-              class="green"
-              onclick="playTrack(${index})">
-              ▶
-            </button>
+  }
 
-            <button
-              onclick="showDetails(${index})">
-              ⋮
-            </button>
 
-          </div>
+  localStorage.setItem(
+    "tama_music_favorites",
+    JSON.stringify(
+      favorites
+    )
+  );
 
-        </div>
-      `;
 
-    }).join("");
+  loadLibrary();
+
 }
 
-function searchPopular() {
 
-  $("searchInput").value =
-    "popular music";
+/* =========================================
+   LIBRARY
+========================================= */
 
-  searchTracks("popular music");
+function loadLibrary() {
+
+  const grid =
+    document.getElementById(
+      "libraryGrid"
+    );
+
+
+  const favorites =
+    getLocalFavorites();
+
+
+  currentTracks =
+    favorites;
+
+
+  if (!favorites.length) {
+
+    grid.innerHTML =
+      `<div class="empty">
+        Belum ada lagu favorit.
+      </div>`;
+
+    return;
+
+  }
+
+
+  renderMusicGrid(
+    favorites,
+    grid
+  );
+
 }
+
+
+/* =========================================
+   ARTIST
+========================================= */
+
+async function openArtist(
+  artistId
+) {
+
+  try {
+
+    const data =
+      await spotifyAPI(
+        `/artists/${artistId}/top-tracks?market=ID`
+      );
+
+
+    currentTracks =
+      data.tracks ||
+      [];
+
+
+    showPage(
+      "search"
+    );
+
+
+    document.getElementById(
+      "searchInfo"
+    ).textContent =
+      "Top tracks artis";
+
+
+    renderSearchResults(
+      currentTracks
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function showPage(
+  page
+) {
+
+  document
+    .querySelectorAll(
+      ".page"
+    )
+    .forEach(
+      element =>
+        element.classList.remove(
+          "active"
+        )
+    );
+
+
+  document
+    .querySelectorAll(
+      ".nav"
+    )
+    .forEach(
+      element =>
+        element.classList.remove(
+          "active"
+        )
+    );
+
+
+  const pageElement =
+    document.getElementById(
+      page + "Page"
+    );
+
+
+  if (pageElement) {
+
+    pageElement.classList.add(
+      "active"
+    );
+
+  }
+
+
+  const nav =
+    document.querySelector(
+      `[data-page="${page}"]`
+    );
+
+
+  if (nav) {
+
+    nav.classList.add(
+      "active"
+    );
+
+  }
+
+
+  if (
+    page ===
+    "library"
+  ) {
+
+    loadLibrary();
+
+  }
+
+}
+
+
+/* =========================================
+   SEARCH INPUT
+========================================= */
+
+document
+  .getElementById(
+    "searchInput"
+  )
+  .addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key ===
+        "Enter"
+      ) {
+
+        searchMusic(
+          event.target.value
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================
+   NAV BUTTONS
+========================================= */
+
+document
+  .querySelectorAll(
+    ".nav"
+  )
+  .forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          showPage(
+            button.dataset.page
+          );
+
+
+          document
+            .getElementById(
+              "sidebar"
+            )
+            .classList.remove(
+              "open"
+            );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+document
+  .getElementById(
+    "loginButton"
+  )
+  .addEventListener(
+    "click",
+    loginSpotify
+  );
+
+
+/* =========================================
+   MOBILE MENU
+========================================= */
+
+document
+  .getElementById(
+    "menuButton"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById(
+          "sidebar"
+        )
+        .classList.toggle(
+          "open"
+        );
+
+    }
+  );
+
+
+/* =========================================
+   SEARCH FOCUS
+========================================= */
 
 function focusSearch() {
 
-  $("searchInput").focus();
+  showPage(
+    "search"
+  );
 
-  $("searchInput").scrollIntoView({
-    behavior: "smooth"
-  });
-}
-
-function escapeHtml(text) {
-
-  return String(text)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-$("searchInput").addEventListener(
-  "keydown",
-  event => {
-
-    if (event.key === "Enter") {
-      searchTracks(event.target.value);
-    }
-
-  }
-);
-
-$("loginBtn").addEventListener(
-  "click",
-  loginSpotify
-);
-
-document.querySelectorAll(".nav").forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    document
-      .querySelectorAll(".nav")
-      .forEach(x => x.classList.remove("active"));
-
-    button.classList.add("active");
-
-    const page = button.dataset.page;
-
-    document
-      .querySelectorAll(".page")
-      .forEach(x => x.classList.remove("active-page"));
-
-    if (page === "home") {
-      $("homePage").classList.add("active-page");
-    }
-
-    if (page === "search") {
-      $("searchPage").classList.add("active-page");
-    }
-
-    if (page === "library") {
-      $("libraryPage").classList.add("active-page");
-    }
-
-    if (page === "library") {
-      loadLibrary();
-    }
-
-  });
-
-});
-
-$("menuBtn").addEventListener("click", () => {
   document
-    .querySelector(".sidebar")
-    .classList.toggle("open");
-});
+    .getElementById(
+      "searchInput"
+    )
+    .focus();
 
-$("volume").addEventListener(
-  "input",
-  event => {
-    audio.volume =
-      Number(event.target.value) / 100;
-  }
-);
-
-audio.addEventListener(
-  "timeupdate",
-  () => {
-
-    if (!audio.duration) return;
-
-    $("progress").value =
-      (audio.currentTime / audio.duration) * 100;
-
-    $("currentTime").textContent =
-      formatTime(audio.currentTime);
-
-    $("duration").textContent =
-      formatTime(audio.duration);
-  }
-);
-
-$("progress").addEventListener(
-  "input",
-  event => {
-
-    if (!audio.duration) return;
-
-    audio.currentTime =
-      (Number(event.target.value) / 100) *
-      audio.duration;
-  }
-);
-
-audio.addEventListener(
-  "ended",
-  nextTrack
-);
-
-function formatTime(seconds) {
-
-  if (!seconds || isNaN(seconds)) {
-    return "0:00";
-  }
-
-  const min =
-    Math.floor(seconds / 60);
-
-  const sec =
-    Math.floor(seconds % 60)
-      .toString()
-      .padStart(2, "0");
-
-  return `${min}:${sec}`;
 }
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logoutSpotify() {
+
+  localStorage.removeItem(
+    "tama_spotify_access_token"
+  );
+
+  localStorage.removeItem(
+    "tama_spotify_expires_at"
+  );
+
+  localStorage.removeItem(
+    "tama_spotify_refresh_token"
+  );
+
+  accessToken =
+    null;
+
+  location.reload();
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
 
 async function init() {
 
   await handleCallback();
 
-  if (accessToken) {
 
-    $("loginBtn").textContent =
-      "Spotify Connected";
+  if (
+    await ensureToken()
+  ) {
 
-    try {
-      await searchTracks("popular music");
-    } catch {}
+    await loadProfile();
+
+    await loadHome();
+
+  } else {
+
+    /*
+     * Tanpa login, Spotify Web API
+     * tidak akan dipanggil dari website ini.
+     */
+
+    document.getElementById(
+      "homeTracks"
+    ).innerHTML = `
+      <div class="empty">
+        <p>Login Spotify untuk mulai mencari musik.</p>
+        <br>
+        <button
+          class="green-button"
+          onclick="loginSpotify()"
+        >
+          Login Spotify
+        </button>
+      </div>
+    `;
+
   }
+
 }
+
 
 init();
