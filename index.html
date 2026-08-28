@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TAMA MUSIC</title>
+
+  <meta
+    name="description"
+    content="TAMA MUSIC - Discover your favorite music"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+      TAMA<span>MUSIC</span>
+    </div>
+
+    <nav>
+
+      <button
+        class="nav active"
+        data-page="home"
+      >
+        <span>⌂</span>
+        Home
+      </button>
+
+      <button
+        class="nav"
+        data-page="search"
+      >
+        <span>⌕</span>
+        Search
+      </button>
+
+      <button
+        class="nav"
+        data-page="library"
+      >
+        <span>♡</span>
+        Library
+      </button>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <button
+        id="loginButton"
+        class="login-button"
+      >
+        Login Spotify
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <main>
+
+    <header>
+
+      <button
+        id="menuButton"
+        class="menu-button"
+      >
+        ☰
+      </button>
+
+      <div class="search-box">
+
+        <span>⌕</span>
+
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Cari lagu, artis, album..."
+          autocomplete="off"
+        >
+
+      </div>
+
+      <div class="user-area">
+
+        <img
+          id="userImage"
+          src=""
+          alt=""
+        >
+
+        <span id="userName">
+          Guest
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <!-- HOME -->
+
+    <section
+      id="homePage"
+      class="page active"
+    >
+
+      <div class="hero">
+
+        <div>
+
+          <small>
+            TAMA MUSIC
+          </small>
+
+          <h1>
+            Music for<br>
+            your mood.
+          </h1>
+
+          <p>
+            Temukan lagu, artis, dan album favoritmu.
+          </p>
+
+          <button
+            class="green-button"
+            onclick="focusSearch()"
+          >
+            Cari Musik
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Lagu Populer
+          </h2>
+
+          <button
+            onclick="searchMusic('popular music')"
+          >
+            Lihat semua
+          </button>
+
+        </div>
+
+        <div
+          id="homeTracks"
+          class="music-grid"
+        ></div>
+
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Artis Populer
+          </h2>
+
+        </div>
+
+        <div
+          id="homeArtists"
+          class="artist-grid"
+        ></div>
+
+      </section>
+
+    </section>
+
+
+    <!-- SEARCH -->
+
+    <section
+      id="searchPage"
+      class="page"
+    >
+
+      <div class="page-title">
+
+        <h1>
+          Search
+        </h1>
+
+        <p id="searchInfo">
+          Cari lagu favoritmu.
+        </p>
+
+      </div>
+
+
+      <div
+        id="searchResults"
+        class="search-results"
+      ></div>
+
+    </section>
+
+
+    <!-- LIBRARY -->
+
+    <section
+      id="libraryPage"
+      class="page"
+    >
+
+      <div class="page-title">
+
+        <h1>
+          Your Library
+        </h1>
+
+        <p>
+          Musik yang kamu simpan.
+        </p>
+
+      </div>
+
+
+      <div
+        id="libraryGrid"
+        class="music-grid"
+      ></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- PLAYER -->
+
+  <div class="player">
+
+    <div class="now-playing">
+
+      <img
+        id="playerImage"
+        src="https://placehold.co/80x80/181818/ffffff?text=T"
+        alt=""
+      >
+
+      <div>
+
+        <strong id="playerTitle">
+          Belum ada lagu
+        </strong>
+
+        <span id="playerArtist">
+          Pilih lagu untuk melihat detail
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="player-center">
+
+      <div class="player-controls">
+
+        <button onclick="previousTrack()">
+          ⏮
+        </button>
+
+        <button
+          class="main-play"
+          id="mainPlay"
+          onclick="openCurrentSpotify()"
+        >
+          ▶
+        </button>
+
+        <button onclick="nextTrack()">
+          ⏭
+        </button>
+
+      </div>
+
+      <div class="player-progress">
+
+        <span>
+          —
+        </span>
+
+        <div class="progress-line">
+        </div>
+
+        <span>
+          Spotify
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="player-right">
+
+      <button onclick="openCurrentSpotify()">
+        🎵
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- DETAIL MODAL -->
+
+  <div
+    id="detailModal"
+    class="modal"
+  >
+
+    <div class="modal-content">
+
+      <button
+        class="close-button"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+
+      <img
+        id="detailImage"
+        class="detail-image"
+        src=""
+        alt=""
+      >
+
+
+      <h2 id="detailTitle">
+      </h2>
+
+
+      <p id="detailArtist">
+      </p>
+
+
+      <p id="detailAlbum">
+      </p>
+
+
+      <div class="modal-actions">
+
+        <button
+          class="green-button"
+          onclick="openCurrentSpotify()"
+        >
+          Buka di Spotify
+        </button>
+
+        <button
+          class="dark-button"
+          onclick="saveCurrentFavorite()"
+        >
+          ♡ Favorit
+        </button>
+
+      </div>
+
+
+      <div class="lyrics">
+
+        <h3>
+          🎤 Lirik
+        </h3>
+
+        <p>
+          Lirik belum tersedia di Spotify Web API.
+          Gunakan sumber lirik berlisensi jika ingin
+          menambahkan fitur lirik.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
