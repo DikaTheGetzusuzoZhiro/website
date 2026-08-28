@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exry Hub • Obfuscator + TikTok</title>
+  <meta property="og:title" content="Exry Hub • Obfuscator" />
+  <meta property="og:description" content="Obfuscate Lua, Download TikTok, Spam Webhook, Musik" />
+  <meta property="og:image" content="https://i.ibb.co.com/ZRVz4PTP/file-00000000f28c82118fdfda99a5b9f33c.png" />
+  <meta property="og:url" content="https://exryhub.vercel.app" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    :root {
+      --bg: #0a0a14;
+      --card: rgba(16, 18, 40, 0.85);
+      --accent: #3b82f6;
+      --accent-light: #60a5fa;
+      --glow: rgba(59, 130, 246, 0.3);
+      --text: #f0f0f5;
+      --muted: #9090b0;
+      --border: rgba(255, 255, 255, 0.06);
+      --radius: 16px;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+      --danger: #ef4444;
+      --success: #22c55e;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 10px; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.05;
+      animation: orbFloat 20s ease-in-out infinite alternate;
+    }
+    .orb--1 {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      left: -100px;
+      background: radial-gradient(circle, #3b82f6, transparent 70%);
+    }
+    .orb--2 {
+      width: 250px;
+      height: 250px;
+      bottom: -80px;
+      right: -80px;
+      background: radial-gradient(circle, #2563eb, transparent 70%);
+      animation-duration: 25s;
+    }
+    @keyframes orbFloat {
+      0% { transform: translate(0,0) scale(1); }
+      100% { transform: translate(30px,-20px) scale(1.1); }
+    }
+
+    .main-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* BANNER */
+    .banner-anime {
+      width: 100%;
+      height: 180px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      background-image: url('https://i.ibb.co.com/PsrF80YF/476d9f1fc9bbe0955cb36c507dac9495.gif');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      margin-bottom: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .banner-anime::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      pointer-events: none;
+    }
+    .banner-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .banner-content .title {
+      font-size: 34px;
+      font-weight: 900;
+      color: #fff;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+    .banner-content .sub {
+      font-size: 15px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+      margin-top: 2px;
+    }
+    .banner-content .sub i {
+      color: #ff6b6b;
+      margin: 0 4px;
+    }
+    .menu-hamburger {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      cursor: pointer;
+      font-size: 22px;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(4px);
+      transition: background 0.3s;
+      line-height: 1;
+    }
+    .menu-hamburger:hover {
+      background: rgba(59,130,246,0.2);
+      border-color: var(--accent);
+    }
+    .banner-clock {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 100;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 12px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(4px);
+      letter-spacing: 0.5px;
+    }
+    .banner-clock i {
+      color: var(--accent-light);
+      margin-right: 4px;
+    }
+    .menu-dropdown {
+      position: absolute;
+      top: 54px;
+      left: 12px;
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 6px 0;
+      min-width: 130px;
+      box-shadow: var(--shadow);
+      display: none;
+      flex-direction: column;
+      z-index: 100;
+      animation: slideDown 0.2s ease;
+    }
+    .menu-dropdown.open { display: flex; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .menu-dropdown a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 14px;
+      font-weight: 600;
+      font-size: 12px;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 3px solid transparent;
+    }
+    .menu-dropdown a:hover {
+      background: rgba(59,130,246,0.06);
+      border-left-color: var(--accent);
+    }
+    .menu-dropdown a i {
+      width: 16px;
+      color: var(--accent-light);
+    }
+
+    /* FEATURE GRID */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .feature-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 6px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .feature-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59,130,246,0.08);
+    }
+    .feature-item i {
+      font-size: 22px;
+      color: var(--accent-light);
+      margin-bottom: 4px;
+      display: block;
+    }
+    .feature-item span {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+      line-height: 1.3;
+    }
+    .feature-item .badge {
+      font-size: 9px;
+      padding: 1px 8px;
+      border-radius: 30px;
+      margin-top: 4px;
+      display: inline-block;
+    }
+    .feature-item .badge i {
+      display: inline;
+      font-size: 9px;
+      margin-right: 2px;
+    }
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--accent-light);
+    }
+    .badge-danger {
+      background: rgba(239,68,68,0.15);
+      color: #f87171;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-panel {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 450px;
+      width: 100%;
+      max-height: 80vh;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-panel .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-panel .close-btn:hover {
+      border-color: #ef4444;
+      background: rgba(239,68,68,0.12);
+      color: #ef4444;
+    }
+    .modal-panel .modal-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .modal-panel .modal-title i {
+      color: var(--accent);
+    }
+    .modal-panel label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .modal-panel input,
+    .modal-panel textarea,
+    .modal-panel select {
+      width: 100%;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-family: inherit;
+      outline: none;
+      transition: border 0.3s;
+      margin-bottom: 10px;
+    }
+    .modal-panel input:focus,
+    .modal-panel textarea:focus,
+    .modal-panel select:focus {
+      border-color: var(--accent);
+    }
+    .modal-panel textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .modal-panel .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .modal-panel .btn-group .btn {
+      flex: 1 1 auto;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn--primary {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      color: #fff;
+      box-shadow: 0 4px 16px var(--glow);
+    }
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--glow);
+    }
+    .btn--primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    .btn--ghost {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      color: #fff;
+      backdrop-filter: blur(4px);
+    }
+    .btn--ghost:hover {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+      transform: translateY(-2px);
+    }
+    .btn--danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(239,68,68,0.3);
+    }
+    .btn--danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(239,68,68,0.4);
+    }
+    .status {
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      backdrop-filter: blur(4px);
+    }
+    .status.success {
+      border-color: var(--success);
+      color: #4ade80;
+    }
+    .status.error {
+      border-color: var(--danger);
+      color: #f87171;
+    }
+    .status.warning {
+      border-color: #f59e0b;
+      color: #fbbf24;
+    }
+    .status.loading {
+      border-color: var(--accent);
+      color: var(--accent-light);
+      animation: pulse 1.2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* OBFUSCATOR BOX */
+    .obfuscate-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .obfuscate-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.15);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .obfuscate-box>* {
+      position: relative;
+      z-index: 1;
+    }
+    .obfuscate-box .title {
+      font-size: 18px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 12px;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+    .obfuscate-box .title i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+
+    .drop-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: rgba(0,0,0,0.2);
+      margin-bottom: 8px;
+    }
+    .drop-zone:hover {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.03);
+    }
+    .drop-zone.dragover {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.06);
+    }
+    .drop-zone .icon {
+      font-size: 24px;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .drop-zone .icon i {
+      color: var(--accent);
+      opacity: 0.6;
+    }
+    .drop-zone .text {
+      font-weight: 600;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .drop-zone .text strong {
+      color: var(--accent);
+    }
+    .drop-zone .file-info {
+      margin-top: 4px;
+      font-weight: 700;
+      font-size: 11px;
+      color: #fff;
+      word-break: break-all;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+    .drop-zone .file-info small {
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 9px;
+      display: block;
+    }
+    #fileInput {
+      display: none;
+    }
+
+    .divider-or {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 4px 0 8px;
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .divider-or::before,
+    .divider-or::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .divider-or i {
+      color: var(--accent);
+      font-size: 7px;
+      opacity: 0.5;
+    }
+
+    .paste-area {
+      margin-bottom: 10px;
+    }
+    .paste-area .label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 700;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .paste-area .label i {
+      color: var(--accent);
+      font-size: 12px;
+    }
+    .paste-area .label .badge-source {
+      background: rgba(59,130,246,0.12);
+      color: var(--accent-light);
+      font-size: 8px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(59,130,246,0.15);
+      display: none;
+    }
+    .paste-area .label .badge-source.show {
+      display: inline-block;
+    }
+
+    .code-textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #e4e4ef;
+      padding: 8px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 220px;
+      outline: none;
+      transition: border 0.3s;
+    }
+    .code-textarea:focus {
+      border-color: var(--accent);
+    }
+    .code-textarea.has-content {
+      border-color: rgba(59,130,246,0.2);
+    }
+    .code-textarea::placeholder {
+      color: rgba(255,255,255,0.25);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .paste-area .char-count {
+      text-align: right;
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 3px;
+      font-weight: 600;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .btn-group .btn {
+      flex: 1 1 auto;
+      justify-content: center;
+      min-width: 60px;
+    }
+
+    .result-area {
+      margin-top: 10px;
+      display: none;
+      animation: fadeUp 0.3s ease;
+    }
+    .result-area.show {
+      display: block;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-area textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #e4e4ef;
+      padding: 8px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      resize: vertical;
+      min-height: 220px;
+      outline: none;
+    }
+    .result-area textarea:focus {
+      border-color: var(--accent);
+    }
+    .result-area .btn-group {
+      margin-top: 8px;
+    }
+
+    /* PLAYLIST OVERLAY */
+    .playlist-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+    .playlist-overlay.open {
+      display: flex;
+    }
+    .playlist-panel {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      max-width: 450px;
+      width: 100%;
+      max-height: 60vh;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      animation: slideUp 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .playlist-panel .close-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-end;
+    }
+    .playlist-panel .close-btn:hover {
+      border-color: #ef4444;
+      background: rgba(239,68,68,0.12);
+      color: #ef4444;
+    }
+    .playlist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+    }
+    .playlist-header h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .playlist-header h3 i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+    .playlist-header .count {
+      font-size: 10px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      padding: 2px 10px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+    }
+    .playlist-scroll {
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 4px;
+    }
+    .playlist-scroll::-webkit-scrollbar {
+      width: 3px;
+    }
+    .playlist-scroll::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 10px;
+    }
+    .playlist-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+      margin-bottom: 2px;
+    }
+    .playlist-item:hover {
+      background: rgba(59,130,246,0.06);
+      border-color: rgba(59,130,246,0.1);
+    }
+    .playlist-item.active {
+      background: rgba(59,130,246,0.08);
+      border-color: var(--accent);
+    }
+    .playlist-item .index {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      min-width: 20px;
+      text-align: right;
+    }
+    .playlist-item .info {
+      flex: 1;
+    }
+    .playlist-item .info .title {
+      font-weight: 700;
+      font-size: 12px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .playlist-item .info .title .playing-icon {
+      color: var(--accent);
+      font-size: 9px;
+      animation: pulseDot 1.5s infinite;
+    }
+    .playlist-item .info .artist {
+      font-size: 9px;
+      color: var(--muted);
+    }
+    .playlist-item .play-indicator {
+      color: var(--accent);
+      font-size: 10px;
+      opacity: 0;
+      transition: 0.3s;
+    }
+    .playlist-item.active .play-indicator {
+      opacity: 1;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .now-playing {
+      font-size: 11px;
+      color: var(--muted);
+      padding: 6px 8px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .now-playing i {
+      color: var(--accent-light);
+    }
+    .now-playing strong {
+      color: #fff;
+    }
+
+    /* MODAL INFO / TUTORIAL */
+    .modal-panel .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      color: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-panel .modal-close:hover {
+      border-color: #ef4444;
+      background: rgba(239,68,68,0.12);
+      color: #ef4444;
+    }
+    .modal-panel h2 {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .modal-panel h2 i {
+      color: var(--accent);
+      margin-right: 6px;
+    }
+    .modal-panel p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    .modal-panel .highlight {
+      color: #fff;
+      font-weight: 600;
+    }
+    .modal-panel .social-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .modal-panel .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      padding: 5px 12px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 11px;
+      transition: 0.3s;
+    }
+    .modal-panel .social-links a:hover {
+      border-color: var(--accent);
+      background: rgba(59,130,246,0.08);
+    }
+    .modal-panel .tutorial-item {
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-panel .tutorial-item:last-child {
+      border-bottom: none;
+    }
+    .modal-panel .tutorial-item h3 {
+      font-weight: 700;
+      color: #fff;
+      font-size: 13px;
+    }
+    .modal-panel .tutorial-item p {
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 12px 10px 4px;
+      color: #555;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+    }
+    .footer span {
+      color: var(--accent);
+    }
+
+    /* DISCORD FLOAT */
+    .discord-float {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: floatDiscord 2.8s ease-in-out infinite;
+    }
+    .discord-float:hover {
+      transform: scale(1.05);
+      animation-play-state: paused;
+    }
+    .discord-float a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #5865f2, #4752c4);
+      color: #fff;
+      font-size: 22px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(88, 101, 242, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+    }
+    .discord-float .tooltip {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 700;
+      margin-top: 3px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .discord-float:hover .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .discord-float .badge-online {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 11px;
+      height: 11px;
+      background: #23a55a;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(35, 165, 90, 0.6);
+      animation: pulseDot 1.5s infinite;
+    }
+    @keyframes floatDiscord {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 480px) {
+      .banner-anime { height: 150px; }
+      .banner-content .title { font-size: 26px; }
+      .banner-content .sub { font-size: 13px; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .obfuscate-box { padding: 12px 10px; }
+      .btn-group .btn { flex: 1 1 100%; }
+      .drop-zone { padding: 10px; }
+      .code-textarea { min-height: 180px; font-size: 11px; }
+      .result-area textarea { min-height: 180px; font-size: 11px; }
+      .discord-float { bottom: 10px; right: 10px; }
+      .discord-float a { width: 38px; height: 38px; font-size: 18px; }
+      .menu-hamburger { font-size: 18px; padding: 4px 8px; top: 8px; left: 8px; }
+      .banner-clock { font-size: 10px; padding: 3px 10px; top: 10px; right: 10px; }
+      .menu-dropdown { min-width: 110px; top: 46px; left: 8px; }
+      .modal-panel { max-height: 80vh; }
+    }
+    @media (max-width: 400px) {
+      .feature-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .feature-item { padding: 8px 4px; }
+      .feature-item i { font-size: 18px; }
+      .feature-item span { font-size: 10px; }
+      .banner-anime { height: 130px; }
+      .banner-content .title { font-size: 22px; }
+      .banner-content .sub { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+
+  <div class="discord-float">
+    <a href="https://discord.gg/Y9gwPyCG9E" target="_blank" rel="noopener noreferrer">
+      <i class="fab fa-discord"></i>
+      <span class="badge-online"></span>
+    </a>
+    <span class="tooltip">Komunitas Exry</span>
+  </div>
+
+  <div class="main-wrapper">
+
+    <!-- BANNER -->
+    <div class="banner-anime">
+      <div class="menu-hamburger" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="banner-clock"><i class="fas fa-clock"></i> <span id="clockText">--:--:--</span></div>
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="#" data-target="info"><i class="fas fa-info-circle"></i> Info</a>
+        <a href="#" data-target="tutorial"><i class="fas fa-graduation-cap"></i> Tutorial</a>
+      </div>
+      <div class="banner-content">
+        <div class="title">Exry Hub</div>
+        <div class="sub">Made By: <span style="color:#ff6b6b;">@TamaRyc</span> <i class="fas fa-heart" style="color:#ff6b6b;"></i></div>
+      </div>
+    </div>
+
+    <!-- FEATURE GRID -->
+    <div class="feature-grid">
+      <div class="feature-item" id="spamBtn">
+        <i class="fas fa-skull-crossbones" style="color:#60a5fa;"></i>
+        <span>Spam Keylogger</span>
+        <span class="badge badge-blue"><i class="fas fa-bolt"></i> Webhook</span>
+      </div>
+      <div class="feature-item" id="tiktokBtn">
+        <i class="fab fa-tiktok" style="color:#60a5fa;"></i>
+        <span>Download TikTok</span>
+        <span class="badge badge-blue"><i class="fas fa-video"></i> No Watermark</span>
+      </div>
+      <div class="feature-item" id="musicBtn">
+        <i class="fas fa-music"></i>
+        <span>Musik</span>
+        <span class="badge badge-blue">List Lagu</span>
+      </div>
+    </div>
+
+    <!-- SPAM WEBHOOK MODAL -->
+    <div class="modal-overlay spam-modal" id="spamModal">
+      <div class="modal-panel">
+        <button class="close-btn" id="closeSpamBtn"><i class="fas fa-times"></i></button>
+        <div class="modal-title spam-title"><i class="fas fa-skull-crossbones"></i> Spam Keylogger Webhook</div>
+        <label>Webhook URL Discord</label>
+        <input type="url" id="webhookUrl" placeholder="https://discord.com/api/webhooks/..." />
+        <label>Pesan Spam</label>
+        <textarea id="spamMessage" placeholder="COMMUNITY MAS TAMA">COMMUNITY MAS TAMA</textarea>
+        <label>Jumlah Spam</label>
+        <select id="spamCount">
+          <option value="5">5 kali</option>
+          <option value="10" selected>10 kali</option>
+          <option value="25">25 kali</option>
+          <option value="50">50 kali</option>
+          <option value="100">100 kali</option>
+        </select>
+        <div class="btn-group">
+          <button class="btn btn--danger" id="executeSpamBtn"><i class="fas fa-bolt"></i> Serang Target!</button>
+          <button class="btn btn--ghost" id="clearSpamBtn"><i class="fas fa-eraser"></i> Bersihkan</button>
+        </div>
+        <div class="status" id="spamStatus">🚀 Siap menyerang webhook target.</div>
+      </div>
+    </div>
+
+    <!-- TIKTOK DOWNLOAD MODAL -->
+    <div class="modal-overlay tiktok-modal" id="tiktokModal">
+      <div class="modal-panel">
+        <button class="close-btn" id="closeTiktokBtn"><i class="fas fa-times"></i></button>
+        <div class="modal-title tiktok-title"><i class="fab fa-tiktok"></i> Download TikTok</div>
+        <label>URL Video TikTok</label>
+        <input type="url" id="tiktokUrl" placeholder="https://vt.tiktok.com/ZSV5BCu6B/" />
+        <div class="btn-group">
+          <button class="btn btn--primary" id="tiktokVideoBtn"><i class="fas fa-video"></i> Video (No Watermark)</button>
+          <button class="btn btn--primary" id="tiktokAudioBtn"><i class="fas fa-music"></i> Audio (MP3)</button>
+        </div>
+        <div style="margin-top: 6px; text-align: right;">
+          <button class="btn btn--ghost" id="clearTiktokBtn" style="font-size:10px; padding:4px 10px;"><i class="fas fa-eraser"></i> Bersihkan</button>
+        </div>
+        <div class="status" id="tiktokStatus">📥 Masukkan URL, lalu pilih Video atau Audio.</div>
+      </div>
+    </div>
+
+    <!-- PLAYLIST OVERLAY -->
+    <div class="playlist-overlay" id="playlistOverlay">
+      <div class="playlist-panel">
+        <button class="close-btn" id="closePlaylistBtn"><i class="fas fa-times"></i></button>
+        <div class="playlist-header">
+          <h3><i class="fas fa-music"></i> Daftar Lagu</h3>
+          <span class="count" id="playlistCount">0 lagu</span>
+        </div>
+        <div class="now-playing" id="nowPlayingInfo">
+          <i class="fas fa-headphones"></i> <span id="nowPlayingText">Tidak ada lagu diputar</span>
+        </div>
+        <div class="playlist-scroll" id="playlistScroll"></div>
+      </div>
+    </div>
+
+    <!-- OBFUSCATOR -->
+    <div class="obfuscate-box" id="obfuscatorSection">
+      <div class="title"><i class="fas fa-code"></i> Obfuscate Lua</div>
+      <div class="drop-zone" id="dropZone">
+        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+        <div class="text"><strong>Klik</strong> atau <strong>seret</strong> file .lua</div>
+        <div class="file-info" id="fileInfo">📂 Belum ada file</div>
+      </div>
+      <input type="file" id="fileInput" accept=".lua,.txt" />
+      <div class="divider-or">
+        <i class="fas fa-circle"></i> atau tempel kode <i class="fas fa-circle"></i>
+      </div>
+      <div class="paste-area">
+        <div class="label">
+          <i class="fas fa-paste"></i> Tempel kode Lua
+          <span class="badge-source" id="sourceBadge"><i class="fas fa-check-circle"></i> Aktif</span>
+        </div>
+        <textarea class="code-textarea" id="codeInput" placeholder="-- Example Lua script
+local function greet(name)
+    -- Print a greeting message
+    print(&quot;Hello, &quot; .. name .. &quot;!&quot;)
+end
+
+-- Main execution
+local names = {&quot;World&quot;, &quot;Lua&quot;, &quot;Developer&quot;}
+for _, name in ipairs(names) do
+    greet(name)
+end"></textarea>
+        <div class="char-count"><span id="charCount">0</span> karakter</div>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn--primary" id="obfuscateBtn"><i class="fas fa-rocket"></i> Obfuscate</button>
+        <button class="btn btn--ghost" id="resetBtn"><i class="fas fa-undo"></i> Reset</button>
+      </div>
+      <div class="status" id="statusMessage">💡 Tempel kode atau upload file .lua, lalu klik Obfuscate.</div>
+      <div class="result-area" id="resultArea">
+        <textarea id="resultCode" readonly placeholder="Hasil obfuscate..."></textarea>
+        <div class="btn-group">
+          <button class="btn btn--ghost" id="clearBtn"><i class="fas fa-eraser"></i> Clear</button>
+          <button class="btn btn--primary" id="downloadBtn"><i class="fas fa-download"></i> Download</button>
+          <button class="btn btn--ghost" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">© 2025 <span>TamaRyc</span> • Exry Hub Enc</div>
+  </div>
+
+  <!-- MODAL INFO -->
+  <div class="modal-overlay" id="infoModal">
+    <div class="modal-panel">
+      <button class="modal-close" id="closeInfoBtn"><i class="fas fa-times"></i></button>
+      <h2><i class="fas fa-info-circle"></i> Tentang Exry Hub</h2>
+      <p>
+        <span class="highlight">Exry Hub</span> adalah alat obfuscator Lua berbasis web yang dirancang untuk melindungi skrip Anda dari pencurian dan reverse engineering. 
+        Dengan satu klik, kode Lua Anda akan diubah menjadi bentuk yang sulit dibaca manusia namun tetap berfungsi sama.
+      </p>
+      <p>
+        Fitur utama: <br />
+        <strong>🔒 Obfuscator</strong> – mengubah variabel, menyandikan string, menghapus komentar, dan merapikan spasi.<br />
+        <strong>📨 Spam Webhook</strong> – kirim pesan berulang ke webhook Discord target (untuk simulasi atau uji coba).<br />
+        <strong>🎵 Musik</strong> – daftar lagu favorit yang bisa diputar langsung di halaman.<br />
+        <strong>📱 Download TikTok</strong> – unduh video tanpa watermark dan audio (MP3) dari TikTok.
+      </p>
+      <p>
+        <span class="highlight">Dibuat oleh TamaRyc</span> untuk komunitas Exry. 
+        Bergabunglah di Discord untuk bertanya, berbagi, atau melaporkan bug.
+      </p>
+      <div class="social-links">
+        <a href="https://youtube.com/@tamarycofc" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+        <a href="https://tiktok.com/@tamaryuchiofc" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+        <a href="https://discord.gg/Y9gwPyCG9E" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TUTORIAL -->
+  <div class="modal-overlay" id="tutorialModal">
+    <div class="modal-panel">
+      <button class="modal-close" id="closeTutorialBtn"><i class="fas fa-times"></i></button>
+      <h2><i class="fas fa-graduation-cap"></i> Tutorial</h2>
+      <div class="tutorial-item">
+        <h3>Obfuscate Lua</h3>
+        <p>Tempel kode Lua atau upload file .lua, lalu klik Obfuscate. Hasil muncul di bawah.</p>
+      </div>
+      <div class="tutorial-item">
+        <h3>Spam Keylogger Webhook</h3>
+        <p>Masukkan URL webhook Discord target, pesan spam, dan jumlah. Klik "Serang Target!" untuk mengirim spam ke webhook tersebut.</p>
+      </div>
+      <div class="tutorial-item">
+        <h3>Download TikTok</h3>
+        <p>Masukkan URL video TikTok (bisa link pendek seperti vt.tiktok.com), lalu pilih tombol <strong>Video</strong> atau <strong>Audio</strong>. Unduhan akan langsung dimulai.</p>
+      </div>
+      <div class="tutorial-item">
+        <h3>Musik &amp; List Lagu</h3>
+        <p>Klik tombol "Musik" di grid untuk membuka daftar lagu. Pilih lagu untuk memutar.</p>
+      </div>
+      <div class="tutorial-item">
+        <h3>Komunitas</h3>
+        <p>Gabung di Discord untuk berbagi dan bertanya.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="youtube-player"></div>
+
+  <script src="https://www.youtube.com/iframe_api">
+  </script>
+  <script>
+    // ====== CLOCK ======
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clockText').textContent =
+        String(now.getHours()).padStart(2, '0') + ':' +
+        String(now.getMinutes()).padStart(2, '0') + ':' +
+        String(now.getSeconds()).padStart(2, '0');
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ====== DOM REFS OBFUSCATOR ======
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const codeInput = document.getElementById('codeInput');
+    const charCount = document.getElementById('charCount');
+    const sourceBadge = document.getElementById('sourceBadge');
+    const statusEl = document.getElementById('statusMessage');
+    const obfuscateBtn = document.getElementById('obfuscateBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const resultArea = document.getElementById('resultArea');
+    const resultCode = document.getElementById('resultCode');
+
+    let selectedFile = null;
+    let fileContent = '';
+    let activeSource = 'none';
+
+    codeInput.addEventListener('input', function() {
+      charCount.textContent = this.value.length;
+      if (this.value.trim().length > 0) {
+        if (activeSource === 'file') {
+          activeSource = 'paste';
+          selectedFile = null;
+          fileContent = '';
+          fileInfo.innerHTML = '📂 Belum ada file (tempelan)';
+          fileInput.value = '';
+          sourceBadge.textContent = '📝 Tempelan aktif';
+          sourceBadge.classList.add('show');
+          codeInput.classList.add('has-content');
+          setStatus('📝 Menggunakan kode tempelan.', '');
+        } else if (activeSource === 'none') {
+          activeSource = 'paste';
+          sourceBadge.textContent = '📝 Tempelan aktif';
+          sourceBadge.classList.add('show');
+          codeInput.classList.add('has-content');
+          setStatus('📝 Menggunakan kode tempelan.', '');
+        }
+      } else {
+        codeInput.classList.remove('has-content');
+        if (activeSource === 'paste' && !selectedFile) {
+          activeSource = 'none';
+          sourceBadge.classList.remove('show');
+          setStatus('💡 Tempel kode atau upload file.', '');
+        }
+      }
+    });
+
+    dropZone.addEventListener('click', () => fileInput.click());
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault();
+      dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change'));
+      }
+    });
+
+    fileInput.addEventListener('change', function() {
+      if (this.files.length > 0) {
+        selectedFile = this.files[0];
+        fileInfo.innerHTML = `📄 ${selectedFile.name} <small>(${(selectedFile.size/1024).toFixed(1)} KB)</small>`;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          fileContent = ev.target.result;
+          codeInput.value = fileContent;
+          charCount.textContent = fileContent.length;
+          codeInput.classList.add('has-content');
+          activeSource = 'file';
+          sourceBadge.textContent = '📂 File aktif';
+          sourceBadge.classList.add('show');
+          setStatus('✅ File siap. Klik Obfuscate.', 'success');
+        };
+        reader.onerror = function() {
+          setStatus('❌ Gagal membaca file.', 'error');
+          fileContent = '';
+          activeSource = 'none';
+          sourceBadge.classList.remove('show');
+          codeInput.classList.remove('has-content');
+        };
+        reader.readAsText(selectedFile);
+      } else {
+        if (activeSource === 'file') {
+          activeSource = 'none';
+          sourceBadge.classList.remove('show');
+          codeInput.classList.remove('has-content');
+          fileInfo.innerHTML = '📂 Belum ada file';
+          setStatus('💡 Tempel kode atau upload file.', '');
+        }
+      }
+    });
+
+    function setStatus(msg, type) {
+      statusEl.textContent = msg;
+      statusEl.className = 'status';
+      if (type) statusEl.classList.add(type);
+    }
+
+    function getSourceCode() {
+      const paste = codeInput.value;
+      if (paste.trim().length > 0) return paste;
+      if (fileContent && fileContent.trim().length > 0) return fileContent;
+      return null;
+    }
+
+    function getSourceName() {
+      if (activeSource === 'file' && selectedFile) return selectedFile.name;
+      if (activeSource === 'paste' && codeInput.value.trim().length > 0) return 'tempelan';
+      if (fileContent && fileContent.trim().length > 0) return 'file (tersimpan)';
+      return null;
+    }
+
+    // ====== OBFUSCATE VIA SERVER API ======
+    obfuscateBtn.addEventListener('click', async function() {
+      const code = getSourceCode();
+      if (!code || code.trim().length === 0) {
+        setStatus('⚠️ Tempel kode atau upload file.', 'warning');
+        return;
+      }
+
+      obfuscateBtn.disabled = true;
+      setStatus('⏳ Menghubungi server...', 'loading');
+
+      try {
+        const res = await fetch('/api/obfuscate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        });
+
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          throw new Error(errData.error || `HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        if (!data.success || !data.code) {
+          throw new Error('Respons server tidak valid.');
+        }
+
+        resultCode.value = data.code;
+        resultArea.classList.add('show');
+        setStatus(`✅ Obfuscate berhasil dari ${getSourceName() || 'kode'}!`, 'success');
+
+      } catch (err) {
+        setStatus(`❌ Gagal: ${err.message}`, 'error');
+        console.error(err);
+      } finally {
+        obfuscateBtn.disabled = false;
+      }
+    });
+
+    // ====== Reset ======
+    resetBtn.addEventListener('click', function() {
+      selectedFile = null;
+      fileContent = '';
+      activeSource = 'none';
+      fileInfo.innerHTML = '📂 Belum ada file';
+      fileInput.value = '';
+      codeInput.value = '';
+      codeInput.classList.remove('has-content');
+      charCount.textContent = '0';
+      sourceBadge.classList.remove('show');
+      resultArea.classList.remove('show');
+      resultCode.value = '';
+      setStatus('💡 Tempel kode atau upload file .lua, lalu klik Obfuscate.', '');
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', function() {
+      resultCode.value = '';
+      resultArea.classList.remove('show');
+      setStatus('💡 Hasil dibersihkan.', '');
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      const code = resultCode.value;
+      if (!code) { setStatus('⚠️ Tidak ada kode.', 'warning'); return; }
+      const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      let name = 'obfuscated.lua';
+      if (selectedFile && selectedFile.name) {
+        name = selectedFile.name.replace(/\.[^.]+$/, '') + '_obfuscated.lua';
+      }
+      a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      setStatus(`📥 Diunduh: ${name}`, 'success');
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', function() {
+      const code = resultCode.value;
+      if (!code) { setStatus('⚠️ Tidak ada kode.', 'warning'); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+          setStatus('📋 Disalin!', 'success');
+        }).catch(() => fallbackCopy(code));
+      } else {
+        fallbackCopy(code);
+      }
+    });
+
+    function fallbackCopy(text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        setStatus('📋 Disalin!', 'success');
+      } catch (e) {
+        setStatus('❌ Gagal menyalin.', 'error');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // ====== MENU ======
+    const menuToggle = document.getElementById('menuToggle');
+    const menuDropdown = document.getElementById('menuDropdown');
+
+    menuToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menuDropdown.classList.toggle('open');
+    });
+    document.addEventListener('click', function(e) {
+      if (!menuDropdown.contains(e.target) && e.target !== menuToggle) {
+        menuDropdown.classList.remove('open');
+      }
+    });
+
+    document.querySelectorAll('.menu-dropdown a').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = this.dataset.target;
+        menuDropdown.classList.remove('open');
+        if (target === 'info') document.getElementById('infoModal').classList.add('open');
+        else if (target === 'tutorial') document.getElementById('tutorialModal').classList.add('open');
+      });
+    });
+
+    // ====== MODAL INFO / TUTORIAL ======
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    document.getElementById('closeInfoBtn').addEventListener('click', () => closeModal('infoModal'));
+    document.getElementById('closeTutorialBtn').addEventListener('click', () => closeModal('tutorialModal'));
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) { if (e.target === this) this.classList.remove('open'); });
+    });
+
+    // ====== SPAM WEBHOOK ======
+    (function() {
+      const spamModal = document.getElementById('spamModal');
+      const closeSpamBtn = document.getElementById('closeSpamBtn');
+      const spamBtn = document.getElementById('spamBtn');
+      const webhookUrl = document.getElementById('webhookUrl');
+      const spamMessage = document.getElementById('spamMessage');
+      const spamCount = document.getElementById('spamCount');
+      const executeSpamBtn = document.getElementById('executeSpamBtn');
+      const clearSpamBtn = document.getElementById('clearSpamBtn');
+      const spamStatus = document.getElementById('spamStatus');
+
+      spamBtn.addEventListener('click', function() {
+        spamModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+
+      function closeSpam() {
+        spamModal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      closeSpamBtn.addEventListener('click', closeSpam);
+      spamModal.addEventListener('click', function(e) { if (e.target === this) closeSpam(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && spamModal.classList.contains('open'))
+          closeSpam(); });
+
+      clearSpamBtn.addEventListener('click', function() {
+        webhookUrl.value = '';
+        spamMessage.value = 'COMMUNITY MAS TAMA';
+        spamCount.value = '10';
+        spamStatus.textContent = '🚀 Siap menyerang webhook target.';
+        spamStatus.className = 'status';
+      });
+
+      executeSpamBtn.addEventListener('click', async function() {
+        const url = webhookUrl.value.trim();
+        const message = spamMessage.value.trim();
+        const count = parseInt(spamCount.value) || 10;
+
+        if (!url) {
+          spamStatus.textContent = '❌ Masukkan URL webhook Discord yang valid.';
+          spamStatus.className = 'status error';
+          return;
+        }
+        if (!message) {
+          spamStatus.textContent = '❌ Tulis pesan spam.';
+          spamStatus.className = 'status error';
+          return;
+        }
+        if (!url.startsWith('https://discord.com/api/webhooks/')) {
+          spamStatus.textContent = '❌ URL webhook tidak valid. Pastikan formatnya benar.';
+          spamStatus.className = 'status error';
+          return;
+        }
+
+        executeSpamBtn.disabled = true;
+        spamStatus.textContent = `⏳ Mengirim ${count} spam ke webhook...`;
+        spamStatus.className = 'status loading';
+
+        let success = 0;
+        let failed = 0;
+
+        for (let i = 0; i < count; i++) {
+          try {
+            const payload = {
+              content: message,
+              username: 'Exry Hub Spam',
+              avatar_url: 'https://i.ibb.co.com/PsrF80YF/476d9f1fc9bbe0955cb36c507dac9495.gif'
+            };
+            const res = await fetch(url, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (res.ok) {
+              success++;
+            } else {
+              failed++;
+            }
+          } catch (err) {
+            failed++;
+          }
+          if (i < count - 1) {
+            await new Promise(r => setTimeout(r, 300));
+          }
+        }
+
+        executeSpamBtn.disabled = false;
+        if (failed === 0 && success > 0) {
+          spamStatus.textContent = `✅ Berhasil mengirim ${success} spam ke webhook target!`;
+          spamStatus.className = 'status success';
+        } else if (success > 0) {
+          spamStatus.textContent = `⚠️ ${success} berhasil, ${failed} gagal. Cek URL webhook.`;
+          spamStatus.className = 'status warning';
+        } else {
+          spamStatus.textContent = `❌ Semua ${count} spam gagal. Periksa URL webhook.`;
+          spamStatus.className = 'status error';
+        }
+      });
+    })();
+
+    // ====== TIKTOK DOWNLOAD (FIXED) ======
+    (function() {
+      const tiktokModal = document.getElementById('tiktokModal');
+      const closeTiktokBtn = document.getElementById('closeTiktokBtn');
+      const tiktokBtn = document.getElementById('tiktokBtn');
+      const tiktokUrl = document.getElementById('tiktokUrl');
+      const tiktokVideoBtn = document.getElementById('tiktokVideoBtn');
+      const tiktokAudioBtn = document.getElementById('tiktokAudioBtn');
+      const clearTiktokBtn = document.getElementById('clearTiktokBtn');
+      const tiktokStatus = document.getElementById('tiktokStatus');
+
+      tiktokBtn.addEventListener('click', function() {
+        tiktokModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+
+      function closeTiktok() {
+        tiktokModal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      closeTiktokBtn.addEventListener('click', closeTiktok);
+      tiktokModal.addEventListener('click', function(e) { if (e.target === this) closeTiktok(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && tiktokModal.classList.contains('open'))
+          closeTiktok(); });
+
+      clearTiktokBtn.addEventListener('click', function() {
+        tiktokUrl.value = '';
+        tiktokStatus.textContent = '📥 Masukkan URL, lalu pilih Video atau Audio.';
+        tiktokStatus.className = 'status';
+      });
+
+      async function downloadTikTok(type) {
+        const url = tiktokUrl.value.trim();
+        if (!url) {
+          tiktokStatus.textContent = '❌ Masukkan URL TikTok.';
+          tiktokStatus.className = 'status error';
+          return;
+        }
+
+        const btn = type === 'video' ? tiktokVideoBtn : tiktokAudioBtn;
+        btn.disabled = true;
+        tiktokStatus.textContent = '⏳ Mengambil data...';
+        tiktokStatus.className = 'status loading';
+
+        try {
+          // Panggil API sendiri (serverless function)
+          const response = await fetch('/api/download', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ url }),
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || 'Gagal mengambil data');
+          }
+
+          let downloadUrl = null;
+          let fileName = '';
+
+          if (type === 'video') {
+            downloadUrl = data.play || data.wmplay;
+            fileName = 'tiktok_video.mp4';
+          } else {
+            downloadUrl = data.music;
+            fileName = 'tiktok_audio.mp3';
+          }
+
+          if (!downloadUrl) {
+            throw new Error(`Link ${type} tidak ditemukan`);
+          }
+
+          const a = document.createElement('a');
+          a.href = downloadUrl;
+          a.download = fileName;
+          a.target = '_blank';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+
+          tiktokStatus.textContent = `✅ ${type === 'video' ? 'Video' : 'Audio'} berhasil diunduh!`;
+          tiktokStatus.className = 'status success';
+        } catch (err) {
+          tiktokStatus.textContent = `❌ ${err.message}`;
+          tiktokStatus.className = 'status error';
+          console.error(err);
+        } finally {
+          btn.disabled = false;
+        }
+      }
+
+      tiktokVideoBtn.addEventListener('click', () => downloadTikTok('video'));
+      tiktokAudioBtn.addEventListener('click', () => downloadTikTok('audio'));
+    })();
+
+    // ====== PLAYLIST (MUSIK) ======
+    (function() {
+      const songs = [
+        { title: 'Teh Hijau', artist: 'Tulus', videoId: 'RO75uUZiAw0' },
+        { title: 'Sesi Potret', artist: 'eńau & Ari Lesmana', videoId: 'QNeKLUrpBpI' },
+        { title: 'Kelingan Mantan', artist: 'Yonanda Frisna Damara', videoId: 'OspTweeZQHw' },
+        { title: 'Negoro Angin', artist: 'Denny Caknan, Rijal Pamungkas & Shadeva Wijaya', videoId: 'WZYUSaHlGlk' },
+        { title: 'Bersenja Gurau', artist: 'Raim Laode', videoId: 'jmvX6XyvCy0' },
+        { title: 'Iqro', artist: 'Raim Laode', videoId: 'M7oZR-MTEZs' },
+        { title: 'Hermione', artist: 'Hermione', videoId: 'nofSUsRRgQw' },
+        { title: 'Dengarlah Bintang Hatiku', artist: 'Aida Kartini', videoId: 'o2XcSS2t9_w' },
+        { title: 'Separuh Nafas', artist: 'Ahmad Dhani & Andra Ramadhan', videoId: 'yfj-SQSp7pE' },
+        { title: 'Dan', artist: 'Sheila on 7', videoId: 'dGcGbF4ex5o' },
+        { title: '33x Perunggu', artist: 'Perunggu', videoId: 'cUnYmncAvP4' }
+      ];
+      let currentIndex = 0;
+      let isPlaying = false;
+      let player = null;
+      let playerReady = false;
+
+      const playlistOverlay = document.getElementById('playlistOverlay');
+      const closePlaylistBtn = document.getElementById('closePlaylistBtn');
+      const playlistScroll = document.getElementById('playlistScroll');
+      const playlistCount = document.getElementById('playlistCount');
+      const nowPlayingText = document.getElementById('nowPlayingText');
+
+      document.getElementById('musicBtn').addEventListener('click', function() {
+        openPlaylist();
+      });
+
+      function openPlaylist() {
+        playlistOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        renderPlaylist();
+      }
+
+      function closePlaylist() {
+        playlistOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      closePlaylistBtn.addEventListener('click', closePlaylist);
+      playlistOverlay.addEventListener('click', function(e) {
+        if (e.target === this) closePlaylist();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && playlistOverlay.classList.contains('open')) closePlaylist();
+      });
+
+      function renderPlaylist() {
+        let html = '';
+        songs.forEach((song, index) => {
+          const isActive = index === currentIndex;
+          html += `
+                        <div class="playlist-item ${isActive ? 'active' : ''}" data-index="${index}">
+                            <span class="index">${String(index+1).padStart(2,'0')}</span>
+                            <div class="info">
+                                <div class="title">
+                                    ${song.title}
+                                    ${isActive && isPlaying ? '<span class="playing-icon"><i class="fas fa-volume-up"></i></span>' : ''}
+                                </div>
+                                <div class="artist">${song.artist}</div>
+                            </div>
+                            <span class="play-indicator">${isActive ? '<i class="fas fa-play"></i>' : ''}</span>
+                        </div>
+                    `;
+        });
+        playlistScroll.innerHTML = html;
+        playlistCount.textContent = `${songs.length} lagu`;
+
+        document.querySelectorAll('.playlist-item').forEach(item => {
+          item.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.index);
+            if (idx !== currentIndex) {
+              currentIndex = idx;
+              playSong(currentIndex);
+              renderPlaylist();
+              updateNowPlaying();
+            } else {
+              if (player && playerReady) {
+                if (isPlaying) {
+                  player.pauseVideo();
+                } else {
+                  player.playVideo();
+                }
+              }
+            }
+          });
+        });
+        updateNowPlaying();
+      }
+
+      function playSong(index) {
+        if (!player || !playerReady) {
+          setTimeout(() => playSong(index), 500);
+          return;
+        }
+        const song = songs[index];
+        player.loadVideoById(song.videoId);
+        player.playVideo();
+        isPlaying = true;
+        updateNowPlaying();
+        renderPlaylist();
+      }
+
+      function updateNowPlaying() {
+        const song = songs[currentIndex];
+        if (song && isPlaying) {
+          nowPlayingText.innerHTML = `<strong>${song.title}</strong> — ${song.artist}`;
+        } else if (song) {
+          nowPlayingText.innerHTML = `<strong>${song.title}</strong> — ${song.artist} (pause)`;
+        } else {
+          nowPlayingText.textContent = 'Tidak ada lagu diputar';
+        }
+      }
+
+      window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtube-player', {
+          height: '0',
+          width: '0',
+          videoId: songs[currentIndex].videoId,
+          playerVars: {
+            autoplay: 0,
+            controls: 0,
+            disablekb: 1,
+            modestbranding: 1,
+            rel: 0
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+            onError: onPlayerError
+          }
+        });
+      };
+
+      function onPlayerReady() {
+        playerReady = true;
+        player.loadVideoById(songs[currentIndex].videoId);
+        renderPlaylist();
+        updateNowPlaying();
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.PLAYING) {
+          isPlaying = true;
+          renderPlaylist();
+          updateNowPlaying();
+        } else if (event.data === YT.PlayerState.PAUSED) {
+          isPlaying = false;
+          renderPlaylist();
+          updateNowPlaying();
+        } else if (event.data === YT.PlayerState.ENDED) {
+          isPlaying = false;
+          currentIndex = (currentIndex + 1) % songs.length;
+          playSong(currentIndex);
+        }
+      }
+
+      function onPlayerError() {
+        currentIndex = (currentIndex + 1) % songs.length;
+        playSong(currentIndex);
+      }
+
+      if (window.YT && window.YT.Player) {
+        window.onYouTubeIframeAPIReady();
+      }
+
+      renderPlaylist();
+    })();
+  </script>
+</body>
+</html>
