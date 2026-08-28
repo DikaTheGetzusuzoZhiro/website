@@ -20,7 +20,7 @@ const CLIENT_ID =
  *
  * Untuk Vercel misalnya:
  *
- * https://tama-music.vercel.app/
+ * https://website-three-weld-9t4erfvh7y.vercel.app/
  */
 
 const REDIRECT_URI =
