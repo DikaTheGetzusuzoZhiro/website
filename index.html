@@ -5,139 +5,339 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TAMA MUSIC</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <aside class="sidebar">
-    <div class="logo">TAMA<span>MUSIC</span></div>
+  <aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+      TAMA<span>MUSIC</span>
+    </div>
 
     <nav>
-      <button class="nav active" data-page="home">⌂ <span>Home</span></button>
-      <button class="nav" data-page="search">⌕ <span>Search</span></button>
-      <button class="nav" data-page="library">♡ <span>Library</span></button>
+      <button class="nav active" data-page="home">
+        <span>⌂</span> Home
+      </button>
+
+      <button class="nav" data-page="search">
+        <span>⌕</span> Search
+      </button>
+
+      <button class="nav" data-page="library">
+        <span>♡</span> Library
+      </button>
     </nav>
 
-    <div class="side-bottom">
-      <button id="loginBtn" class="login-btn">Login Spotify</button>
+    <div class="sidebar-bottom">
+      <p>© 2026 TAMA MUSIC</p>
     </div>
+
   </aside>
+
 
   <main>
 
     <header>
-      <button class="mobile-menu" id="menuBtn">☰</button>
+
+      <button class="menu-button" id="menuButton">
+        ☰
+      </button>
 
       <div class="search-box">
         <span>⌕</span>
-        <input id="searchInput" placeholder="Cari lagu, artis, album...">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Cari lagu, artis, album..."
+        >
       </div>
 
-      <button id="profileBtn" class="profile">♪</button>
+      <button class="profile-button">
+        ♪
+      </button>
+
     </header>
 
-    <section id="homePage" class="page active-page">
 
-      <div class="hero">
-        <div>
-          <small>TAMA MUSIC</small>
-          <h1>Music for<br>your mood.</h1>
-          <p>Cari dan temukan musik favoritmu.</p>
-          <button class="hero-btn" onclick="focusSearch()">Mulai Cari</button>
+    <!-- HOME -->
+
+    <section class="page active" id="homePage">
+
+      <section class="hero">
+
+        <div class="hero-content">
+
+          <span class="hero-label">
+            TAMA MUSIC
+          </span>
+
+          <h1>
+            Musik untuk<br>
+            setiap suasana.
+          </h1>
+
+          <p>
+            Temukan lagu favoritmu dan dengarkan langsung.
+          </p>
+
+          <button
+            class="primary-button"
+            onclick="startSearch()"
+          >
+            Cari Musik
+          </button>
+
         </div>
-      </div>
 
-      <div class="section">
-        <div class="section-title">
-          <h2>Musik Populer</h2>
-          <button onclick="searchPopular()">Lihat semua</button>
+      </section>
+
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Pilihan Musik
+          </h2>
+
+          <button onclick="loadPopular()">
+            Lihat semua
+          </button>
+
         </div>
 
-        <div id="popularGrid" class="music-grid"></div>
-      </div>
+        <div
+          id="popularGrid"
+          class="music-grid"
+        ></div>
+
+      </section>
 
     </section>
 
-    <section id="searchPage" class="page">
 
-      <div class="search-heading">
-        <h1>Search</h1>
-        <p id="searchStatus">Cari musik favoritmu.</p>
+    <!-- SEARCH -->
+
+    <section class="page" id="searchPage">
+
+      <div class="page-title">
+
+        <h1>
+          Search
+        </h1>
+
+        <p id="searchStatus">
+          Cari lagu favoritmu.
+        </p>
+
       </div>
 
-      <div id="searchResults" class="result-list"></div>
+      <div
+        id="searchResults"
+        class="search-results"
+      ></div>
 
     </section>
 
-    <section id="libraryPage" class="page">
 
-      <div class="search-heading">
-        <h1>Library</h1>
-        <p>Lagu yang kamu simpan.</p>
+    <!-- LIBRARY -->
+
+    <section class="page" id="libraryPage">
+
+      <div class="page-title">
+
+        <h1>
+          Library
+        </h1>
+
+        <p>
+          Lagu yang kamu simpan.
+        </p>
+
       </div>
 
-      <div id="libraryGrid" class="music-grid"></div>
+      <div
+        id="libraryGrid"
+        class="music-grid"
+      ></div>
 
     </section>
 
   </main>
 
-  <div id="player" class="player">
+
+  <!-- PLAYER -->
+
+  <div class="player">
 
     <div class="now-playing">
-      <img id="playerCover" src="https://via.placeholder.com/70">
-      <div>
-        <strong id="playerTitle">Belum ada lagu</strong>
-        <small id="playerArtist">Pilih lagu untuk melihat detail</small>
+
+      <img
+        id="playerImage"
+        src="https://via.placeholder.com/80"
+        alt=""
+      >
+
+      <div class="now-info">
+
+        <strong id="playerTitle">
+          Belum ada lagu
+        </strong>
+
+        <span id="playerArtist">
+          Pilih lagu untuk mulai
+        </span>
+
       </div>
+
     </div>
 
-    <div class="controls">
-      <button onclick="previousTrack()">⏮</button>
-      <button id="playBtn" class="play-btn" onclick="togglePlay()">▶</button>
-      <button onclick="nextTrack()">⏭</button>
+
+    <div class="player-center">
+
+      <div class="player-buttons">
+
+        <button onclick="previousSong()">
+          ⏮
+        </button>
+
+        <button
+          class="play-button"
+          onclick="togglePlayer()"
+          id="playButton"
+        >
+          ▶
+        </button>
+
+        <button onclick="nextSong()">
+          ⏭
+        </button>
+
+      </div>
+
+      <div class="progress-container">
+
+        <span id="currentTime">
+          0:00
+        </span>
+
+        <input
+          id="progress"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+        >
+
+        <span id="totalTime">
+          0:00
+        </span>
+
+      </div>
+
     </div>
 
-    <div class="progress-area">
-      <span id="currentTime">0:00</span>
-      <input id="progress" type="range" min="0" max="100" value="0">
-      <span id="duration">0:00</span>
-    </div>
 
-    <div class="volume">
-      🔊
-      <input id="volume" type="range" min="0" max="100" value="80">
+    <div class="player-right">
+
+      <span>
+        🔊
+      </span>
+
+      <input
+        id="volume"
+        type="range"
+        min="0"
+        max="100"
+        value="80"
+      >
+
     </div>
 
   </div>
 
-  <div id="detailModal" class="modal">
+
+  <!-- YOUTUBE PLAYER -->
+
+  <div
+    id="youtubeContainer"
+    class="youtube-container"
+  >
+
+    <div id="youtubePlayer"></div>
+
+  </div>
+
+
+  <!-- DETAIL MODAL -->
+
+  <div
+    class="modal"
+    id="detailModal"
+  >
+
     <div class="modal-content">
 
-      <button class="close" onclick="closeModal()">×</button>
+      <button
+        class="close-button"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
 
-      <img id="detailCover" class="detail-cover">
+      <img
+        id="detailImage"
+        class="detail-image"
+        src=""
+        alt=""
+      >
 
-      <h1 id="detailTitle"></h1>
-      <p id="detailArtist"></p>
-      <p id="detailAlbum"></p>
+      <h2 id="detailTitle">
+      </h2>
 
-      <a id="spotifyLink" target="_blank" class="spotify-btn">
-        Buka di Spotify
+      <p id="detailArtist">
+      </p>
+
+      <p id="detailChannel">
+      </p>
+
+      <button
+        class="primary-button modal-play"
+        onclick="playDetail()"
+      >
+        ▶ Putar
+      </button>
+
+      <a
+        id="youtubeLink"
+        class="youtube-link"
+        target="_blank"
+        rel="noopener"
+      >
+        Buka di YouTube
       </a>
 
-      <div class="lyrics">
-        <h2>🎤 Lirik</h2>
-        <p id="lyricsText">
-          Lirik belum tersedia untuk lagu ini.
+      <div class="lyrics-box">
+
+        <h3>
+          🎤 Lirik
+        </h3>
+
+        <p>
+          Lirik lagu tidak diambil otomatis dari YouTube.
+          Tambahkan sumber lirik yang memiliki izin jika ingin
+          menyediakan fitur lirik.
         </p>
+
       </div>
 
     </div>
+
   </div>
 
-  <script src="app.js"></script>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
