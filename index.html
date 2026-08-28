@@ -3,7 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>TAMA MUSIC</title>
+
+  <meta
+    name="description"
+    content="TAMA MUSIC - Discover your favorite music"
+  >
+
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -16,21 +23,42 @@
     </div>
 
     <nav>
-      <button class="nav active" data-page="home">
-        <span>⌂</span> Home
+
+      <button
+        class="nav active"
+        data-page="home"
+      >
+        <span>⌂</span>
+        Home
       </button>
 
-      <button class="nav" data-page="search">
-        <span>⌕</span> Search
+      <button
+        class="nav"
+        data-page="search"
+      >
+        <span>⌕</span>
+        Search
       </button>
 
-      <button class="nav" data-page="library">
-        <span>♡</span> Library
+      <button
+        class="nav"
+        data-page="library"
+      >
+        <span>♡</span>
+        Library
       </button>
+
     </nav>
 
     <div class="sidebar-bottom">
-      <p>© 2026 TAMA MUSIC</p>
+
+      <button
+        id="loginButton"
+        class="login-button"
+      >
+        Login Spotify
+      </button>
+
     </div>
 
   </aside>
@@ -40,55 +68,99 @@
 
     <header>
 
-      <button class="menu-button" id="menuButton">
+      <button
+        id="menuButton"
+        class="menu-button"
+      >
         ☰
       </button>
 
       <div class="search-box">
+
         <span>⌕</span>
+
         <input
           id="searchInput"
-          type="text"
+          type="search"
           placeholder="Cari lagu, artis, album..."
+          autocomplete="off"
         >
+
       </div>
 
-      <button class="profile-button">
-        ♪
-      </button>
+      <div class="user-area">
+
+        <img
+          id="userImage"
+          src=""
+          alt=""
+        >
+
+        <span id="userName">
+          Guest
+        </span>
+
+      </div>
 
     </header>
 
 
     <!-- HOME -->
 
-    <section class="page active" id="homePage">
+    <section
+      id="homePage"
+      class="page active"
+    >
 
-      <section class="hero">
+      <div class="hero">
 
-        <div class="hero-content">
+        <div>
 
-          <span class="hero-label">
+          <small>
             TAMA MUSIC
-          </span>
+          </small>
 
           <h1>
-            Musik untuk<br>
-            setiap suasana.
+            Music for<br>
+            your mood.
           </h1>
 
           <p>
-            Temukan lagu favoritmu dan dengarkan langsung.
+            Temukan lagu, artis, dan album favoritmu.
           </p>
 
           <button
-            class="primary-button"
-            onclick="startSearch()"
+            class="green-button"
+            onclick="focusSearch()"
           >
             Cari Musik
           </button>
 
         </div>
+
+      </div>
+
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Lagu Populer
+          </h2>
+
+          <button
+            onclick="searchMusic('popular music')"
+          >
+            Lihat semua
+          </button>
+
+        </div>
+
+        <div
+          id="homeTracks"
+          class="music-grid"
+        ></div>
 
       </section>
 
@@ -98,18 +170,14 @@
         <div class="section-header">
 
           <h2>
-            Pilihan Musik
+            Artis Populer
           </h2>
-
-          <button onclick="loadPopular()">
-            Lihat semua
-          </button>
 
         </div>
 
         <div
-          id="popularGrid"
-          class="music-grid"
+          id="homeArtists"
+          class="artist-grid"
         ></div>
 
       </section>
@@ -119,7 +187,10 @@
 
     <!-- SEARCH -->
 
-    <section class="page" id="searchPage">
+    <section
+      id="searchPage"
+      class="page"
+    >
 
       <div class="page-title">
 
@@ -127,11 +198,12 @@
           Search
         </h1>
 
-        <p id="searchStatus">
+        <p id="searchInfo">
           Cari lagu favoritmu.
         </p>
 
       </div>
+
 
       <div
         id="searchResults"
@@ -143,19 +215,23 @@
 
     <!-- LIBRARY -->
 
-    <section class="page" id="libraryPage">
+    <section
+      id="libraryPage"
+      class="page"
+    >
 
       <div class="page-title">
 
         <h1>
-          Library
+          Your Library
         </h1>
 
         <p>
-          Lagu yang kamu simpan.
+          Musik yang kamu simpan.
         </p>
 
       </div>
+
 
       <div
         id="libraryGrid"
@@ -175,18 +251,18 @@
 
       <img
         id="playerImage"
-        src="https://via.placeholder.com/80"
+        src="https://placehold.co/80x80/181818/ffffff?text=T"
         alt=""
       >
 
-      <div class="now-info">
+      <div>
 
         <strong id="playerTitle">
           Belum ada lagu
         </strong>
 
         <span id="playerArtist">
-          Pilih lagu untuk mulai
+          Pilih lagu untuk melihat detail
         </span>
 
       </div>
@@ -196,42 +272,37 @@
 
     <div class="player-center">
 
-      <div class="player-buttons">
+      <div class="player-controls">
 
-        <button onclick="previousSong()">
+        <button onclick="previousTrack()">
           ⏮
         </button>
 
         <button
-          class="play-button"
-          onclick="togglePlayer()"
-          id="playButton"
+          class="main-play"
+          id="mainPlay"
+          onclick="openCurrentSpotify()"
         >
           ▶
         </button>
 
-        <button onclick="nextSong()">
+        <button onclick="nextTrack()">
           ⏭
         </button>
 
       </div>
 
-      <div class="progress-container">
+      <div class="player-progress">
 
-        <span id="currentTime">
-          0:00
+        <span>
+          —
         </span>
 
-        <input
-          id="progress"
-          type="range"
-          min="0"
-          max="100"
-          value="0"
-        >
+        <div class="progress-line">
+        </div>
 
-        <span id="totalTime">
-          0:00
+        <span>
+          Spotify
         </span>
 
       </div>
@@ -241,31 +312,11 @@
 
     <div class="player-right">
 
-      <span>
-        🔊
-      </span>
-
-      <input
-        id="volume"
-        type="range"
-        min="0"
-        max="100"
-        value="80"
-      >
+      <button onclick="openCurrentSpotify()">
+        🎵
+      </button>
 
     </div>
-
-  </div>
-
-
-  <!-- YOUTUBE PLAYER -->
-
-  <div
-    id="youtubeContainer"
-    class="youtube-container"
-  >
-
-    <div id="youtubePlayer"></div>
 
   </div>
 
@@ -273,8 +324,8 @@
   <!-- DETAIL MODAL -->
 
   <div
-    class="modal"
     id="detailModal"
+    class="modal"
   >
 
     <div class="modal-content">
@@ -286,6 +337,7 @@
         ×
       </button>
 
+
       <img
         id="detailImage"
         class="detail-image"
@@ -293,41 +345,48 @@
         alt=""
       >
 
+
       <h2 id="detailTitle">
       </h2>
+
 
       <p id="detailArtist">
       </p>
 
-      <p id="detailChannel">
+
+      <p id="detailAlbum">
       </p>
 
-      <button
-        class="primary-button modal-play"
-        onclick="playDetail()"
-      >
-        ▶ Putar
-      </button>
 
-      <a
-        id="youtubeLink"
-        class="youtube-link"
-        target="_blank"
-        rel="noopener"
-      >
-        Buka di YouTube
-      </a>
+      <div class="modal-actions">
 
-      <div class="lyrics-box">
+        <button
+          class="green-button"
+          onclick="openCurrentSpotify()"
+        >
+          Buka di Spotify
+        </button>
+
+        <button
+          class="dark-button"
+          onclick="saveCurrentFavorite()"
+        >
+          ♡ Favorit
+        </button>
+
+      </div>
+
+
+      <div class="lyrics">
 
         <h3>
           🎤 Lirik
         </h3>
 
         <p>
-          Lirik lagu tidak diambil otomatis dari YouTube.
-          Tambahkan sumber lirik yang memiliki izin jika ingin
-          menyediakan fitur lirik.
+          Lirik belum tersedia di Spotify Web API.
+          Gunakan sumber lirik berlisensi jika ingin
+          menambahkan fitur lirik.
         </p>
 
       </div>
@@ -337,7 +396,7 @@
   </div>
 
 
-  <script src="script.js"></script>
+  <script src="app.js"></script>
 
 </body>
 </html>
