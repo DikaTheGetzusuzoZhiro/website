@@ -4,41 +4,49 @@
   padding: 0;
 }
 
-body {
-  font-family: Inter, Arial, sans-serif;
-  background: #090909;
-  color: white;
-  min-height: 100vh;
+:root {
+  --green: #1ed760;
+  --bg: #090909;
+  --panel: #121212;
+  --panel2: #181818;
+  --text: #ffffff;
+  --muted: #999999;
 }
 
-button,
-input {
-  font-family: inherit;
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 105px;
 }
 
 button {
-  border: 0;
+  font-family: inherit;
   cursor: pointer;
+  border: none;
 }
 
 .sidebar {
   position: fixed;
-  width: 230px;
+  top: 0;
+  left: 0;
+  width: 235px;
   height: 100vh;
   background: #050505;
-  padding: 28px 18px;
-  z-index: 20;
+  padding: 30px 18px;
+  z-index: 50;
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -1px;
+  font-size: 24px;
+  font-weight: 900;
   margin-bottom: 45px;
+  letter-spacing: -1px;
 }
 
 .logo span {
-  color: #1ed760;
+  color: var(--green);
 }
 
 nav {
@@ -50,181 +58,202 @@ nav {
 .nav {
   width: 100%;
   text-align: left;
-  padding: 13px 15px;
-  border-radius: 10px;
-  color: #aaa;
   background: transparent;
+  color: #aaa;
+  padding: 14px 16px;
+  border-radius: 10px;
   font-size: 15px;
+  transition: .2s;
+}
+
+.nav span {
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 .nav:hover,
 .nav.active {
-  background: #181818;
+  background: #1a1a1a;
   color: white;
 }
 
-.nav span {
-  margin-left: 10px;
-}
-
-.side-bottom {
+.sidebar-bottom {
   position: absolute;
-  bottom: 30px;
-  left: 18px;
-  right: 18px;
-}
-
-.login-btn {
-  width: 100%;
-  background: #1ed760;
-  color: #000;
-  padding: 12px;
-  border-radius: 30px;
-  font-weight: 700;
+  bottom: 25px;
+  color: #555;
+  font-size: 11px;
 }
 
 main {
-  margin-left: 230px;
-  padding: 20px 35px 150px;
+  margin-left: 235px;
+  padding: 20px 35px 130px;
 }
 
 header {
   height: 55px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
+}
+
+.menu-button {
+  display: none;
+  background: transparent;
+  color: white;
+  font-size: 24px;
 }
 
 .search-box {
-  background: #1a1a1a;
-  border: 1px solid #292929;
-  border-radius: 30px;
+  width: 440px;
   height: 45px;
-  width: 430px;
   display: flex;
   align-items: center;
-  padding: 0 17px;
+  background: #191919;
+  border: 1px solid #292929;
+  border-radius: 30px;
+  padding: 0 16px;
 }
 
 .search-box span {
-  font-size: 22px;
+  font-size: 23px;
   color: #aaa;
 }
 
 .search-box input {
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: white;
   width: 100%;
   margin-left: 10px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
   font-size: 14px;
 }
 
-.profile {
+.profile-button {
   margin-left: auto;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: #222;
+  background: #202020;
   color: white;
   font-size: 18px;
 }
 
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
 .hero {
   margin-top: 25px;
-  min-height: 330px;
-  border-radius: 22px;
-  padding: 45px;
+  min-height: 340px;
+  border-radius: 25px;
+  padding: 50px;
   display: flex;
   align-items: center;
   background:
-    radial-gradient(circle at 75% 30%, #1ed76055, transparent 30%),
-    linear-gradient(120deg, #18251d, #101010 60%);
+    radial-gradient(
+      circle at 80% 25%,
+      #1ed76066,
+      transparent 30%
+    ),
+    linear-gradient(
+      120deg,
+      #172b20,
+      #0d0d0d 70%
+    );
 }
 
-.hero small {
-  color: #1ed760;
+.hero-label {
+  color: var(--green);
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
 }
 
 .hero h1 {
-  font-size: clamp(40px, 6vw, 72px);
+  margin-top: 15px;
+  font-size: clamp(42px, 6vw, 72px);
   line-height: .95;
-  margin: 15px 0;
   letter-spacing: -4px;
 }
 
 .hero p {
   color: #aaa;
+  margin-top: 18px;
   margin-bottom: 25px;
 }
 
-.hero-btn {
-  background: #1ed760;
-  padding: 13px 24px;
+.primary-button {
+  background: var(--green);
+  color: black;
   border-radius: 30px;
-  font-weight: 700;
+  padding: 13px 24px;
+  font-weight: 800;
 }
 
 .section {
   margin-top: 40px;
 }
 
-.section-title {
+.section-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-.section-title h2 {
+.section-header h2 {
   font-size: 24px;
 }
 
-.section-title button {
+.section-header button {
+  background: transparent;
   color: #aaa;
-  background: none;
 }
 
 .music-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-template-columns:
+    repeat(auto-fill, minmax(165px, 1fr));
   gap: 18px;
 }
 
 .card {
-  background: #121212;
+  background: var(--panel);
   padding: 12px;
   border-radius: 12px;
   transition: .2s;
+  overflow: hidden;
 }
 
 .card:hover {
-  background: #1c1c1c;
+  background: #1b1b1b;
   transform: translateY(-3px);
 }
 
-.card img {
+.card-image {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.card h3 {
-  font-size: 14px;
+.card-title {
   margin-top: 12px;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.card p {
-  color: #999;
-  font-size: 12px;
+.card-artist {
+  color: #888;
   margin-top: 5px;
+  font-size: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -233,56 +262,48 @@ header {
 .card-buttons {
   display: flex;
   gap: 7px;
-  margin-top: 10px;
+  margin-top: 11px;
 }
 
 .card-buttons button {
   flex: 1;
+  padding: 9px;
   border-radius: 20px;
-  padding: 8px;
-  background: #252525;
+  background: #292929;
   color: white;
 }
 
-.card-buttons .green {
-  background: #1ed760;
+.card-buttons .play {
+  background: var(--green);
   color: black;
 }
 
-.page {
-  display: none;
+.page-title {
+  margin: 35px 0 25px;
 }
 
-.active-page {
-  display: block;
+.page-title h1 {
+  font-size: 35px;
 }
 
-.search-heading {
-  margin: 30px 0;
-}
-
-.search-heading h1 {
-  font-size: 34px;
-}
-
-.search-heading p {
-  color: #999;
+.page-title p {
   margin-top: 8px;
+  color: #888;
 }
 
-.result-list {
+.search-results {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .result {
   display: grid;
-  grid-template-columns: 55px 1fr auto;
-  gap: 15px;
+  grid-template-columns: 65px 1fr auto;
   align-items: center;
+  gap: 15px;
   padding: 8px;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 .result:hover {
@@ -290,48 +311,49 @@ header {
 }
 
 .result img {
-  width: 55px;
-  height: 55px;
+  width: 60px;
+  height: 60px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
-.result-info h3 {
+.result-title {
   font-size: 14px;
+  font-weight: 700;
 }
 
-.result-info p {
-  color: #999;
+.result-artist {
+  color: #888;
   font-size: 12px;
-  margin-top: 4px;
+  margin-top: 5px;
 }
 
 .result-actions {
   display: flex;
-  gap: 8px;
+  gap: 7px;
 }
 
 .result-actions button {
-  background: #222;
+  background: #262626;
   color: white;
   border-radius: 20px;
-  padding: 8px 12px;
+  padding: 9px 13px;
 }
 
 .player {
   position: fixed;
-  bottom: 0;
-  left: 230px;
+  z-index: 100;
+  left: 235px;
   right: 0;
-  height: 90px;
+  bottom: 0;
+  height: 95px;
   background: #111;
   border-top: 1px solid #292929;
-  z-index: 30;
   display: grid;
-  grid-template-columns: 280px 220px 1fr 130px;
+  grid-template-columns: 290px 1fr 160px;
   align-items: center;
-  padding: 10px 22px;
   gap: 20px;
+  padding: 10px 20px;
 }
 
 .now-playing {
@@ -342,52 +364,63 @@ header {
 }
 
 .now-playing img {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
-.now-playing strong,
-.now-playing small {
+.now-info {
+  min-width: 0;
+}
+
+.now-info strong,
+.now-info span {
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.now-playing strong {
+.now-info strong {
   font-size: 13px;
 }
 
-.now-playing small {
+.now-info span {
   color: #888;
   font-size: 11px;
   margin-top: 5px;
 }
 
-.controls {
+.player-center {
+  max-width: 650px;
+  width: 100%;
+  margin: auto;
+}
+
+.player-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
 }
 
-.controls button {
+.player-buttons button {
   background: transparent;
   color: white;
   font-size: 17px;
 }
 
-.controls .play-btn {
-  background: white;
-  color: black;
+.player-buttons .play-button {
   width: 38px;
   height: 38px;
   border-radius: 50%;
+  background: white;
+  color: black;
 }
 
-.progress-area {
+.progress-container {
+  margin-top: 5px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -395,27 +428,36 @@ header {
   font-size: 10px;
 }
 
-#progress {
+.progress-container input {
   width: 100%;
 }
 
-.volume {
+.player-right {
   display: flex;
-  gap: 8px;
   align-items: center;
+  gap: 8px;
 }
 
-.volume input {
-  width: 80px;
+.player-right input {
+  width: 100px;
+}
+
+.youtube-container {
+  position: fixed;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .modal {
   display: none;
   position: fixed;
+  z-index: 200;
   inset: 0;
-  background: #000b;
-  z-index: 100;
-  padding: 30px;
+  background: rgba(0,0,0,.8);
+  padding: 25px;
   overflow-y: auto;
 }
 
@@ -426,79 +468,88 @@ header {
 }
 
 .modal-content {
-  width: min(600px, 100%);
-  background: #181818;
-  border-radius: 20px;
-  padding: 30px;
   position: relative;
+  width: min(550px, 100%);
+  background: #181818;
+  padding: 30px;
+  border-radius: 20px;
   text-align: center;
 }
 
-.close {
+.close-button {
   position: absolute;
-  right: 20px;
+  right: 18px;
   top: 15px;
-  background: #333;
-  color: white;
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  background: #333;
+  color: white;
   font-size: 20px;
 }
 
-.detail-cover {
+.detail-image {
   width: 240px;
   height: 240px;
   object-fit: cover;
   border-radius: 12px;
 }
 
-.modal-content h1 {
+.modal-content h2 {
   margin-top: 20px;
-  font-size: 24px;
 }
 
 .modal-content > p {
-  color: #999;
+  color: #888;
   margin-top: 7px;
 }
 
-.spotify-btn {
-  display: inline-block;
+.modal-play {
   margin-top: 20px;
-  padding: 11px 20px;
+}
+
+.youtube-link {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 12px 18px;
   border-radius: 25px;
-  background: #1ed760;
-  color: black;
-  font-weight: 700;
+  background: #292929;
+  color: white;
   text-decoration: none;
 }
 
-.lyrics {
+.lyrics-box {
   margin-top: 30px;
-  padding-top: 25px;
   border-top: 1px solid #333;
+  padding-top: 25px;
   text-align: left;
 }
 
-.lyrics h2 {
-  margin-bottom: 15px;
+.lyrics-box h3 {
+  margin-bottom: 12px;
 }
 
-.lyrics p {
-  color: #aaa;
-  line-height: 1.8;
+.lyrics-box p {
+  color: #999;
+  line-height: 1.7;
+  font-size: 13px;
 }
 
-.mobile-menu {
-  display: none;
+.loading {
+  color: #888;
+  padding: 30px 0;
 }
 
-@media(max-width: 850px) {
+.empty {
+  color: #777;
+  padding: 30px 0;
+}
+
+@media(max-width: 900px) {
 
   .sidebar {
     transform: translateX(-100%);
-    transition: .2s;
+    transition: .25s;
   }
 
   .sidebar.open {
@@ -507,14 +558,11 @@ header {
 
   main {
     margin-left: 0;
-    padding: 15px 15px 150px;
+    padding: 15px 15px 130px;
   }
 
-  .mobile-menu {
+  .menu-button {
     display: block;
-    background: none;
-    color: white;
-    font-size: 22px;
   }
 
   .search-box {
@@ -522,7 +570,7 @@ header {
   }
 
   .hero {
-    min-height: 270px;
+    min-height: 280px;
     padding: 30px;
   }
 
@@ -532,25 +580,45 @@ header {
 
   .player {
     left: 0;
-    height: 105px;
+    height: 110px;
     grid-template-columns: 1fr auto;
     padding: 8px 12px;
   }
 
-  .progress-area {
-    grid-column: 1 / -1;
-    grid-row: 2;
+  .player-center {
+    width: auto;
   }
 
-  .volume {
+  .player-right {
     display: none;
   }
 
-  .controls {
-    gap: 10px;
+  .progress-container {
+    position: absolute;
+    bottom: 4px;
+    left: 12px;
+    right: 12px;
   }
 
   .music-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .result {
+    grid-template-columns: 55px 1fr;
+  }
+
+  .result img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .result-actions {
+    grid-column: 2;
+  }
+
+  .profile-button {
+    display: none;
   }
 }
